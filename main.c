@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 12:20:02 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/16 10:26:21 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/16 17:44:12 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,55 +15,55 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-int main(void)
-{
-    //Declare struct
-    t_img   img;
+// int main(void)
+// {
+//     //Declare struct
+//     t_img   img;
 
-    // Size of the image
-    int     img_width;
-    int     img_height;
+//     // Size of the image
+//     int     img_width;
+//     int     img_height;
 
-    img.win_width = 1000;
-    img.win_height = 800;
+//     img.win_width = 1000;
+//     img.win_height = 800;
 
-    img_width = 20;
-    img_height = 20;
+//     img_width = 20;
+//     img_height = 20;
 
-    // Establish the connection between X Server and X client
-    img.mlx_ptr = mlx_init();
-    if (img.mlx_ptr == NULL)
-        return (1);
+//     // Establish the connection between X Server and X client
+//     img.mlx_ptr = mlx_init();
+//     if (img.mlx_ptr == NULL)
+//         return (1);
 
-    // Create the window
-    img.win_ptr = mlx_new_window(img.mlx_ptr, img.win_width, img.win_height, "Test");
-    if (img.win_ptr == NULL)
-        return (1);
+//     // Create the window
+//     img.win_ptr = mlx_new_window(img.mlx_ptr, img.win_width, img.win_height, "Test");
+//     if (img.win_ptr == NULL)
+//         return (1);
 
-    // Create an image
-    img.img_ptr = mlx_new_image(img.mlx_ptr, img_width, img_height);
+//     // Create an image
+//     img.img_ptr = mlx_new_image(img.mlx_ptr, img_width, img_height);
 
-    // Get the address of the image
-    img.img_addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
+//     // Get the address of the image
+//     img.img_addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
 
-    // Draw pixels on the image
-    // draw_horizontal_line(&img, win_width, win_height);
-    // draw_vertical_line(&img, win_width, win_height);
-    //draw_x(&img, win_width / 2, win_height / 2, win_width, win_height);
-    img.img_pos_x = img.win_width / 2;
-    img.img_pos_y = img.win_height / 2;
-    draw_box(&img, img.img_pos_x, img.img_pos_y, img_width, img_height);
+//     // Draw pixels on the image
+//     // draw_horizontal_line(&img, win_width, win_height);
+//     // draw_vertical_line(&img, win_width, win_height);
+//     //draw_x(&img, win_width / 2, win_height / 2, win_width, win_height);
+//     img.img_pos_x = img.win_width / 2;
+//     img.img_pos_y = img.win_height / 2;
+//     draw_box(&img, img.img_pos_x, img.img_pos_y, img_width, img_height);
 
-    // Put the image on the window
-    //mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img_ptr, 0, 0); //x, y coordinates, where to put the image
+//     // Put the image on the window
+//     //mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img_ptr, 0, 0); //x, y coordinates, where to put the image
 
-    // Whenever a specific key is pressed, close the window
-    mlx_hook(img.win_ptr, 2, 1L<<0, move, &img);
-    //mlx_hook(img.win_ptr, DestroyNotify, StructureNotifyMask, close, &img);
+//     // Whenever a specific key is pressed, close the window
+//     mlx_hook(img.win_ptr, 2, 1L<<0, move, &img);
+//     //mlx_hook(img.win_ptr, DestroyNotify, StructureNotifyMask, close, &img);
 
-    mlx_loop(img.mlx_ptr);
-    return (0);
-}
+//     mlx_loop(img.mlx_ptr);
+//     return (0);
+// }
 
 void    my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour)
 {
@@ -140,7 +140,7 @@ void    draw_box(t_img *img, int x, int y, int box_width, int box_height)
     mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, x, y);
 }
 
-int argb_to_hex(int t, int r, int g, int b)
+unsigned int argb_to_hex(int t, int r, int g, int b)
 {
     return (t<<24 | r<<16 | g<<8 | b);
 }
