@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/13 12:20:02 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/14 20:01:54 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/16 10:26:21 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,3 +190,5 @@ int move(int keycode, t_img *img)
     }
     return (0);
 }
+
+//hilmi
