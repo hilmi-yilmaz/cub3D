@@ -1,15 +1,18 @@
 CC = gcc
 CFLAGS = -g
 
+# Setting variables depending on Operating System
+ifdef IS_LINUX
+OS_FLAGS = -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -D IS_LINUX
+MLX_DIR = mlx_linux
+else
+OS_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = mlx
+endif
+
 NAME = exec
 
 MLX_LIB = libmlx.a
-
-ifdef IS_LINUX
-MLX_DIR = mlx_linux
-else
-MLX_DIR = mlx
-endif
 
 SRC = main.c
 
@@ -18,13 +21,8 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)%.o)
 
 all: $(OBJ_DIR) $(MLX_LIB) $(NAME)
 
-ifdef IS_LINUX
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
-else
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-endif
+	$(CC) $(CFLAGS) $(OBJ) $(O_FLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
