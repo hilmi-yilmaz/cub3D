@@ -37,6 +37,7 @@ $(MLX_LIB):
 
 clean:
 	rm -rdf obj/
+	make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
