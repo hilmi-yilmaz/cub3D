@@ -5,6 +5,12 @@ NAME = exec
 
 MLX_LIB = libmlx.a
 
+ifdef IS_LINUX
+MLX_DIR = mlx_linux
+else
+MLX_DIR = mlx
+endif
+
 SRC = main.c
 
 OBJ_DIR = obj/
@@ -27,7 +33,7 @@ $(OBJ_DIR):
 	mkdir $@
 
 $(MLX_LIB):
-	make -C mlx
+	make -C $(MLX_DIR)
 
 clean:
 	rm -rdf obj/
