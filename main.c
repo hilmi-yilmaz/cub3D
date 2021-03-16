@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_linux/mlx.h"
 #include "cub3d.h"
-#include <X11/X.h>
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -60,7 +58,7 @@ int main(void)
     //mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img_ptr, 0, 0); //x, y coordinates, where to put the image
 
     // Whenever a specific key is pressed, close the window
-    mlx_hook(img.win_ptr, KeyPress, KeyPressMask, move, &img);
+    mlx_hook(img.win_ptr, 2, 1L<<0, move, &img);
     //mlx_hook(img.win_ptr, DestroyNotify, StructureNotifyMask, close, &img);
 
     mlx_loop(img.mlx_ptr);
@@ -168,27 +166,25 @@ int move(int keycode, t_img *img)
     mlx_clear_window(img->mlx_ptr, img->win_ptr);
     img->img_ptr = mlx_new_image(img->mlx_ptr, 20, 20);
     img->img_addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->line_size, &img->endian);
-    if (keycode == 65363)
+    if (keycode == RIGHT_KEY)
     {
         draw_box(img, img->img_pos_x += step, img->img_pos_y, 20, 20);
         printf("Move right\n");
     }
-    if (keycode == 65361)
+    if (keycode == LEFT_KEY)
     {
         draw_box(img, img->img_pos_x -= step, img->img_pos_y, 20, 20);
         printf("Move left\n");
     }
-    if (keycode == 65364)
+    if (keycode == DOWN_KEY)
     {
         draw_box(img, img->img_pos_x, img->img_pos_y += step, 20, 20);
         printf("Move down\n");
     }
-    if (keycode == 65362)
+    if (keycode == UP_KEY)
     {
         draw_box(img, img->img_pos_x, img->img_pos_y -= step, 20, 20);
         printf("Move up\n");
     }
     return (0);
 }
-
-//hilmi
