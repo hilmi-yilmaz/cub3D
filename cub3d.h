@@ -23,33 +23,45 @@
 
 typedef struct s_img
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*img_addr;
+    void            *mlx_ptr;
+    void            *win_ptr;
+    void            *img_ptr;
+    void            *img_addr;
 
-	int		win_width;
-	int		win_height;
+    int             bits_per_pixel;
+    int             line_size;
+    int             endian;
 
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}			t_img;
+    unsigned int    floor_colour;
+    unsigned int    ceiling_colour;
 
-void    my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-void    draw_horizontal_line(t_img *img, int win_width, int win_height);
-void    draw_vertical_line(t_img *img, int win_width, int win_height);
-unsigned int		argb_to_hex(int a, int r, int g, int b);
-int 	key_hook(int keycode, t_img *img);
-int 	close(int keycode, t_img *img);
-void    draw_x(t_img *img, int x, int y, int win_width, int win_height);
-void    draw_box(t_img *img, int x, int y, int box_width, int box_height);
-int 	move(int keycode, t_img *img);
+}                   t_img;
 
+typedef struct s_info
+{
+    int     win_width;
+    int     win_height;
 
-void    put_square(t_img *img, int square_width, int square_height);
-int close_window(t_img *img);
-int key_input(int keycode, t_img *img);
-void reset_image(t_img *img);
+    char    *north_text;
+    char    *south_text;
+    char    *west_text;
+    char    *east_text;
+
+    char    *sprite_text;
+
+    int     floor_colour[3];
+    int     ceiling_colour[3];
+
+}                   t_info;
+
+/* Parsing data */
+void    parse_data(t_info *info, char **argv);
+void    parse_resolution(t_info *info, char *line);
+
+/* Utils */
+int skip_spaces(char *str);
+
+/* Temporary helper functions */
+void    print_info(t_info *info);
 
 #endif
