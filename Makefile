@@ -4,10 +4,10 @@ CFLAGS = -fsanitize=address -g
 # Setting variables depending on Operating System
 ifdef IS_LINUX
 LINKS = -D IS_LINUX=1 -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
-MLX_DIR = mlx_linux/
+MLX_DIR = mlx_linux
 else
 LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-MLX_DIR = mlx/
+MLX_DIR = mlx
 endif
 
 # Output file which is the executable
@@ -21,11 +21,25 @@ LIBFT = libft.a
 LIBFT_DIR = libft
 
 # Source files
-SRC = main.c
+#DIR_MAIN = 
+SRC_MAIN = main.c
+
+DIR_PARSER = parser
+SRC_PARSER =	parse_main.c \
+				parse_data.c \
+				init.c \
+				parse_resolution.c \
+				parse_texture.c \
+				parse_colour.c \
+				utils.c
+
+SRC = $(SRC_MAIN) $(SRC_PARSER)
 
 # Object files
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
+
+VPATH = $(DIR_PARSER)
 
 all: $(OBJ_DIR) $(MLX_LIB) $(LIBFT) $(NAME)
 
@@ -45,7 +59,7 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) $(LINKS) -c $< -o $@
 
 clean:
-	rm -rdf obj/
+	rm -rdf $(OBJ_DIR)
 	make -C $(MLX_DIR) clean
 
 fclean: clean

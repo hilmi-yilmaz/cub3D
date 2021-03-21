@@ -21,6 +21,21 @@
 #  define StructureNotifyMask 1L<<17
 # endif
 
+# include "libft/libft.h"
+
+# define LEN_NO 2
+# define LEN_SO 2
+# define LEN_WE 2
+# define LEN_EA 2
+# define LEN_S 1
+# define LEN_F 1
+# define LEN_C 1
+
+# define RGB_DATA_COUNT 3
+# define RESOLUTION_DATA_COUNT 2
+
+# define UNINITIALIZED -1
+
 typedef struct s_img
 {
     void            *mlx_ptr;
@@ -31,10 +46,6 @@ typedef struct s_img
     int             bits_per_pixel;
     int             line_size;
     int             endian;
-
-    unsigned int    floor_colour;
-    unsigned int    ceiling_colour;
-
 }                   t_img;
 
 typedef struct s_info
@@ -55,11 +66,22 @@ typedef struct s_info
 }                   t_info;
 
 /* Parsing data */
-void    parse_data(t_info *info, char **argv);
-void    parse_resolution(t_info *info, char *line);
+void    parse_main(t_info *info, char **argv);
+void    info_init(t_info *info);
+void    parse_data(int fd, t_info *info);
+int     parse_resolution(int *win_width, int *win_height, char *line);
+int     parse_textures(t_info *info, char *line);
+int     fill_texture(char **texture, char *line);
+int     parse_colour(int *colour_array, char *line);
+
+/* Checks while parsing */
+int     check_resolution(char *line);
+int     check_colour(char *line);
 
 /* Utils */
-int skip_spaces(char *str);
+int     skip_chr(char *str, int c);
+void    free_info(t_info *info);
+void    free_and_exit(t_info *info);
 
 /* Temporary helper functions */
 void    print_info(t_info *info);
