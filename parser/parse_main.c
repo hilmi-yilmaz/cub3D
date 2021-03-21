@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 16:23:16 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/21 20:22:51 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    parse_main(t_info *info, char **argv)
+int parse_main(t_info *info, char **argv)
 {
     int     fd;
+    int     parse_return;
     int     close_return;
 
     fd = open(*(argv + 1), O_RDONLY);
@@ -34,7 +35,12 @@ void    parse_main(t_info *info, char **argv)
         exit(1);
     }
     info_init(info);
-    parse_data(fd, info);
+    parse_return = parse_data(fd, info);
+    if (parse_return == -1)
+    {
+        free_info(info);
+        return (-1);
+    }
     print_info(info);
     free_info(info);
     close_return = close(fd);
@@ -43,4 +49,5 @@ void    parse_main(t_info *info, char **argv)
         printf("Error closing %s\n", *(argv + 1));
         exit (1);
     }
+    return (0);
 }

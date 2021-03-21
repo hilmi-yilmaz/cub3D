@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 16:19:23 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/21 20:15:39 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int check_colour(char *line)
     {
         if (*(line + i) != ',' && *(line + i) != ' ' && ft_isdigit(*(line + i)) == 0)
         {
-            printf("Error with parsing colour\n");
+            printf("Error\nWrong characters found while parsing colour data.\n");
             return (-1);
         }
         if (ft_isdigit(*(line + i)) != 0 && ft_isdigit(*(line + i + 1)) == 0)
@@ -59,6 +59,10 @@ int check_colour(char *line)
         i++;
     }
     if (data_count != RGB_DATA_COUNT)
+    {
+        printf("Error\nFormat of colour data isn't correct. ");
+        printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
         return (-1);
+    }
     return (0);
 }

@@ -66,9 +66,9 @@ typedef struct s_info
 }                   t_info;
 
 /* Parsing data */
-void    parse_main(t_info *info, char **argv);
+int     parse_main(t_info *info, char **argv);
 void    info_init(t_info *info);
-void    parse_data(int fd, t_info *info);
+int     parse_data(int fd, t_info *info);
 int     parse_resolution(int *win_width, int *win_height, char *line);
 int     parse_textures(t_info *info, char *line);
 int     fill_texture(char **texture, char *line);

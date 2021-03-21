@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 16:25:55 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/21 20:20:29 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    parse_data(int fd, t_info *info)
+int parse_data(int fd, t_info *info)
 {
     int     res;
     int     return_val;
@@ -40,9 +40,18 @@ void    parse_data(int fd, t_info *info)
             return_val = parse_colour(info->ceiling_colour, line + LEN_C);
         else if (*line == '\0')
            ;
+        else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
+                *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ')
+            ;
+        else
+        {
+            printf("Error\nWrong type identifier in scene file or wrong element in map.\n");
+            return_val = -1;
+        }
         free(line);
         line = NULL;
         if (return_val == -1)
-            break ;
+            return (-1);
     }
+    return (0);
 }
