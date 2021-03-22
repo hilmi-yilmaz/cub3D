@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 20:20:29 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 18:09:48 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ int parse_data(int fd, t_info *info)
            ;
         else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
                 *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ')
-            ;
+        {
+            return_val = parse_map(fd, info, line);
+            if (return_val == -1)
+                return (-1);
+            return (0);
+        }
         else
         {
             printf("Error\nWrong type identifier in scene file or wrong element in map.\n");

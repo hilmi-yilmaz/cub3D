@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 15:30:54 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 16:19:20 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ void    print_info(t_info *info)
     printf("Ceiling colour = |%d,%d,%d|\n", info->ceiling_colour[0], info->ceiling_colour[1], info->ceiling_colour[2]);
 }
 
+void    print_map(t_info *info)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (*(info->map.map + i) != NULL)
+    {
+        while (j < info->map.len_element[i])
+        {
+            printf("%c", *(*(info->map.map + i) + j));
+            j++;
+        }
+        //printf("     %d", info->map.len_element[i]);
+        printf("\n");
+        j = 0;
+        i++;
+    }
+}
+
 int skip_chr(char *str, int c)
 {
     int i;
@@ -42,11 +63,21 @@ int skip_chr(char *str, int c)
 
 void    free_info(t_info *info)
 {
+    int i;
+
+    i = 0;
     free(info->north_text);
     free(info->south_text);
     free(info->west_text);
     free(info->east_text);
     free(info->sprite_text);
+    while (*(info->map.map + i) != NULL)
+    {
+        free(*(info->map.map + i));
+        i++;
+    }
+    free(info->map.map);
+    free(info->map.len_element);
 }
 
 void    free_and_exit(t_info *info)

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 20:22:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 11:13:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h> // for read, write, close
 #include <stdlib.h> //for malloc, free, exit
 #include <string.h> //strerror
+#include <errno.h> //errno
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -30,8 +31,7 @@ int parse_main(t_info *info, char **argv)
     fd = open(*(argv + 1), O_RDONLY);
     if (fd == -1)
     {
-        printf("Error\nSomething went wrong opening \"%s\"\n", *(argv + 1));
-        perror(NULL);
+        printf("Error\nSomething went wrong opening \"%s\": %s\n", *(argv + 1), strerror(errno));
         exit(1);
     }
     info_init(info);
@@ -46,7 +46,7 @@ int parse_main(t_info *info, char **argv)
     close_return = close(fd);
     if (close_return == -1)
     {
-        printf("Error closing %s\n", *(argv + 1));
+        printf("Error\nSomething went wrong closing \"%s\": %s\n", *(argv + 1), strerror(errno));
         exit (1);
     }
     return (0);

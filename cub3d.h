@@ -48,6 +48,12 @@ typedef struct s_img
     int             endian;
 }                   t_img;
 
+typedef struct s_map
+{
+    int **map;
+    int *len_element;
+}       t_map;
+
 typedef struct s_info
 {
     int     win_width;
@@ -63,6 +69,8 @@ typedef struct s_info
     int     floor_colour[3];
     int     ceiling_colour[3];
 
+    t_map   map;
+
 }                   t_info;
 
 /* Parsing data */
@@ -73,6 +81,10 @@ int     parse_resolution(int *win_width, int *win_height, char *line);
 int     parse_textures(t_info *info, char *line);
 int     fill_texture(char **texture, char *line);
 int     parse_colour(int *colour_array, char *line);
+
+int     parse_map(int fd, t_info *info, char *line);
+int     **create_map(t_info *info, char *line, int rows);
+int     *create_len(t_info *info, char *line, int rows);
 
 /* Checks while parsing */
 int     check_resolution(char *line);
@@ -85,5 +97,6 @@ void    free_and_exit(t_info *info);
 
 /* Temporary helper functions */
 void    print_info(t_info *info);
+void    print_map(t_info *info);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 15:30:07 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 17:58:32 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,20 @@
 
 int parse_textures(t_info *info, char *line)
 {
+    int res;
+
     if (*line == 'N')
-        fill_texture(&info->north_text, line + LEN_NO);
+        res = fill_texture(&info->north_text, line + LEN_NO);
     else if (*line == 'S' && *(line + 1) == 'O')
-        fill_texture(&info->south_text, line + LEN_SO);
+        res = fill_texture(&info->south_text, line + LEN_SO);
     else if (*line == 'W')
-        fill_texture(&info->west_text, line + LEN_WE);
+        res = fill_texture(&info->west_text, line + LEN_WE);
     else if (*line == 'E')
-        fill_texture(&info->east_text, line + LEN_EA);
+        res = fill_texture(&info->east_text, line + LEN_EA);
     else if (*line == 'S')
-        fill_texture(&info->sprite_text, line + LEN_S);
+        res = fill_texture(&info->sprite_text, line + LEN_S);
+    if (res == -1)
+        return (-1);
     return (0);
 }
 

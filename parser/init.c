@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:17:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 16:17:41 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 15:36:52 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ void    info_init(t_info *info)
         *(info->ceiling_colour + i) = UNINITIALIZED;
         i++;
     }
+    //info->map.map = NULL;
+    //info->map.len_element = NULL;
 }

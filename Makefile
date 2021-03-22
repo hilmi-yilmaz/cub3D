@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -fsanitize=address -g
+CFLAGS = -g -fsanitize=address
 
 # Setting variables depending on Operating System
 ifdef IS_LINUX
@@ -31,6 +31,7 @@ SRC_PARSER =	parse_main.c \
 				parse_resolution.c \
 				parse_texture.c \
 				parse_colour.c \
+				parse_map.c \
 				utils.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER)
