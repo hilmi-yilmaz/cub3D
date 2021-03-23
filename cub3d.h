@@ -23,6 +23,7 @@
 
 # include "libft/libft.h"
 
+# define LEN_R 1
 # define LEN_NO 2
 # define LEN_SO 2
 # define LEN_WE 2

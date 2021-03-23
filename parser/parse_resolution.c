@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/21 20:10:16 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 11:38:59 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,10 @@ int parse_resolution(int *win_width, int *win_height, char *line)
     int i;
     int check;
 
-    check = check_resolution(line);
+    i = 0;
+	check = check_resolution(line);
     if (check == -1)
         return (-1);
-    i = 0;
-    while (*(line + i) != '\0')
-    {
-        if (*(line + i) != ' ' && ft_isdigit(*(line + i)) == 0)
-            return (-1);
-        i++;
-    }
     i = skip_chr(line, ' ');
     *win_width = ft_atoi(line + i);
     i += ft_nblen(*win_width, 10);
