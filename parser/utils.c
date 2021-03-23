@@ -6,13 +6,15 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/22 16:19:20 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 09:22:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Standard library header files */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -71,13 +73,34 @@ void    free_info(t_info *info)
     free(info->west_text);
     free(info->east_text);
     free(info->sprite_text);
-    while (*(info->map.map + i) != NULL)
+    if (info->map.map != NULL)
     {
-        free(*(info->map.map + i));
-        i++;
+        while (*(info->map.map + i) != NULL)
+        {
+            free(*(info->map.map + i));
+            i++;
+        }
     }
     free(info->map.map);
     free(info->map.len_element);
+}
+
+void    *free_map(int **map, int *len_element, int rows, int message)
+{
+    int i;
+
+    i = 0;
+    if (message == TRUE)
+        printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+    while (i < rows)
+    {
+        free(*(map + i));
+        i++;
+    }
+    free(map);
+    if (len_element != NULL)
+        free(len_element);
+    return (NULL);
 }
 
 void    free_and_exit(t_info *info)

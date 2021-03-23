@@ -36,6 +36,9 @@
 
 # define UNINITIALIZED -1
 
+# define TRUE 1
+# define FALSE 0
+
 typedef struct s_img
 {
     void            *mlx_ptr;
@@ -52,6 +55,7 @@ typedef struct s_map
 {
     int **map;
     int *len_element;
+    
 }       t_map;
 
 typedef struct s_info
@@ -85,6 +89,7 @@ int     parse_colour(int *colour_array, char *line);
 int     parse_map(int fd, t_info *info, char *line);
 int     **create_map(t_info *info, char *line, int rows);
 int     *create_len(t_info *info, char *line, int rows);
+int     old_to_new_map(t_info *info, int **new_map, int rows);
 
 /* Checks while parsing */
 int     check_resolution(char *line);
@@ -93,6 +98,7 @@ int     check_colour(char *line);
 /* Utils */
 int     skip_chr(char *str, int c);
 void    free_info(t_info *info);
+void    *free_map(int **map, int * len_element, int rows, int message);
 void    free_and_exit(t_info *info);
 
 /* Temporary helper functions */

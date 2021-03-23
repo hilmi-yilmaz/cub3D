@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/22 18:09:48 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 09:31:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,25 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int parse_data(int fd, t_info *info)
+int	parse_data(int fd, t_info *info)
 {
-    int     res;
-    int     return_val;
-    char    *line;
+	int		res;
+	int		return_val;
+	int		count;
+	char	*line;
 
     res = 1;
     line = NULL;
+	count = 0;
     while (res > 0)
     {
         res = get_next_line(fd, &line);
+		if (res == 0 && count == 0 && *line == '\0')
+		{
+			printf("Error\nThe data file is empty.\n");
+			free(line);
+			return (-1);
+		}
         if (*line == 'R')
             return_val = parse_resolution(&info->win_width, &info->win_height, line + 1);
         else if (*line == 'N' || (*line == 'S' && *(line + 1) == 'O') || \
@@ -50,11 +58,12 @@ int parse_data(int fd, t_info *info)
         }
         else
         {
-            printf("Error\nWrong type identifier in scene file or wrong element in map.\n");
+            printf("Error\nWrong type identifier in scene file or wrong starting element in map.\n");
             return_val = -1;
         }
         free(line);
         line = NULL;
+		count++;
         if (return_val == -1)
             return (-1);
     }

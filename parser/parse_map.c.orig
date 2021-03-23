@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 09:33:04 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/22 20:51:28 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int parse_map(int fd, t_info *info, char *line)
             free(line);
             return (-1);
         }
+        // printf("\n");
+        // print_map(info);
+        // printf("\n");
         free(line);
         line = NULL;
         rows++;
@@ -71,7 +74,12 @@ int *create_len(t_info *info, char *line, int rows)
     i = 0;
     new_elements_len = (int *)malloc(sizeof(int) * rows);
     if (new_elements_len == NULL)
-        return (free_map(info->map.map, info->map.len_element, rows - 1, TRUE));
+    {
+        printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+        free(info->map.len_element);
+        free_map(info->map.map, rows - 1);
+        return (NULL);
+    }
     while (i < rows - 1)
     {
         *(new_elements_len + i) = *(info->map.len_element + i);
@@ -93,37 +101,22 @@ int **create_map(t_info *info, char *line, int rows)
     j = 0;
     new_map = (int **)malloc(sizeof(int *) * (rows + 1));
     if (new_map == NULL)
-        return (free_map(info->map.map, info->map.len_element, rows - 1, TRUE));
-    *(new_map + rows) = NULL;
-    i = old_to_new_map(info, new_map, rows);
-    if (i == -1)
-        return (NULL);
-    *(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
-    if (*(new_map + i) == NULL)
-        return (free_map(new_map, info->map.len_element, rows - 1, TRUE));
-    j = 0;
-    while (*(line + j) != '\0')
     {
-        *(*(new_map + i) + j) = *(line + j);
-        j++;
+        printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+        free(info->map.len_element);
+        free_map(info->map.map, rows - 1);
+        return (NULL);       
     }
-    return (new_map);
-}
-
-int old_to_new_map(t_info *info, int **new_map, int rows)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
+    *(new_map + rows) = NULL;
     while (i < rows - 1)
     {
         *(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
         if (*(new_map + i) == NULL)
         {
-            free_map(new_map, info->map.len_element, i, TRUE);
-            return (-1);
+            printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+            free_map(new_map, i);
+            free(info->map.len_element);
+            return (NULL);
         }
         while (j < *(info->map.len_element + i))
         {
@@ -134,6 +127,20 @@ int old_to_new_map(t_info *info, int **new_map, int rows)
         i++;
     }
     if (rows > 1)
-        free_map(info->map.map, NULL, rows - 1, FALSE);
-    return (i);
+        free_map(info->map.map, rows - 1);
+    *(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
+    if (*(new_map + i) == NULL)
+    {
+        printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+        free_map(new_map, rows - 1);
+        free(info->map.len_element);
+        return (NULL);
+    }
+    j = 0;
+    while (*(line + j) != '\0')
+    {
+        *(*(new_map + i) + j) = *(line + j);
+        j++;
+    }
+    return (new_map);
 }
