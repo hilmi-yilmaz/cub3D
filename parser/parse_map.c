@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 09:33:04 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/24 21:50:59 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int parse_map(int fd, t_info *info, char *line)
             res = get_next_line(fd, &line);
         if (res == -1) // ------------- Also check for case that res = 0 first time in loop ---------------//
         {
-            printf("Error\nSomething went wrong while reading the map\n");
+            printf("Error\nSomething went wrong reading the map\n");
             return (-1);
         }
         info->map.len_element = create_len(info, line, rows);
@@ -71,17 +71,30 @@ int *create_len(t_info *info, char *line, int rows)
     i = 0;
     new_elements_len = (int *)malloc(sizeof(int) * rows);
     if (new_elements_len == NULL)
-        return (free_map(info->map.map, info->map.len_element, rows - 1, TRUE));
+        return (error_malloc());
     while (i < rows - 1)
     {
         *(new_elements_len + i) = *(info->map.len_element + i);
         i++;
     }
-    if (rows > 1)
-        free(info->map.len_element);
+    free(info->map.len_element);
     *(new_elements_len + i) = ft_strlen(line);
     return (new_elements_len);
 }
+
+/* Mock malloc that fails after a few times */
+static void	*xmalloc(size_t size)
+{
+	static int fail = 1;
+	static int i = 0;
+
+	if (fail == i)
+		return (NULL);
+	i++;
+	return (malloc(size));
+}
+
+//#define malloc(x) xmalloc(x)
 
 int **create_map(t_info *info, char *line, int rows)
 {
@@ -91,17 +104,25 @@ int **create_map(t_info *info, char *line, int rows)
 
     i = 0;
     j = 0;
+	//#define malloc(x) xmalloc(x)
     new_map = (int **)malloc(sizeof(int *) * (rows + 1));
+	//#undef malloc
     if (new_map == NULL)
-        return (free_map(info->map.map, info->map.len_element, rows - 1, TRUE));
-    *(new_map + rows) = NULL;
+	{
+		free_info(info);
+		return (error_malloc());
+	}
+	*(new_map + rows) = NULL;
     i = old_to_new_map(info, new_map, rows);
     if (i == -1)
-        return (NULL);
-    *(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
+		return (NULL);
+	*(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
     if (*(new_map + i) == NULL)
-        return (free_map(new_map, info->map.len_element, rows - 1, TRUE));
-    j = 0;
+	{
+		free_map(new_map);
+        return (error_malloc());
+	}
+	j = 0;
     while (*(line + j) != '\0')
     {
         *(*(new_map + i) + j) = *(line + j);
@@ -109,6 +130,8 @@ int **create_map(t_info *info, char *line, int rows)
     }
     return (new_map);
 }
+
+//#undef malloc
 
 int old_to_new_map(t_info *info, int **new_map, int rows)
 {
@@ -119,10 +142,14 @@ int old_to_new_map(t_info *info, int **new_map, int rows)
     j = 0;
     while (i < rows - 1)
     {
-        *(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
+        #define malloc(x) xmalloc(x)
+		*(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
+		#undef malloc
         if (*(new_map + i) == NULL)
         {
-            free_map(new_map, info->map.len_element, i, TRUE);
+            free_map(new_map);
+			free_info(info);
+			error_malloc();
             return (-1);
         }
         while (j < *(info->map.len_element + i))
@@ -133,7 +160,6 @@ int old_to_new_map(t_info *info, int **new_map, int rows)
         j = 0;
         i++;
     }
-    if (rows > 1)
-        free_map(info->map.map, NULL, rows - 1, FALSE);
+    free_map(info->map.map);
     return (i);
 }

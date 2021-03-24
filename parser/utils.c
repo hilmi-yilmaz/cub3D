@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 12:14:45 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/24 16:04:06 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,49 +63,8 @@ int skip_chr(char *str, int c)
     return (i);
 }
 
-/* This function frees the textures and map after exiting the game (this when no errors occured) */
-void    free_info(t_info *info)
+void    *error_malloc(void)
 {
-    int i;
-
-    i = 0;
-    free(info->north_text);
-    free(info->south_text);
-    free(info->west_text);
-    free(info->east_text);
-    free(info->sprite_text);
-    if (info->map.map != NULL)
-    {
-        while (*(info->map.map + i) != NULL)
-        {
-            free(*(info->map.map + i));
-            i++;
-        }
-    }
-    free(info->map.map);
-    free(info->map.len_element);
-}
-
-void    *free_map(int **map, int *len_element, int rows, int message)
-{
-    int i;
-
-    i = 0;
-    if (message == TRUE)
-        printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
-    while (i < rows)
-    {
-        free(*(map + i));
-        i++;
-    }
-    free(map);
-    if (len_element != NULL)
-        free(len_element);
+    printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
     return (NULL);
-}
-
-void    free_and_exit(t_info *info)
-{
-    free_info(info);
-    exit(1);
 }

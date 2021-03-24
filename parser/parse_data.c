@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 12:15:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/24 20:16:18 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ int	parse_data(int fd, t_info *info)
                 *line == 'W' || *line == 'E' || *line == 'S')
             return_val = parse_textures(info, line); /* Allocation happens */
         else if (*line == 'F')
-            return_val = parse_colour(info->floor_colour, line + LEN_F);
+            return_val = parse_colour(info->floor_colour, line + LEN_F); /* No allocation */
         else if (*line == 'C')
-            return_val = parse_colour(info->ceiling_colour, line + LEN_C);
+            return_val = parse_colour(info->ceiling_colour, line + LEN_C); /* No allocation */
         else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
                 *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ')
         {
-            return_val = parse_map(fd, info, line);
+            return_val = parse_map(fd, info, line); /* Allocation happens */
             if (return_val == -1)
                 return (-1);
-            return (0);
+			return (0);
         }
         else
         {

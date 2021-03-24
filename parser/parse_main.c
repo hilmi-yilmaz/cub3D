@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 14:15:25 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/24 21:44:05 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int parse_main(t_info *info, char **argv)
 {
     int     fd;
     int     parse_return;
+	int		check;
     int     close_return;
 
     fd = open(*(argv + 1), O_RDONLY);
@@ -38,9 +39,15 @@ int parse_main(t_info *info, char **argv)
     parse_return = parse_data(fd, info);
     if (parse_return == -1)
     {
-        free_info(info);
+        //free_info(info);
         return (-1);
     }
+	check = check_data_completeness(info);
+	if (check == -1)
+	{
+		free_info(info);
+		return (-1);
+	}
     print_info(info);
     free_info(info);
     close_return = close(fd);
@@ -51,4 +58,51 @@ int parse_main(t_info *info, char **argv)
         exit (1);
     }
     return (0);
+}
+
+/* This function checks whether the data file was complete (no missing data) */
+int	check_data_completeness(t_info *info)
+{
+	int i;
+	int	error;
+
+	i = 0;
+	error = 0;
+	if (info->win_width == UNINITIALIZED || info->win_height == UNINITIALIZED)
+	{
+		if (error != -1)
+			printf("Error\n");
+		printf("Missing resolution data.\n");
+		error = -1;
+	}
+	if (info->north_text == NULL || info->south_text == NULL || \
+		info->west_text == NULL || info->east_text == NULL || \
+		info->sprite_text == NULL)
+	{
+		if (error != -1)
+			printf("Error\n");
+		printf("Missing texture data.\n");
+		error = -1;
+	}
+    while (i < RGB_DATA_COUNT)
+    {
+        if (*(info->floor_colour + i) == UNINITIALIZED || \
+			*(info->ceiling_colour + i) == UNINITIALIZED)
+		{
+			if (error != -1)
+				printf("Error\n");
+			printf("Missing floor/ceiling data.\n");
+			error = -1;
+			break ;
+		}
+        i++;
+    }
+	if (info->map.map == NULL)
+	{
+		if (error != -1)
+			printf("Error\n");
+		printf("Missing map data.\n");
+		error = -1;
+	}
+	return (error);
 }

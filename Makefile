@@ -1,5 +1,10 @@
 CC = clang
+
+ifdef VALGRIND
+CFLAGS = -g 
+else
 CFLAGS = -g -fsanitize=address
+endif
 
 # Setting variables depending on Operating System
 ifdef IS_LINUX
@@ -15,6 +20,9 @@ NAME = exec
 
 # The name of the library that is created by mlx
 MLX_LIB = libmlx.a
+
+# Headerfile
+HEADER_FILE = cub3d.h
 
 # Libft (including get_next_line)
 LIBFT = libft.a
@@ -32,6 +40,7 @@ SRC_PARSER =	parse_main.c \
 				parse_texture.c \
 				parse_colour.c \
 				parse_map.c \
+				free_data.c \
 				utils.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER)
@@ -53,7 +62,7 @@ $(MLX_LIB):
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADER_FILE)
 	$(CC) $(CFLAGS) $(OBJ) $(LINKS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
