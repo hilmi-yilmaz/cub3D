@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 09:22:57 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 12:14:45 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int skip_chr(char *str, int c)
     return (i);
 }
 
+/* This function frees the textures and map after exiting the game (this when no errors occured) */
 void    free_info(t_info *info)
 {
     int i;

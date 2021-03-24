@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 11:38:59 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 13:59:31 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int parse_resolution(int *win_width, int *win_height, char *line)
     int i;
     int check;
 
-    i = 0;
+	if (*line != ' ')
+	{
+		printf("Error\nNo space between identifier and data for resolution.\n");
+		return (-1);
+	}
+	i = 1;
 	check = check_resolution(line);
     if (check == -1)
         return (-1);

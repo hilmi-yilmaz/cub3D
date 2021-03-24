@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/22 11:13:43 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 14:15:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int parse_main(t_info *info, char **argv)
     if (close_return == -1)
     {
         printf("Error\nSomething went wrong closing \"%s\": %s\n", *(argv + 1), strerror(errno));
+		//Free all data
         exit (1);
     }
     return (0);

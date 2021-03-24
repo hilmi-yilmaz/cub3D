@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 11:32:38 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/23 12:15:51 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	parse_data(int fd, t_info *info)
 			return (-1);
 		}
         if (*line == 'R')
-            return_val = parse_resolution(&info->win_width, &info->win_height, line + LEN_R);
+            return_val = parse_resolution(&info->win_width, &info->win_height, line + LEN_R); /* No allocation in parse_resolution */
         else if (*line == 'N' || (*line == 'S' && *(line + 1) == 'O') || \
                 *line == 'W' || *line == 'E' || *line == 'S')
-            return_val = parse_textures(info, line);
+            return_val = parse_textures(info, line); /* Allocation happens */
         else if (*line == 'F')
             return_val = parse_colour(info->floor_colour, line + LEN_F);
         else if (*line == 'C')

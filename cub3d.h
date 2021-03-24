@@ -34,6 +34,7 @@
 
 # define RGB_DATA_COUNT 3
 # define RESOLUTION_DATA_COUNT 2
+# define MAX_KOMMAS 2
 
 # define UNINITIALIZED -1
 
@@ -80,21 +81,21 @@ typedef struct s_info
 
 /* Parsing data */
 int     parse_main(t_info *info, char **argv);
-void    info_init(t_info *info);
-int     parse_data(int fd, t_info *info);
-int     parse_resolution(int *win_width, int *win_height, char *line);
-int     parse_textures(t_info *info, char *line);
-int     fill_texture(char **texture, char *line);
-int     parse_colour(int *colour_array, char *line);
-
-int     parse_map(int fd, t_info *info, char *line);
-int     **create_map(t_info *info, char *line, int rows);
-int     *create_len(t_info *info, char *line, int rows);
-int     old_to_new_map(t_info *info, int **new_map, int rows);
+void    	info_init(t_info *info);
+int     	parse_data(int fd, t_info *info);
+int     		parse_resolution(int *win_width, int *win_height, char *line);
+int     		parse_textures(t_info *info, char *line);
+int     			fill_texture(char **texture, char *line, char *text_id);
+int     		parse_colour(int *colour_array, char *line);
+int     		parse_map(int fd, t_info *info, char *line);
+int     			**create_map(t_info *info, char *line, int rows);
+int     			*create_len(t_info *info, char *line, int rows);
+int     			old_to_new_map(t_info *info, int **new_map, int rows);
 
 /* Checks while parsing */
 int     check_resolution(char *line);
-int     check_colour(char *line);
+int		fill_colour(int *colour_array, char *line);
+int		error_colour(void);
 
 /* Utils */
 int     skip_chr(char *str, int c);
