@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/24 21:50:59 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/29 10:48:19 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 /* User defined header files */
 #include "../cub3d.h"
-
-/* --------------------------------------------------------------------------------------- */
-/* KEEP IN MIND THAT IF ONE ALLOCATION FAILS MIDWAY, I HAVE TO FREE ALL ALLOCATIONS BEFORE */
-/* --------------------------------------------------------------------------------------- */
 
 int parse_map(int fd, t_info *info, char *line)
 {
@@ -82,20 +78,6 @@ int *create_len(t_info *info, char *line, int rows)
     return (new_elements_len);
 }
 
-/* Mock malloc that fails after a few times */
-static void	*xmalloc(size_t size)
-{
-	static int fail = 1;
-	static int i = 0;
-
-	if (fail == i)
-		return (NULL);
-	i++;
-	return (malloc(size));
-}
-
-//#define malloc(x) xmalloc(x)
-
 int **create_map(t_info *info, char *line, int rows)
 {
     int i;
@@ -104,9 +86,7 @@ int **create_map(t_info *info, char *line, int rows)
 
     i = 0;
     j = 0;
-	//#define malloc(x) xmalloc(x)
     new_map = (int **)malloc(sizeof(int *) * (rows + 1));
-	//#undef malloc
     if (new_map == NULL)
 	{
 		free_info(info);
@@ -131,8 +111,6 @@ int **create_map(t_info *info, char *line, int rows)
     return (new_map);
 }
 
-//#undef malloc
-
 int old_to_new_map(t_info *info, int **new_map, int rows)
 {
     int i;
@@ -142,9 +120,7 @@ int old_to_new_map(t_info *info, int **new_map, int rows)
     j = 0;
     while (i < rows - 1)
     {
-        #define malloc(x) xmalloc(x)
 		*(new_map + i) = (int *)malloc(sizeof(int) * info->map.len_element[i]);
-		#undef malloc
         if (*(new_map + i) == NULL)
         {
             free_map(new_map);

@@ -5,9 +5,9 @@
 if [[ "$1" == "fclean" ]]; then
     make fclean IS_LINUX=1
 elif [[ "$1" == "valgrind" ]]; then
-	make fclean && make IS_LINUX=1 VALGRIND=1 && ./exec scenes/correct/basic.cub 
+	make IS_LINUX=1 VALGRIND=1 && ./exec scenes/correct/basic.cub 
 elif [[ "$1" == "" ]]; then
-    make fclean && make IS_LINUX=1 && ./exec scenes/correct/basic.cub
+    make IS_LINUX=1 && ./exec scenes/correct/basic.cub
 	#make IS_LINUX=1 && ./exec scenes/correct/basic.cub
 else
     echo "Run script as: ./run.sh [fclean]."
