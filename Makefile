@@ -43,13 +43,16 @@ SRC_PARSER =	parse_main.c \
 				free_data.c \
 				utils.c
 
-SRC = $(SRC_MAIN) $(SRC_PARSER)
+DIR_RAYCASTER = raycaster
+SRC_RAYCASTER = raycaster_main.c
+
+SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 
 # Object files
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-VPATH = $(DIR_PARSER)
+VPATH = $(DIR_PARSER) $(DIR_RAYCASTER)
 
 all: $(OBJ_DIR) $(MLX_LIB) $(LIBFT) $(NAME)
 

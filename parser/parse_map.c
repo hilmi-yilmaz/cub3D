@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/29 10:48:19 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/29 21:21:47 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int **create_map(t_info *info, char *line, int rows)
 	j = 0;
     while (*(line + j) != '\0')
     {
-        *(*(new_map + i) + j) = *(line + j);
+        *(*(new_map + i) + j) = *(line + j) - '0';
         j++;
     }
     return (new_map);

@@ -41,16 +41,29 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+
+	int width;
+	int	height;
+	
+}	t_player;
+
 typedef struct s_img
 {
     void            *mlx_ptr;
     void            *win_ptr;
     void            *img_ptr;
-    void            *img_addr;
+    char            *img_addr;
 
     int             bits_per_pixel;
     int             line_size;
     int             endian;
+
+	t_player		player;
+
 }                   t_img;
 
 typedef struct s_map
@@ -72,12 +85,13 @@ typedef struct s_info
 
     char    *sprite_text;
 
-    int     floor_colour[3];
-    int     ceiling_colour[3];
+    int     floor_colour[RGB_DATA_COUNT];
+    int     ceiling_colour[RGB_DATA_COUNT];
 
     t_map   map;
 
 }                   t_info;
+
 
 /* Parsing data */
 int     parse_main(t_info *info, char **argv);

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/24 16:04:06 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/29 21:22:46 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    print_map(t_info *info)
     {
         while (j < info->map.len_element[i])
         {
-            printf("%c", *(*(info->map.map + i) + j));
+            printf("%c", *(*(info->map.map + i) + j) + '0');
             j++;
         }
         //printf("     %d", info->map.len_element[i]);
