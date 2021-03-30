@@ -65,10 +65,10 @@ $(MLX_LIB):
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ) $(HEADER_FILE)
+$(NAME): $(OBJ) #$(HEADER_FILE)
 	$(CC) $(CFLAGS) $(OBJ) $(LINKS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
 	$(CC) $(CFLAGS) $(LINKS) -c $< -o $@
 
 clean:

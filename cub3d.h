@@ -8,12 +8,16 @@
 #  define DOWN_KEY 65364
 #  define RIGHT_KEY 65363
 #  define LEFT_KEY 65361
+#  define A_KEY 97
+#  define D_KEY 100
 # else
 #  include "mlx/mlx.h"
 #  define UP_KEY 126
 #  define DOWN_KEY 125
 #  define RIGHT_KEY 124
 #  define LEFT_KEY 123
+#  define A_KEY 0
+#  define D_KEY 2
 #  define KeyPress 2
 #  define KeyPressMask 1L<<0
 #  define NoEventMask 1L<<0
@@ -41,6 +45,8 @@
 # define TRUE 1
 # define FALSE 0
 
+# define UNIT 64
+
 typedef struct s_player
 {
 	int	x;
@@ -48,6 +54,8 @@ typedef struct s_player
 
 	int width;
 	int	height;
+
+	float alpha;
 	
 }	t_player;
 

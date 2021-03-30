@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/29 21:22:08 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/03/30 17:00:41 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+#define PI 3.1415
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -29,6 +32,9 @@ int				key_input(int keycode, t_img *img);
 
 void			draw_map(t_img *img, t_info *info);
 void			draw_unit(t_img *img, int pos_x, int pos_y);
+
+void			draw_line(t_img *img, int x_start, int y_start, int len);
+void			remove_line(t_img *img, int x_start, int y_start, int len);
 
 int	raycaster_main(t_img *img, t_info *info)
 {
@@ -72,12 +78,14 @@ int	raycaster_main(t_img *img, t_info *info)
 
 void	init(t_img *img, t_info *info)
 {
-	img->player.x = 500;
+	img->player.x = 100;
 	img->player.y = 100;
 	img->player.width = 10;
 	img->player.height = 10;
+	img->player.alpha = 0.25 * PI;
 	draw_map(img, info);
 	draw_player(img);
+	draw_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
 }
 
 void	draw_player(t_img *img)
@@ -129,11 +137,11 @@ void	draw_map(t_img *img, t_info *info)
 	j = 0;
 	while (*(info->map.map + i) != NULL)
 	{
-		while (j < 10)
+		while (j < 8)
 		{
 			//printf("info->map.map[i][j] = %d\n", info->map.map[i][j]);
 			if (info->map.map[i][j] == 1)
-				draw_unit(img, j * 64, i * 64);
+				draw_unit(img, j * UNIT, i * UNIT);
 			j++;
 		}
 		j = 0;
@@ -146,32 +154,67 @@ void	draw_unit(t_img *img, int pos_x, int pos_y)
 	int i;
 	int j;
 
-	i = 0;
-	j = 0;
-	while (i < 64)
+	i = 2;
+	j = 2;
+	while (i < UNIT - 2)
 	{
-		while (j < 64)
+		while (j < UNIT - 2)
 		{
-			my_pixel_put(img, pos_x + j, pos_y + i, argb_to_hex(0, 255, 0, 0));
+			my_pixel_put(img, pos_x + j, pos_y + i, argb_to_hex(0, 255, 255, 0));
 			j++;
 		}
-		j = 0;
+		j = 2;
 		i++;
 	}
 }
 
+void	draw_line(t_img *img, int x_start, int y_start, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		my_pixel_put(img, x_start + i * cos(img->player.alpha), y_start + i * -sin(img->player.alpha), argb_to_hex(0, 255, 0, 0));
+		i++;
+	}
+	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
+
+void	remove_line(t_img *img, int x_start, int y_start, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		my_pixel_put(img, x_start + i * cos(img->player.alpha), y_start + i * -sin(img->player.alpha), argb_to_hex(0, 0, 0, 0));
+		i++;
+	}
+	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
+
 int		key_input(int keycode, t_img *img)
 {
+	int speed;
+	
+	speed = 10;
 	remove_current_player(img);
+	remove_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
 	if (keycode == LEFT_KEY)
-		img->player.x -= 5;
+		img->player.x -= speed;
 	else if (keycode == RIGHT_KEY)
-		img->player.x += 5;
+		img->player.x += speed;
 	else if (keycode == UP_KEY)
-		img->player.y -= 5;
+		img->player.y -= speed;
 	else if (keycode == DOWN_KEY)
-		img->player.y += 5;
+		img->player.y += speed;
+	else if (keycode == A_KEY)
+		img->player.alpha += 0.02 * PI;
+	else if (keycode == D_KEY)
+		img->player.alpha -= 0.02 * PI;
 	draw_player(img);
+	draw_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
 	return (0);
 }
 
