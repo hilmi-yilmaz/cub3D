@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/24 20:16:18 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/03 18:33:42 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_data(int fd, t_info *info)
         else if (*line == 'C')
             return_val = parse_colour(info->ceiling_colour, line + LEN_C); /* No allocation */
         else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
-                *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ')
+                *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ') // ----------- Actually cant be NWSE because map would not be valid then ------------- //
         {
             return_val = parse_map(fd, info, line); /* Allocation happens */
             if (return_val == -1)

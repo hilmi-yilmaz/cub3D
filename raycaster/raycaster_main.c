@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/03 15:04:43 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/03 20:57:11 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			remove_line(t_img *img, int x_start, int y_start, int len);
 
 void			player_location(t_img *img);
 int				check_wall(int **map, int x, int y);
+void			set_start_location(t_map map, int *x, int *y, float *alpha);
 
 int	raycaster_main(t_img *img, t_info *info)
 {
@@ -85,15 +86,47 @@ int	raycaster_main(t_img *img, t_info *info)
 
 void	init(t_img *img, t_info *info)
 {
-	img->player.x = 100;
-	img->player.y = 100;
+	set_start_location(img->info.map, &img->player.x, &img->player.y, &img->player.alpha);
+	printf("x = %d, y = %d\n", img->player.x, img->player.y);
 	player_location(img);
 	img->player.width = 11;
 	img->player.height = 11;
-	img->player.alpha = 0.25 * PI;
 	draw_map(img, info);
 	draw_player(img);
-	draw_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
+	draw_line(img, img->player.x, img->player.y, 20);
+}
+
+void	set_start_location(t_map map, int *x, int *y, float *alpha)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (*(map.map + i) != NULL)
+	{
+		while (j < map.len_element[i])
+		{
+			printf("%d\n", map.map[i][j]);
+			if (map.map[i][j] == 'N' || map.map[i][j] == 'W' || map.map[i][j] == 'S' || map.map[i][j] == 'E')
+			{
+				*x = (j + 0.5) * UNIT;
+				*y = (i + 0.5) * UNIT;
+				if (map.map[i][j] == 'N')
+					*alpha = 0.5 * PI;
+				else if (map.map[i][j] == 'W')
+					*alpha = 1 * PI;
+				else if (map.map[i][j] == 'S')
+					*alpha = 1.5 * PI;
+				else
+					*alpha = 0 * PI;
+				return ;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 }
 
 void	draw_player(t_img *img)
@@ -101,16 +134,16 @@ void	draw_player(t_img *img)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < img->player.height)
+	i = -img->player.height / 2; //i = 0;
+	j = -img->player.width / 2; //j = 0;
+	while (i < img->player.height / 2)
 	{
-		while (j < img->player.width)
+		while (j < img->player.width / 2)
 		{
 			my_pixel_put(img, img->player.x + j, img->player.y + i, argb_to_hex(0, 255, 255, 255));
 			j++;
 		}
-		j = 0;
+		j = -img->player.width / 2;
 		i++;
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
@@ -121,16 +154,16 @@ void	remove_current_player(t_img *img)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < img->player.height)
+	i = -img->player.height / 2; //i = 0;
+	j = -img->player.width / 2; //j = 0;
+	while (i < img->player.height / 2)
 	{
-		while (j < img->player.width)
+		while (j < img->player.width / 2)
 		{
 			my_pixel_put(img, img->player.x + j, img->player.y + i, argb_to_hex(0, 0, 0, 0));
 			j++;
 		}
-		j = 0;
+		j = -img->player.width / 2;
 		i++;
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
@@ -154,7 +187,7 @@ void	draw_map(t_img *img, t_info *info)
 		while (j < 8)
 		{
 			//printf("info->map.map[i][j] = %d\n", info->map.map[i][j]);
-			if (info->map.map[i][j] == 1)
+			if (info->map.map[i][j] == 1 + '0')
 				draw_unit(img, j * UNIT, i * UNIT);
 			j++;
 		}
@@ -168,16 +201,16 @@ void	draw_unit(t_img *img, int pos_x, int pos_y)
 	int i;
 	int j;
 
-	i = 2;
-	j = 2;
-	while (i < UNIT - 2)
+	i = EDGE;
+	j = EDGE;
+	while (i < UNIT - EDGE)
 	{
-		while (j < UNIT - 2)
+		while (j < UNIT - EDGE)
 		{
 			my_pixel_put(img, pos_x + j, pos_y + i, argb_to_hex(0, 255, 255, 0));
 			j++;
 		}
-		j = 2;
+		j = EDGE;
 		i++;
 	}
 }
@@ -213,30 +246,30 @@ int		key_input(int keycode, t_img *img)
 	int speed;
 	int	wall;
 	
-	speed = 10;
+	speed = 8;
 	remove_current_player(img);
-	remove_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
+	remove_line(img, img->player.x, img->player.y, 20);
 	if (keycode == LEFT_KEY)
 	{
-		wall = check_wall(img->info.map.map, img->player.x - speed, img->player.y);
+		wall = check_wall(img->info.map.map, img->player.x - speed - img->player.width / 2, img->player.y);
 		if (wall == 0)
 			img->player.x -= speed;
 	}
 	else if (keycode == RIGHT_KEY)
 	{
-		wall = check_wall(img->info.map.map, img->player.x + speed, img->player.y);
+		wall = check_wall(img->info.map.map, img->player.x + speed + img->player.width / 2 - 1, img->player.y);
 		if (wall == 0)
 			img->player.x += speed;
 	}
 	else if (keycode == UP_KEY)
 	{
-		wall = check_wall(img->info.map.map, img->player.x, img->player.y - speed);
+		wall = check_wall(img->info.map.map, img->player.x, img->player.y - speed - img->player.height / 2);
 		if (wall == 0)
 			img->player.y -= speed;
 	}
 	else if (keycode == DOWN_KEY)
 	{
-		wall = check_wall(img->info.map.map, img->player.x, img->player.y + speed);
+		wall = check_wall(img->info.map.map, img->player.x, img->player.y + speed + img->player.height / 2 - 1);
 		if (wall == 0)
 			img->player.y += speed;
 	}
@@ -246,9 +279,10 @@ int		key_input(int keycode, t_img *img)
 		img->player.alpha -= 0.02 * PI;
 	
 	draw_player(img);
-	draw_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
+	draw_line(img, img->player.x, img->player.y, 20);
 	player_location(img);
-	//printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
+	printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
+	printf("x = %d, y = %d\n", img->player.x, img->player.y);
 	return (0);
 }
 
@@ -260,7 +294,7 @@ int		check_wall(int **map, int x, int y)
 	next_location_x = (float)x / UNIT;
 	next_location_y = (float)y / UNIT;
 	printf("x = %d, y = %d, map[x][y] = %d\n", (int)next_location_x, (int)next_location_y, map[(int)next_location_y][(int)next_location_x]);
-	if (map[(int)next_location_y][(int)next_location_x] == 1)
+	if (map[(int)next_location_y][(int)next_location_x] == 1 + '0')
 		return (1);
 	return (0);
 }

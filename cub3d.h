@@ -46,6 +46,7 @@
 # define FALSE 0
 
 # define UNIT 64
+# define EDGE 0
 
 typedef struct s_map
 {
