@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/30 17:00:41 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/03 15:04:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,16 @@ void			draw_unit(t_img *img, int pos_x, int pos_y);
 void			draw_line(t_img *img, int x_start, int y_start, int len);
 void			remove_line(t_img *img, int x_start, int y_start, int len);
 
+void			player_location(t_img *img);
+int				check_wall(int **map, int x, int y);
+
 int	raycaster_main(t_img *img, t_info *info)
 {
 	t_player player;
+	
+	/* Copy the data of the info struct inside the img struct */
+	img->info = *info;
+	//print_map(&img->info);
 	
 	/* Establish the connection between the X Server and X client */
 	img->mlx_ptr = mlx_init();
@@ -80,8 +87,9 @@ void	init(t_img *img, t_info *info)
 {
 	img->player.x = 100;
 	img->player.y = 100;
-	img->player.width = 10;
-	img->player.height = 10;
+	player_location(img);
+	img->player.width = 11;
+	img->player.height = 11;
 	img->player.alpha = 0.25 * PI;
 	draw_map(img, info);
 	draw_player(img);
@@ -126,6 +134,12 @@ void	remove_current_player(t_img *img)
 		i++;
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
+
+void	player_location(t_img *img)
+{
+	img->player.x_unit = (float)img->player.x / UNIT;
+	img->player.y_unit = (float)img->player.y / UNIT;
 }
 
 void	draw_map(t_img *img, t_info *info)
@@ -197,24 +211,57 @@ void	remove_line(t_img *img, int x_start, int y_start, int len)
 int		key_input(int keycode, t_img *img)
 {
 	int speed;
+	int	wall;
 	
 	speed = 10;
 	remove_current_player(img);
 	remove_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
 	if (keycode == LEFT_KEY)
-		img->player.x -= speed;
+	{
+		wall = check_wall(img->info.map.map, img->player.x - speed, img->player.y);
+		if (wall == 0)
+			img->player.x -= speed;
+	}
 	else if (keycode == RIGHT_KEY)
-		img->player.x += speed;
+	{
+		wall = check_wall(img->info.map.map, img->player.x + speed, img->player.y);
+		if (wall == 0)
+			img->player.x += speed;
+	}
 	else if (keycode == UP_KEY)
-		img->player.y -= speed;
+	{
+		wall = check_wall(img->info.map.map, img->player.x, img->player.y - speed);
+		if (wall == 0)
+			img->player.y -= speed;
+	}
 	else if (keycode == DOWN_KEY)
-		img->player.y += speed;
+	{
+		wall = check_wall(img->info.map.map, img->player.x, img->player.y + speed);
+		if (wall == 0)
+			img->player.y += speed;
+	}
 	else if (keycode == A_KEY)
 		img->player.alpha += 0.02 * PI;
 	else if (keycode == D_KEY)
 		img->player.alpha -= 0.02 * PI;
+	
 	draw_player(img);
 	draw_line(img, img->player.x + 0.5 * img->player.width, img->player.y + 0.5 * img->player.height, 20);
+	player_location(img);
+	//printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
+	return (0);
+}
+
+int		check_wall(int **map, int x, int y)
+{
+	float next_location_x;
+	float next_location_y;
+
+	next_location_x = (float)x / UNIT;
+	next_location_y = (float)y / UNIT;
+	printf("x = %d, y = %d, map[x][y] = %d\n", (int)next_location_x, (int)next_location_y, map[(int)next_location_y][(int)next_location_x]);
+	if (map[(int)next_location_y][(int)next_location_x] == 1)
+		return (1);
 	return (0);
 }
 

@@ -47,33 +47,6 @@
 
 # define UNIT 64
 
-typedef struct s_player
-{
-	int	x;
-	int	y;
-
-	int width;
-	int	height;
-
-	float alpha;
-	
-}	t_player;
-
-typedef struct s_img
-{
-    void            *mlx_ptr;
-    void            *win_ptr;
-    void            *img_ptr;
-    char            *img_addr;
-
-    int             bits_per_pixel;
-    int             line_size;
-    int             endian;
-
-	t_player		player;
-
-}                   t_img;
-
 typedef struct s_map
 {
     int **map;
@@ -99,6 +72,37 @@ typedef struct s_info
     t_map   map;
 
 }                   t_info;
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+
+	float x_unit;
+	float y_unit;
+
+	int width;
+	int	height;
+
+	float alpha;
+	
+}	t_player;
+
+typedef struct s_img
+{
+    void            *mlx_ptr;
+    void            *win_ptr;
+    void            *img_ptr;
+    char            *img_addr;
+
+    int             bits_per_pixel;
+    int             line_size;
+    int             endian;
+
+	t_player		player;
+	t_info			info;
+
+}                   t_img;
 
 
 /* Parsing data */
@@ -134,5 +138,8 @@ void	free_len_elements(t_map map);
 /* Temporary helper functions */
 void    print_info(t_info *info);
 void    print_map(t_info *info);
+
+/* Raycaster */
+int		raycaster_main(t_img *img, t_info *info);
 
 #endif
