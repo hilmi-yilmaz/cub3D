@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/03 20:57:11 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/06 18:58:02 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void			remove_line(t_img *img, int x_start, int y_start, int len);
 void			player_location(t_img *img);
 int				check_wall(int **map, int x, int y);
 void			set_start_location(t_map map, int *x, int *y, float *alpha);
+
+int				cast_ray(t_img *img);
 
 int	raycaster_main(t_img *img, t_info *info)
 {
@@ -73,7 +75,7 @@ int	raycaster_main(t_img *img, t_info *info)
 	mlx_hook(img->win_ptr, KeyPress, KeyPressMask, key_input, img);
 
 	/* React on closing the screen */
-	if (IS_LINUX)
+	if (IS_LINUX == 1)
 		mlx_hook(img->win_ptr, ClientMessage, NoEventMask, close_window, img);
 	else
 		mlx_hook(img->win_ptr, DestroyNotify, StructureNotifyMask, close_window, img);
@@ -93,7 +95,11 @@ void	init(t_img *img, t_info *info)
 	img->player.height = 11;
 	draw_map(img, info);
 	draw_player(img);
-	draw_line(img, img->player.x, img->player.y, 20);
+	//draw_line(img, img->player.x, img->player.y, 20);
+
+	/* Initialize ray */
+	img->ray.len = 1;
+	cast_ray(img);
 }
 
 void	set_start_location(t_map map, int *x, int *y, float *alpha)
@@ -241,6 +247,32 @@ void	remove_line(t_img *img, int x_start, int y_start, int len)
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
+int	cast_ray(t_img *img)
+{
+	float step;
+	float x_line_end;
+	float y_line_end;
+
+	img->ray.len = 0;
+	step = 0.01;
+	while (1)
+	{
+		x_line_end = img->player.x_unit + img->ray.len * cos(img->player.alpha);
+		y_line_end = img->player.y_unit - img->ray.len * sin(img->player.alpha);
+		printf("%c\n", img->info.map.map[(int)x_line_end][(int)y_line_end]);
+		printf("len_ray = %f\n", img->ray.len);
+		if (img->info.map.map[(int)y_line_end][(int)x_line_end] == 1 + '0')
+		{
+			draw_line(img, img->player.x, img->player.y, img->ray.len * UNIT);
+			return (0);
+		}
+		img->ray.len += step;
+		// x_line_end = img->ray.len * cos(img->player.alpha);
+		// y_line_end = img->ray.len * sin(img->player.alpha);
+	}
+	return (-1);
+}
+
 int		key_input(int keycode, t_img *img)
 {
 	int speed;
@@ -248,7 +280,7 @@ int		key_input(int keycode, t_img *img)
 	
 	speed = 8;
 	remove_current_player(img);
-	remove_line(img, img->player.x, img->player.y, 20);
+	remove_line(img, img->player.x, img->player.y, img->ray.len * UNIT);
 	if (keycode == LEFT_KEY)
 	{
 		wall = check_wall(img->info.map.map, img->player.x - speed - img->player.width / 2, img->player.y);
@@ -279,8 +311,8 @@ int		key_input(int keycode, t_img *img)
 		img->player.alpha -= 0.02 * PI;
 	
 	draw_player(img);
-	draw_line(img, img->player.x, img->player.y, 20);
 	player_location(img);
+	cast_ray(img);
 	printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
 	printf("x = %d, y = %d\n", img->player.x, img->player.y);
 	return (0);
@@ -304,7 +336,7 @@ int	close_window(t_img *img)
 	/* Destroy the image and window */
 	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
 	mlx_destroy_window(img->mlx_ptr, img->win_ptr);
-	mlx_destroy_display(img->mlx_ptr);
+	//mlx_destroy_display(img->mlx_ptr);
 
 	/* Free the pointer */
 	free(img->mlx_ptr); /* mlx_init pointer */

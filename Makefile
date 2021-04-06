@@ -74,6 +74,7 @@ $(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
 clean:
 	rm -rdf $(OBJ_DIR)
 	make -C $(MLX_DIR) clean
+	make -C $(LIBFT_DIR) fclean
 
 fclean: clean
 	rm -f $(NAME)
