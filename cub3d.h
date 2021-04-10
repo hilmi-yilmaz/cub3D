@@ -77,11 +77,13 @@ typedef struct s_info
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	/* These are pixel coordinates of the player */
+	int	x;			/* 128 */
+	int	y;			/* 192 */
 
-	float x_unit;
-	float y_unit;
+	/* These are unit coordinates of the player */
+	float x_unit;	/*	128 / UNIT	*/
+	float y_unit;	/* 	192 / UNIT 	*/
 
 	int width;
 	int	height;
