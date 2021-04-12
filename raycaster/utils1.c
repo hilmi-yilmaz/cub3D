@@ -9,8 +9,10 @@ void	player_location(t_img *img)
 	img->player.x_unit = (float)img->player.x / UNIT;
 	img->player.y_unit = (float)img->player.y / UNIT;
 }
-
-int	unit_circle(float alpha)
+/*
+** Returns 0 if upperhalf cirle, 1 if lowerhalf circle
+*/
+int	unit_circle_upper_lower(float alpha)
 {
 	if ((alpha >= 0 && alpha < PI) || (alpha <= -PI && alpha > -2 * PI))
 		return (0);
@@ -20,25 +22,40 @@ int	unit_circle(float alpha)
 		return (-1);
 }
 
+/*
+** Return 0 if left half, 1 if right half.
+*/
+int	unit_circle_left_right(float alpha)
+{
+	alpha -= 0.5 * PI;
+	/* If the angle is bigger than 2PI, substract 2PI */
+	if (alpha > 2 * PI)
+		alpha -= 2 * PI;
+	if (alpha < -2 * PI)
+		alpha += 2 * PI;
+	return(unit_circle_upper_lower(alpha));
+}
+
 int		check_wall(t_map map, int x, int y) /* x and y are pixel coordinates */
 {
-	float next_location_x;
-	float next_location_y;
+	float x_unit;
+	float y_unit;
 
-	next_location_x = (float)x / UNIT;
-	next_location_y = (float)y / UNIT;
+	x_unit = (float)x / UNIT;
+	y_unit = (float)y / UNIT;
 
-	printf("Checking wall at x = %d, y = %d\n", x, y);
+	//printf("Checking wall at x = %d, y = %d\n", x, y);
 	
 	/* Can't have a higher y than the amount of rows in the map itself */
-	if ((int)next_location_y > ft_arrlen(map.map))
+	//printf("y_unit = %d, map_rows = %d\n", (int)y_unit, ft_arrlen(map.map));
+	if ((int)y_unit >= ft_arrlen(map.map))
 		return (-1);
 	/* Can't have higher x than the elements in y'th row in the map */
-	if (next_location_x > map.len_element[(int)next_location_y])
+	if (x_unit > map.len_element[(int)y_unit])
 		return (-1);
-	//printf("x = %d, y = %d\n", (int)next_location_x, (int)next_location_y);
-	//printf("x = %d, y = %d, map[x][y] = %d\n", (int)next_location_x, (int)next_location_y, map.map[(int)next_location_y][(int)next_location_x]);
-	if (map.map[(int)next_location_y][(int)next_location_x] == 1 + '0')
+	//printf("x = %d, y = %d\n", (int)x_unit, (int)y_unit);
+	//printf("x = %d, y = %d, map[x][y] = %d\n", (int)x_unit, (int)y_unit, map.map[(int)y_unit][(int)x_unit]);
+	if (map.map[(int)y_unit][(int)x_unit] == 1 + '0')
 		return (1); /* Found wall */
 	return (0); /* No wall */
 }

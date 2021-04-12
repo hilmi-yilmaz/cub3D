@@ -12,7 +12,7 @@ int		key_input(int keycode, t_img *img)
 	speed = 8;
 	remove_current_player(img);
 	//remove_line(img, img->player.x, img->player.y, img->ray.len * UNIT);
-	remove_line(img, img->player.x, img->player.y, 20);
+	remove_line(img, img->player.alpha, 20);
 	if (keycode == LEFT_KEY)
 	{
 		wall = check_wall(img->info.map, img->player.x - speed - img->player.width / 2, img->player.y);
@@ -50,9 +50,9 @@ int		key_input(int keycode, t_img *img)
 	
 	draw_player(img);
 	player_location(img);
-	draw_line(img, img->player.x, img->player.y, 20);
-	//cast_ray(img);
-	horizontal_intersection(img);
+	draw_line(img, img->player.alpha, 20);
+	//cast_rays(img, img->info.win_width);
+	cast_ray(img);
 	//printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
 	printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
 	return (0);

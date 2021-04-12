@@ -51,6 +51,8 @@
 
 # define PI 3.1415
 
+# define FOV 60 /* in degrees */
+
 typedef struct s_map
 {
     int **map;
@@ -166,14 +168,20 @@ void	remove_current_player(t_img *img);
 
 void	draw_unit(t_img *img, int pos_x, int pos_y);
 void	draw_map(t_img *img, t_info *info);
-void	draw_line(t_img *img, int x_start, int y_start, int len);
-void	remove_line(t_img *img, int x_start, int y_start, int len);
+void	draw_line(t_img *img, float angle, int len);
+void	remove_line(t_img *img, float angle, int len);
 
 int		check_wall(t_map map, int x, int y);
 
-int		horizontal_intersection(t_img *img);
+int		*intersection(t_img *img, float angle);
+int		*horizontal_intersection(t_img *img, float angle);
+int 	*vertical_intersection(t_img *img, float angle);
 int		draw_point(t_img *img, int x, int y);
-int		unit_circle(float alpha);
+int		unit_circle_upper_lower(float alpha);
+int		unit_circle_left_right(float alpha);
+
+int		cast_rays(t_img *img, int win_width);
+int		cast_ray(t_img *img);
 
 int		ft_arrlen(int **arr);
 

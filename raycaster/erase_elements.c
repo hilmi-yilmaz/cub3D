@@ -25,14 +25,14 @@ void	remove_current_player(t_img *img)
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
-void	remove_line(t_img *img, int x_start, int y_start, int len)
+void	remove_line(t_img *img, float angle, int len)
 {
 	int i;
 
 	i = 0;
 	while (i < len)
 	{
-		my_pixel_put(img, x_start + i * cos(img->player.alpha), y_start + i * -sin(img->player.alpha), argb_to_hex(0, 0, 0, 0));
+		my_pixel_put(img, img->player.x + i * cos(angle), img->player.y + i * -sin(angle), argb_to_hex(0, 0, 0, 0));
 		i++;
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);

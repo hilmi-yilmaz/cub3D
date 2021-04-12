@@ -25,12 +25,12 @@ void	init(t_img *img)
 	img->player.height = 11;
 	draw_map(img, &img->info);
 	draw_player(img);
-	draw_line(img, img->player.x, img->player.y, 20);
+	//draw_line(img, img->player.alpha, 20);
 	
 	/* Initialize ray */
 	img->ray.len = 1;
-	horizontal_intersection(img);
-	//cast_ray(img);
+	//cast_rays(img, img->info.win_width);
+	cast_ray(img);
 
 	/* Print the data of the player */
 	printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
