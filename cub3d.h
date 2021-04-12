@@ -49,6 +49,8 @@
 # define UNIT 64
 # define EDGE 0
 
+# define PI 3.1415
+
 typedef struct s_map
 {
     int **map;
@@ -117,7 +119,7 @@ typedef struct s_img
 
 }                   t_img;
 
-
+/* ------------------------------------ PARSING ---------------------------------- */
 /* Parsing data */
 int     parse_main(t_info *info, char **argv);
 void    	info_init(t_info *info);
@@ -152,7 +154,33 @@ void	free_len_elements(t_map map);
 void    print_info(t_info *info);
 void    print_map(t_info *info);
 
-/* Raycaster */
+/* ------------------------------------ CASTING ---------------------------------- */
 int		raycaster_main(t_img *img, t_info *info);
+
+void	init(t_img *img);
+void	set_start_location(t_map map, int *x, int *y, float *alpha);
+void	player_location(t_img *img);
+
+void	draw_player(t_img *img);
+void	remove_current_player(t_img *img);
+
+void	draw_unit(t_img *img, int pos_x, int pos_y);
+void	draw_map(t_img *img, t_info *info);
+void	draw_line(t_img *img, int x_start, int y_start, int len);
+void	remove_line(t_img *img, int x_start, int y_start, int len);
+
+int		check_wall(t_map map, int x, int y);
+
+int		horizontal_intersection(t_img *img);
+int		draw_point(t_img *img, int x, int y);
+int		unit_circle(float alpha);
+
+int		ft_arrlen(int **arr);
+
+/* related to mlx */
+int				close_window(t_img *img);
+unsigned int 	argb_to_hex(int a, int r, int g, int b);
+void    		my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
+int				key_input(int keycode, t_img *img);
 
 #endif

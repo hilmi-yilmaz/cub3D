@@ -6,11 +6,12 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/29 21:14:37 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/11 14:26:17 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 int main(int argc, char **argv)
 {
@@ -22,6 +23,7 @@ int main(int argc, char **argv)
     parse_return = parse_main(&info, argv);
     if (parse_return == -1)
         return (-1);
+	printf("\n--------------------------------------------------------------------------------------\n\n");
 	img_return = raycaster_main(&img, &info);
 	if (parse_return == -1)
         return (-1);
