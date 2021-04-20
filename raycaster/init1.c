@@ -30,7 +30,9 @@ void	init(t_img *img)
 	/* Initialize ray */
 	img->ray.len = 1;
 	//cast_rays(img, img->info.win_width);
-	cast_ray(img);
+	//cast_ray(img, img->player.alpha);
+	//cast_all_rays(img);
+	cast_fov(img);
 
 	/* Print the data of the player */
 	printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);

@@ -52,7 +52,9 @@ int		key_input(int keycode, t_img *img)
 	player_location(img);
 	draw_line(img, img->player.alpha, 20);
 	//cast_rays(img, img->info.win_width);
-	cast_ray(img);
+	//cast_ray(img, img->player.alpha);
+	//cast_all_rays(img);
+	cast_fov(img);
 	//printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
 	printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
 	return (0);

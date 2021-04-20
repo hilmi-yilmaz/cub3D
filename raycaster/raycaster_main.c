@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/12 13:52:04 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/13 18:52:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 /* User defined header files */
 #include "../cub3d.h"
-
-int				cast_ray(t_img *img);
-
 
 int	raycaster_main(t_img *img, t_info *info)
 {

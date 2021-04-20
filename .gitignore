@@ -2,3 +2,4 @@
 .vscode/
 to_do.txt
 testing/
+massif.out*

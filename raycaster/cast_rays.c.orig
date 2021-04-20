@@ -46,50 +46,32 @@
 // 	return (0);
 // }
 
-int	cast_ray(t_img *img, float angle)
+int	cast_ray(t_img *img)
 {
 	int		ray_len;
 	int	*wall_hit_point;
 
-	wall_hit_point = intersection(img, angle);
-	if (wall_hit_point == NULL)
-		return (-1);
+	wall_hit_point = intersection(img, img->player.alpha);
 	ray_len = sqrt(pow(img->player.x - wall_hit_point[0], 2) + pow(img->player.y - wall_hit_point[1], 2));
 	//printf("wall hit points: x = %d, y = %d\n", wall_hit_point[0], wall_hit_point[1]);
-	draw_line(img, angle, ray_len);
+	draw_line(img, img->player.alpha, ray_len);
 	free(wall_hit_point);
 	return (0);
 }
 
-int cast_all_rays(t_img *img)
-{
-	int i;
-	float angle;
-	float angle_increment;
+// int cast_all_rays(t_img *img)
+// {
+// 	int i;
+// 	float angle;
+// 	float angle_increment;
 
-	i = 0;
-	angle = img->player.alpha - 0.5 * ((float)FOV / 180 * PI);
-	angle_increment = (float)FOV / 180 * PI / img->info.win_width;
-	printf("FOV = %f\n", ((float)FOV / 180 * PI));
-	printf("angle_increment = %f\n", angle_increment);
-	while (i < img->info.win_width)
-	{
-		cast_ray(img, angle);
-		i++;
-		angle += angle_increment;
-		printf("%d\n", i);
-	}
-	return (0);
-}
+// 	angle = img->player.alpha - 0.5 * FOV;
+// 	angle_increment = FOV / img->info.win_width;
+// 	while (i < img->info.win_width)
+// 	{
+// 		cast_ray()
 
-int cast_fov(t_img *img)
-{
-	float first_angle;
-	float last_angle;
-
-	first_angle = img->player.alpha - 0.5 * ((float)FOV / 180 * PI);
-	last_angle = img->player.alpha + 0.5 * ((float)FOV / 180 * PI);
-	cast_ray(img, first_angle);
-	cast_ray(img, last_angle);
-	return (0);
-}
+// 		i++;
+// 		angle += angle_increment;
+// 	}
+// }

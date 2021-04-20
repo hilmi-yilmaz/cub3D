@@ -27,6 +27,7 @@ int	*intersection(t_img *img, float angle)
 
 	printf("horiz_dist = %f\n", horiz_dist);
 	printf("verti_dist = %f\n", verti_dist);
+	printf("angle = %f\n", angle);
 
 	if (horiz_dist == -1)
 	{
@@ -74,6 +75,7 @@ int	*horizontal_intersection(t_img *img, float angle)
 		ya = 64;
 	}
 	x = img->player.x + (img->player.y - y) / tan(angle); /* Also in pixel coordinates */
+	printf("x = %d\n", x);
 	if (x > img->info.win_width || x < 0)
 	{
 		free(x_y);
@@ -165,6 +167,7 @@ int *vertical_intersection(t_img *img, float angle)
 		printf("Ray facing LEFT\n");
 	}
 	y = img->player.y + (img->player.x - x) * tan(angle);
+	printf("y = %d\n", y);
 	if (y > img->info.win_height || y < 0)
 	{
 		free(x_y);

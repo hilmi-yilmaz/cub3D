@@ -51,7 +51,7 @@
 
 # define PI 3.1415
 
-# define FOV 60 /* in degrees */
+# define FOV 30 /* in degrees */
 
 typedef struct s_map
 {
@@ -121,6 +121,34 @@ typedef struct s_img
 
 }                   t_img;
 
+typedef struct s_parse
+{
+    int     win_width;
+    int     win_height;
+
+    char    *north_text;
+    char    *south_text;
+    char    *west_text;
+    char    *east_text;
+
+    char    *sprite_text;
+
+    int     floor_colour[RGB_DATA_COUNT];
+    int     ceiling_colour[RGB_DATA_COUNT];
+
+	char	**map;
+	int		*elements_len;
+
+}	t_parse;
+
+// typedef struct s_data
+// {
+// 	t_parse		parse;
+// 	t_mlx		mlx;
+// 	t_player	player;
+
+// }	t_data;
+
 /* ------------------------------------ PARSING ---------------------------------- */
 /* Parsing data */
 int     parse_main(t_info *info, char **argv);
@@ -181,7 +209,9 @@ int		unit_circle_upper_lower(float alpha);
 int		unit_circle_left_right(float alpha);
 
 int		cast_rays(t_img *img, int win_width);
-int		cast_ray(t_img *img);
+int		cast_ray(t_img *img, float angle);
+int 	cast_all_rays(t_img *img);
+int 	cast_fov(t_img *img);;
 
 int		ft_arrlen(int **arr);
 
