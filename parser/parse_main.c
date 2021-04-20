@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/29 21:14:08 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 14:23:16 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int parse_main(t_info *info, char **argv)
+int parse_main(t_parse *parse, char **argv)
 {
     int     fd;
     int     parse_return;
@@ -35,21 +35,21 @@ int parse_main(t_info *info, char **argv)
         printf("Error\nSomething went wrong opening \"%s\": %s\n", *(argv + 1), strerror(errno));
         exit(1);
     }
-    info_init(info);
-    parse_return = parse_data(fd, info);
+    parse_init(parse);
+    parse_return = parse_data(fd, parse);
     if (parse_return == -1)
     {
-        //free_info(info);
+        //free_parse(parse);
         return (-1);
     }
-	check = check_data_completeness(info);
+	check = check_data_completeness(parse);
 	if (check == -1)
 	{
-		free_info(info);
+		free_parse(parse);
 		return (-1);
 	}
-    print_info(info);
-    //free_info(info);
+    print_parse(parse);
+    //free_parse(parse);
     close_return = close(fd);
     if (close_return == -1)
     {
@@ -61,23 +61,23 @@ int parse_main(t_info *info, char **argv)
 }
 
 /* This function checks whether the data file was complete (no missing data) */
-int	check_data_completeness(t_info *info)
+int	check_data_completeness(t_parse *parse)
 {
 	int i;
 	int	error;
 
 	i = 0;
 	error = 0;
-	if (info->win_width == UNINITIALIZED || info->win_height == UNINITIALIZED)
+	if (parse->win_width == UNINITIALIZED || parse->win_height == UNINITIALIZED)
 	{
 		if (error != -1)
 			printf("Error\n");
 		printf("Missing resolution data.\n");
 		error = -1;
 	}
-	if (info->north_text == NULL || info->south_text == NULL || \
-		info->west_text == NULL || info->east_text == NULL || \
-		info->sprite_text == NULL)
+	if (parse->north_text == NULL || parse->south_text == NULL || \
+		parse->west_text == NULL || parse->east_text == NULL || \
+		parse->sprite_text == NULL)
 	{
 		if (error != -1)
 			printf("Error\n");
@@ -86,8 +86,8 @@ int	check_data_completeness(t_info *info)
 	}
     while (i < RGB_DATA_COUNT)
     {
-        if (*(info->floor_colour + i) == UNINITIALIZED || \
-			*(info->ceiling_colour + i) == UNINITIALIZED)
+        if (*(parse->floor_colour + i) == UNINITIALIZED || \
+			*(parse->ceiling_colour + i) == UNINITIALIZED)
 		{
 			if (error != -1)
 				printf("Error\n");
@@ -97,7 +97,7 @@ int	check_data_completeness(t_info *info)
 		}
         i++;
     }
-	if (info->map.map == NULL)
+	if (parse->map == NULL)
 	{
 		if (error != -1)
 			printf("Error\n");

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/03 13:31:50 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 15:25:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,34 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    print_info(t_info *info)
+void    print_parse(t_parse *parse)
 {
-    printf("win_width = |%d|\n", info->win_width);
-    printf("win_height = |%d|\n", info->win_height);
-    printf("north_texture = |%s|\n", info->north_text);
-    printf("south_texture = |%s|\n", info->south_text);
-    printf("west_texture = |%s|\n", info->west_text);
-    printf("east_texture = |%s|\n", info->east_text);
-    printf("sprite_texture = |%s|\n", info->sprite_text);
-    printf("Floor colour = |%d,%d,%d|\n", info->floor_colour[0], info->floor_colour[1], info->floor_colour[2]);
-    printf("Ceiling colour = |%d,%d,%d|\n", info->ceiling_colour[0], info->ceiling_colour[1], info->ceiling_colour[2]);
+    printf("win_width = |%d|\n", parse->win_width);
+    printf("win_height = |%d|\n", parse->win_height);
+    printf("north_texture = |%s|\n", parse->north_text);
+    printf("south_texture = |%s|\n", parse->south_text);
+    printf("west_texture = |%s|\n", parse->west_text);
+    printf("east_texture = |%s|\n", parse->east_text);
+    printf("sprite_texture = |%s|\n", parse->sprite_text);
+    printf("Floor colour = |%d,%d,%d|\n", parse->floor_colour[0], parse->floor_colour[1], parse->floor_colour[2]);
+    printf("Ceiling colour = |%d,%d,%d|\n", parse->ceiling_colour[0], parse->ceiling_colour[1], parse->ceiling_colour[2]);
 }
 
-void    print_map(t_info *info)
+void    print_map(t_parse *parse)
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (*(info->map.map + i) != NULL)
+    while (*(parse->map + i) != NULL)
     {
-        while (j < info->map.len_element[i])
+        while (parse->map[i][j] != '\0')
         {
-            printf("%d", *(*(info->map.map + i) + j));
+            printf("%c", *(*(parse->map + i) + j));
             j++;
         }
-        //printf("     %d", info->map.len_element[i]);
+        //printf("     %d", parse->map_len[i]);
         printf("\n");
         j = 0;
         i++;

@@ -4,18 +4,18 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int		key_input(int keycode, t_img *img)
+int		key_input(int keycode, t_data *data)
 {
 	int speed;
 	int	wall;
 	
 	speed = 8;
-	remove_current_player(img);
+	remove_current_player(data->img);
 	//remove_line(img, img->player.x, img->player.y, img->ray.len * UNIT);
-	remove_line(img, img->player.alpha, 20);
+	remove_line(data->img, data->player.angle, 20);
 	if (keycode == LEFT_KEY)
 	{
-		wall = check_wall(img->info.map, img->player.x - speed - img->player.width / 2, img->player.y);
+		wall = check_wall(data->parse.map, img->player.x - speed - img->player.width / 2, img->player.y);
 		if (wall == 0)
 			img->player.x -= speed;
 	}

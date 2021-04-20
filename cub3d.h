@@ -53,73 +53,31 @@
 
 # define FOV 30 /* in degrees */
 
-typedef struct s_map
-{
-    int **map;
-    int *len_element;
+// typedef struct s_map
+// {
+//     int **map;
+//     int *len_element;
     
-}       t_map;
+// }       t_map;
 
-typedef struct s_info
-{
-    int     win_width;
-    int     win_height;
+// typedef struct s_info
+// {
+//     int     win_width;
+//     int     win_height;
 
-    char    *north_text;
-    char    *south_text;
-    char    *west_text;
-    char    *east_text;
+//     char    *north_text;
+//     char    *south_text;
+//     char    *west_text;
+//     char    *east_text;
 
-    char    *sprite_text;
+//     char    *sprite_text;
 
-    int     floor_colour[RGB_DATA_COUNT];
-    int     ceiling_colour[RGB_DATA_COUNT];
+//     int     floor_colour[RGB_DATA_COUNT];
+//     int     ceiling_colour[RGB_DATA_COUNT];
 
-    t_map   map;
+//     t_map   map;
 
-}                   t_info;
-
-typedef struct s_player
-{
-	/* These are pixel coordinates of the player */
-	int	x;			/* 128 */
-	int	y;			/* 192 */
-
-	/* These are unit coordinates of the player */
-	float x_unit;	/*	128 / UNIT	*/
-	float y_unit;	/* 	192 / UNIT 	*/
-
-	int width;
-	int	height;
-
-	float alpha;
-	
-}	t_player;
-
-
-typedef struct s_ray
-{
-    float   len;
-
-}           t_ray;
-
-
-typedef struct s_img
-{
-    void            *mlx_ptr;
-    void            *win_ptr;
-    void            *img_ptr;
-    char            *img_addr;
-
-    int             bits_per_pixel;
-    int             line_size;
-    int             endian;
-
-	t_player		player;
-	t_info			info;
-    t_ray           ray;
-
-}                   t_img;
+// }                   t_info;
 
 typedef struct s_parse
 {
@@ -137,32 +95,64 @@ typedef struct s_parse
     int     ceiling_colour[RGB_DATA_COUNT];
 
 	char	**map;
-	int		*elements_len;
+	//int		*map_len;
 
 }	t_parse;
 
-// typedef struct s_data
-// {
-// 	t_parse		parse;
-// 	t_mlx		mlx;
-// 	t_player	player;
+typedef struct s_img
+{
+    void            *mlx_ptr;
+    void            *win_ptr;
+    void            *img_ptr;
+    char            *img_addr;
 
-// }	t_data;
+    int             bits_per_pixel;
+    int             line_size;
+    int             endian;
+
+}                   t_img;
+
+typedef struct s_player
+{
+	/* These are pixel coordinates of the player */
+	int	x;			/* 128 */
+	int	y;			/* 192 */
+
+	/* These are unit coordinates of the player */
+	float x_unit;	/*	128 / UNIT	*/
+	float y_unit;	/* 	192 / UNIT 	*/
+
+	int width;
+	int	height;
+
+	float angle;
+
+    int *rays;
+	
+}	t_player;
+
+typedef struct s_data
+{
+	t_parse		parse;
+	t_img	    img;
+	t_player	player;
+
+}	t_data;
 
 /* ------------------------------------ PARSING ---------------------------------- */
 /* Parsing data */
-int     parse_main(t_info *info, char **argv);
-void    	info_init(t_info *info);
-int     	parse_data(int fd, t_info *info);
+int     parse_main(t_parse *parse, char **argv);
+void    	parse_init(t_parse *parse);
+int     	parse_data(int fd, t_parse *parse);
 int     		parse_resolution(int *win_width, int *win_height, char *line);
-int     		parse_textures(t_info *info, char *line);
+int     		parse_textures(t_parse *parse, char *line);
 int     			fill_texture(char **texture, char *line, char *text_id);
 int     		parse_colour(int *colour_array, char *line);
-int     		parse_map(int fd, t_info *info, char *line);
-int     			**create_map(t_info *info, char *line, int rows);
-int     			*create_len(t_info *info, char *line, int rows);
-int     			old_to_new_map(t_info *info, int **new_map, int rows);
-int			check_data_completeness(t_info *info);
+int     		parse_map(int fd, t_parse *parse, char *line);
+char     			**create_map(t_parse *parse, char *line, int rows);
+int     			*create_len(t_parse *parse, char *line, int rows);
+int     			old_to_new_map(t_parse *parse, char **new_map, int rows);
+int			check_data_completeness(t_parse *parse);
 
 /* Checks while parsing */
 int     check_resolution(char *line);
@@ -174,20 +164,20 @@ void    *error_malloc(void);
 int     skip_chr(char *str, int c);
 
 /* Free data */
-void    free_info(t_info *info);
-void	free_textures(t_info *info);
-void	free_map(int **map);
-void	free_len_elements(t_map map);
+void    free_parse(t_parse *parse);
+void	free_textures(t_parse *parse);
+void	free_map(char **map);
+void	free_map_len(int *map_len);
 
 
 /* Temporary helper functions */
-void    print_info(t_info *info);
-void    print_map(t_info *info);
+void    print_parse(t_parse *parse);
+void    print_map(t_parse *parse);
 
 /* ------------------------------------ CASTING ---------------------------------- */
-int		raycaster_main(t_img *img, t_info *info);
+int		raycaster_main(t_data *data);
 
-void	init(t_img *img);
+void	init(t_img *img, t_player *player);
 void	set_start_location(t_map map, int *x, int *y, float *alpha);
 void	player_location(t_img *img);
 
@@ -195,7 +185,7 @@ void	draw_player(t_img *img);
 void	remove_current_player(t_img *img);
 
 void	draw_unit(t_img *img, int pos_x, int pos_y);
-void	draw_map(t_img *img, t_info *info);
+void	draw_map(t_img *img, char **map);
 void	draw_line(t_img *img, float angle, int len);
 void	remove_line(t_img *img, float angle, int len);
 
@@ -216,9 +206,9 @@ int 	cast_fov(t_img *img);;
 int		ft_arrlen(int **arr);
 
 /* related to mlx */
-int				close_window(t_img *img);
+int				close_window(t_data *data);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
 void    		my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-int				key_input(int keycode, t_img *img);
+int				key_input(int keycode, t_data *data);
 
 #endif

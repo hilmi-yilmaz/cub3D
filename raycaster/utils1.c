@@ -9,6 +9,7 @@ void	player_location(t_img *img)
 	img->player.x_unit = (float)img->player.x / UNIT;
 	img->player.y_unit = (float)img->player.y / UNIT;
 }
+
 /*
 ** Returns 0 if upperhalf cirle, 1 if lowerhalf circle
 */
@@ -36,7 +37,7 @@ int	unit_circle_left_right(float alpha)
 	return(unit_circle_upper_lower(alpha));
 }
 
-int		check_wall(t_map map, int x, int y) /* x and y are pixel coordinates */
+int		check_wall(char **map, int x, int y) /* x and y are pixel coordinates */
 {
 	float x_unit;
 	float y_unit;
@@ -48,10 +49,10 @@ int		check_wall(t_map map, int x, int y) /* x and y are pixel coordinates */
 	
 	/* Can't have a higher y than the amount of rows in the map itself */
 	//printf("y_unit = %d, map_rows = %d\n", (int)y_unit, ft_arrlen(map.map));
-	if ((int)y_unit >= ft_arrlen(map.map))
+	if ((int)y_unit >= ft_arrlen(map))
 		return (-1);
 	/* Can't have higher x than the elements in y'th row in the map */
-	if (x_unit > map.len_element[(int)y_unit])
+	if (x_unit > ft_strlen(map[(int)y_unit])) /* integer gets promoted to float ------------------------------------------------------------------------------------------- */ 
 		return (-1);
 	//printf("x = %d, y = %d\n", (int)x_unit, (int)y_unit);
 	//printf("x = %d, y = %d, map[x][y] = %d\n", (int)x_unit, (int)y_unit, map.map[(int)y_unit][(int)x_unit]);

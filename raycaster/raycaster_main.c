@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/13 18:52:13 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 18:07:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,40 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int	raycaster_main(t_img *img, t_info *info)
-{
-	t_player player;
-	
-	/* Copy the data of the info struct inside the img struct */
-	img->info = *info;
-	//print_map(&img->info);
-	
+int	raycaster_main(t_data *data)
+{	
 	/* Establish the connection between the X Server and X client */
-	img->mlx_ptr = mlx_init();
-	if (img->mlx_ptr == NULL)
+	data->img.mlx_ptr = mlx_init();
+	if (data->img.mlx_ptr == NULL)
 		return (-1);
 
 	/* Create the window */
-	img->win_ptr = mlx_new_window(img->mlx_ptr, info->win_width, info->win_height, "cub3d");
-	if (img->win_ptr == NULL)
+	data->img.win_ptr = mlx_new_window(data->img.mlx_ptr, data->parse.win_width, data->parse.win_height, "cub3d");
+	if (data->img.win_ptr == NULL)
 		return (-1);
 
 	/* Create an empty image */
-	img->img_ptr = mlx_new_image(img->mlx_ptr, info->win_width, info->win_height);
-	if (img->img_ptr == NULL)
+	data->img.img_ptr = mlx_new_image(data->img.mlx_ptr, data->parse.win_width, data->parse.win_height);
+	if (data->img.img_ptr == NULL)
 		return (-1);
 
 	/* Get the address of the image */
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &img->bits_per_pixel, &img->line_size, &img->endian);
+	data->img.img_addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bits_per_pixel, &data->img.line_size, &data->img.endian);
 
 	/* Initialize the screen with the player */
-	init(img);
+	init(&data->img, &data->player);
 
 	/* React on the moving player */
-	mlx_hook(img->win_ptr, KeyPress, KeyPressMask, key_input, img);
+	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, key_input, &data);
 
 	/* React on closing the screen */
 	if (IS_LINUX == 1)
-		mlx_hook(img->win_ptr, ClientMessage, NoEventMask, close_window, img);
+		mlx_hook(data->img.win_ptr, ClientMessage, NoEventMask, close_window, &data);
 	else
-		mlx_hook(img->win_ptr, DestroyNotify, StructureNotifyMask, close_window, img);
+		mlx_hook(data->img.win_ptr, DestroyNotify, StructureNotifyMask, close_window, &data);
 
 	/* mlx_loop is needed for listening to events. It is an infinite loop */
-	mlx_loop(img->mlx_ptr);
+	mlx_loop(data->img.mlx_ptr);
 
 	return (0);
 }
@@ -90,16 +84,16 @@ int	raycaster_main(t_img *img, t_info *info)
 // 	return (-1);
 // }
 
-int	close_window(t_img *img)
+int	close_window(t_data *data)
 {
 	/* Destroy the image and window */
-	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
-	mlx_destroy_window(img->mlx_ptr, img->win_ptr);
+	mlx_destroy_image(data->img.mlx_ptr, data->img.img_ptr);
+	mlx_destroy_window(data->img.mlx_ptr, data->img.win_ptr);
 	if (IS_LINUX == 1)
-		mlx_destroy_display(img->mlx_ptr);
+		mlx_destroy_display(data->img.mlx_ptr);
 
 	/* Free the pointer */
-	free(img->mlx_ptr); /* mlx_init pointer */
+	free(data->img.mlx_ptr); /* mlx_init pointer */
 
 	/* Exit the program */
 	exit(0);

@@ -25,7 +25,7 @@ void	draw_player(t_img *img)
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
-void	draw_unit(t_img *img, int pos_x, int pos_y)
+void	draw_unit(t_img *img, int pos_x, int pos_y) /* x,y is upper left corner of unit */
 {
 	int i;
 	int j;
@@ -44,19 +44,19 @@ void	draw_unit(t_img *img, int pos_x, int pos_y)
 	}
 }
 
-void	draw_map(t_img *img, t_info *info)
+void	draw_map(t_img *img, char **map)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (*(info->map.map + i) != NULL)
+	while (*(map + i) != NULL)
 	{
-		while (j < 8)
+		while (map[i][j] != '\0') //while (j < 8)
 		{
-			//printf("info->map.map[i][j] = %d\n", info->map.map[i][j]);
-			if (info->map.map[i][j] == 1 + '0')
+			//printf("map[i][j] = %d\n", map[i][j]);
+			if (map[i][j] == '1')
 				draw_unit(img, j * UNIT, i * UNIT);
 			j++;
 		}

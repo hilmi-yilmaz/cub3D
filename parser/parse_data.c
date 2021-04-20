@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/03 18:33:42 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 12:59:16 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int	parse_data(int fd, t_info *info)
+int	parse_data(int fd, t_parse *parse)
 {
 	int		res;
 	int		return_val;
@@ -39,18 +39,18 @@ int	parse_data(int fd, t_info *info)
 			return (-1);
 		}
         if (*line == 'R')
-            return_val = parse_resolution(&info->win_width, &info->win_height, line + LEN_R); /* No allocation in parse_resolution */
+            return_val = parse_resolution(&parse->win_width, &parse->win_height, line + LEN_R); /* No allocation in parse_resolution */
         else if (*line == 'N' || (*line == 'S' && *(line + 1) == 'O') || \
                 *line == 'W' || *line == 'E' || *line == 'S')
-            return_val = parse_textures(info, line); /* Allocation happens */
+            return_val = parse_textures(parse, line); /* Allocation happens */
         else if (*line == 'F')
-            return_val = parse_colour(info->floor_colour, line + LEN_F); /* No allocation */
+            return_val = parse_colour(parse->floor_colour, line + LEN_F); /* No allocation */
         else if (*line == 'C')
-            return_val = parse_colour(info->ceiling_colour, line + LEN_C); /* No allocation */
+            return_val = parse_colour(parse->ceiling_colour, line + LEN_C); /* No allocation */
         else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
                 *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ') // ----------- Actually cant be NWSE because map would not be valid then ------------- //
         {
-            return_val = parse_map(fd, info, line); /* Allocation happens */
+            return_val = parse_map(fd, parse, line); /* Allocation happens */
             if (return_val == -1)
                 return (-1);
 			return (0);

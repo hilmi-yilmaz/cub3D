@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 14:06:57 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 12:57:37 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int parse_textures(t_info *info, char *line)
+int parse_textures(t_parse *parse, char *line)
 {
     int res;
 
 	if (*line == 'N')
-        res = fill_texture(&info->north_text, line + LEN_NO, "North");
+        res = fill_texture(&parse->north_text, line + LEN_NO, "North");
     else if (*line == 'S' && *(line + 1) == 'O')
-        res = fill_texture(&info->south_text, line + LEN_SO, "South");
+        res = fill_texture(&parse->south_text, line + LEN_SO, "South");
     else if (*line == 'W')
-        res = fill_texture(&info->west_text, line + LEN_WE, "West");
+        res = fill_texture(&parse->west_text, line + LEN_WE, "West");
     else if (*line == 'E')
-        res = fill_texture(&info->east_text, line + LEN_EA, "East");
+        res = fill_texture(&parse->east_text, line + LEN_EA, "East");
     else if (*line == 'S')
-        res = fill_texture(&info->sprite_text, line + LEN_S, "Sprite");
+        res = fill_texture(&parse->sprite_text, line + LEN_S, "Sprite");
     if (res == -1)
         return (-1);
     return (0);

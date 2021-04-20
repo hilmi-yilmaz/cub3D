@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 16:02:54 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/24 20:38:28 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 16:31:38 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 #include "../cub3d.h"
 
 /* This function frees the textures and map */
-void    free_info(t_info *info)
+void    free_parse(t_parse *parse)
 {
-	free_textures(info);
-	free_map(info->map.map);
-	free(info->map.len_element);
+	free_textures(parse);
+	free_map(parse->map);
+	//free_map_len(parse->map_len); Can be deleted later
 }
 
-void	free_textures(t_info *info)
+void	free_textures(t_parse *parse)
 {
-    free(info->north_text);
-    free(info->south_text);
-    free(info->west_text);
-    free(info->east_text);
-    free(info->sprite_text);
+    free(parse->north_text);
+    free(parse->south_text);
+    free(parse->west_text);
+    free(parse->east_text);
+    free(parse->sprite_text);
 }
 
-void	free_map(int **map)
+void	free_map(char **map)
 {
 	int	i;
 
@@ -49,7 +49,8 @@ void	free_map(int **map)
     free(map);
 }
 
-void	free_len_elements(t_map map)
-{
-	free(map.len_element);
-}
+// Can be deleted later
+// void	free_map_len(int *map_len)
+// {
+// 	free(map_len);
+// }

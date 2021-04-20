@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/24 12:05:41 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/20 12:58:14 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,80 +15,6 @@
 
 /* User defined header files */
 #include "../cub3d.h"
-
-// int parse_colour(int *colour_array, char *line)
-// {
-//     int i;
-
-// 	if (*line != ' ')
-// 	{
-// 		printf("Error\nNo space between identifier and data for colour.\n");
-// 		return (-1);
-// 	}
-
-// 	i = 0;
-// 	i += skip_chr(line, ' ');
-// 	if (ft_isdigit(*(line + i)) == 0)
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	*(colour_array + 0) = ft_atoi(line + i);
-// 	printf("%d\n", *(colour_array + 0));
-// 	i += ft_nblen(*(colour_array + 0), 10);
-
-
-// 	i += skip_chr(line + i, ' ');
-// 	if (*(line + i) != ',')
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	i++;
-// 	i += skip_chr(line + i, ' ');
-// 	if (ft_isdigit(*(line + i)) == 0)
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	*(colour_array + 1) = ft_atoi(line + i);
-// 	printf("%d\n", *(colour_array + 1));
-// 	i += ft_nblen(*(colour_array + 1), 10);
-
-
-// 	i += skip_chr(line + i, ' ');
-// 	if (*(line + i) != ',')
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	i++;
-// 	i += skip_chr(line + i, ' ');
-// 	if (ft_isdigit(*(line + i)) == 0)
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	*(colour_array + 2) = ft_atoi(line + i);
-// 	printf("%d\n", *(colour_array + 2));
-// 	i += ft_nblen(*(colour_array + 2), 10);
-
-
-
-// 	i += skip_chr(line + i, ' ');
-// 	if (*(line + i) != '\0')
-// 	{
-//         printf("Error\nFormat of colour data isn't correct. ");
-//         printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-//         return (-1);
-// 	}
-// 	return (0);
-// }
 
 int parse_colour(int *colour_array, char *line)
 {

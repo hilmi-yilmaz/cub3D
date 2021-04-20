@@ -16,14 +16,14 @@
 ** Returns:
 **		(void)		None
 */
-void	init(t_img *img)
+void	init(t_img *img, t_player *player, char **map)
 {
-	set_start_location(img->info.map, &img->player.x, &img->player.y, &img->player.alpha);
+	set_start_location(map, &img->player.x, &img->player.y, &img->player.angle);
 	//printf("x = %d, y = %d\n", img->player.x, img->player.y);
-	player_location(img);
+	player_location(img); /* set x_unit and y_unit */
 	img->player.width = 11;
 	img->player.height = 11;
-	draw_map(img, &img->info);
+	draw_map(img, map);
 	draw_player(img);
 	//draw_line(img, img->player.alpha, 20);
 	
@@ -32,33 +32,33 @@ void	init(t_img *img)
 	//cast_rays(img, img->info.win_width);
 	//cast_ray(img, img->player.alpha);
 	//cast_all_rays(img);
-	cast_fov(img);
+	cast_fov(img); /* cast field of vision */
 
 	/* Print the data of the player */
-	printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
+	//printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
 }
 
-void	set_start_location(t_map map, int *x, int *y, float *alpha)
+void	set_start_location(char **map, int *x, int *y, float *alpha)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (*(map.map + i) != NULL)
+	while (*(map + i) != NULL)
 	{
-		while (j < map.len_element[i])
+		while (map[i][j] != '\0')
 		{
 			//printf("%d\n", map.map[i][j]);
-			if (map.map[i][j] == 'N' || map.map[i][j] == 'W' || map.map[i][j] == 'S' || map.map[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'S' || map[i][j] == 'E')
 			{
-				*x = (j + 0.5) * UNIT;
+				*x = (j + 0.5) * UNIT; /* check wether value j + 0.5 is not rounded to j */
 				*y = (i + 0.5) * UNIT;
-				if (map.map[i][j] == 'N')
+				if (map[i][j] == 'N')
 					*alpha = 0.5 * PI;
-				else if (map.map[i][j] == 'W')
+				else if (map[i][j] == 'W')
 					*alpha = 1 * PI;
-				else if (map.map[i][j] == 'S')
+				else if (map[i][j] == 'S')
 					*alpha = 1.5 * PI;
 				else
 					*alpha = 0 * PI;
