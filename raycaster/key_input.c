@@ -12,7 +12,8 @@ int		key_input(int keycode, t_data *data)
 	speed = 8;
 	remove_current_player(&data->img, &data->player);
 	//remove_line(img, img->player.x, img->player.y, img->ray.len * UNIT);
-	//remove_line(&data->img, &data->player, data->player.angle, 20);
+	remove_line(&data->img, &data->player, data->player.angle, 20);
+	remove_cast_fov(data);
 	if (keycode == LEFT_KEY)
 	{
 		wall = check_wall(data->parse.map, data->player.x - speed - data->player.width / 2, data->player.y);
@@ -50,12 +51,15 @@ int		key_input(int keycode, t_data *data)
 	
 	draw_player(&data->img, &data->player);
 	player_location(&data->player);
-	//draw_line(&data->img, &data->player, data->player.angle, 20);
+	draw_line(&data->img, &data->player, data->player.angle, 20);
 	//cast_rays(img, img->info.win_width);
 	//cast_ray(img, img->player.alpha);
 	//cast_all_rays(img);
 	//cast_fov(data);
-	cast_single_ray(data, data->player.angle);
+	//cast_single_ray(data, data->player.angle);
+	cast_all_rays(data);
+	print_rays(data->player.rays_array, data->parse.win_width);
+	cast_fov(data);
 	//printf("x_unit = %f, y_unit = %f\n", img->player.x_unit, img->player.y_unit);
 	//printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
 	return (0);

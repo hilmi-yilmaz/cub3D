@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/25 17:17:32 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/04/26 16:08:17 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	close_window(t_data *data)
 
 	/* Free the pointer */
 	free(data->img.mlx_ptr); /* mlx_init pointer */
+	free(data->player.rays_array);
 
 	/* Exit the program */
 	exit(0);

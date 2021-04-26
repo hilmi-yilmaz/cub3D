@@ -1,5 +1,6 @@
 /* Standard library header files */
 #include <stdio.h>
+#include <stdlib.h>
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -25,15 +26,16 @@ void	init(t_data *data)
 	data->player.height = 11;
 	draw_map(&data->img, data->parse.map);
 	draw_player(&data->img, &data->player);
-	//draw_line(img, img->player.alpha, 20);
+	draw_line(&data->img, &data->player, data->player.angle, 20);
+	data->player.rays_array = malloc(sizeof(int) * data->parse.win_width);
 	
 	/* Initialize ray */
 	//img->ray.len = 1;
 	//cast_rays(img, img->info.win_width);
 	//cast_ray(img, img->player.alpha);
-	//cast_all_rays(img);
-	//cast_fov(img); /* cast field of vision */
-	cast_single_ray(data, data->player.angle);
+	cast_all_rays(data);
+	cast_fov(data); /* cast field of vision */
+	//cast_single_ray(data, data->player.angle);
 
 	/* Print the data of the player */
 	//printf("x = %d, y = %d, alpha = %f (%f)\n", data->player.x, data->player.y, data->player.angle, data->player.angle / PI * 180);

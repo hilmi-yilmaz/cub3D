@@ -129,7 +129,7 @@ typedef struct s_player
 
 	float angle;
 
-    int *rays;
+    int *rays_array;
 	
 }	t_player;
 
@@ -185,7 +185,6 @@ void	player_location(t_player *player);
 
 void	draw_player(t_img *img, t_player *player);
 void	remove_current_player(t_img *img, t_player *player);
-int 	cast_single_ray(t_data *data, float angle);
 
 void	draw_unit(t_img *img, int pos_x, int pos_y);
 void	draw_map(t_img *img, char **map);
@@ -195,7 +194,7 @@ void	remove_line(t_img *img, t_player *player, float angle, int len);
 int		check_wall(char **map, int x, int y); /* x and y are pixel coordinates */
 
 double	calculate_ray_len(t_player player, int x, int y);
-int expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
+int     expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
 
 int		*intersection(t_img *img, float angle);
 int 	horizontal_intersection(t_data *data, float angle, int *horizontal);
@@ -204,12 +203,13 @@ int		draw_point(t_img *img, int x, int y);
 int		unit_circle_upper_lower(float alpha);
 int		unit_circle_left_right(float alpha);
 
-int		cast_rays(t_img *img, int win_width);
-int		cast_ray(t_data data, float angle);
-int 	cast_all_rays(t_img *img);
+int 	cast_single_ray(t_data *data, float angle);
+void    cast_all_rays(t_data *data);
 int 	cast_fov(t_data *data);
+int     remove_cast_fov(t_data *data);
 
 int		ft_arrlen(char **arr);
+void	print_rays(int *rays_array, int len);
 
 /* related to mlx */
 int				close_window(t_data *data);

@@ -10,6 +10,8 @@ void	draw_player(t_img *img, t_player *player)
 	int	i;
 	int	j;
 
+//printf("-------------------------------------------------\n");
+	//printf("player_x = %d, player_y = %d, angle = %f\n", player->x, player->y, player->angle / PI * 180);
 	i = -player->height / 2; //i = 0;
 	j = -player->width / 2; //j = 0;
 	while (i < player->height / 2)

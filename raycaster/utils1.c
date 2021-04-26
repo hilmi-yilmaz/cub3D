@@ -52,7 +52,8 @@ int		check_wall(char **map, int x, int y) /* x and y are pixel coordinates */
 	
 	/* Can't have a higher y than the amount of rows in the map itself */
 	//printf("y_unit = %d, map_rows = %d\n", (int)y_unit, ft_arrlen(map.map));
-	if (y_unit < 0 || y_unit + 1 >= ft_arrlen(map))
+	//printf("map_len = %d\n", ft_arrlen(map));
+	if (y_unit < 0 || y_unit + 1 > ft_arrlen(map))
 		return (-1);
 	/* Can't have higher x than the elements in y'th row in the map */
 	if (x_unit > ft_strlen(map[y_unit])) 
@@ -81,6 +82,19 @@ double	calculate_ray_len(t_player player, int x, int y)
 // 		return (-1);
 // 	return (0);
 // }
+
+void	print_rays(int *rays_array, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		printf("%d ", rays_array[i]);
+		i++;
+	}
+	printf("\n");
+}
 
 void    my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour)
 {
