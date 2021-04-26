@@ -52,7 +52,8 @@ SRC_RAYCASTER = raycaster_main.c \
 				intersections.c \
 				utils1.c \
 				to_libft.c \
-				cast_rays.c
+				cast_rays.c \
+				v1_intersection.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 

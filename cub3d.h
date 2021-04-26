@@ -28,7 +28,7 @@
 # include "incl/X.h"
 # include "libft/libft.h"
 
-# define LEN_R 1
+# define LEN_R 1	/* Rename to OFFSET_R */
 # define LEN_NO 2
 # define LEN_SO 2
 # define LEN_WE 2
@@ -41,13 +41,15 @@
 # define RESOLUTION_DATA_COUNT 2
 # define MAX_KOMMAS 2
 
-# define UNINITIALIZED -1
+# define UNINITIALIZED -1 /* Rename to UNINT */
 
-# define TRUE 1
+# define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
 
 # define UNIT 64
 # define EDGE 0
+
+# define XY_COORDINATES 2
 
 # define PI 3.1415
 
@@ -177,33 +179,37 @@ void    print_map(t_parse *parse);
 /* ------------------------------------ CASTING ---------------------------------- */
 int		raycaster_main(t_data *data);
 
-void	init(t_img *img, t_player *player);
-void	set_start_location(t_map map, int *x, int *y, float *alpha);
-void	player_location(t_img *img);
+void	init(t_data *data);
+void	set_start_location(char **map, int *x, int *y, float *alpha);
+void	player_location(t_player *player);
 
-void	draw_player(t_img *img);
-void	remove_current_player(t_img *img);
+void	draw_player(t_img *img, t_player *player);
+void	remove_current_player(t_img *img, t_player *player);
+int 	cast_single_ray(t_data *data, float angle);
 
 void	draw_unit(t_img *img, int pos_x, int pos_y);
 void	draw_map(t_img *img, char **map);
-void	draw_line(t_img *img, float angle, int len);
-void	remove_line(t_img *img, float angle, int len);
+void	draw_line(t_img *img, t_player *player, float angle, int len);
+void	remove_line(t_img *img, t_player *player, float angle, int len);
 
-int		check_wall(t_map map, int x, int y);
+int		check_wall(char **map, int x, int y); /* x and y are pixel coordinates */
+
+double	calculate_ray_len(t_player player, int x, int y);
+int expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
 
 int		*intersection(t_img *img, float angle);
-int		*horizontal_intersection(t_img *img, float angle);
-int 	*vertical_intersection(t_img *img, float angle);
+int 	horizontal_intersection(t_data *data, float angle, int *horizontal);
+int		vertical_intersection(t_data *data, float angle, int *vertical);
 int		draw_point(t_img *img, int x, int y);
 int		unit_circle_upper_lower(float alpha);
 int		unit_circle_left_right(float alpha);
 
 int		cast_rays(t_img *img, int win_width);
-int		cast_ray(t_img *img, float angle);
+int		cast_ray(t_data data, float angle);
 int 	cast_all_rays(t_img *img);
-int 	cast_fov(t_img *img);;
+int 	cast_fov(t_data *data);
 
-int		ft_arrlen(int **arr);
+int		ft_arrlen(char **arr);
 
 /* related to mlx */
 int				close_window(t_data *data);

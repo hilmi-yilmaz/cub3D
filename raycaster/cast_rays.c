@@ -6,90 +6,50 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-// int	cast_rays(t_img *img, int win_width)
+// int	cast_ray(t_data data, float angle)
 // {
-// 	int	i;
-// 	int angle;
-// 	int *wall_hit_point; /* store x and y coordinates of where the ray hits the wall */
-// 	float ray_len;
+// 	int	ray_len;
+// 	int	*wall_hit_point;
+
+// 	wall_hit_point = intersection(img, angle);
+// 	if (wall_hit_point == NULL)
+// 		return (-1);
+// 	ray_len = sqrt(pow(img->player.x - wall_hit_point[0], 2) + pow(img->player.y - wall_hit_point[1], 2));
+// 	//printf("wall hit points: x = %d, y = %d\n", wall_hit_point[0], wall_hit_point[1]);
+// 	draw_line(img, angle, ray_len);
+// 	free(wall_hit_point);
+// 	return (0);
+// }
+
+// int cast_all_rays(t_img *img)
+// {
+// 	int i;
+// 	float angle;
 // 	float angle_increment;
 
 // 	i = 0;
-// 	angle = img->player.alpha - 0.5 * FOV;
-// 	angle_increment = FOV / win_width;
-// 	while (i < win_width)
+// 	angle = img->player.alpha - 0.5 * ((float)FOV / 180 * PI);
+// 	angle_increment = (float)FOV / 180 * PI / img->info.win_width;
+// 	printf("FOV = %f\n", ((float)FOV / 180 * PI));
+// 	printf("angle_increment = %f\n", angle_increment);
+// 	while (i < img->info.win_width)
 // 	{
-// 		/* Fill the wall_hit_point array with x and y value of hit point */
-// 		wall_hit_point = intersection(img, angle);
-// 		if (wall_hit_point == NULL)
-// 		{
-// 			i++;
-// 			angle += angle_increment;
-// 			continue;
-// 		}
-
-// 		/* Calculate the length of the ray using square root */
-// 		ray_len = sqrt(pow(img->player.x - *(wall_hit_point + 0), 2) + pow(img->player.y - *(wall_hit_point + 1), 2));
-
-// 		/* Free wall_hit_point */
-// 		free(wall_hit_point);
-
-// 		/* Draw the ray */
-// 		draw_line(img, angle, ray_len);
-
-// 		/* Increment angle and i */
-// 		angle += angle_increment;
+// 		cast_ray(img, angle);
 // 		i++;
-
-// 		break ;
+// 		angle += angle_increment;
+// 		printf("%d\n", i);
 // 	}
 // 	return (0);
 // }
 
-int	cast_ray(t_img *img, float angle)
-{
-	int		ray_len;
-	int	*wall_hit_point;
+// int cast_fov(t_data *data)
+// {
+// 	float first_angle;
+// 	float last_angle;
 
-	wall_hit_point = intersection(img, angle);
-	if (wall_hit_point == NULL)
-		return (-1);
-	ray_len = sqrt(pow(img->player.x - wall_hit_point[0], 2) + pow(img->player.y - wall_hit_point[1], 2));
-	//printf("wall hit points: x = %d, y = %d\n", wall_hit_point[0], wall_hit_point[1]);
-	draw_line(img, angle, ray_len);
-	free(wall_hit_point);
-	return (0);
-}
-
-int cast_all_rays(t_img *img)
-{
-	int i;
-	float angle;
-	float angle_increment;
-
-	i = 0;
-	angle = img->player.alpha - 0.5 * ((float)FOV / 180 * PI);
-	angle_increment = (float)FOV / 180 * PI / img->info.win_width;
-	printf("FOV = %f\n", ((float)FOV / 180 * PI));
-	printf("angle_increment = %f\n", angle_increment);
-	while (i < img->info.win_width)
-	{
-		cast_ray(img, angle);
-		i++;
-		angle += angle_increment;
-		printf("%d\n", i);
-	}
-	return (0);
-}
-
-int cast_fov(t_img *img)
-{
-	float first_angle;
-	float last_angle;
-
-	first_angle = img->player.alpha - 0.5 * ((float)FOV / 180 * PI);
-	last_angle = img->player.alpha + 0.5 * ((float)FOV / 180 * PI);
-	cast_ray(img, first_angle);
-	cast_ray(img, last_angle);
-	return (0);
-}
+// 	first_angle = data.player.angle - 0.5 * ((float)FOV / 180 * PI);
+// 	last_angle = data.player.angle + 0.5 * ((float)FOV / 180 * PI);
+// 	cast_ray(data, first_angle);
+// 	cast_ray(data, last_angle);
+// 	return (0);
+// }

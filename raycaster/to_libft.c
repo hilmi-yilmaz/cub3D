@@ -1,7 +1,7 @@
 /* Standard library header files */
 #include <stddef.h>
 
-int		ft_arrlen(int **arr)
+int		ft_arrlen(char **arr)
 {
 	int i;
 

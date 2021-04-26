@@ -16,26 +16,27 @@
 ** Returns:
 **		(void)		None
 */
-void	init(t_img *img, t_player *player, char **map)
+void	init(t_data *data)
 {
-	set_start_location(map, &img->player.x, &img->player.y, &img->player.angle);
+	set_start_location(data->parse.map, &data->player.x, &data->player.y, &data->player.angle);
 	//printf("x = %d, y = %d\n", img->player.x, img->player.y);
-	player_location(img); /* set x_unit and y_unit */
-	img->player.width = 11;
-	img->player.height = 11;
-	draw_map(img, map);
-	draw_player(img);
+	player_location(&data->player); /* set x_unit and y_unit */
+	data->player.width = 11;
+	data->player.height = 11;
+	draw_map(&data->img, data->parse.map);
+	draw_player(&data->img, &data->player);
 	//draw_line(img, img->player.alpha, 20);
 	
 	/* Initialize ray */
-	img->ray.len = 1;
+	//img->ray.len = 1;
 	//cast_rays(img, img->info.win_width);
 	//cast_ray(img, img->player.alpha);
 	//cast_all_rays(img);
-	cast_fov(img); /* cast field of vision */
+	//cast_fov(img); /* cast field of vision */
+	cast_single_ray(data, data->player.angle);
 
 	/* Print the data of the player */
-	//printf("x = %d, y = %d, alpha = %f (%f)\n", img->player.x, img->player.y, img->player.alpha, img->player.alpha / PI * 180);
+	//printf("x = %d, y = %d, alpha = %f (%f)\n", data->player.x, data->player.y, data->player.angle, data->player.angle / PI * 180);
 }
 
 void	set_start_location(char **map, int *x, int *y, float *alpha)
