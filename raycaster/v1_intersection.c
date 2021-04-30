@@ -12,7 +12,7 @@ int horizontal_intersection(t_data *data, float angle, int *horizontal)
     float	ya;
     int		ray_len;
 
-    //printf("--------------- Horizontal ----------------\n");
+    printf("--------------- Horizontal ----------------\n");
 
     /* Calculate horizontal intersection if ray is facing up/down */
     if (unit_circle_upper_lower(angle) == 0)
@@ -50,7 +50,7 @@ int vertical_intersection(t_data *data, float angle, int *vertical)
     float	ya;
     int		ray_len;
     
-   // printf("--------------- Vertical ----------------\n");
+    printf("--------------- Vertical ----------------\n");
 
     /* Calculate horizontal intersection if ray is facing up/down */
     if (unit_circle_left_right(angle) == 1) /* Ray facing right */
@@ -74,7 +74,7 @@ int vertical_intersection(t_data *data, float angle, int *vertical)
 	if (unit_circle_left_right(angle) == 1)
 		ya *= -1;
 
-  //  printf("ya = %f, xa = %f\n", ya, xa);
+  printf("ya = %f, xa = %f\n", ya, xa);
 
     //if (horizontal[0] >= data->parse.win_width || horizontal[0] < 0)
     //    return (-1);
@@ -95,7 +95,7 @@ int expand_ray(t_data *data, int *xy_coordinates, float xa, float ya)
     {
         xy_coordinates[0] += xa;
         xy_coordinates[1] += ya;
-	//	printf("x = %d, y = %d\n", xy_coordinates[0], xy_coordinates[1]);
+	printf("x = %d, y = %d\n", xy_coordinates[0], xy_coordinates[1]);
         wall = check_wall(data->parse.map, xy_coordinates[0], xy_coordinates[1]);
         // if (wall != -1)
         //     draw_point(&data->img, xy_coordinates[0], xy_coordinates[1]);

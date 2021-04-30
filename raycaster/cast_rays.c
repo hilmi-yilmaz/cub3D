@@ -19,9 +19,9 @@ int cast_single_ray(t_data *data, float angle)
 	min_len = -1;
 	ray_len_hor = horizontal_intersection(data, angle, horizontal);
 	ray_len_ver = vertical_intersection(data, angle, vertical);
-	//printf("ray_len_hor = %d\n", ray_len_hor);
-	//printf("ray_len_ver = %d\n", ray_len_ver);
-	if (ray_len_hor > ray_len_ver)
+	printf("ray_len_hor = %d\n", ray_len_hor);
+	printf("ray_len_ver = %d\n", ray_len_ver);
+	if (ray_len_hor >= ray_len_ver)
 		min_len = ray_len_ver;
 	else if (ray_len_hor < ray_len_ver)
 		min_len = ray_len_hor;

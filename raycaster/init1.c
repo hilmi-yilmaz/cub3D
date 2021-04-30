@@ -33,8 +33,9 @@ void	init(t_data *data)
 	//img->ray.len = 1;
 	//cast_rays(img, img->info.win_width);
 	//cast_ray(img, img->player.alpha);
-	cast_all_rays(data);
-	cast_fov(data); /* cast field of vision */
+	//----cast_all_rays(data);
+	//----cast_fov(data); /* cast field of vision */
+	draw_line(&data->img, &data->player, data->player.angle, cast_single_ray(data, data->player.angle));
 	//cast_single_ray(data, data->player.angle);
 
 	/* Print the data of the player */
