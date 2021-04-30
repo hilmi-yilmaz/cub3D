@@ -47,7 +47,7 @@
 # define FALSE 0
 
 # define UNIT 64
-# define EDGE 0
+# define EDGE 1
 
 # define XY_COORDINATES 2
 
@@ -176,45 +176,62 @@ void	free_map_len(int *map_len);
 void    print_parse(t_parse *parse);
 void    print_map(t_parse *parse);
 
-/* ------------------------------------ CASTING ---------------------------------- */
-int		raycaster_main(t_data *data);
+// /* ------------------------------------ CASTING ---------------------------------- */
+// int		raycaster_main(t_data *data);
 
-void	init(t_data *data);
-void	set_start_location(char **map, int *x, int *y, float *alpha);
-void	player_location(t_player *player);
+// void	init(t_data *data);
+// void	set_start_location(char **map, int *x, int *y, float *alpha);
+// void	player_location(t_player *player);
 
-void	draw_player(t_img *img, t_player *player);
-void	remove_current_player(t_img *img, t_player *player);
+// void	draw_player(t_img *img, t_player *player);
+// void	remove_current_player(t_img *img, t_player *player);
 
-void	draw_unit(t_img *img, int pos_x, int pos_y);
-void	draw_map(t_img *img, char **map);
-void	draw_line(t_img *img, t_player *player, float angle, int len);
-void	remove_line(t_img *img, t_player *player, float angle, int len);
+// void	draw_unit(t_img *img, int pos_x, int pos_y);
+// void	draw_map(t_img *img, char **map);
+// void	draw_line(t_img *img, t_player *player, float angle, int len);
+// void	remove_line(t_img *img, t_player *player, float angle, int len);
 
-int		check_wall(char **map, int x, int y); /* x and y are pixel coordinates */
+// int		check_wall(char **map, int x, int y); /* x and y are pixel coordinates */
 
-double	calculate_ray_len(t_player player, int x, int y);
-int     expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
+// double	calculate_ray_len(t_player player, int x, int y);
+// int     expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
 
-int		*intersection(t_img *img, float angle);
-int 	horizontal_intersection(t_data *data, float angle, int *horizontal);
-int		vertical_intersection(t_data *data, float angle, int *vertical);
-int		draw_point(t_img *img, int x, int y);
-int		unit_circle_upper_lower(float alpha);
-int		unit_circle_left_right(float alpha);
+// int		*intersection(t_img *img, float angle);
+// int 	horizontal_intersection(t_data *data, float angle, int *horizontal);
+// int		vertical_intersection(t_data *data, float angle, int *vertical);
+// int		draw_point(t_img *img, int x, int y);
+// int		unit_circle_upper_lower(float alpha);
+// int		unit_circle_left_right(float alpha);
 
-int 	cast_single_ray(t_data *data, float angle);
-void    cast_all_rays(t_data *data);
-int 	cast_fov(t_data *data);
-int     remove_cast_fov(t_data *data);
+// int 	cast_single_ray(t_data *data, float angle);
+// void    cast_all_rays(t_data *data);
+// int 	cast_fov(t_data *data);
+// int     remove_cast_fov(t_data *data);
 
-int		ft_arrlen(char **arr);
-void	print_rays(int *rays_array, int len);
+// int		ft_arrlen(char **arr);
+// void	print_rays(int *rays_array, int len);
 
-/* related to mlx */
-int				close_window(t_data *data);
+// /* related to mlx */
+// int				close_window(t_data *data);
+// unsigned int 	argb_to_hex(int a, int r, int g, int b);
+// void    		my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
+// int				key_input(int keycode, t_data *data);
+
+/* --------------------------- v1 Raycasting ---------------------------- */
+int     raycaster_main(t_data *data);
+
+/* Initialize */
+void    init(t_data *data);
+void    find_start_location(t_player *player, char **map);
+void    set_start_location(t_player *player, char **map, int i, int j);
+
+/* Drawing elements */
+void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour);
+void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
+void    draw_map(t_img *img, t_parse *parse);
+
+/* MLX utils */
+void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
-void    		my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-int				key_input(int keycode, t_data *data);
 
 #endif

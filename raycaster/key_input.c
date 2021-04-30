@@ -42,9 +42,9 @@ int		key_input(int keycode, t_data *data)
 			data->player.y += speed;
 	}
 	else if (keycode == A_KEY)
-		data->player.angle += 0.0002 * PI;
+		data->player.angle += 0.002 * PI;
 	else if (keycode == D_KEY)
-		data->player.angle -= 0.0002 * PI;
+		data->player.angle -= 0.002 * PI;
 
 	/* If the angle is bigger than 2PI, substract 2PI */
 	if (data->player.angle > 2 * PI)
