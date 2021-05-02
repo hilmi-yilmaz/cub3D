@@ -1,24 +1,34 @@
 /* Standard Library header files */
 #include <stdio.h>
+#include <math.h>
 
 /* User defined header files */
 #include "../cub3d.h"
+
+void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour)
+{
+    my_pixel_put(img, pos_x, pos_y, colour);
+    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
 
 void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour)
 {
     int i;
     int j;
 
-    i = EDGE;
-    j = EDGE;
-    while (i < UNIT - EDGE)
+    i = 0;
+    j = 0;
+    while (i < UNIT)
     {
-        while (j < UNIT - EDGE)
+        while (j < UNIT)
         {
-            my_pixel_put(img, pos_x + j, pos_y + i, colour);
+            if (i == 0 || i == UNIT - EDGE || j == 0 || j == UNIT - EDGE)
+                my_pixel_put(img, pos_x + j, pos_y + i, argb_to_hex(0, 0, 0, 0));
+            else
+                my_pixel_put(img, pos_x + j, pos_y + i, colour);
             j++;
         }
-        j = EDGE;
+        j = 0;
         i++;
     }
 }
@@ -47,8 +57,6 @@ void    draw_map(t_img *img, t_parse *parse)
     int i;
     int j;
 
-    printf("Drawing map\n");
-
     i = 0;
     j = 0;
     set_background_color(img, parse, argb_to_hex(150, 100, 100, 100));
@@ -64,4 +72,17 @@ void    draw_map(t_img *img, t_parse *parse)
         i++;
     }
     mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
+
+void	draw_line(t_img *img, t_player *player, double angle, int len, int colour)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		my_pixel_put(img, player->x + i * cos(angle), player->y + i * -sin(angle), colour);
+		i++;
+	}
+	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }

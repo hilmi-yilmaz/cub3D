@@ -33,9 +33,11 @@ int parse_map(int fd, t_parse *parse, char *line)
             res = get_next_line(fd, &line);
         if (res == -1) // ------------- Also check for case that res = 0 first time in loop ---------------//
         {
-            printf("Error\nSomething went wrong reading the map\n");
+            printf("Error\nSomething went wrong reading the map.\n");
             return (-1);
         }
+        if (res == 0)
+            return (0);
         // parse->map_len = create_len(parse, line, rows);
         // if (parse->map_len == NULL)
         // {

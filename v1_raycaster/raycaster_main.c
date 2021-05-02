@@ -33,13 +33,13 @@ int raycaster_main(t_data *data)
 	//printf("x = %d, y = %d, alpha = %f (%f)\n", data->player.x, data->player.y, data->player.angle, data->player.angle / PI * 180);
 
 	/* React on the moving player */
-	//mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, key_input, data);
+	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, hooks, data);
 
 	/* React on closing the screen */
-	//if (IS_LINUX == 1)
-	//	mlx_hook(data->img.win_ptr, ClientMessage, NoEventMask, close_window, data);
-	//else
-	//	mlx_hook(data->img.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
+	if (__linux__)
+		mlx_hook(data->img.win_ptr, ClientMessage, NoEventMask, close_window, data);
+	else
+		mlx_hook(data->img.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
 
 	/* mlx_loop is needed for listening to events. It is an infinite loop */
 	mlx_loop(data->img.mlx_ptr);

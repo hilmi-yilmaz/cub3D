@@ -1,9 +1,9 @@
 CC = clang
 
 ifdef VALGRIND
-CFLAGS = -g 
+CFLAGS = -g3 
 else
-CFLAGS = -g -fsanitize=address
+CFLAGS = -g3 -fsanitize=address
 endif
 
 # Setting variables depending on Operating System
@@ -59,7 +59,11 @@ DIR_RAYCASTER = v1_raycaster
 SRC_RAYCASTER = raycaster_main.c \
 				raycaster_init.c \
 				draw_elements.c \
-				raycaster_utils.c
+				raycaster_utils.c \
+				hooks.c \
+				checks.c \
+				intersections.c \
+				print_data.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 

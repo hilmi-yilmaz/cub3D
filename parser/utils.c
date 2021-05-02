@@ -41,6 +41,7 @@ void    print_map(t_parse *parse)
     j = 0;
     while (*(parse->map + i) != NULL)
     {
+        printf("|");
         while (parse->map[i][j] != '\0')
         {
             printf("%c", *(*(parse->map + i) + j));

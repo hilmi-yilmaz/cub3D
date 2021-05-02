@@ -49,9 +49,11 @@
 # define UNIT 64
 # define EDGE 1
 
+#define GLASS 2
+
 # define XY_COORDINATES 2
 
-# define PI 3.1415
+# define PI 3.141592653589793
 
 # define FOV 30 /* in degrees */
 
@@ -114,20 +116,47 @@ typedef struct s_img
 
 }                   t_img;
 
+typedef struct s_directions
+{
+    int north;
+    int west;
+    int east;
+    int south;
+}               t_directions;
+
+typedef struct s_ray
+{
+    int     hor_x;
+    int     hor_y;
+    float   hor_xa;
+    float   hor_ya;
+    int     hor_error;
+    
+    int     ver_x;
+    int     ver_y;
+    float   ver_xa;
+    float   ver_ya;
+    int     ver_error;
+
+}               t_ray;
+
 typedef struct s_player
 {
 	/* These are pixel coordinates of the player */
-	int	x;			/* 128 */
-	int	y;			/* 192 */
+	int     x;			/* 128 */
+	int     y;			/* 192 */
+
+    int     speed;
+    float   rot_speed;
+
+    t_directions    direction;
+    t_ray           ray;
 
 	/* These are unit coordinates of the player */
 	float x_unit;	/*	128 / UNIT	*/
 	float y_unit;	/* 	192 / UNIT 	*/
 
-	int width;
-	int	height;
-
-	float angle;
+	double  angle;
 
     int *rays_array;
 	
@@ -229,9 +258,40 @@ void    set_start_location(t_player *player, char **map, int i, int j);
 void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour);
 void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
 void    draw_map(t_img *img, t_parse *parse);
+void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour);
+void    draw_line(t_img *img, t_player *player, double angle, int len, int colour);
+
+/* Hooks */
+int     hooks(int keycode, t_data *data);
+
+/* Intersection calculations */
+
+void    intersections(t_player *player, double angle, char **map, t_img *img);
+void    horizontal_intersection(t_player *player, double angle);
+void    vertical_intersection(t_player *player, double angle);
+void    expand_hor_ray(t_player *player, char **map, int *hor); 
+void    expand_ver_ray(t_player *player, char **map, int *ver); 
+
+/* Checks*/
+int     check_wall(char **map, int x, int y);
+void    check_directions(t_player *player, char **map);
+void    check_coordinates(t_ray *ray, char **map);
+
+/* Math utils */
+void    bounds_angle(double *angle);
+int     unit_circle_upper_lower(double angle);
+int     unit_circle_left_right(double angle);
+double  calculate_ray_len(t_player *player, int x, int y);
 
 /* MLX utils */
+int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
+
+/* To libft */
+int		ft_arrlen(char **arr);
+
+/* Printing data */
+void    print_ray_data(t_ray ray);
 
 #endif
