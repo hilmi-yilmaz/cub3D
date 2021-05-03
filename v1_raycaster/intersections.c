@@ -7,11 +7,11 @@
 
 void    intersections(t_player *player, double angle, char **map, t_img *img)
 {
-    //int hor[2];
+    int hor[2];
     int ver[2];
 
-    //hor[0] = -1;
-    //hor[1] = -1;
+    hor[0] = -1;
+    hor[1] = -1;
     ver[0] = -1;
     ver[1] = -1;
 
@@ -19,19 +19,27 @@ void    intersections(t_player *player, double angle, char **map, t_img *img)
     player->ray.hor_error = 0;
     player->ray.ver_error = 0;
 
-    //horizontal_intersection(player, player->angle); 
-    //expand_hor_ray(player, map, hor);
+    horizontal_intersection(player, player->angle); 
+    expand_hor_ray(player, map, hor);
     vertical_intersection(player, player->angle); 
     expand_ver_ray(player, map, ver);
     //printf("ray.hor_x = %d\n", player->ray.hor_x);
     //printf("ray.hor_x = %d\n", player->ray.hor_x);
     printf("angle = %f\n", angle / PI * 180);
-    //printf("hor[0] = %d\n", hor[0]);
-    //printf("hor[1] = %d\n", hor[1]);
+    printf("hor[0] = %d\n", hor[0]);
+    printf("hor[1] = %d\n", hor[1]);
     printf("ver[0] = %d\n", ver[0]);
     printf("ver[1] = %d\n", ver[1]);
     if (ver[0] != -1 && ver[1] != -1)
-        my_pixel_put(img, player->ray.ver_x, player->ray.ver_y, argb_to_hex(0, 255, 255, 255));
+    {
+        my_pixel_put(img, ver[0], ver[1], argb_to_hex(0, 255, 255, 255));
+        mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+    }
+    if (hor[0] != -1 && hor[1] != -1)
+    {
+        my_pixel_put(img, hor[0], hor[1], argb_to_hex(0, 255, 255, 255));
+        mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+    }
 }
 
 
@@ -51,18 +59,13 @@ void    check_coordinates(t_ray *ray, char **map)
     hor_y = ray->hor_y / UNIT;
     ver_x = ray->ver_x / UNIT;
     ver_y = ray->ver_y / UNIT;
-    //print_ray_data(*ray);
-    printf("check: ver_x = %d\n", ver_x);
-    printf("check: ver_y = %d\n", ver_y);
-    printf("ft_arrlen(map) = %d\n", ft_arrlen(map));
-    printf("map[7] = %s\n", map[7]);
     if (ray->hor_x < 0 || ray->hor_y < 0)
         ray->hor_error = 1;
-    else if (hor_y > ft_arrlen(map) || hor_x > ft_strlen(map[hor_y]))
+    else if (hor_y >= ft_arrlen(map) || hor_x > ft_strlen(map[hor_y]))
         ray->hor_error = 1;
     if (ray->ver_x < 0 || ray->ver_y < 0)
         ray->ver_error = 1;
-    else if (ver_y > ft_arrlen(map) || ver_x > ft_strlen(map[ver_y]))
+    else if (ver_y >= ft_arrlen(map) || ver_x > ft_strlen(map[ver_y]))
         ray->ver_error = 1;
 }
 

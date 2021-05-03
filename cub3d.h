@@ -25,6 +25,11 @@
 // #  define StructureNotifyMask 1L<<17
 # endif
 
+/* If not defined, we are on OSX */
+# ifndef __linux__
+#  define __linux__ 0
+# endif
+
 # include "incl/X.h"
 # include "libft/libft.h"
 

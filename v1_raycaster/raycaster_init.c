@@ -15,7 +15,7 @@ void    init(t_data *data)
 
     /* Set speed and rotation speed of the player */
     data->player.speed = 1;
-    data->player.rot_speed = 0.01 * PI;
+    data->player.rot_speed = 0.001 * PI;
 
     /* Set direction struct to zeros (all paths are free at the beginning */
     data->player.direction.north = 0;
