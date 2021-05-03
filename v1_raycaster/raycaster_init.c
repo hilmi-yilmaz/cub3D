@@ -15,7 +15,7 @@ void    init(t_data *data)
 
     /* Set speed and rotation speed of the player */
     data->player.speed = 10;
-    data->player.rot_speed = 0.1 * PI;
+    data->player.rot_speed = 0.01 * PI;
 
     /* Set start angle temporary */
     data->player.angle = -PI * 45 / 180;
@@ -30,7 +30,8 @@ void    init(t_data *data)
     /* Initialize ray data */
     //data->player.ray.hor_error = 0;
     //data->player.ray.ver_error = 0;
-    ft_memset(&data->player.ray, 0, sizeof(data->player.ray));
+    ft_memset(&data->player.hor_ray, 0, sizeof(data->player.hor_ray));
+    ft_memset(&data->player.ver_ray, 0, sizeof(data->player.ver_ray));
     //print_ray_data(data->player.ray);
 
     /* Draw the player and direction arrow */

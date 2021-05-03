@@ -131,17 +131,11 @@ typedef struct s_directions
 
 typedef struct s_ray
 {
-    int     hor_x;
-    int     hor_y;
-    float   hor_xa;
-    float   hor_ya;
-    int     hor_error;
-    
-    int     ver_x;
-    int     ver_y;
-    float   ver_xa;
-    float   ver_ya;
-    int     ver_error;
+    int     x;
+    int     y;
+    float   xa;
+    float   ya;
+    int     error;  
 
 }               t_ray;
 
@@ -154,7 +148,8 @@ typedef struct s_player
     int             speed;
     float           rot_speed;
     t_directions    direction;
-    t_ray           ray;
+    t_ray           hor_ray;
+    t_ray           ver_ray;
     int             *rays_array;
 	
 }	                t_player;
@@ -264,8 +259,8 @@ int     hooks(int keycode, t_data *data);
 /* Intersection calculations */
 
 void    intersections(t_player *player, double angle, char **map, t_img *img);
-void    horizontal_intersection(t_player *player, double angle);
-void    vertical_intersection(t_player *player, double angle);
+int     horizontal_intersection(t_player *player, double angle, char **map);
+int     vertical_intersection(t_player *player, double angle, char **map);
 void    expand_hor_ray(t_player *player, char **map);
 void    expand_ver_ray(t_player *player, char **map);
 
