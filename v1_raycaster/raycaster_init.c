@@ -14,18 +14,24 @@ void    init(t_data *data)
     find_start_location(&data->player, data->parse.map);
 
     /* Set speed and rotation speed of the player */
-    data->player.speed = 1;
-    data->player.rot_speed = 0.001 * PI;
+    data->player.speed = 10;
+    data->player.rot_speed = 0.1 * PI;
+
+    /* Set start angle temporary */
+    data->player.angle = -PI * 45 / 180;
 
     /* Set direction struct to zeros (all paths are free at the beginning */
-    data->player.direction.north = 0;
-    data->player.direction.west = 0;
-    data->player.direction.east = 0;
-    data->player.direction.south = 0;
+    ft_memset(&data->player.direction, 0, sizeof(data->player.direction));
+    // printf("north = %d\n", data->player.direction.north);
+    // printf("west = %d\n", data->player.direction.west);
+    // printf("east = %d\n", data->player.direction.east);
+    // printf("south = %d\n", data->player.direction.south);
 
     /* Initialize ray data */
-    data->player.ray.hor_error = 0;
-    data->player.ray.ver_error = 0;
+    //data->player.ray.hor_error = 0;
+    //data->player.ray.ver_error = 0;
+    ft_memset(&data->player.ray, 0, sizeof(data->player.ray));
+    //print_ray_data(data->player.ray);
 
     /* Draw the player and direction arrow */
     draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));

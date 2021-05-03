@@ -148,24 +148,16 @@ typedef struct s_ray
 typedef struct s_player
 {
 	/* These are pixel coordinates of the player */
-	int     x;			/* 128 */
-	int     y;			/* 192 */
-
-    int     speed;
-    float   rot_speed;
-
+	int             x;			/* 128 */
+	int             y;			/* 192 */
+    double          angle;
+    int             speed;
+    float           rot_speed;
     t_directions    direction;
     t_ray           ray;
-
-	/* These are unit coordinates of the player */
-	float x_unit;	/*	128 / UNIT	*/
-	float y_unit;	/* 	192 / UNIT 	*/
-
-	double  angle;
-
-    int *rays_array;
+    int             *rays_array;
 	
-}	t_player;
+}	                t_player;
 
 typedef struct s_data
 {
@@ -274,8 +266,8 @@ int     hooks(int keycode, t_data *data);
 void    intersections(t_player *player, double angle, char **map, t_img *img);
 void    horizontal_intersection(t_player *player, double angle);
 void    vertical_intersection(t_player *player, double angle);
-void    expand_hor_ray(t_player *player, char **map, int *hor); 
-void    expand_ver_ray(t_player *player, char **map, int *ver); 
+void    expand_hor_ray(t_player *player, char **map);
+void    expand_ver_ray(t_player *player, char **map);
 
 /* Checks*/
 int     check_wall(char **map, int x, int y);
