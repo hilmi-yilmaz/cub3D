@@ -14,32 +14,6 @@ int		ft_arrlen(char **arr)
 	return (i);
 }
 
-void    bounds_angle(double *angle)
-{
-    if (*angle > 2 * PI)
-        *angle -= 2 * PI;
-    if (*angle < -2 * PI)
-        *angle += 2 * PI;
-}
-
-int unit_circle_upper_lower(double angle)
-{
-    if ((angle >= 0 && angle < PI) || (angle <= -PI && angle > -2 * PI))
-        return (0);
-    return (1);
-}
-
-int unit_circle_left_right(double angle)
-{
-    /* Substract half PI from angle (unit circle is now rotated half PI counterclockwise) */
-    angle -= 0.5 * PI;
-
-    /* Correct angle */
-    bounds_angle(&angle);
-
-    return (unit_circle_upper_lower(angle));
-}
-
 int close_window(t_data *data)
 {
     /* Destroy the image and window */

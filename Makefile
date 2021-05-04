@@ -43,19 +43,7 @@ SRC_PARSER =	parse_main.c \
 				free_data.c \
 				utils.c
 
-# DIR_RAYCASTER = raycaster
-# SRC_RAYCASTER = raycaster_main.c \
-# 				init1.c \
-# 				draw_elements.c \
-# 				erase_elements.c \
-# 				key_input.c \
-# 				intersections.c \
-# 				utils1.c \
-# 				to_libft.c \
-# 				cast_rays.c \
-# 				v1_intersection.c
-
-DIR_RAYCASTER = v1_raycaster
+DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = raycaster_main.c \
 				raycaster_init.c \
 				draw_elements.c \
@@ -63,7 +51,8 @@ SRC_RAYCASTER = raycaster_main.c \
 				hooks.c \
 				checks.c \
 				intersections.c \
-				print_data.c
+				print_data.c \
+				math.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 

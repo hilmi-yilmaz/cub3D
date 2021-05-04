@@ -7,6 +7,9 @@
 
 void    init(t_data *data)
 {
+    /* Initialize player struct to all zeros */
+    ft_memset(&data->player, 0, sizeof(data->player));    
+
     /* Draw the map */
     draw_map(&data->img, &data->parse);
 
@@ -20,28 +23,25 @@ void    init(t_data *data)
     /* Set start angle temporary */
     data->player.angle = -PI * 45 / 180;
 
-    /* Set direction struct to zeros (all paths are free at the beginning */
-    ft_memset(&data->player.direction, 0, sizeof(data->player.direction));
+    // printf("x = %d\n", data->player.x);
+    // printf("y = %d\n", data->player.y);
+    // printf("angle = %f\n", data->player.angle);
+    // printf("speed = %d\n", data->player.speed);
+    // printf("rot_speed = %f\n", data->player.rot_speed);
+    // printf("rays_array = %p\n", data->player.rays_array);
     // printf("north = %d\n", data->player.direction.north);
     // printf("west = %d\n", data->player.direction.west);
     // printf("east = %d\n", data->player.direction.east);
     // printf("south = %d\n", data->player.direction.south);
-
-    /* Initialize ray data */
-    //data->player.ray.hor_error = 0;
-    //data->player.ray.ver_error = 0;
-    ft_memset(&data->player.hor_ray, 0, sizeof(data->player.hor_ray));
-    ft_memset(&data->player.ver_ray, 0, sizeof(data->player.ver_ray));
-    //print_ray_data(data->player.ray);
+    // print_ray_data(data->player.hor_ray);
+    // print_ray_data(data->player.ver_ray);
 
     /* Draw the player and direction arrow */
     draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));
     draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
 
     /* Calculate the intersection point */
-    //horizontal_intersection(&data->player, data->player.angle);
     intersections(&data->player, data->player.angle, data->parse.map, &data->img);
-
 }
 
 void    find_start_location(t_player *player, char **map)

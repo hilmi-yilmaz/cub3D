@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   raycaster_main.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/03/29 11:07:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/26 16:08:17 by hyilmaz       ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
 /* Standard library header files */
 #include <stddef.h>
 #include <stdio.h>
@@ -19,9 +7,9 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int	raycaster_main(t_data *data)
-{	
-	/* Establish the connection between the X Server and X client */
+int raycaster_main(t_data *data)
+{
+    /* Establish the connection between the X Server and X client */
 	data->img.mlx_ptr = mlx_init();
 	if (data->img.mlx_ptr == NULL)
 		return (-1);
@@ -45,10 +33,10 @@ int	raycaster_main(t_data *data)
 	//printf("x = %d, y = %d, alpha = %f (%f)\n", data->player.x, data->player.y, data->player.angle, data->player.angle / PI * 180);
 
 	/* React on the moving player */
-	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, key_input, data);
+	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, hooks, data);
 
 	/* React on closing the screen */
-	if (IS_LINUX == 1)
+	if (__linux__)
 		mlx_hook(data->img.win_ptr, ClientMessage, NoEventMask, close_window, data);
 	else
 		mlx_hook(data->img.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
@@ -57,21 +45,4 @@ int	raycaster_main(t_data *data)
 	mlx_loop(data->img.mlx_ptr);
 
 	return (0);
-}
-
-int	close_window(t_data *data)
-{
-	/* Destroy the image and window */
-	mlx_destroy_image(data->img.mlx_ptr, data->img.img_ptr);
-	mlx_destroy_window(data->img.mlx_ptr, data->img.win_ptr);
-	if (IS_LINUX == 1)
-		mlx_destroy_display(data->img.mlx_ptr);
-
-	/* Free the pointer */
-	free(data->img.mlx_ptr); /* mlx_init pointer */
-	free(data->player.rays_array);
-
-	/* Exit the program */
-	exit(0);
-	return (1);
 }

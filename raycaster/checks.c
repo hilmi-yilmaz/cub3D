@@ -19,6 +19,17 @@ int check_wall(char **map, int x, int y)
     return (0);
 }
 
+int check_coordinates(int x, int y, char **map)
+{
+    if (x < 0 || y < 0)
+        return (-1);
+    x /= UNIT;
+    y /= UNIT;
+    if (y >= ft_arrlen(map) || x > ft_strlen(map[y]))
+        return (-1);
+    return (0);
+}
+
 void    check_directions(t_player *player, char **map)
 {
     /* Check north direction */

@@ -141,9 +141,8 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	/* These are pixel coordinates of the player */
-	int             x;			/* 128 */
-	int             y;			/* 192 */
+	int             x;
+	int             y;
     double          angle;
     int             speed;
     float           rot_speed;
@@ -257,23 +256,21 @@ void    draw_line(t_img *img, t_player *player, double angle, int len, int colou
 int     hooks(int keycode, t_data *data);
 
 /* Intersection calculations */
-
 void    intersections(t_player *player, double angle, char **map, t_img *img);
 int     horizontal_intersection(t_player *player, double angle, char **map);
 int     vertical_intersection(t_player *player, double angle, char **map);
-void    expand_hor_ray(t_player *player, char **map);
-void    expand_ver_ray(t_player *player, char **map);
+int     expand_ray(t_ray *ray, char **map);
 
 /* Checks*/
 int     check_wall(char **map, int x, int y);
 void    check_directions(t_player *player, char **map);
-void    check_coordinates(t_ray *ray, char **map);
+int     check_coordinates(int x, int y, char **map);
 
 /* Math utils */
+double  calculate_ray_len(t_player *player, int x, int y);
 void    bounds_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
-double  calculate_ray_len(t_player *player, int x, int y);
 
 /* MLX utils */
 int				close_window(t_data *data);

@@ -1,231 +1,101 @@
-// /* Standard library header files */
-// #include <stdio.h>
-// #include <math.h>
-// #include <stdlib.h>
+/* Standard Library header files */
+#include <stdio.h>
+#include <math.h>
 
-// /* User defined header files */
-// #include "../cub3d.h"
+/* User defined header files */
+#include "../cub3d.h"
 
-// int	*intersection(t_img *img, float angle)
-// {
-// 	int*	horiz;			/* Horizontal intersection with coordinates x, y */
-// 	int*	verti;			/* Vertical intersection with coordinates x, y */
-// 	float 	horiz_dist;
-// 	float 	verti_dist;
+void    intersections(t_player *player, double angle, char **map, t_img *img)
+{
+    int hor;
+    int ver;
 
-// 	horiz_dist = -1;
-// 	verti_dist = -1;
-// 	printf("Entered intersection function\n");
-// 	horiz = horizontal_intersection(img, angle);
-// 	verti = vertical_intersection(img, angle);
-// 	printf("horiz = %p\n", horiz);
-// 	printf("verti = %p\n", verti);
-// 	if (horiz != NULL)
-// 		horiz_dist = sqrt(pow(img->player.x - *(horiz + 0), 2) + pow(img->player.y - *(horiz + 1), 2));
-// 	if (verti != NULL)
-// 		verti_dist = sqrt(pow(img->player.x - *(verti + 0), 2) + pow(img->player.y - *(verti + 1), 2));
+    hor = horizontal_intersection(player, player->angle, map);
+    ver = vertical_intersection(player, player->angle, map); 
+    printf("angle = %f\n", angle / PI * 180);
+    printf("hor_x = %d\n", player->hor_ray.x);
+    printf("hor_y = %d\n", player->hor_ray.y);
+    printf("ver_x = %d\n", player->ver_ray.x);
+    printf("ver_y = %d\n", player->ver_ray.y);
+    printf("ver_error = %d, hor_error = %d\n", ver, hor);
+    if (ver != -1)
+        my_pixel_put(img, player->ver_ray.x, player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
+    if (hor != -1)
+        my_pixel_put(img, player->hor_ray.x, player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
+    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+}
 
-// 	printf("horiz_dist = %f\n", horiz_dist);
-// 	printf("verti_dist = %f\n", verti_dist);
-// 	printf("angle = %f\n", angle);
+int horizontal_intersection(t_player *player, double angle, char **map)
+{
+    int error;
+    
+    error = 0;
+    /* If the ray is facing up */
+    if (unit_circle_upper_lower(player->angle) == 0)
+    {
+        player->hor_ray.y = (int)(player->y / UNIT) * UNIT - 1;
+        player->hor_ray.ya = -UNIT;
+    }
+    else
+    {
+        player->hor_ray.y = (int)(player->y / UNIT) * UNIT + UNIT;
+        player->hor_ray.ya = UNIT;
+    }
+    player->hor_ray.x = player->x + (player->y - player->hor_ray.y) / tan(angle);
+    player->hor_ray.xa = UNIT / tan(angle);
+    if (unit_circle_upper_lower(player->angle) == 1)
+        player->hor_ray.xa *= -1;
+    error = v1_expand_ray(&player->hor_ray, map);
+    if (error == -1)
+        return (-1);
+    return (0);
+}
 
-// 	if (horiz_dist == -1)
-// 	{
-// 		free(horiz);
-// 		return (verti);
-// 	}
-// 	if (verti_dist == -1)
-// 	{
-// 		free(verti);
-// 		return (horiz);
-// 	}
-// 	if (verti_dist < horiz_dist)
-// 	{
-// 		free(horiz);
-// 		return (verti);
-// 	}
-// 	else
-// 	{
-// 		free(verti);
-// 		return (horiz);
-// 	}
-// }
+int vertical_intersection(t_player *player, double angle, char **map)
+{
+    int error;
 
-// int	*horizontal_intersection(t_img *img, float angle)
-// {
-// 	int	y; 	/* The y pixel coordinate of the horizontal intersection point */
-// 	int	x; 	/* The x pixel coordinate of the horizontal intersection point */
-// 	int	ya;
-// 	int	xa;
-// 	int	wall;
-// 	int *x_y;
-	
-// 	printf("Entered horizontal intersection function\n");
-// 	x_y = (int *)malloc(sizeof(int) * 2);
-// 	x_y[0] = -1;
-// 	x_y[1] = -1;
-// 	if (unit_circle_upper_lower(angle) == 0) /* if ray is facing up */
-// 	{
-// 		y = (int)(img->player.y / UNIT) * UNIT - 1; /* y is in pixel coordinates */
-// 		ya = -64;
-// 	}
-// 	else if (unit_circle_upper_lower(angle) == 1)  /* if ray is facing down */
-// 	{
-// 		y = (int)(img->player.y / UNIT) * UNIT + UNIT; /* y is in pixel coordinates */
-// 		ya = 64;
-// 	}
-// 	x = img->player.x + (img->player.y - y) / tan(angle); /* Also in pixel coordinates */
-// 	printf("x = %d\n", x);
-// 	if (x > img->info.win_width || x < 0)
-// 	{
-// 		free(x_y);
-// 		return (NULL);
-// 	}
-// 	printf("\ny_horizontal = %d = (%d / %d) * %d - 1\n", y, img->player.y, UNIT, UNIT);
-// 	printf("x_horizontal = %d = %d + (%d - %d) / %f\n", x, img->player.x, img->player.y, y, tan(angle));
+    error = 0;    
+    /* If the ray is facing right */
+    if (unit_circle_left_right(angle) == 1)
+    {
+        player->ver_ray.x = (int)(player->x / UNIT) * UNIT + UNIT;
+        player->ver_ray.xa = UNIT;
+    }
+    else
+    {
+        player->ver_ray.x = (int)(player->x / UNIT) * UNIT - 1;
+        player->ver_ray.xa = -UNIT;
+    }
+    player->ver_ray.y = player->y + (player->x - player->ver_ray.x) * tan(angle);
+    player->ver_ray.ya = UNIT * tan(angle);
+    if (unit_circle_left_right(player->angle) == 1)
+        player->ver_ray.ya *= -1;
+    error = v1_expand_ray(&player->ver_ray, map);
+    if (error == -1)
+        return (-1);
+    return (0);
+}
 
-// 	/* Find xa */
-// 	xa = UNIT / tan(angle);
-// 	// if (angle > PI && angle <= 2 * PI)
-// 	// 	xa *= -1;
-// 	// if (angle >= -PI && angle < 0)
-// 	// 	xa *= -1;
-// 	if (unit_circle_upper_lower(angle) == 1) /* if alpha is lowerhalf circle of unit circle */
-// 		xa *= -1;
-// 	printf("xa = %d\n", xa);
+int expand_ray(t_ray *ray, char **map)
+{
+    int wall;
+    int error;
+    int xa;
+    int ya;
 
-// 	/* Check for wall at (x, y) */
-// 	wall = check_wall(img->info.map, x, y);
-// 	if (wall == 1)
-// 	{
-// 		//printf("Found wall at x = %d, y = %d\n", x, y);
-// 		x_y[0] = x;
-// 		x_y[1] = y;
-// 		//draw_point(img, x, y);
-// 		return (x_y);
-// 	}
-// 	if (wall == -1)
-// 	{
-// 		//printf("Can't find horizontal intersection in the image with angle = %f\n", angle);
-// 		free(x_y);
-// 		return (NULL);
-// 	}
-// 	//draw_point(img, x, y);
-
-// 	while (wall == 0)
-// 	{
-// 		x += xa;
-// 		y += ya;
-// 		if (x > img->info.win_width || x < 0)
-// 		{
-// 			free(x_y);
-// 			return (NULL);
-// 		}
-// 		//draw_point(img, x, y);
-// 		wall = check_wall(img->info.map, x, y);
-// 		if (wall == 1)
-// 		{
-// 			//printf("Found wall at x = %d, y = %d\n", x, y);
-// 			x_y[0] = x;
-// 			x_y[1] = y;
-// 			draw_point(img, x, y);
-// 			return (x_y);
-// 		}
-// 		if (wall == -1)
-// 		{
-// 			//printf("Can't find horizontal intersection in the image with angle = %f\n", angle);
-// 			free(x_y);
-// 			return (NULL);
-// 		}
-// 	}
-// 	return (NULL);
-// }
-
-// int *vertical_intersection(t_img *img, float angle)
-// {
-// 	int x;
-// 	int y;
-// 	int xa;
-// 	int ya;
-// 	int wall;
-// 	int *x_y;
-	
-// 	printf("Entered vertical intersection function\n");
-// 	x_y = (int *)malloc(sizeof(int) * 2);
-// 	x_y[0] = -1;
-// 	x_y[1] = -1;
-// 	if (unit_circle_left_right(angle) == 1) /* Ray facing right */
-// 	{
-// 		x = (int)(img->player.x / UNIT) * UNIT + UNIT;
-// 		xa = UNIT;
-// 		printf("Ray facing RIGHT\n");
-// 	}
-// 	else if (unit_circle_left_right(angle) == 0) /* Ray facing left */
-// 	{
-// 		x = (int)(img->player.x / UNIT) * UNIT - 1;
-// 		xa = -UNIT;
-// 		printf("Ray facing LEFT\n");
-// 	}
-// 	y = img->player.y + (img->player.x - x) * tan(angle);
-// 	printf("y = %d\n", y);
-// 	if (y > img->info.win_height || y < 0)
-// 	{
-// 		free(x_y);
-// 		return (NULL);
-// 	}
-
-// 	ya = UNIT * tan(angle);
-// 	if (unit_circle_left_right(angle) == 1)
-// 		ya *= -1;
-
-// 	/* Check for wall at (x, y) */
-// 	wall = check_wall(img->info.map, x, y);
-// 	if (wall == 1)
-// 	{
-// 		//printf("Found wall at x = %d, y = %d\n", x, y);
-// 		x_y[0] = x;
-// 		x_y[1] = y;
-// 		draw_point(img, x, y);
-// 		return (x_y);
-// 	}
-// 	if (wall == -1)
-// 	{
-// 		//printf("Can't find horizontal intersection in the image with angle = %f\n", angle);
-// 		free(x_y);
-// 		return (NULL);
-// 	}
-// 	//draw_point(img, x, y);
-
-// 	while (wall == 0)
-// 	{
-// 		x += xa;
-// 		y += ya;
-// 		if (y > img->info.win_height || y < 0)
-// 		{
-// 			free(x_y);
-// 			return (NULL);
-// 		}
-// 		if (x > img->info.win_width || x < 0)
-// 		{
-// 			free(x_y);
-// 			return (NULL);
-// 		}
-// 		//draw_point(img, x, y);
-// 		wall = check_wall(img->info.map, x, y);
-// 		if (wall == 1)
-// 		{
-// 			//printf("Found wall at x = %d, y = %d\n", x, y);
-// 			draw_point(img, x, y);
-// 			x_y[0] = x;
-// 			x_y[1] = y;			
-// 			return (x_y);
-// 		}
-// 		if (wall == -1)
-// 		{
-// 			//printf("Can't find horizontal intersection in the image with angle = %f\n", angle);
-// 			free(x_y);
-// 			return (NULL);
-// 		}
-// 	}
-// 	return (NULL);
-// }
+    wall = 0;
+    error = 0;
+    while (wall == 0)
+    {
+        error = v1_check_coordinates(ray->x, ray->y, map);
+        if (error == -1)
+            return (-1);
+        printf("ray->x = %d, ray->y = %d\n", ray->x, ray->y);
+        wall = check_wall(map, ray->x, ray->y);
+        if (wall == -1)
+            return (0);
+        ray->x += ray->xa;
+        ray->y += ray->ya;
+    }
+}

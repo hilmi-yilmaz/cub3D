@@ -6,7 +6,6 @@
 
 int hooks(int keycode, t_data *data)
 {
-   
     draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 0, 0, 0));
     check_directions(&data->player, data->parse.map);
     if (keycode == UP_KEY && data->player.direction.north != -1)
