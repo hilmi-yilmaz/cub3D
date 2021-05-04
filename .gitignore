@@ -4,3 +4,4 @@ to_do.txt
 testing/
 massif.out*
 tmux*log
+*.swp

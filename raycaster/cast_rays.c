@@ -71,6 +71,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
     mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
     printf("\n");
     free(player->rays_array);
+    free(player->angles_array);
     return (0);
 }
 
