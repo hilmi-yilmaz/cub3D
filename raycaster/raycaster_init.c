@@ -21,7 +21,7 @@ void    init(t_data *data)
     data->player.rot_speed = 0.01 * PI;
 
     /* Set start angle temporary */
-    data->player.angle = -PI * 45 / 180;
+    //data->player.angle = -98.100004 / 180 * PI;
 
     // printf("x = %d\n", data->player.x);
     // printf("y = %d\n", data->player.y);
@@ -41,7 +41,10 @@ void    init(t_data *data)
     draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
 
     /* Calculate the intersection point */
-    intersections(&data->player, data->player.angle, data->parse.map, &data->img);
+    //intersections(&data->player, data->player.angle, data->parse.map, &data->img);
+
+    //cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
+    cast_all_rays(&data->img, &data->player, 200, data->parse.map);
 }
 
 void    find_start_location(t_player *player, char **map)

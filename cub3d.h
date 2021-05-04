@@ -60,33 +60,7 @@
 
 # define PI 3.141592653589793
 
-# define FOV 30 /* in degrees */
-
-// typedef struct s_map
-// {
-//     int **map;
-//     int *len_element;
-    
-// }       t_map;
-
-// typedef struct s_info
-// {
-//     int     win_width;
-//     int     win_height;
-
-//     char    *north_text;
-//     char    *south_text;
-//     char    *west_text;
-//     char    *east_text;
-
-//     char    *sprite_text;
-
-//     int     floor_colour[RGB_DATA_COUNT];
-//     int     ceiling_colour[RGB_DATA_COUNT];
-
-//     t_map   map;
-
-// }                   t_info;
+# define FOV 60
 
 typedef struct s_parse
 {
@@ -104,7 +78,6 @@ typedef struct s_parse
     int     ceiling_colour[RGB_DATA_COUNT];
 
 	char	**map;
-	//int		*map_len;
 
 }	t_parse;
 
@@ -131,10 +104,10 @@ typedef struct s_directions
 
 typedef struct s_ray
 {
-    int     x;
-    int     y;
-    float   xa;
-    float   ya;
+    double  x;
+    double  y;
+    double  xa;
+    double  ya;
     int     error;  
 
 }               t_ray;
@@ -150,6 +123,7 @@ typedef struct s_player
     t_ray           hor_ray;
     t_ray           ver_ray;
     int             *rays_array;
+    double          *angles_array;
 	
 }	                t_player;
 
@@ -196,48 +170,7 @@ void	free_map_len(int *map_len);
 void    print_parse(t_parse *parse);
 void    print_map(t_parse *parse);
 
-// /* ------------------------------------ CASTING ---------------------------------- */
-// int		raycaster_main(t_data *data);
-
-// void	init(t_data *data);
-// void	set_start_location(char **map, int *x, int *y, float *alpha);
-// void	player_location(t_player *player);
-
-// void	draw_player(t_img *img, t_player *player);
-// void	remove_current_player(t_img *img, t_player *player);
-
-// void	draw_unit(t_img *img, int pos_x, int pos_y);
-// void	draw_map(t_img *img, char **map);
-// void	draw_line(t_img *img, t_player *player, float angle, int len);
-// void	remove_line(t_img *img, t_player *player, float angle, int len);
-
-// int		check_wall(char **map, int x, int y); /* x and y are pixel coordinates */
-
-// double	calculate_ray_len(t_player player, int x, int y);
-// int     expand_ray(t_data *data, int *xy_coordinates, float xa, float ya);
-
-// int		*intersection(t_img *img, float angle);
-// int 	horizontal_intersection(t_data *data, float angle, int *horizontal);
-// int		vertical_intersection(t_data *data, float angle, int *vertical);
-// int		draw_point(t_img *img, int x, int y);
-// int		unit_circle_upper_lower(float alpha);
-// int		unit_circle_left_right(float alpha);
-
-// int 	cast_single_ray(t_data *data, float angle);
-// void    cast_all_rays(t_data *data);
-// int 	cast_fov(t_data *data);
-// int     remove_cast_fov(t_data *data);
-
-// int		ft_arrlen(char **arr);
-// void	print_rays(int *rays_array, int len);
-
-// /* related to mlx */
-// int				close_window(t_data *data);
-// unsigned int 	argb_to_hex(int a, int r, int g, int b);
-// void    		my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-// int				key_input(int keycode, t_data *data);
-
-/* --------------------------- v1 Raycasting ---------------------------- */
+/* --------------------------- Raycasting ---------------------------- */
 int     raycaster_main(t_data *data);
 
 /* Initialize */
@@ -260,6 +193,10 @@ void    intersections(t_player *player, double angle, char **map, t_img *img);
 int     horizontal_intersection(t_player *player, double angle, char **map);
 int     vertical_intersection(t_player *player, double angle, char **map);
 int     expand_ray(t_ray *ray, char **map);
+
+/* Casting rays */
+int     cast_single_ray(t_img *img, t_player *player, double angle, char **map);
+int     cast_all_rays(t_img *img, t_player *player, int width, char **map);
 
 /* Checks*/
 int     check_wall(char **map, int x, int y);

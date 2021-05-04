@@ -6,8 +6,8 @@
 
 void    print_ray_data(t_ray ray)
 {
-    printf("x = %d\n", ray.x);
-    printf("y = %d\n", ray.y);
+    printf("x = %f\n", ray.x);
+    printf("y = %f\n", ray.y);
     printf("xa = %.15f\n", ray.xa);
     printf("ya = %.15f\n", ray.ya);
     printf("error = %d\n", ray.error);

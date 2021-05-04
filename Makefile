@@ -52,7 +52,8 @@ SRC_RAYCASTER = raycaster_main.c \
 				checks.c \
 				intersections.c \
 				print_data.c \
-				math.c
+				math.c \
+				cast_rays.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 
