@@ -10,22 +10,22 @@ void    intersections(t_player *player, double angle, char **map, t_img *img)
     int hor;
     int ver;
 
-    hor = horizontal_intersection(player, angle, map);
-    ver = vertical_intersection(player, angle, map); 
-    // printf("angle = %f\n", angle / PI * 180);
-    // printf("hor_x = %f\n", player->hor_ray.x);
-    // printf("hor_y = %f\n", player->hor_ray.y);
-    // printf("ver_x = %f\n", player->ver_ray.x);
-    // printf("ver_y = %f\n", player->ver_ray.y);
+    hor = horizontal_intersection(player, angle, map, img);
+    ver = vertical_intersection(player, angle, map, img);
+    printf("angle = %f\n", angle / PI * 180);
+    printf("hor_x = %f\n", player->hor_ray.x);
+    printf("hor_y = %f\n", player->hor_ray.y);
+    printf("ver_x = %f\n", player->ver_ray.x);
+    printf("ver_y = %f\n", player->ver_ray.y);
     // printf("ver_error = %d, hor_error = %d\n", ver, hor);
-    // if (ver != -1)
-    //     my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
-    // if (hor != -1)
-    //     my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
-    //mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+    if (ver != -1)
+        my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
+    if (hor != -1)
+        my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
+    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
-int horizontal_intersection(t_player *player, double angle, char **map)
+int horizontal_intersection(t_player *player, double angle, char **map, t_img *img)
 {
     int error;
     
@@ -45,13 +45,13 @@ int horizontal_intersection(t_player *player, double angle, char **map)
     player->hor_ray.xa = UNIT / tan(angle);
     if (unit_circle_upper_lower(angle) == 1)
         player->hor_ray.xa *= -1;
-    error = expand_ray(&player->hor_ray, map);
+    error = expand_ray(&player->hor_ray, map, img);
     if (error == -1)
         return (-1);
     return (0);
 }
 
-int vertical_intersection(t_player *player, double angle, char **map)
+int vertical_intersection(t_player *player, double angle, char **map, t_img *img)
 {
     int error;
 
@@ -71,15 +71,17 @@ int vertical_intersection(t_player *player, double angle, char **map)
     player->ver_ray.ya = UNIT * tan(angle);
     if (unit_circle_left_right(angle) == 1)
         player->ver_ray.ya *= -1;
-    error = expand_ray(&player->ver_ray, map);
+    error = expand_ray(&player->ver_ray, map, img);
     if (error == -1)
         return (-1);
     return (0);
 }
 
-int expand_ray(t_ray *ray, char **map)
+int expand_ray(t_ray *ray, char **map, t_img *img)
 {
     int wall;
+    int wall1 = 0;
+    int wall2 = 0;
     int error;
 
     wall = 0;
@@ -87,10 +89,14 @@ int expand_ray(t_ray *ray, char **map)
     while (wall == 0)
     {
         error = check_coordinates(ray->x, ray->y, map);
+        printf("x = %f, y = %f\n", ray->x, ray->y);
+        my_pixel_put(img, (int)ray->x, (int)ray->y, argb_to_hex(0, 255, 255, 255));
         if (error == -1)
             return (-1);
         wall = check_wall(map, ray->x, ray->y);
-        if (wall == -1)
+        wall1 = check_wall(map, ray->x, ray->y + 1);
+        wall2 = check_wall(map, ray->x - 1, ray->y);
+        if (wall == -1 || wall2 == -1 || wall1 == -1)
             return (0);
         ray->x += ray->xa;
         ray->y += ray->ya;

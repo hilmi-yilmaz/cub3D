@@ -190,9 +190,9 @@ int     hooks(int keycode, t_data *data);
 
 /* Intersection calculations */
 void    intersections(t_player *player, double angle, char **map, t_img *img);
-int     horizontal_intersection(t_player *player, double angle, char **map);
-int     vertical_intersection(t_player *player, double angle, char **map);
-int     expand_ray(t_ray *ray, char **map);
+int     horizontal_intersection(t_player *player, double angle, char **map, t_img *img);
+int     vertical_intersection(t_player *player, double angle, char **map, t_img *img);
+int     expand_ray(t_ray *ray, char **map, t_img *img);
 
 /* Casting rays */
 int     cast_single_ray(t_img *img, t_player *player, double angle, char **map);
@@ -219,5 +219,6 @@ int		ft_arrlen(char **arr);
 
 /* Printing data */
 void    print_ray_data(t_ray ray);
+void    print_rays_array(int *rays_array, int width);
 
 #endif

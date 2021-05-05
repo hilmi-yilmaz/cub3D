@@ -41,10 +41,10 @@ void    init(t_data *data)
     draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
 
     /* Calculate the intersection point */
-    //intersections(&data->player, data->player.angle, data->parse.map, &data->img);
+    intersections(&data->player, data->player.angle, data->parse.map, &data->img);
 
     //cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
-    cast_all_rays(&data->img, &data->player, 200, data->parse.map);
+    //cast_all_rays(&data->img, &data->player, 200, data->parse.map);
 }
 
 void    find_start_location(t_player *player, char **map)

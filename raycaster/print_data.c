@@ -6,9 +6,22 @@
 
 void    print_ray_data(t_ray ray)
 {
-    printf("x = %f\n", ray.x);
-    printf("y = %f\n", ray.y);
-    printf("xa = %.15f\n", ray.xa);
-    printf("ya = %.15f\n", ray.ya);
-    printf("error = %d\n", ray.error);
+        printf("x = %f\n", ray.x);
+        printf("y = %f\n", ray.y);
+        printf("xa = %.15f\n", ray.xa);
+        printf("ya = %.15f\n", ray.ya);
+        printf("error = %d\n", ray.error);
+}
+
+void    print_rays_array(int *rays_array, int width)
+{
+    int i;
+
+    i = 0;
+    while (i < width)
+    {
+        printf("%d ", rays_array[i]);
+        i++;
+    }
+    printf("\n\n");
 }
