@@ -7,11 +7,11 @@ DIR="/home/hilmi/Desktop/codam/curriculum/cub3d/"
 TEXT_EDITOR="vim"
 
 # Source files to open for $SRC_WINDOW
-file_0_0="v1_raycaster/raycaster_init.c"    # file to open at window 0, pane 0
-file_0_1="v1_raycaster/intersections.c"     # file to open at window 0, pane 1
-file_0_2="v1_raycaster/checks.c"
-file_0_4="v1_raycaster/hooks.c"
-file_0_5="v1_raycaster/raycaster_utils.c"
+file_0_0="raycaster/raycaster_init.c"    # file to open at window 0, pane 0
+file_0_1="raycaster/intersections.c"     # file to open at window 0, pane 1
+file_0_2="raycaster/checks.c"
+file_0_4="raycaster/hooks.c"
+file_0_5="raycaster/raycaster_utils.c"
 file_1_0="cub3d.h"
 file_1_1="Makefile"
 
