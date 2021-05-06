@@ -12,11 +12,11 @@ void    intersections(t_player *player, double angle, char **map, t_img *img)
 
     hor = horizontal_intersection(player, angle, map, img);
     ver = vertical_intersection(player, angle, map, img);
-    printf("angle = %f\n", angle / PI * 180);
-    printf("hor_x = %f\n", player->hor_ray.x);
-    printf("hor_y = %f\n", player->hor_ray.y);
-    printf("ver_x = %f\n", player->ver_ray.x);
-    printf("ver_y = %f\n", player->ver_ray.y);
+    //---printf("angle = %f\n", angle / PI * 180);
+    //---printf("hor_x = %f\n", player->hor_ray.x);
+    //---printf("hor_y = %f\n", player->hor_ray.y);
+    //---printf("ver_x = %f\n", player->ver_ray.x);
+    //---printf("ver_y = %f\n", player->ver_ray.y);
     // printf("ver_error = %d, hor_error = %d\n", ver, hor);
     if (ver != -1)
         my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
@@ -29,7 +29,7 @@ int horizontal_intersection(t_player *player, double angle, char **map, t_img *i
 {
     int error;
    
-    printf("horizontal intersections\n");
+    //---printf("horizontal intersections\n");
     error = 0;
     /* If the ray is facing up */
     if (unit_circle_upper_lower(angle) == 0)
@@ -56,7 +56,7 @@ int vertical_intersection(t_player *player, double angle, char **map, t_img *img
 {
     int error;
 
-    printf("vertical intersections\n");
+    //---printf("vertical intersections\n");
     error = 0;    
     /* If the ray is facing right */
     if (unit_circle_left_right(angle) == 1)
@@ -82,11 +82,11 @@ int vertical_intersection(t_player *player, double angle, char **map, t_img *img
 int expand_ray(t_ray *ray, char **map, t_img *img, double angle)
 {
     int wall;
-    //int wall1 = 0;
-    //int wall2 = 0;
+    int wall_corners;
     int error;
 
     wall = 0;
+    wall_corners = 0;
     error = 0;
     while (wall == 0)
     {
@@ -94,13 +94,11 @@ int expand_ray(t_ray *ray, char **map, t_img *img, double angle)
         if (error == -1)
             return (-1);
         wall = check_wall(map, ray->x, ray->y);
-        //wall = check_wall_corners(map, ray->x, ray->y, angle);
-        //wall1 = check_wall(map, ray->x, ray->y + 1);
-        //wall2 = check_wall(map, ray->x - 1, ray->y);
-        if (wall == -1)// || wall2 == -1 || wall1 == -1)
+        wall_corners = check_wall_corners(map, ray->x, ray->y, angle);
+        if (wall == -1 || wall_corners == -1)// || wall2 == -1 || wall1 == -1)
             return (0);
-        printf("x = %f, y = %f\n", ray->x, ray->y);
-        my_pixel_put(img, (int)ray->x, (int)ray->y, argb_to_hex(0, 255, 255, 255));
+        ///---printf("x = %f, y = %f\n", ray->x, ray->y);
+        //my_pixel_put(img, (int)ray->x, (int)ray->y, argb_to_hex(0, 255, 255, 255));
         ray->x += ray->xa;
         ray->y += ray->ya;
     }

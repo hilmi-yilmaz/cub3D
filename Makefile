@@ -53,7 +53,8 @@ SRC_RAYCASTER = raycaster_main.c \
 				intersections.c \
 				print_data.c \
 				math.c \
-				cast_rays.c
+				cast_rays.c \
+				map_to_3d.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
 

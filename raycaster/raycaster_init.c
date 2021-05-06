@@ -17,8 +17,8 @@ void    init(t_data *data)
     find_start_location(&data->player, data->parse.map);
 
     /* Set speed and rotation speed of the player */
-    data->player.speed = 10;
-    data->player.rot_speed = 0.001 * PI;
+    data->player.speed = UNIT / 4;
+    data->player.rot_speed = 0.01 * PI;
 
     /* Set start angle temporary */
     //data->player.angle = (float)-45 / 180 * PI;
@@ -38,13 +38,16 @@ void    init(t_data *data)
 
     /* Draw the player and direction arrow */
     draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));
-    draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
+    //draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
 
     /* Calculate the intersection point */
     //intersections(&data->player, data->player.angle, data->parse.map, &data->img);
 
-    cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
-   // cast_all_rays(&data->img, &data->player, 200, data->parse.map);
+    //cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
+    cast_all_rays(&data->img, &data->player, data->parse.win_width, data->parse.map);
+
+    /* Map 2D map to 3D */
+    map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
 }
 
 void    find_start_location(t_player *player, char **map)

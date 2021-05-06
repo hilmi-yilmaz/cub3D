@@ -52,7 +52,7 @@ int check_wall_corners(char **map, int x, int y, double angle)
         wall_hor = check_wall(map, x + 1, y);
         wall_ver = check_wall(map, x, y - 1);
     }
-    if (wall_hor == -1 || wall_ver == -1)
+    if (wall_hor == -1 && wall_ver == -1)
         return (-1);
     return (0);
 }

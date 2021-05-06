@@ -51,7 +51,7 @@
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
 
-# define UNIT 64
+# define UNIT 16
 # define EDGE 1
 
 #define GLASS 2
@@ -184,6 +184,7 @@ void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
 void    draw_map(t_img *img, t_parse *parse);
 void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour);
 void    draw_line(t_img *img, t_player *player, double angle, int len, int colour);
+void    draw_columns(t_img *img, int column, int wall_height, int win_height);
 
 /* Hooks */
 int     hooks(int keycode, t_data *data);
@@ -197,6 +198,9 @@ int     expand_ray(t_ray *ray, char **map, t_img *img, double angle);
 /* Casting rays */
 int     cast_single_ray(t_img *img, t_player *player, double angle, char **map);
 int     cast_all_rays(t_img *img, t_player *player, int width, char **map);
+
+/* Map to 3D */
+void    map_to_3d(t_img *img, int *rays_array, int win_width, int win_height);
 
 /* Checks*/
 int     check_wall(char **map, int x, int y);
