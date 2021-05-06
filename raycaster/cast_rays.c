@@ -25,6 +25,7 @@ int cast_single_ray(t_img *img, t_player *player, double angle, char **map)
         ray_len = hor_distance;
         my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
     }
+    draw_line(img, player, angle, ray_len, argb_to_hex(0, 255, 0, 0));
     return (ray_len);
 }
 
@@ -49,8 +50,8 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
         i++;
     }
     /* Draw fov */
-    draw_line(img, player, player->angles_array[0], player->rays_array[0], argb_to_hex(0, 255, 0, 0));
-    draw_line(img, player, player->angles_array[width - 1], player->rays_array[width - 1], argb_to_hex(0, 255, 0, 0));
+    //draw_line(img, player, player->angles_array[0], player->rays_array[0], argb_to_hex(0, 255, 0, 0));
+    //draw_line(img, player, player->angles_array[width - 1], player->rays_array[width - 1], argb_to_hex(0, 255, 0, 0));
 
     mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
     // printf("\n");

@@ -19,6 +19,44 @@ int check_wall(char **map, int x, int y)
     return (0);
 }
 
+int check_wall_corners(char **map, int x, int y, double angle)
+{
+    int wall_hor;
+    int wall_ver;
+    int lower;
+    int right;
+
+    wall_hor = 0;
+    wall_ver = 0;
+    lower = unit_circle_upper_lower(angle);
+    right = unit_circle_left_right(angle);
+
+    /* If first quarter of the unit cirle (0 - 0.5*PI) */
+    if (lower == 0 && right == 1)
+    {
+        wall_hor = check_wall(map, x - 1, y);
+        wall_ver = check_wall(map, x, y + 1);
+    }
+    else if (lower == 0 && right == 0)
+    {
+        wall_hor = check_wall(map, x + 1, y);
+        wall_ver = check_wall(map, x, y + 1);
+    }
+    else if (lower == 1 && right == 1)// && check_coordinates(x + 1, y + 1, map) == 0 && check_wall(map, x + 1, y + 1) != -1)
+    { 
+        wall_hor = check_wall(map, x - 1, y);
+        wall_ver = check_wall(map, x, y - 1);
+    }
+    else
+    {
+        wall_hor = check_wall(map, x + 1, y);
+        wall_ver = check_wall(map, x, y - 1);
+    }
+    if (wall_hor == -1 || wall_ver == -1)
+        return (-1);
+    return (0);
+}
+
 int check_coordinates(int x, int y, char **map)
 {
     if (x < 0 || y < 0)
