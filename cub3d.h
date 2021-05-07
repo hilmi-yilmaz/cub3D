@@ -51,7 +51,7 @@
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
 
-# define UNIT 128
+# define UNIT 1
 # define EDGE 1
 
 #define GLASS 2
@@ -120,7 +120,7 @@ typedef struct s_player
 	int             y;
     double          angle;
     int             speed;
-    float           rot_speed;
+    double          rot_speed;
     t_directions    direction;
     t_ray           hor_ray;
     t_ray           ver_ray;
@@ -227,6 +227,6 @@ int		ft_arrlen(char **arr);
 
 /* Printing data */
 void    print_ray_data(t_ray ray);
-void    print_rays_array(int *rays_array, int width);
+void    print_rays_array(double *rays_array, int width);
 
 #endif

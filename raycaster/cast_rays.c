@@ -16,7 +16,7 @@ double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
     intersections(player, angle, map, img);
     hor_distance = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
     ver_distance = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
-    if ((int)hor_distance >= (int)ver_distance)
+    if (hor_distance >= ver_distance)
     {
         ray_len = ver_distance;
         //my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
@@ -50,6 +50,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
         player->rays_array[i] = cast_single_ray(img, player, angle, map);
         //draw_line(img, player, angle, player->rays_array[i], argb_to_hex(0, 255, 0, 0));
         player->angles_array[i] = angle;
+        printf("%f\n", angle);
         angle += angle_increment;
         bounds_angle(&angle);
         i++;
@@ -62,7 +63,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
     // printf("\n");
     //print_rays_array(player->rays_array, width);
     //free(player->rays_array);
-    free(player->angles_array);
+    //free(player->angles_array);
     return (0);
 }
 

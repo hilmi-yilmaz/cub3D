@@ -49,6 +49,7 @@ void    init(t_data *data)
     /* Map 2D map to 3D */
     map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
     free(data->player.rays_array);
+    free(data->player.angles_array);
 }
 
 void    find_start_location(t_player *player, char **map)

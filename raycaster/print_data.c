@@ -13,14 +13,14 @@ void    print_ray_data(t_ray ray)
         printf("error = %d\n", ray.error);
 }
 
-void    print_rays_array(int *rays_array, int width)
+void    print_rays_array(double *rays_array, int width)
 {
     int i;
 
     i = 0;
     while (i < width)
     {
-        printf("%d ", rays_array[i]);
+        printf("%f ", rays_array[i]);
         i++;
     }
     printf("\n\n");

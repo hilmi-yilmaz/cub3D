@@ -34,7 +34,9 @@ int hooks(int keycode, t_data *data)
     //intersections(&data->player, data->player.angle, data->parse.map, &data->img);
     //cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
     cast_all_rays(&data->img, &data->player, data->parse.win_width, data->parse.map);
+    //print_rays_array(data->player.rays_array, data->parse.win_width);
     map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
     free(data->player.rays_array);
+    free(data->player.angles_array);
     return (0);
 }
