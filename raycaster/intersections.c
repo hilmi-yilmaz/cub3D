@@ -18,11 +18,11 @@ void    intersections(t_player *player, double angle, char **map, t_img *img)
     //---printf("ver_x = %f\n", player->ver_ray.x);
     //---printf("ver_y = %f\n", player->ver_ray.y);
     // printf("ver_error = %d, hor_error = %d\n", ver, hor);
-    if (ver != -1)
-        my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
-    if (hor != -1)
-        my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
-    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+    //if (ver != -1)
+        //my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
+    //if (hor != -1)
+        //my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
+    //mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
 int horizontal_intersection(t_player *player, double angle, char **map, t_img *img)

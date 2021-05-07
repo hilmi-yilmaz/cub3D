@@ -1,15 +1,16 @@
 /* Standard library header files */
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 /* User defined header files */
 #include "../cub3d.h"
 
-int cast_single_ray(t_img *img, t_player *player, double angle, char **map)
+double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
 {
     double  hor_distance;
     double  ver_distance;
-    int     ray_len;
+    double  ray_len;
 
     
     intersections(player, angle, map, img);
@@ -25,6 +26,10 @@ int cast_single_ray(t_img *img, t_player *player, double angle, char **map)
         ray_len = hor_distance;
         //my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
     }
+
+    /* Remove fisheye effect */
+    ray_len *= cos(player->angle - angle);
+
     //draw_line(img, player, angle, ray_len, argb_to_hex(0, 255, 0, 0));
     return (ray_len);
 }
@@ -38,7 +43,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
     i = 0;
     angle = player->angle - 0.5 * ((double)FOV / 180 * PI);
     angle_increment = ((double)FOV / 180 * PI) / width;
-    player->rays_array = malloc(sizeof(int) * width);
+    player->rays_array = malloc(sizeof(double) * width);
     player->angles_array = malloc(sizeof(double) * width);
     while (i < width)
     {
@@ -55,7 +60,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
 
     //mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
     // printf("\n");
-    print_rays_array(player->rays_array, width);
+    //print_rays_array(player->rays_array, width);
     //free(player->rays_array);
     free(player->angles_array);
     return (0);

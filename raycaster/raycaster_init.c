@@ -11,7 +11,7 @@ void    init(t_data *data)
     ft_memset(&data->player, 0, sizeof(data->player));    
 
     /* Draw the map */
-    draw_map(&data->img, &data->parse);
+    //draw_map(&data->img, &data->parse);
 
     /* Find the starting position of the player */
     find_start_location(&data->player, data->parse.map);
@@ -21,7 +21,7 @@ void    init(t_data *data)
     data->player.rot_speed = 0.01 * PI;
 
     /* Set start angle temporary */
-    //data->player.angle = (float)-45 / 180 * PI;
+    //data->player.angle = (double)135 / 180 * PI;
 
     // printf("x = %d\n", data->player.x);
     // printf("y = %d\n", data->player.y);
@@ -37,7 +37,7 @@ void    init(t_data *data)
     // print_ray_data(data->player.ver_ray);
 
     /* Draw the player and direction arrow */
-    draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));
+    //draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));
     //draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
 
     /* Calculate the intersection point */
@@ -48,6 +48,7 @@ void    init(t_data *data)
 
     /* Map 2D map to 3D */
     map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
+    free(data->player.rays_array);
 }
 
 void    find_start_location(t_player *player, char **map)

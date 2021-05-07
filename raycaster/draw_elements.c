@@ -86,3 +86,22 @@ void	draw_line(t_img *img, t_player *player, double angle, int len, int colour)
 	}
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
+
+void    clear_screen(t_img *img, int win_width, int win_height)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (i < win_height)
+    {
+        while(j < win_width)
+        {
+            my_pixel_put(img, j, i, argb_to_hex(0, 0, 0, 0));
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+}
