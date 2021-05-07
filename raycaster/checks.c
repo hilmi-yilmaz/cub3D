@@ -57,13 +57,14 @@ int check_wall_corners(char **map, int x, int y, double angle)
     return (0);
 }
 
-int check_coordinates(int x, int y, char **map)
+int check_coordinates(double x, double y, char **map)
 {
+    printf("Check with x = %f, y = %f\n", x, y);
     if (x < 0 || y < 0)
         return (-1);
     x /= UNIT;
     y /= UNIT;
-    if (y >= ft_arrlen(map) || x > ft_strlen(map[y]))
+    if ((int)y >= ft_arrlen(map) || x > ft_strlen(map[(int)y]))
         return (-1);
     return (0);
 }

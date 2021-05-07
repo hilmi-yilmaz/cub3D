@@ -208,7 +208,7 @@ void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height)
 /* Checks*/
 int     check_wall(char **map, int x, int y);
 void    check_directions(t_player *player, char **map);
-int     check_coordinates(int x, int y, char **map);
+int     check_coordinates(double x, double y, char **map);
 int     check_wall_corners(char **map, int x, int y, double angle);
 
 /* Math utils */

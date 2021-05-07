@@ -15,11 +15,11 @@ void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height)
     i = 0;
     height = 0;
     dist_to_plane = win_width / 2 * tan((double)FOV / 180 * PI / 2);
-    printf("dist_to_plane = %f\n", dist_to_plane);
+    //printf("dist_to_plane = %f\n", dist_to_plane);
     while (i < win_width)
     {
         height = (double)UNIT / rays_array[i] * dist_to_plane * WALL_RATIO;
-        printf("%f, %f, %f\n", height, rays_array[i], dist_to_plane);
+        //printf("%f, %f, %f\n", height, rays_array[i], dist_to_plane);
         draw_columns(img, i, height, win_height);
         //printf("%d ", i);
         i++;

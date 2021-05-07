@@ -26,6 +26,8 @@ double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
         ray_len = hor_distance;
         //my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
     }
+    if (player->ver_ray.error == 1)
+        ray_len = hor_distance;
 
     /* Remove fisheye effect */
     ray_len *= cos(player->angle - angle);
@@ -50,7 +52,7 @@ int cast_all_rays(t_img *img, t_player *player, int width, char **map)
         player->rays_array[i] = cast_single_ray(img, player, angle, map);
         //draw_line(img, player, angle, player->rays_array[i], argb_to_hex(0, 255, 0, 0));
         player->angles_array[i] = angle;
-        printf("%f\n", angle);
+        printf("------------ angle = %f, ray_len = %f\n\n", angle, player->rays_array[i]);
         angle += angle_increment;
         bounds_angle(&angle);
         i++;
