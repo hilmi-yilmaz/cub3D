@@ -4,9 +4,9 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-double	calculate_ray_len(t_player *player, int x, int y)
+double	calculate_ray_len(t_player *player, double x, double y)
 {
-	return(sqrt(pow(player->x - x, 2) + pow(player->y - y, 2)));
+	return(sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)));
 }
 
 void    bounds_angle(double *angle)

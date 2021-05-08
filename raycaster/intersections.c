@@ -73,11 +73,11 @@ int vertical_intersection(t_player *player, double angle, char **map, t_img *img
     player->ver_ray.ya = UNIT * tan(angle);
     if (unit_circle_left_right(angle) == 1)
         player->ver_ray.ya *= -1;
-    if (player->ver_ray.x < 0 || player->ver_ray.y < 0)
-    {
-        player->ver_ray.error = 1;
-        return (-1);
-    }
+    //if (player->ver_ray.x < 0 || player->ver_ray.y < 0)
+    //{
+    //    player->ver_ray.error = 1;
+    //    return (-1);
+    //}
     error = expand_ray(&player->ver_ray, map, img, angle);
     if (error == -1)
         return (-1);

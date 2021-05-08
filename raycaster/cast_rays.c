@@ -26,8 +26,6 @@ double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
         ray_len = hor_distance;
         //my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
     }
-    if (player->ver_ray.error == 1)
-        ray_len = hor_distance;
 
     /* Remove fisheye effect */
     ray_len *= cos(player->angle - angle);

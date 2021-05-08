@@ -51,10 +51,11 @@
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
 
-# define UNIT 1
+# define UNIT 64
 # define EDGE 1
+# define INF 2147483647 
 
-#define GLASS 2
+# define GLASS 2
 
 # define XY_COORDINATES 2
 
@@ -212,7 +213,7 @@ int     check_coordinates(double x, double y, char **map);
 int     check_wall_corners(char **map, int x, int y, double angle);
 
 /* Math utils */
-double  calculate_ray_len(t_player *player, int x, int y);
+double  calculate_ray_len(t_player *player, double x, double y);
 void    bounds_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);

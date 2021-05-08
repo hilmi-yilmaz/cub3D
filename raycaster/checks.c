@@ -60,7 +60,7 @@ int check_wall_corners(char **map, int x, int y, double angle)
 int check_coordinates(double x, double y, char **map)
 {
     printf("Check with x = %f, y = %f\n", x, y);
-    if (x < 0 || y < 0)
+    if (x < 0 || y < 0)// || x > INF || y > INF)
         return (-1);
     x /= UNIT;
     y /= UNIT;
