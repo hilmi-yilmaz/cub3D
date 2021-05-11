@@ -8,7 +8,7 @@
 void    init(t_data *data)
 {
     /* Initialize player struct to all zeros */
-    ft_memset(&data->player, 0, sizeof(data->player));    
+    ft_memset(&data->player, 0, sizeof(data->player));
 
     /* Draw the map */
     //draw_map(&data->img, &data->parse);
@@ -17,7 +17,7 @@ void    init(t_data *data)
     find_start_location(&data->player, data->parse.map);
 
     /* Set speed and rotation speed of the player */
-    data->player.speed = UNIT / 4;
+    data->player.speed = (double)UNIT / 4;
     data->player.rot_speed = 0.01 * PI;
 
     /* Set start angle temporary */

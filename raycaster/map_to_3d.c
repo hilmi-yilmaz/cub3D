@@ -8,13 +8,13 @@
 
 void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height)
 {
-    int i;
-    int height;
-    int dist_to_plane;
+    int		i;
+    int		height;
+    double	dist_to_plane;
 
     i = 0;
     height = 0;
-    dist_to_plane = win_width / 2 * tan((float)FOV / 180 * PI / 2);
+    dist_to_plane = win_width / 2 * tan((double)FOV / 180 * PI / 2);
     //printf("dist_to_plane = %d\n", dist_to_plane);
     while (i < win_width)
     {

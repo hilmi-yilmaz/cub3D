@@ -14,9 +14,23 @@ double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
 
     
     intersections(player, angle, map, img);
-    hor_distance = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
-    ver_distance = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
-    if ((int)hor_distance >= (int)ver_distance)
+	// printf("\n----\n");
+	// printf("player->x = %f\n", player->x);
+	// printf("player->y = %f\n", player->y);
+	// printf("angle = %f\n", angle);
+	// printf("player->hor_ray.x = %f\n", player->hor_ray.x);
+	// printf("player->hor_ray.y = %f\n", player->hor_ray.y);
+	// printf("player->ver_ray.x = %f\n", player->ver_ray.x);
+	// printf("player->ver_ray.y = %f\n", player->ver_ray.y);
+	// printf("player->hor_ray.xa = %f\n", player->hor_ray.xa);
+	// printf("player->hor_ray.ya = %f\n", player->hor_ray.ya);
+	// printf("player->ver_ray.xa = %f\n", player->ver_ray.xa);
+	// printf("player->ver_ray.ya = %f\n", player->ver_ray.ya);
+    hor_distance = calculate_ray_len_1(player, player->hor_ray.x, angle);
+    ver_distance = calculate_ray_len_1(player, player->ver_ray.x, angle);
+	// printf("hor_distance = %f\n", hor_distance);
+	// printf("ver_distance = %f\n", ver_distance);
+    if (hor_distance >= ver_distance)
     {
         ray_len = ver_distance;
         //my_pixel_put(img, (int)player->ver_ray.x, (int)player->ver_ray.y, argb_to_hex(0, 255, 255, 255));
@@ -27,8 +41,11 @@ double  cast_single_ray(t_img *img, t_player *player, double angle, char **map)
         //my_pixel_put(img, (int)player->hor_ray.x, (int)player->hor_ray.y, argb_to_hex(0, 255, 255, 255));
     }
 
+	printf("ray_len=%.8f ", ray_len);
+
     /* Remove fisheye effect */
     ray_len *= cos(player->angle - angle);
+	printf("ray_len=%.8f\n", ray_len);
 
     //draw_line(img, player, angle, ray_len, argb_to_hex(0, 255, 0, 0));
     return (ray_len);
