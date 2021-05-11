@@ -43,20 +43,7 @@ SRC_PARSER =	parse_main.c \
 				free_data.c \
 				utils.c
 
-# DIR_RAYCASTER = raycaster
-# SRC_RAYCASTER = raycaster_main.c \
-# 				raycaster_init.c \
-# 				draw_elements.c \
-# 				raycaster_utils.c \
-# 				hooks.c \
-# 				checks.c \
-# 				intersections.c \
-# 				print_data.c \
-# 				math.c \
-# 				cast_rays.c \
-# 				map_to_3d.c
-
-DIR_RAYCASTER = v1_raycaster
+DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = raycaster_main.c \
 				raycaster_init.c \
 				hooks.c \

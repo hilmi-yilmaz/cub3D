@@ -30,8 +30,6 @@ int raycaster_main(t_data *data)
 	/* Initialize the screen with the player */
 	init(data);
 
-	//printf("x = %d, y = %d, alpha = %f (%f)\n", data->player.x, data->player.y, data->player.angle, data->player.angle / PI * 180);
-
 	/* React on the moving player */
 	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, hooks, data);
 

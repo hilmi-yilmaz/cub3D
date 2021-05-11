@@ -1,90 +1,22 @@
-/* Standard Library header files */
-#include <stdio.h>
-#include <math.h>
-
 /* User defined header files */
 #include "../cub3d.h"
 
-void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour)
+void    draw_columns(t_img *img, int column, int wall_height, int win_height)
 {
-    my_pixel_put(img, pos_x, pos_y, colour);
-    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
-}
+    int start;
+    int end;
 
-void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (i < UNIT)
+    start = (win_height - wall_height) / 2;
+    if (start < 0)
+        start = 0;
+    end = (win_height + wall_height) / 2;
+    if (end >= win_height)
+        end = win_height - 1;
+    while (start < end)
     {
-        while (j < UNIT)
-        {
-            if (i == 0 || i == UNIT - EDGE || j == 0 || j == UNIT - EDGE)
-                my_pixel_put(img, pos_x + j, pos_y + i, argb_to_hex(0, 0, 0, 0));
-            else
-                my_pixel_put(img, pos_x + j, pos_y + i, colour);
-            j++;
-        }
-        j = 0;
-        i++;
+        my_pixel_put(img, column, start, argb_to_hex(0, 255, 0, 0));
+        start++;
     }
-}
-
-void    set_background_color(t_img *img, t_parse *parse, unsigned int colour)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (parse->map[i] != NULL)
-    {
-        while (parse->map[i][j] != '\0')
-        {
-            draw_unit(img, j * UNIT, i * UNIT, colour);
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-}
-
-void    draw_map(t_img *img, t_parse *parse)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    set_background_color(img, parse, argb_to_hex(150, 100, 100, 100));
-    while (parse->map[i] != NULL)
-    {
-        while (parse->map[i][j] != '\0')
-        {
-            if (parse->map[i][j] == '1')
-                draw_unit(img, j * UNIT, i * UNIT, argb_to_hex(0, 255, 255, 0));
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-    mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
-}
-
-void	draw_line(t_img *img, t_player *player, double angle, int len, int colour)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		my_pixel_put(img, player->x + i * cos(angle), player->y + i * -sin(angle), colour);
-		i++;
-	}
-	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 }
 
 void    clear_screen(t_img *img, int win_width, int win_height)

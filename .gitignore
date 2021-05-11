@@ -5,3 +5,5 @@ testing/
 massif.out*
 tmux*log
 *.swp
+*.out
+*.exe

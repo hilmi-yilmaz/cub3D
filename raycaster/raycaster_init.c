@@ -1,5 +1,6 @@
 /* Standard Library header files */
 #include <stdio.h>
+#include <stdlib.h>
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -7,49 +8,18 @@
 
 void    init(t_data *data)
 {
-    /* Initialize player struct to all zeros */
     ft_memset(&data->player, 0, sizeof(data->player));
-
-    /* Draw the map */
-    //draw_map(&data->img, &data->parse);
-
-    /* Find the starting position of the player */
     find_start_location(&data->player, data->parse.map);
-
-    /* Set speed and rotation speed of the player */
-    data->player.speed = (double)UNIT / 4;
+    data->player.speed = 0.1;
     data->player.rot_speed = 0.01 * PI;
 
-    /* Set start angle temporary */
-    //data->player.angle = (double)135 / 180 * PI;
+	/* Set start angle */
+	//data->player.angle = deg2rad(360 - 45);
 
-    // printf("x = %d\n", data->player.x);
-    // printf("y = %d\n", data->player.y);
-    // printf("angle = %f\n", data->player.angle);
-    // printf("speed = %d\n", data->player.speed);
-    // printf("rot_speed = %f\n", data->player.rot_speed);
-    // printf("rays_array = %p\n", data->player.rays_array);
-    // printf("north = %d\n", data->player.direction.north);
-    // printf("west = %d\n", data->player.direction.west);
-    // printf("east = %d\n", data->player.direction.east);
-    // printf("south = %d\n", data->player.direction.south);
-    // print_ray_data(data->player.hor_ray);
-    // print_ray_data(data->player.ver_ray);
-
-    /* Draw the player and direction arrow */
-    //draw_player(&data->img, data->player.x, data->player.y, argb_to_hex(0, 255, 0, 0));
-    //draw_line(&data->img, &data->player, data->player.angle, 25, argb_to_hex(0, 255, 0, 0));
-
-    /* Calculate the intersection point */
-    //intersections(&data->player, data->player.angle, data->parse.map, &data->img);
-
-    //cast_single_ray(&data->img, &data->player, data->player.angle, data->parse.map);
-    cast_all_rays(&data->img, &data->player, data->parse.win_width, data->parse.map);
-
-    /* Map 2D map to 3D */
-    map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
+    cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
+	map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
+	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);
     free(data->player.rays_array);
-    free(data->player.angles_array);
 }
 
 void    find_start_location(t_player *player, char **map)
@@ -65,7 +35,7 @@ void    find_start_location(t_player *player, char **map)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2')
 			{
-                set_start_location(player, map, i, j);
+				set_start_location(player, map, i, j);
 				return ;
 			}
 			j++;
