@@ -20,7 +20,7 @@
 #  define LEFT_KEY 123
 #  define A_KEY 0
 #  define D_KEY 2
-#  define W_KEY 12
+#  define W_KEY 13
 #  define S_KEY 1
 // #  define KeyPress 2
 // #  define KeyPressMask 1L<<0
@@ -67,7 +67,7 @@
 
 # define FOV 60
 
-# define WALL_RATIO 2
+# define WALL_RATIO 1
 
 # define INF 2147483647
 
@@ -253,6 +253,7 @@ void	move(t_player *player, double x_local, double y_local);
 /* Checks*/
 int     check_wall(char **map, double x, double y);
 int     check_coordinates(double x, double y, char **map);
+void    check_directions(t_player *player, char **map);
 
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);

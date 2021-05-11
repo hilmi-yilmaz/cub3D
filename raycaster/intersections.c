@@ -54,8 +54,8 @@ int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(doub
 	wall = 0;
 	while (wall == 0)
 	{
-		if (check_coordinates(ray->x, ray->y, map) == -1)
-			return (-1);
+		// if (check_coordinates(ray->x, ray->y, map) == -1)
+		// 	return (-1);
 		if (dir == 0)
 			wall = check_wall(map, ray->x, ray->y - 1.0);
 		else if (dir == 1)
@@ -66,6 +66,8 @@ int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(doub
 			wall = check_wall(map, ray->x, ray->y);
 		if (wall == 1)
 			return (0);
+		if (wall == -1)
+			return (-1);
 		ray->x += ray->xa;
 		ray->y += ray->ya;
 	}

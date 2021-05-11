@@ -40,6 +40,6 @@ int cast_all_rays(t_player *player, int width, char **map)
         reset_angle(&angle);
         i++;
     }
-    print_rays_array(player->rays_array, width);
+    //print_rays_array(player->rays_array, width);
     return (0);
 }
