@@ -9,6 +9,8 @@
 #  define LEFT_KEY 65361
 #  define A_KEY 97
 #  define D_KEY 100
+#  define W_KEY 119
+#  define S_KEY 115
 # else
 #  define IS_LINUX 0
 #  include "mlx/mlx.h"
@@ -18,6 +20,8 @@
 #  define LEFT_KEY 123
 #  define A_KEY 0
 #  define D_KEY 2
+#  define W_KEY 12
+#  define S_KEY 1
 // #  define KeyPress 2
 // #  define KeyPressMask 1L<<0
 // #  define NoEventMask 1L<<0
@@ -51,11 +55,11 @@
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
 
-# define UNIT 64
+# define UNIT 1
 # define EDGE 1
 # define INF 2147483647 
 
-# define GLASS 2
+#define GLASS (UNIT / 10)
 
 # define XY_COORDINATES 2
 
@@ -64,6 +68,10 @@
 # define FOV 60
 
 # define WALL_RATIO 2
+
+# define INF 2147483647
+
+# define INF_SMALL 0.0000000000001
 
 typedef struct s_parse
 {
@@ -117,16 +125,15 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int             x;
-	int             y;
+	double        	x;
+	double        	y;
     double          angle;
-    int             speed;
-    double          rot_speed;
+    double        	speed;
+    double         	rot_speed;
     t_directions    direction;
     t_ray           hor_ray;
     t_ray           ver_ray;
     double          *rays_array;
-    double          *angles_array;
 	
 }	                t_player;
 
@@ -173,7 +180,65 @@ void	free_map_len(int *map_len);
 void    print_parse(t_parse *parse);
 void    print_map(t_parse *parse);
 
-/* --------------------------- Raycasting ---------------------------- */
+// /* --------------------------- Raycasting ---------------------------- */
+// int     raycaster_main(t_data *data);
+
+// /* Initialize */
+// void    init(t_data *data);
+// void    find_start_location(t_player *player, char **map);
+// void    set_start_location(t_player *player, char **map, int i, int j);
+
+// /* Drawing elements */
+// void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour);
+// void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
+// void    draw_map(t_img *img, t_parse *parse);
+// void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour);
+// void    draw_line(t_img *img, t_player *player, double angle, int len, int colour);
+// void    draw_columns(t_img *img, int column, int wall_height, int win_height);
+// void    clear_screen(t_img *img, int win_width, int win_height);
+
+// /* Hooks */
+// int     hooks(int keycode, t_data *data);
+
+// /* Intersection calculations */
+// void    intersections(t_player *player, double angle, char **map, t_img *img);
+// int     horizontal_intersection(t_player *player, double angle, char **map, t_img *img);
+// int     vertical_intersection(t_player *player, double angle, char **map, t_img *img);
+// int     expand_ray(t_ray *ray, char **map, t_img *img, double angle);
+
+// /* Casting rays */
+// double  cast_single_ray(t_img *img, t_player *player, double angle, char **map);
+// int     cast_all_rays(t_img *img, t_player *player, int width, char **map);
+
+// /* Map to 3D */
+// void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height);
+
+// /* Checks*/
+// int     check_wall(char **map, double x, double y);
+// void    check_directions(t_player *player, char **map);
+// int     check_coordinates(double x, double y, char **map);
+// int     check_wall_corners(char **map, int x, int y, double angle);
+
+// /* Math utils */
+// double  calculate_ray_len(t_player *player, double x, double y);
+// double	calculate_ray_len_1(t_player *player, double x, double angle);
+// void    bounds_angle(double *angle);
+// int     unit_circle_upper_lower(double angle);
+// int     unit_circle_left_right(double angle);
+
+// /* MLX utils */
+// int				close_window(t_data *data);
+// void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
+// unsigned int 	argb_to_hex(int a, int r, int g, int b);
+
+// /* To libft */
+// int		ft_arrlen(char **arr);
+
+// /* Printing data */
+// void    print_ray_data(t_ray ray);
+// void    print_rays_array(double *rays_array, int width);
+
+/* --------------------------- V1 Raycasting ---------------------------- */
 int     raycaster_main(t_data *data);
 
 /* Initialize */
@@ -181,42 +246,35 @@ void    init(t_data *data);
 void    find_start_location(t_player *player, char **map);
 void    set_start_location(t_player *player, char **map, int i, int j);
 
-/* Drawing elements */
-void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour);
-void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
-void    draw_map(t_img *img, t_parse *parse);
-void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour);
-void    draw_line(t_img *img, t_player *player, double angle, int len, int colour);
-void    draw_columns(t_img *img, int column, int wall_height, int win_height);
-void    clear_screen(t_img *img, int win_width, int win_height);
-
 /* Hooks */
 int     hooks(int keycode, t_data *data);
+void	move(t_player *player, double x_local, double y_local);
 
-/* Intersection calculations */
-void    intersections(t_player *player, double angle, char **map, t_img *img);
-int     horizontal_intersection(t_player *player, double angle, char **map, t_img *img);
-int     vertical_intersection(t_player *player, double angle, char **map, t_img *img);
-int     expand_ray(t_ray *ray, char **map, t_img *img, double angle);
+/* Checks*/
+int     check_wall(char **map, double x, double y);
+int     check_coordinates(double x, double y, char **map);
 
-/* Casting rays */
-double  cast_single_ray(t_img *img, t_player *player, double angle, char **map);
-int     cast_all_rays(t_img *img, t_player *player, int width, char **map);
+/* Draw elements */
+void    clear_screen(t_img *img, int win_width, int win_height);
+void    draw_columns(t_img *img, int column, int wall_height, int win_height);
+
+/* Intersection */
+int 	horizontal_intersection(t_player *player, double angle, char **map);
+int		vertical_intersection(t_player *player, double angle, char **map);
+int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
+double	cast_single_ray(t_player *player, double angle, char **map);
+int 	cast_all_rays(t_player *player, int width, char **map);
 
 /* Map to 3D */
 void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height);
 
-/* Checks*/
-int     check_wall(char **map, int x, int y);
-void    check_directions(t_player *player, char **map);
-int     check_coordinates(double x, double y, char **map);
-int     check_wall_corners(char **map, int x, int y, double angle);
-
 /* Math utils */
-double  calculate_ray_len(t_player *player, double x, double y);
-void    bounds_angle(double *angle);
+double	calculate_ray_len(t_player *player, double x, double angle);
+void    reset_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
+double	deg2rad(double degree);
+void	rotate_vector(double *x, double *y, double angle);
 
 /* MLX utils */
 int				close_window(t_data *data);

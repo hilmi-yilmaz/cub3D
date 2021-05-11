@@ -9,6 +9,11 @@ double	calculate_ray_len(t_player *player, double x, double y)
 	return(sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)));
 }
 
+double	calculate_ray_len_1(t_player *player, double x, double angle)
+{
+	return (fabs((player->x - x) / cos(angle)));
+}
+
 void    bounds_angle(double *angle)
 {
     if (*angle > 2 * PI)
