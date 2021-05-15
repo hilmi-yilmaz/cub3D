@@ -16,6 +16,10 @@ void    init(t_data *data)
 	/* Set start angle */
 	//data->player.angle = deg2rad(360 - 45);
 
+	/* Set start location */
+	data->player.x = 4.5;
+	data->player.y = 1.48;
+
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
 	map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);

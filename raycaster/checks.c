@@ -16,6 +16,25 @@ int check_wall(char **map, double x, double y)
     return (0);
 }
 
+int wall_collision(char **map, double x, double y)
+{
+    
+    printf("before: x = %f, y = %f\n", x, y);
+    if (x - (int)x < GLASS)
+        x = (int)x - 1.0;
+    if (1.0 - (x - (int)x) < GLASS)
+        x = (int)x + 1.0;
+    if (y - (int)y < GLASS)
+        y = (int)y - 1.0;
+    if (1.0 - (y - (int)y) < GLASS)
+        y = (int)y + 1.0;
+
+    printf("after : x = %f, y = %f\n", x, y);
+    return(check_wall(map, x, y));
+}
+
+
+
 int check_coordinates(double x, double y, char **map)
 {
     if (x < 0 || y < 0 || x > INF || y > INF)

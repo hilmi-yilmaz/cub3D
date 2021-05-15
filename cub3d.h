@@ -50,7 +50,7 @@
 # define RESOLUTION_DATA_COUNT 2
 # define MAX_KOMMAS 2
 
-# define UNINITIALIZED -1 /* Rename to UNINT */
+# define UNINITIALIZED -1 /* Rename to UNINIT */
 
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
@@ -59,7 +59,7 @@
 # define EDGE 1
 # define INF 2147483647 
 
-#define GLASS (UNIT / 10)
+#define GLASS 0.1
 
 # define XY_COORDINATES 2
 
@@ -180,64 +180,6 @@ void	free_map_len(int *map_len);
 void    print_parse(t_parse *parse);
 void    print_map(t_parse *parse);
 
-// /* --------------------------- Raycasting ---------------------------- */
-// int     raycaster_main(t_data *data);
-
-// /* Initialize */
-// void    init(t_data *data);
-// void    find_start_location(t_player *player, char **map);
-// void    set_start_location(t_player *player, char **map, int i, int j);
-
-// /* Drawing elements */
-// void    draw_unit(t_img *img, int pos_x, int pos_y, unsigned int colour);
-// void    set_background_color(t_img *img, t_parse *parse, unsigned int colour);
-// void    draw_map(t_img *img, t_parse *parse);
-// void    draw_player(t_img *img, int pos_x, int pos_y, unsigned int colour);
-// void    draw_line(t_img *img, t_player *player, double angle, int len, int colour);
-// void    draw_columns(t_img *img, int column, int wall_height, int win_height);
-// void    clear_screen(t_img *img, int win_width, int win_height);
-
-// /* Hooks */
-// int     hooks(int keycode, t_data *data);
-
-// /* Intersection calculations */
-// void    intersections(t_player *player, double angle, char **map, t_img *img);
-// int     horizontal_intersection(t_player *player, double angle, char **map, t_img *img);
-// int     vertical_intersection(t_player *player, double angle, char **map, t_img *img);
-// int     expand_ray(t_ray *ray, char **map, t_img *img, double angle);
-
-// /* Casting rays */
-// double  cast_single_ray(t_img *img, t_player *player, double angle, char **map);
-// int     cast_all_rays(t_img *img, t_player *player, int width, char **map);
-
-// /* Map to 3D */
-// void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height);
-
-// /* Checks*/
-// int     check_wall(char **map, double x, double y);
-// void    check_directions(t_player *player, char **map);
-// int     check_coordinates(double x, double y, char **map);
-// int     check_wall_corners(char **map, int x, int y, double angle);
-
-// /* Math utils */
-// double  calculate_ray_len(t_player *player, double x, double y);
-// double	calculate_ray_len_1(t_player *player, double x, double angle);
-// void    bounds_angle(double *angle);
-// int     unit_circle_upper_lower(double angle);
-// int     unit_circle_left_right(double angle);
-
-// /* MLX utils */
-// int				close_window(t_data *data);
-// void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-// unsigned int 	argb_to_hex(int a, int r, int g, int b);
-
-// /* To libft */
-// int		ft_arrlen(char **arr);
-
-// /* Printing data */
-// void    print_ray_data(t_ray ray);
-// void    print_rays_array(double *rays_array, int width);
-
 /* --------------------------- V1 Raycasting ---------------------------- */
 int     raycaster_main(t_data *data);
 
@@ -248,12 +190,14 @@ void    set_start_location(t_player *player, char **map, int i, int j);
 
 /* Hooks */
 int     hooks(int keycode, t_data *data);
-void	move(t_player *player, double x_local, double y_local);
+int     move(t_player *player, double x_local, double y_local, char **map);
 
 /* Checks*/
 int     check_wall(char **map, double x, double y);
 int     check_coordinates(double x, double y, char **map);
 void    check_directions(t_player *player, char **map);
+int     wall_collision(char **map, double x, double y);
+double	distance_to_wall(t_player *player, char **map);
 
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);
