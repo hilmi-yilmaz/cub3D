@@ -14,8 +14,8 @@ double	cast_single_ray(t_player *player, double angle, char **map)
 
 	horizontal_intersection(player, angle, map);
 	vertical_intersection(player, angle, map);
-	hor_dist = calculate_ray_len(player, player->hor_ray.x, angle);
-	ver_dist = calculate_ray_len(player, player->ver_ray.x, angle);
+	hor_dist = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
+	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
 	if (ver_dist <= hor_dist)
 		distance = ver_dist;
 	else

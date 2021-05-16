@@ -16,24 +16,25 @@ int check_wall(char **map, double x, double y)
     return (0);
 }
 
-int wall_collision(char **map, double x, double y)
+int	check_next_step(double new_x, double new_y, char **map)
 {
-    
-    printf("before: x = %f, y = %f\n", x, y);
-    if (x - (int)x < GLASS)
-        x = (int)x - 1.0;
-    if (1.0 - (x - (int)x) < GLASS)
-        x = (int)x + 1.0;
-    if (y - (int)y < GLASS)
-        y = (int)y - 1.0;
-    if (1.0 - (y - (int)y) < GLASS)
-        y = (int)y + 1.0;
+	double	angle;
+	double	angle_increment;
+	double	x;
+	double	y;
 
-    printf("after : x = %f, y = %f\n", x, y);
-    return(check_wall(map, x, y));
+	angle = 0;
+	angle_increment = PI / 180;
+	while (angle < 2 * PI)
+	{
+		x = new_x + GLASS * cos(angle);
+		y = new_y + GLASS * sin(angle);
+		if (check_wall(map, x, y) == 1)
+			return (1);
+		angle += angle_increment;
+	}
+	return (0);
 }
-
-
 
 int check_coordinates(double x, double y, char **map)
 {
@@ -42,35 +43,4 @@ int check_coordinates(double x, double y, char **map)
     if ((int)y >= ft_arrlen(map) || x > ft_strlen(map[(int)y]))
         return (-1);
     return (0);
-}
-
-void    check_directions(t_player *player, char **map)
-{
-    double  x_tmp;
-    double  y_tmp;
-    double  x_local;
-    double  y_local;
-    
-    x_tmp = player->x;
-    y_tmp = player->y;
-
-    /* Check north */
-    x_local = 0.0;
-    y_local = player->speed;
-    rotate_vector(&x_local, &y_local, player->angle + 0.5 * PI);
-    x_tmp += x_local;
-    y_tmp += y_local;
-    printf("x_tmp = %f, y_tmp = %f\n", x_tmp, y_tmp);
-    player->direction.north = check_wall(map, x_tmp, y_tmp);
-
-    /* Check south */
-    x_tmp = player->x;
-    y_tmp = player->y;
-    x_local = 0.0;
-    y_local = -player->speed;
-    rotate_vector(&x_local, &y_local, player->angle + 0.5 * PI);
-    x_tmp += x_local;
-    y_tmp += y_local;
-    printf("x_tmp = %f, y_tmp = %f\n", x_tmp, y_tmp);
-    player->direction.south = check_wall(map, x_tmp, y_tmp);
 }

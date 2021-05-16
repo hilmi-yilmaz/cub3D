@@ -7,9 +7,9 @@
 #define ROWS 2
 #define COLUMNS 2
 
-double	calculate_ray_len(t_player *player, double x, double angle)
+double	calculate_ray_len(t_player *player, double x, double y)
 {
-	return (fabs((player->x - x) / cos(angle)));
+	return (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)));
 }
 
 void    reset_angle(double *angle)

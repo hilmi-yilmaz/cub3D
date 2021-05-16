@@ -36,33 +36,12 @@ int hooks(int keycode, t_data *data)
 
 int	move(t_player *player, double x_local, double y_local, char **map)
 {
-	double	x_local_copy;
-	double	y_local_copy;
-	int		wall;
-	
-	x_local_copy = x_local;
-	y_local_copy = y_local;
 	rotate_vector(&x_local, &y_local, player->angle + 0.5 * PI);
-	wall = wall_collision(map, player->x + x_local, player->y + y_local);
-	if (wall == 1)
-	{
-		x_local = x_local_copy;
-		y_local = distance_to_wall(player, map);
-		printf("Distance to wall = %f\n", y_local);
-		rotate_vector(&x_local, &y_local, player->angle + 0.5 * PI);
-	}
+
+	/* Rotate around the new position and see if the radius of the player is free */
+	if (check_next_step(player->x + x_local, player->y + y_local, map) == 1)
+		return (-1);
 	player->x += x_local;
 	player->y += y_local;
 	return (0);
-}
-
-double	distance_to_wall(t_player *player, char **map)
-{
-	t_player player_1;
-	double distance;
-
-	player_1.x = player->x;
-	player_1.y = player->y;
-	distance = cast_single_ray(&player_1, player->angle, map);
-	return (distance);
 }

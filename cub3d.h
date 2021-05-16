@@ -196,8 +196,7 @@ int     move(t_player *player, double x_local, double y_local, char **map);
 int     check_wall(char **map, double x, double y);
 int     check_coordinates(double x, double y, char **map);
 void    check_directions(t_player *player, char **map);
-int     wall_collision(char **map, double x, double y);
-double	distance_to_wall(t_player *player, char **map);
+int		check_next_step(double new_x, double new_y, char **map);
 
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);
@@ -215,6 +214,7 @@ void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height)
 
 /* Math utils */
 double	calculate_ray_len(t_player *player, double x, double angle);
+double	calculate_ray_len_v1(t_player *player, double x, double y);
 void    reset_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
