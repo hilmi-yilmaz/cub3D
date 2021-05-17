@@ -17,8 +17,8 @@ void    init(t_data *data)
 	//data->player.angle = deg2rad(360 - 45);
 
 	/* Set start location */
-	data->player.x = 4.5;
-	data->player.y = 1.48;
+	//data->player.x = 4.5;
+	//data->player.y = 8.8;
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
 	map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);

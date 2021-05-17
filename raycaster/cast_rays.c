@@ -35,7 +35,7 @@ int cast_all_rays(t_player *player, int width, char **map)
     player->rays_array = malloc(sizeof(double) * width);
     while (i < width)
     {
-        player->rays_array[i] = cast_single_ray(player, angle, map);
+        player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map);
         angle += angle_increment;
         reset_angle(&angle);
         i++;

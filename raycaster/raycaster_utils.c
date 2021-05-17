@@ -1,5 +1,6 @@
 /* Standard library header files */
 #include <stdlib.h>
+#include <stdio.h>
 
 /* User defined header files */
 #include "../cub3d.h"
@@ -10,8 +11,8 @@ int		ft_arrlen(char **arr)
 
 	i = 0;
 	while (*(arr + i) != NULL)
-		i++;
-	return (i);
+        i++;
+    return (i);
 }
 
 int close_window(t_data *data)

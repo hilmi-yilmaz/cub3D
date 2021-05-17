@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/20 16:26:32 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/05/17 11:50:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int parse_map(int fd, t_parse *parse, char *line)
             printf("Error\nSomething went wrong reading the map.\n");
             return (-1);
         }
-        if (res == 0)
-            return (0);
+        // if (res == 0)
+        //     break ;
         // parse->map_len = create_len(parse, line, rows);
         // if (parse->map_len == NULL)
         // {
@@ -111,6 +111,7 @@ char **create_map(t_parse *parse, char *line, int rows)
         j++;
     }
     *(*(new_map + i) + j) = '\0';
+    printf("+%s\n", *(new_map + i));
     return (new_map);
 }
 

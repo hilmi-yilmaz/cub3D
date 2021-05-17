@@ -1,4 +1,4 @@
-R 512 256
+R 1024 512
 NO ./path_to_the_north_texture
 SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
@@ -10,9 +10,9 @@ C 225,30,0
 
 1111111111
 1000000001
-1000N00001
 1000000001
-1001000001
+1000001001
+1001E00001
 1000000001
 1000000001
 1000000001

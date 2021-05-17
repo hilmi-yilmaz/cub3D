@@ -67,7 +67,7 @@
 
 # define FOV 60
 
-# define WALL_RATIO 1
+# define WALL_RATIO 0.5
 
 # define INF 2147483647
 

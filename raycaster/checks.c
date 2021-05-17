@@ -1,19 +1,20 @@
 /* Standard library header files */
 #include <stdio.h>
+#include <math.h>
 
 /* User defined header files */
 #include "../cub3d.h"
 
 int check_wall(char **map, double x, double y)
 {  
-    //printf("Checking with x = %d, y = %d\n", (int)x, (int)y);
+    // printf("Checking with x = %d, y = %d\n", (int)x, (int)y);
 
     if (check_coordinates(x, y, map) == -1)
         return (-1);
     /* Check for glass wall */
     if (map[(int)y][(int)x] == '1')
-        return (1);
-    return (0);
+		return (1);
+	return (0);
 }
 
 int	check_next_step(double new_x, double new_y, char **map)
