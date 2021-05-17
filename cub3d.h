@@ -125,7 +125,7 @@ typedef struct s_player
     t_ray           hor_ray;
     t_ray           ver_ray;
     double          *rays_array;
-    int             *side;      //1 if North or South side, 0 is West of East side
+    char            *side;      //1 if North or South side, 0 is West of East side
 	
 }	                t_player;
 

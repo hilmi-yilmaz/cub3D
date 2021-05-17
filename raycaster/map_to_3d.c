@@ -19,10 +19,14 @@ void    map_to_3d(t_img *img, t_player *player, int win_width, int win_height)
     while (i < win_width)
     {
         height = 1.0 / player->rays_array[i] * dist_to_plane * WALL_RATIO;
-        if (player->side[i] == 1)
+        if (player->side[i] == 'N')
             colour = argb_to_hex(0, 255, 0, 0);
-        else
+        else if (player->side[i] == 'S')
+            colour = argb_to_hex(0, 0, 255, 0);
+        else if (player->side[i] == 'W')
             colour = argb_to_hex(0, 127, 0, 0);
+        else
+            colour = argb_to_hex(0, 0, 127, 0);
         draw_columns(img, i, height, win_height, colour);
         i++;
     }

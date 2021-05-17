@@ -18,12 +18,18 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
 	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
 	if (ver_dist <= hor_dist)
     {
-		player->side[i] = 1;
+		if (unit_circle_left_right(angle) == 2)
+            player->side[i] = 'E';
+        else
+            player->side[i] = 'W';
         distance = ver_dist;
     }
     else
     {
-        player->side[i] = 0;
+        if (unit_circle_upper_lower(angle) == 1)
+            player->side[i] = 'N';
+        else
+            player->side[i] = 'S';
 		distance = hor_dist;
     }
     return (distance * cos(player->angle - angle));
