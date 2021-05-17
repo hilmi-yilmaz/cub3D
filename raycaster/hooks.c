@@ -24,8 +24,9 @@ int hooks(int keycode, t_data *data)
 	reset_angle(&data->player.angle);
 	ft_memset(&data->player.direction, '\0', sizeof(data->player.direction));
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
-	map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
+	map_to_3d(&data->img, &data->player, data->parse.win_width, data->parse.win_height);
     free(data->player.rays_array);
+	free(data->player.side);
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);
 	printf("player->x       = %f\n", data->player.x);
 	printf("player->y       = %f\n", data->player.y);

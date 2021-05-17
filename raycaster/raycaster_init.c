@@ -21,7 +21,7 @@ void    init(t_data *data)
 	//data->player.y = 8.8;
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
-	map_to_3d(&data->img, data->player.rays_array, data->parse.win_width, data->parse.win_height);
+	map_to_3d(&data->img, &data->player, data->parse.win_width, data->parse.win_height);
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);
     free(data->player.rays_array);
 }

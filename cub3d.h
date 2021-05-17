@@ -67,7 +67,7 @@
 
 # define FOV 60
 
-# define WALL_RATIO 0.5
+# define WALL_RATIO 1
 
 # define INF 2147483647
 
@@ -134,6 +134,7 @@ typedef struct s_player
     t_ray           hor_ray;
     t_ray           ver_ray;
     double          *rays_array;
+    int             *side;      //1 if North or South side, 0 is West of East side
 	
 }	                t_player;
 
@@ -200,17 +201,17 @@ int		check_next_step(double new_x, double new_y, char **map);
 
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);
-void    draw_columns(t_img *img, int column, int wall_height, int win_height);
+void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
 
 /* Intersection */
 int 	horizontal_intersection(t_player *player, double angle, char **map);
 int		vertical_intersection(t_player *player, double angle, char **map);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
-double	cast_single_ray(t_player *player, double angle, char **map);
+double	cast_single_ray(t_player *player, double angle, char **map, int i);
 int 	cast_all_rays(t_player *player, int width, char **map);
 
 /* Map to 3D */
-void    map_to_3d(t_img *img, double *rays_array, int win_width, int win_height);
+void    map_to_3d(t_img *img, t_player *player, int win_width, int win_height);
 
 /* Math utils */
 double	calculate_ray_len(t_player *player, double x, double angle);
@@ -232,5 +233,6 @@ int		ft_arrlen(char **arr);
 /* Printing data */
 void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
+void    print_side_array(int *side_array, int width);
 
 #endif

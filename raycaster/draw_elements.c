@@ -1,7 +1,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    draw_columns(t_img *img, int column, int wall_height, int win_height)
+void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour)
 {
     int start;
     int end;
@@ -14,7 +14,7 @@ void    draw_columns(t_img *img, int column, int wall_height, int win_height)
         end = win_height - 1;
     while (start < end)
     {
-        my_pixel_put(img, column, start, argb_to_hex(0, 255, 0, 0));
+        my_pixel_put(img, column, start, colour);
         start++;
     }
 }

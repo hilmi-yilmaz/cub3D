@@ -27,3 +27,18 @@ void    print_rays_array(double *rays_array, int width)
     }
     printf("\n\n");
 }
+
+void    print_side_array(int *side_array, int width)
+{
+    int i;
+
+    i = 0;
+    while (i < width)
+    {
+        printf("%d ", side_array[i]);
+		if (i % 4 == 0)
+			printf("\n");
+        i++;
+    }
+    printf("\n\n");
+}
