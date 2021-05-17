@@ -10,8 +10,8 @@ void    init(t_data *data)
 {
     ft_memset(&data->player, 0, sizeof(data->player));
     find_start_location(&data->player, data->parse.map);
-    data->player.speed = 0.1;
-    data->player.rot_speed = 0.01 * PI;
+    data->player.speed = 0.25;
+    data->player.rot_speed = 0.025 * PI;
 
 	/* Set the floor and ceiling colour */
 	draw_floor_ceiling(&data->img, &data->parse);
