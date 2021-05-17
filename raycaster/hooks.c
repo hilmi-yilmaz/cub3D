@@ -22,7 +22,7 @@ int hooks(int keycode, t_data *data)
     else if (keycode == LEFT_KEY)
         data->player.angle += data->player.rot_speed;
 	reset_angle(&data->player.angle);
-	ft_memset(&data->player.direction, '\0', sizeof(data->player.direction));
+	draw_floor_ceiling(&data->img, &data->parse);
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
 	map_to_3d(&data->img, &data->player, data->parse.win_width, data->parse.win_height);
     free(data->player.rays_array);

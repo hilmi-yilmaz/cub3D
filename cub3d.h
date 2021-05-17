@@ -105,14 +105,6 @@ typedef struct s_img
 
 }                   t_img;
 
-typedef struct s_directions
-{
-    int north;
-    int west;
-    int east;
-    int south;
-}               t_directions;
-
 typedef struct s_ray
 {
     double  x;
@@ -130,7 +122,6 @@ typedef struct s_player
     double          angle;
     double        	speed;
     double         	rot_speed;
-    t_directions    direction;
     t_ray           hor_ray;
     t_ray           ver_ray;
     double          *rays_array;
@@ -202,6 +193,7 @@ int		check_next_step(double new_x, double new_y, char **map);
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);
 void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
+void    draw_floor_ceiling(t_img *img, t_parse *parse);
 
 /* Intersection */
 int 	horizontal_intersection(t_player *player, double angle, char **map);

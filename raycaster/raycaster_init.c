@@ -13,6 +13,9 @@ void    init(t_data *data)
     data->player.speed = 0.1;
     data->player.rot_speed = 0.01 * PI;
 
+	/* Set the floor and ceiling colour */
+	draw_floor_ceiling(&data->img, &data->parse);
+
 	/* Set start angle */
 	//data->player.angle = deg2rad(360 - 45);
 
