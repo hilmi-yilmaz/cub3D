@@ -217,7 +217,9 @@ void	rotate_vector(double *x, double *y, double angle);
 /* MLX utils */
 int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
+unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
+int             get_argb(unsigned int argb, char c);
 
 /* To libft */
 int		ft_arrlen(char **arr);
@@ -226,5 +228,9 @@ int		ft_arrlen(char **arr);
 void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);
+
+/* --------------------------- Texture Handling ---------------------------- */
+
+void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, double scale_x, double scale_y, int xpm_width, int xpm_height);
 
 #endif

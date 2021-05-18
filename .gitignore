@@ -7,3 +7,4 @@ tmux*log
 *.swp
 *.out
 *.exe
+output.txt

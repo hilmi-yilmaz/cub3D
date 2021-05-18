@@ -56,13 +56,16 @@ SRC_RAYCASTER = raycaster_main.c \
 				print_data.c \
 				map_to_3d.c
 
-SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER)
+DIR_TEXTURES = 	texture_handling
+SRC_TEXTURES = 	scale_bmp.c
+
+SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER) $(SRC_TEXTURES)
 
 # Object files
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-VPATH = $(DIR_PARSER) $(DIR_RAYCASTER)
+VPATH = $(DIR_PARSER) $(DIR_RAYCASTER) $(DIR_TEXTURES)
 
 all: $(OBJ_DIR) $(MLX_LIB) $(LIBFT) $(NAME)
 

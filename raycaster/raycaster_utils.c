@@ -41,7 +41,34 @@ void    my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour)
     *(unsigned int *)dst = colour;
 }
 
+unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y)
+{
+    unsigned int    offset;
+    char            *dst;
+
+    offset = pos_y * img->line_size + pos_x * (img->bits_per_pixel / 8);
+    dst = img->img_addr + offset;
+    return (*(unsigned int *)dst);
+}
+
 unsigned int argb_to_hex(int a, int r, int g, int b)
 {
     return (a<<24 | r<<16 | g<<8 | b);
+}
+
+int get_argb(unsigned int argb, char c)
+{
+    int shift;
+    
+    if (c == 'a')
+        shift = 24;
+    else if (c == 'r')
+        shift = 16;
+    else if (c == 'g')
+        shift = 8;
+    else if (c == 'b')
+        shift = 0;
+    else
+        return (-1);
+    return (argb & (0xFF << shift));
 }
