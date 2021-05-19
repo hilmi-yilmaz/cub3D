@@ -7,7 +7,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-#define PRINT 0
+#define PRINT 1
 
 void    scale_bmp_v1(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height)
 {
