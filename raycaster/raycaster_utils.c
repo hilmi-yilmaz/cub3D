@@ -70,5 +70,5 @@ int get_argb(unsigned int argb, char c)
         shift = 0;
     else
         return (-1);
-    return (argb & (0xFF << shift));
+    return ((argb & (0xFF << shift)) >> shift);
 }

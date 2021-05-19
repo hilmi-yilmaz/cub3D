@@ -7,8 +7,8 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-#define SCALE_X 0.5
-#define SCALE_Y 0.5
+#define SCALE_X 0.8
+#define SCALE_Y 0.8
 
 int raycaster_main(t_data *data)
 {
@@ -28,7 +28,7 @@ int raycaster_main(t_data *data)
 	xpm_img.win_ptr = data->img.win_ptr;
 	int	img_width;
 	int	img_height;
-	xpm_img.img_ptr = mlx_xpm_file_to_image(xpm_img.mlx_ptr, "textures/wood.xpm", &img_width, &img_height);
+	xpm_img.img_ptr = mlx_xpm_file_to_image(xpm_img.mlx_ptr, "textures/brick.xpm", &img_width, &img_height);
 	if (xpm_img.img_ptr == NULL)
 	{
 		printf("xpm = NULL\n");
@@ -41,8 +41,8 @@ int raycaster_main(t_data *data)
 	scaled_xpm_img.win_ptr = data->img.win_ptr;
 	int	scaled_img_width = img_width * SCALE_X;
 	int	scaled_img_height = img_height * SCALE_Y;
-	//printf("scaled_img_width = %d\n", scaled_img_width);
-	//printf("scaled_img_height = %d\n", scaled_img_height);
+	printf("scaled_img_width = %d\n", scaled_img_width);
+	printf("scaled_img_height = %d\n", scaled_img_height);
 	scaled_xpm_img.img_ptr = mlx_new_image(scaled_xpm_img.mlx_ptr, scaled_img_width, scaled_img_height);
 	if (scaled_xpm_img.img_ptr == NULL)
 	{
@@ -50,7 +50,7 @@ int raycaster_main(t_data *data)
 		return (-1);
 	}
 
-	scale_bmp(&xpm_img, &scaled_xpm_img, SCALE_X, SCALE_Y, img_width, img_height);
+	scale_bmp_v1(&xpm_img, &scaled_xpm_img, img_width, img_height, scaled_img_width, scaled_img_height);
 
 	/* Create the window */
 	data->img.win_ptr = mlx_new_window(data->img.mlx_ptr, 1024, 1024, "cub3d");
