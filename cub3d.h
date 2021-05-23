@@ -158,6 +158,7 @@ typedef struct s_player
     t_ray           ver_ray;
     double          *rays_array;
     char            *side;      //1 if North or South side, 0 is West of East side
+	int				*which_wall;
 	
 }	                t_player;
 
@@ -263,6 +264,6 @@ void    print_side_array(int *side_array, int width);
 
 /* --------------------------- Texture Handling ---------------------------- */
 
-void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, double scale_x, double scale_y, int xpm_width, int xpm_height);
-void    scale_bmp_v1(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
+void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
+
 #endif

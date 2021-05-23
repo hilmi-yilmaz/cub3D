@@ -27,6 +27,7 @@ void    map_to_3d(t_img *img, t_player *player, int win_width, int win_height)
             colour = argb_to_hex(0, 127, 0, 0);
         else
             colour = argb_to_hex(0, 0, 127, 0);
+		//colour = argb_to_hex(0, player->which_wall[i] * 20, player->which_wall[i] * 10, player->which_wall[i] * 15);
         draw_columns(img, i, height, win_height, colour);
         i++;
     }

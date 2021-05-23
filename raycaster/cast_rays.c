@@ -11,9 +11,11 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
 	double	hor_dist;
 	double	ver_dist;
 	double	distance;
+	int		wall_hor;
+	int		wall_ver;
 
-	horizontal_intersection(player, angle, map);
-	vertical_intersection(player, angle, map);
+	wall_hor = horizontal_intersection(player, angle, map);
+	wall_ver = vertical_intersection(player, angle, map);
 	hor_dist = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
 	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
 	if (ver_dist <= hor_dist)
@@ -22,14 +24,16 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
             player->side[i] = 'E';
         else
             player->side[i] = 'W';
+		player->which_wall[i] = wall_ver + player->side[i];
         distance = ver_dist;
     }
     else
     {
-        if (unit_circle_upper_lower(angle) == 0)
+		if (unit_circle_upper_lower(angle) == 0)
             player->side[i] = 'N';
         else
             player->side[i] = 'S';
+		player->which_wall[i] = wall_hor + player->side[i];
 		distance = hor_dist;
     }
     return (distance * cos(player->angle - angle));
@@ -45,7 +49,8 @@ int cast_all_rays(t_player *player, int width, char **map)
     angle = player->angle - 0.5 * deg2rad(FOV);
     angle_increment = deg2rad(FOV) / width;
     player->rays_array = malloc(sizeof(double) * width);
-    player->side = malloc(sizeof(int) * width);
+    player->side = malloc(sizeof(char) * width);
+	player->which_wall = malloc(sizeof(int) * width);
     while (i < width)
     {
         player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map, width - 1 - i);

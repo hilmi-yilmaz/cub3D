@@ -21,8 +21,7 @@ int horizontal_intersection(t_player *player, double angle, char **map)
 	player->hor_ray.xa = 1.0 / tan(angle);
 	if (unit_circle_upper_lower(angle) == 1)
 		player->hor_ray.xa *= -1;
-	expand_ray(&player->hor_ray, map, angle, unit_circle_upper_lower);
-	return (0);
+	return (expand_ray(&player->hor_ray, map, angle, unit_circle_upper_lower));
 }
 
 int	vertical_intersection(t_player *player, double angle, char **map)
@@ -41,8 +40,7 @@ int	vertical_intersection(t_player *player, double angle, char **map)
 	player->ver_ray.ya = 1.0 * tan(angle);
 	if (unit_circle_left_right(angle) == 3)
 		player->ver_ray.ya *= -1;
-	expand_ray(&player->ver_ray, map, angle, unit_circle_left_right);
-	return (0);
+	return (expand_ray(&player->ver_ray, map, angle, unit_circle_left_right));
 }
 
 int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double))
@@ -62,8 +60,8 @@ int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(doub
 			wall = check_wall(map, ray->x - 1.0, ray->y);
 		else
 			wall = check_wall(map, ray->x, ray->y);
-		if (wall == 1)
-			return (0);
+		if (wall > 0) // ------------------ //
+			return (wall);
 		if (wall == -1)
 			return (-1);
 		ray->x += ray->xa;

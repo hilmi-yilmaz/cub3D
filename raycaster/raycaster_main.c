@@ -21,7 +21,9 @@ int raycaster_main(t_data *data)
 	// data->img.win_ptr = mlx_new_window(data->img.mlx_ptr, data->parse.win_width, data->parse.win_height, "cub3d");
 	// if (data->img.win_ptr == NULL)
 	// 	return (-1);
-
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------------------------------//
 	/* Create an xpm image */
     t_img	xpm_img;
 	xpm_img.mlx_ptr = data->img.mlx_ptr;
@@ -51,7 +53,7 @@ int raycaster_main(t_data *data)
 		return (-1);
 	}
 
-	scale_bmp_v1(&xpm_img, &scaled_xpm_img, img_width, img_height, scaled_img_width, scaled_img_height);
+	scale_bmp(&xpm_img, &scaled_xpm_img, img_width, img_height, scaled_img_width, scaled_img_height);
 
 	/* Create the window */
 	data->img.win_ptr = mlx_new_window(data->img.mlx_ptr, 1024, 1024, "cub3d");
@@ -62,6 +64,10 @@ int raycaster_main(t_data *data)
 
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, xpm_img.img_ptr, 1023 - 640, 1023 - 426);
 
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------------------------------//
+	
 	// /* Create an empty image */
 	// data->img.img_ptr = mlx_new_image(data->img.mlx_ptr, data->parse.win_width, data->parse.win_height);
 	// if (data->img.img_ptr == NULL)
@@ -73,8 +79,8 @@ int raycaster_main(t_data *data)
 	// /* Initialize the screen with the player */
 	// init(data);
 
-	// /* React on the moving player */
-	// mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, hooks, data);
+	/* React on the moving player */
+	mlx_hook(data->img.win_ptr, KeyPress, KeyPressMask, hooks, data);
 
 	/* React on closing the screen */
 	if (__linux__)

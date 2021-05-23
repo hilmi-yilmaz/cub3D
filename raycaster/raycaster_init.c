@@ -27,6 +27,8 @@ void    init(t_data *data)
 	map_to_3d(&data->img, &data->player, data->parse.win_width, data->parse.win_height);
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);
     free(data->player.rays_array);
+	free(data->player.side);
+	free(data->player.which_wall);
 }
 
 void    find_start_location(t_player *player, char **map)
