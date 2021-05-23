@@ -7,8 +7,8 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-#define SCALE_X 0.8
-#define SCALE_Y 0.8
+#define SCALE_X 0.5
+#define SCALE_Y 0.5
 
 int raycaster_main(t_data *data)
 {
@@ -28,7 +28,8 @@ int raycaster_main(t_data *data)
 	xpm_img.win_ptr = data->img.win_ptr;
 	int	img_width;
 	int	img_height;
-	xpm_img.img_ptr = mlx_xpm_file_to_image(xpm_img.mlx_ptr, "textures/brick.xpm", &img_width, &img_height);
+	xpm_img.img_ptr = mlx_xpm_file_to_image(xpm_img.mlx_ptr, "textures/sample_640x426.xpm", &img_width, &img_height);
+	//xpm_img.img_ptr = mlx_png_file_to_image(xpm_img.mlx_ptr, "textures/pics/eagle.png", &img_width, &img_height);
 	if (xpm_img.img_ptr == NULL)
 	{
 		printf("xpm = NULL\n");
@@ -59,7 +60,7 @@ int raycaster_main(t_data *data)
 
 	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, scaled_xpm_img.img_ptr, 0, 0);
 
-	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, xpm_img.img_ptr, 100, 100);
+	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, xpm_img.img_ptr, 1023 - 640, 1023 - 426);
 
 	// /* Create an empty image */
 	// data->img.img_ptr = mlx_new_image(data->img.mlx_ptr, data->parse.win_width, data->parse.win_height);

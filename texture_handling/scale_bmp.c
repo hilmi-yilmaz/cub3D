@@ -17,9 +17,11 @@ void    scale_bmp_v1(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int x
     /* Get the address of the scaled xpm img */
     scaled_xpm_img->img_addr = mlx_get_data_addr(scaled_xpm_img->img_ptr, &scaled_xpm_img->bits_per_pixel, &scaled_xpm_img->line_size, &scaled_xpm_img->endian);
 
+	printf("xpm_width = %d, xpm_scaled_width = %d\n", xpm_width, scaled_xpm_width);
+
     /* Calculate the scaling factors */
-    double fx = xpm_width / scaled_xpm_width;
-    double fy = xpm_height / scaled_xpm_height;
+    double fx = (double)xpm_width / scaled_xpm_width;
+    double fy = (double)xpm_height / scaled_xpm_height;
 
     /* Correcting for the rounding error */
     double fxstep = 0.9999 * fx;

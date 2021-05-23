@@ -105,6 +105,38 @@ typedef struct s_img
 
 }                   t_img;
 
+typedef struct s_scale
+{
+	double	fx;
+	double	fy;
+	double	fxstep;
+	double	fystep;
+	double	fix;
+	double	fiy;
+	double	sy1;
+	double	sy2;
+	int		jstart;
+	int		jend;
+	double	devY1;
+	double	devY2;
+	double	sx1;
+	double	sx2;
+	int		istart;
+	int		iend;
+	double	devX1;
+	double	devX2;
+	double	dx;
+	double	dy;
+	double	AP;
+	double	destR;
+	double	destG;
+	double	destB;
+	int		sR;
+	int		sG;
+	int		sB;
+
+}			t_scale;
+
 typedef struct s_ray
 {
     double  x;
