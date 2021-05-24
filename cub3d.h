@@ -67,11 +67,37 @@
 
 # define FOV 60
 
-# define WALL_RATIO 1
+# define WALL_RATIO 2
 
 # define INF 2147483647
 
 # define INF_SMALL 0.0000000000001
+
+typedef struct s_img
+{
+    void            *mlx_ptr;
+    void            *win_ptr;
+    void            *img_ptr;
+    char            *img_addr;
+
+    int             bits_per_pixel;
+    int             line_size;
+    int             endian;
+
+	int				width;
+	int				height;
+
+}                   t_img;
+
+typedef struct s_images
+{
+	t_img	main;
+	t_img	north_xpm;
+	t_img	south_xpm;
+	t_img	west_xpm;
+	t_img	east_xpm;
+
+}			t_images;
 
 typedef struct s_parse
 {
@@ -91,19 +117,6 @@ typedef struct s_parse
 	char	**map;
 
 }	t_parse;
-
-typedef struct s_img
-{
-    void            *mlx_ptr;
-    void            *win_ptr;
-    void            *img_ptr;
-    char            *img_addr;
-
-    int             bits_per_pixel;
-    int             line_size;
-    int             endian;
-
-}                   t_img;
 
 typedef struct s_scale
 {
@@ -157,7 +170,7 @@ typedef struct s_player
     t_ray           hor_ray;
     t_ray           ver_ray;
     double          *rays_array;
-    char            *side;      //1 if North or South side, 0 is West of East side
+    char            *side;
 	int				*which_wall;
 	
 }	                t_player;
@@ -165,7 +178,7 @@ typedef struct s_player
 typedef struct s_data
 {
 	t_parse		parse;
-	t_img	    img;
+	t_images	images;
 	t_player	player;
 
 }	t_data;
@@ -226,7 +239,7 @@ int		check_next_step(double new_x, double new_y, char **map);
 /* Draw elements */
 void    clear_screen(t_img *img, int win_width, int win_height);
 void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
-void    draw_floor_ceiling(t_img *img, t_parse *parse);
+void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Intersection */
 int 	horizontal_intersection(t_player *player, double angle, char **map);
@@ -236,7 +249,10 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i);
 int 	cast_all_rays(t_player *player, int width, char **map);
 
 /* Map to 3D */
-void    map_to_3d(t_img *img, t_player *player, int win_width, int win_height);
+void    map_to_3d(t_img *main, t_player *player, int win_width, int win_height);
+void    v1_map_to_3d(t_img *main, t_player *player, int win_width, int win_height);
+int 	*width_of_wall(int *which_wall, int width);
+int 	amount_visible_walls(int *which_wall, int width);
 
 /* Math utils */
 double	calculate_ray_len(t_player *player, double x, double angle);

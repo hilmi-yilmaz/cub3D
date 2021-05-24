@@ -14,7 +14,7 @@ void    init(t_data *data)
     data->player.rot_speed = 0.025 * PI;
 
 	/* Set the floor and ceiling colour */
-	draw_floor_ceiling(&data->img, &data->parse);
+	draw_floor_ceiling(&data->images.main, &data->parse);
 
 	/* Set start angle */
 	//data->player.angle = deg2rad(360 - 45);
@@ -24,9 +24,10 @@ void    init(t_data *data)
 	//data->player.y = 8.8;
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
-	map_to_3d(&data->img, &data->player, data->parse.win_width, data->parse.win_height);
-	mlx_put_image_to_window(data->img.mlx_ptr, data->img.win_ptr, data->img.img_ptr, 0, 0);
-    free(data->player.rays_array);
+	v1_map_to_3d(&data->images.main, &data->player, data->parse.win_width, data->parse.win_height);
+	mlx_put_image_to_window(data->images.main.mlx_ptr, data->images.main.win_ptr, data->images.main.img_ptr, 0, 0);
+    //print_side_array(data->player.which_wall, data->parse.win_width);
+	free(data->player.rays_array);
 	free(data->player.side);
 	free(data->player.which_wall);
 }

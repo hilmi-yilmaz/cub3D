@@ -34,17 +34,17 @@ void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_
     /* Get the address of the scaled xpm img */
     scaled_xpm_img->img_addr = mlx_get_data_addr(scaled_xpm_img->img_ptr, &scaled_xpm_img->bits_per_pixel, &scaled_xpm_img->line_size, &scaled_xpm_img->endian);
 
-    // /* Calculate the scaling factors */
-    // scale_params.fx = (double)xpm_width / scaled_xpm_width;
-    // scale_params.fy = (double)xpm_height / scaled_xpm_height;
+    /* Calculate the scaling factors */
+    scale_params.fx = (double)xpm_width / scaled_xpm_width;
+    scale_params.fy = (double)xpm_height / scaled_xpm_height;
 
-    // /* Correcting for the rounding error */
-    // scale_params.fxstep = 0.9999 * scale_params.fx;
-    // scale_params.fystep = 0.9999 * scale_params.fy;
+    /* Correcting for the rounding error */
+    scale_params.fxstep = 0.9999 * scale_params.fx;
+    scale_params.fystep = 0.9999 * scale_params.fy;
 
-    // /* Inverse of fx and fy */
-    // scale_params.fix = 1 / scale_params.fx;
-    // scale_params.fiy = 1 / scale_params.fy;
+    /* Inverse of fx and fy */
+    scale_params.fix = 1 / scale_params.fx;
+    scale_params.fiy = 1 / scale_params.fy;
 
     if (PRINT == 1)
         printf("fx = %f, fy = %f\n", scale_params.fx, scale_params.fy);

@@ -16,7 +16,7 @@
 ** Returns:
 **		(int)		-1 if the coordinates are invalid (outside of the map).
 **					 0 if there is no wall.
-**					 positive integer ( > 0) if there is a wall. 	
+**					 positive integer ( >0 ) if there is a wall.
 */
 
 

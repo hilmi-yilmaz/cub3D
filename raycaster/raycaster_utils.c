@@ -18,13 +18,13 @@ int		ft_arrlen(char **arr)
 int close_window(t_data *data)
 {
     /* Destroy the image and window */
-    mlx_destroy_image(data->img.mlx_ptr, data->img.img_ptr);
-    mlx_destroy_window(data->img.mlx_ptr, data->img.win_ptr);
+    mlx_destroy_image(data->images.main.mlx_ptr, data->images.main.img_ptr);
+    mlx_destroy_window(data->images.main.mlx_ptr, data->images.main.win_ptr);
     if (__linux__)
-            mlx_destroy_display(data->img.mlx_ptr);
+            mlx_destroy_display(data->images.main.mlx_ptr);
 
     /* Free the pointers */
-    free(data->img.mlx_ptr);
+    free(data->images.main.mlx_ptr);
     
     /* Exit the programn */
     exit(0);

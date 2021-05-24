@@ -21,7 +21,7 @@ void    draw_columns(t_img *img, int column, int wall_height, int win_height, un
     }
 }
 
-void    draw_floor_ceiling(t_img *img, t_parse *parse)
+void    draw_floor_ceiling(t_img *main, t_parse *parse)
 {
     int             i;
     int             j;
@@ -37,9 +37,9 @@ void    draw_floor_ceiling(t_img *img, t_parse *parse)
         while (j < parse->win_width)
         {
             if (i < parse->win_height / 2)
-                my_pixel_put(img, j, i, ceiling_colour);
+                my_pixel_put(main, j, i, ceiling_colour);
             else
-                my_pixel_put(img, j, i, floor_colour);
+                my_pixel_put(main, j, i, floor_colour);
             j++;
         }
         j = 0;

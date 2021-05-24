@@ -35,7 +35,7 @@ void    print_side_array(int *side_array, int width)
     i = 0;
     while (i < width)
     {
-        printf("%d ", side_array[i]);
+        printf("%d = %d\n", i, side_array[i]);
 		if (i % 4 == 0)
 			printf("\n");
         i++;
