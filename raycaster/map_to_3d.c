@@ -48,7 +48,7 @@
 //     }
 // }
 
-void    v1_map_to_3d(t_img *main, t_player *player, int win_width, int win_height)
+void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse)
 {
     int		        i;
     int             j;
@@ -56,12 +56,14 @@ void    v1_map_to_3d(t_img *main, t_player *player, int win_width, int win_heigh
     unsigned int    colour;
     double	        dist_to_plane;
     int             *width_walls;
+    t_img           scaled_xpm;
+    unsigned int    *column_rgb;
 
     i = 0;
     j = 0;
     height = 0;
-    dist_to_plane = win_width / 2 * tan(deg2rad(FOV) / 2);
-    width_walls = width_of_wall(player->which_wall, win_width);
+    dist_to_plane = parse->win_width / 2 * tan(deg2rad(FOV) / 2);
+    width_walls = width_of_wall(player->which_wall, parse->win_width);
 
 //-------------------------------------- //
     int p = 0;
@@ -73,19 +75,39 @@ void    v1_map_to_3d(t_img *main, t_player *player, int win_width, int win_heigh
     printf("\n");
 //-----------------------------------------//
 
-    while (i < win_width)
+    while (width_walls[i] != -1)
     {
-        height = 1.0 / player->rays_array[i] * dist_to_plane * WALL_RATIO;
-        // if (player->side[i] == 'N')
-        //     colour = argb_to_hex(0, 255, 0, 0);
-        // else if (player->side[i] == 'S')
-        //     colour = argb_to_hex(0, 0, 255, 0);
-        // else if (player->side[i] == 'W')
-        //     colour = argb_to_hex(0, 127, 0, 0);
-        // else
-        //     colour = argb_to_hex(0, 0, 127, 0);
-        colour = argb_to_hex(0, player->which_wall[i] * 20, player->which_wall[i] * 10, player->which_wall[i] * 15);
-        draw_columns(main, i, height, win_height, colour);
+        scaled_xpm.img_ptr = mlx_new_image(images->main.mlx_ptr, width_walls[i], images->north_xpm.height);
+        scale_bmp(&images->north_xpm, &scaled_xpm, images->north_xpm.height, images->north_xpm.height, width_walls[i], images->north_xpm.height);
+        while (j < width_walls[i])
+        {
+            height = 1.0 / player->rays_array[i] * dist_to_plane * WALL_RATIO;
+            column_rgb = malloc(sizeof(*column_rgb) * height);
+            // if (player->side[i] == 'N')
+            //     colour = argb_to_hex(0, 255, 0, 0);
+            // else if (player->side[i] == 'S')
+            //     colour = argb_to_hex(0, 0, 255, 0);
+            // else if (player->side[i] == 'W')
+            //     colour = argb_to_hex(0, 127, 0, 0);
+            // else
+            //     colour = argb_to_hex(0, 0, 127, 0);
+            colour = argb_to_hex(0, player->which_wall[i] * 20, player->which_wall[i] * 10, player->which_wall[i] * 15);
+            draw_columns(&images->main, i, height, parse->win_height, colour);
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+}
+
+void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column)
+{
+    int i;
+
+    i = 0;
+    while (i < xpm_img->height)
+    {
+        column_rgb[i] = my_pixel_get(xpm_img, column, i);
         i++;
     }
 }

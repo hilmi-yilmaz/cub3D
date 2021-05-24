@@ -250,9 +250,10 @@ int 	cast_all_rays(t_player *player, int width, char **map);
 
 /* Map to 3D */
 void    map_to_3d(t_img *main, t_player *player, int win_width, int win_height);
-void    v1_map_to_3d(t_img *main, t_player *player, int win_width, int win_height);
+void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse);
 int 	*width_of_wall(int *which_wall, int width);
 int 	amount_visible_walls(int *which_wall, int width);
+void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column);
 
 /* Math utils */
 double	calculate_ray_len(t_player *player, double x, double angle);
@@ -281,5 +282,8 @@ void    print_side_array(int *side_array, int width);
 /* --------------------------- Texture Handling ---------------------------- */
 
 void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
+
+void    load_all_xpm_images(t_images *images, t_parse *parse);
+void    load_xpm_image(t_img *xpm_img, char *path);
 
 #endif
