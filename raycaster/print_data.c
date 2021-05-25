@@ -36,8 +36,21 @@ void    print_side_array(int *side_array, int width)
     while (i < width)
     {
         printf("%d = %d\n", i, side_array[i]);
-		if (i % 4 == 0)
+		if (i % 10 == 0 && i != 0)
 			printf("\n");
+        i++;
+    }
+    printf("\n\n");
+}
+
+void    print_columns(unsigned int *arr, int len)
+{
+    int i;
+
+    i = 0;
+    while (i < len)
+    {
+        printf("%u ", arr[i]);
         i++;
     }
     printf("\n\n");

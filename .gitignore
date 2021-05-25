@@ -8,3 +8,4 @@ tmux*log
 *.out
 *.exe
 output.txt
+output_wrong.txt

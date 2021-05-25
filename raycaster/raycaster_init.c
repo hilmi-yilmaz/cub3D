@@ -24,11 +24,11 @@ void    init(t_data *data)
 	//data->player.y = 8.8;
 
 	/* Load xpm images */
-	load_all_xpm_images(&data->images, &data->parse);
+	load_all_xpm_images(data->images.mlx.mlx_ptr, &data->images, &data->parse);
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
-	v1_map_to_3d(&data->images, &data->player, &data->parse);
-	mlx_put_image_to_window(data->images.main.mlx_ptr, data->images.main.win_ptr, data->images.main.img_ptr, 0, 0);
+	v1_map_to_3d(data);
+	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
     //print_side_array(data->player.which_wall, data->parse.win_width);
 	free(data->player.rays_array);
 	free(data->player.side);

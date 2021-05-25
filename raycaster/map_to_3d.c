@@ -6,7 +6,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-// void    map_to_3d(t_img *main, t_player *player, int win_width, int win_height)
+// void    map_to_3d(t_data *data)
 // {
 //     int		        i;
 //     int             j;
@@ -18,22 +18,22 @@
 //     i = 0;
 //     j = 0;
 //     height = 0;
-//     dist_to_plane = win_width / 2 * tan(deg2rad(FOV) / 2);
-//     width_walls = width_of_wall(player->which_wall, win_width);
+//     dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
+//     width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
 
 // //-------------------------------------- //
-//     // int p = 0;
-//     // while (width_walls[p] != -1)
-//     // {
-//     //     printf("%d ", width_walls[p]);
-//     //     p++;
-//     // }
-//     // printf("\n");
+//     int p = 0;
+//     while (width_walls[p] != -1)
+//     {
+//         printf("%d ", width_walls[p]);
+//         p++;
+//     }
+//     printf("\n");
 // //-----------------------------------------//
 
-//     while (i < win_width)
+//     while (i < data->parse.win_width)
 //     {
-//         height = 1.0 / player->rays_array[i] * dist_to_plane * WALL_RATIO;
+//         height = 1.0 / data->player.rays_array[i] * dist_to_plane * WALL_RATIO;
 //         // if (player->side[i] == 'N')
 //         //     colour = argb_to_hex(0, 255, 0, 0);
 //         // else if (player->side[i] == 'S')
@@ -42,28 +42,29 @@
 //         //     colour = argb_to_hex(0, 127, 0, 0);
 //         // else
 //         //     colour = argb_to_hex(0, 0, 127, 0);
-//         colour = argb_to_hex(0, player->which_wall[i] * 20, player->which_wall[i] * 10, player->which_wall[i] * 15);
-//         draw_columns(main, i, height, win_height, colour);
+//         colour = argb_to_hex(0, data->player.which_wall[i] * 20, data->player.which_wall[i] * 10, data->player.which_wall[i] * 15);
+//         draw_columns(&data->images.main, i, height, data->parse.win_height, colour);
 //         i++;
 //     }
 // }
 
-void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse)
+void    v1_map_to_3d(t_data *data)
 {
     int		        i;
     int             j;
+    int             count;
     int		        height;
     unsigned int    colour;
     double	        dist_to_plane;
     int             *width_walls;
-    t_img           scaled_xpm;
     unsigned int    *column_rgb;
 
     i = 0;
     j = 0;
+    count = 0;
     height = 0;
-    dist_to_plane = parse->win_width / 2 * tan(deg2rad(FOV) / 2);
-    width_walls = width_of_wall(player->which_wall, parse->win_width);
+    dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
+    width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
 
 //-------------------------------------- //
     int p = 0;
@@ -77,12 +78,24 @@ void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse)
 
     while (width_walls[i] != -1)
     {
-        scaled_xpm.img_ptr = mlx_new_image(images->main.mlx_ptr, width_walls[i], images->north_xpm.height);
-        scale_bmp(&images->north_xpm, &scaled_xpm, images->north_xpm.height, images->north_xpm.height, width_walls[i], images->north_xpm.height);
+        data->images.scaled_xpm.width = width_walls[i];
+        data->images.scaled_xpm.height = data->images.north_xpm.height;
+        data->images.scaled_xpm.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, data->images.scaled_xpm.width, data->images.scaled_xpm.height);
+        data->images.scaled_xpm.img_addr = mlx_get_data_addr(data->images.scaled_xpm.img_ptr, &data->images.scaled_xpm.bits_per_pixel, &data->images.scaled_xpm.line_size, &data->images.scaled_xpm.endian);
+        //printf("scaled_xpm_address = %p\n", data->images.scaled_xpm.img_addr);
+        scale_bmp(&data->images.north_xpm, &data->images.scaled_xpm); // Scale in x direction
+        //mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.scaled_xpm.img_ptr, 0, 0);
+        
         while (j < width_walls[i])
         {
-            height = 1.0 / player->rays_array[i] * dist_to_plane * WALL_RATIO;
+            height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
+            //printf("count = %d\n", count);
+            //printf("height = %d\n", height);
             column_rgb = malloc(sizeof(*column_rgb) * height);
+            scale_column(&data->images.scaled_xpm, j, column_rgb, height);
+            //printf("%d\n", j);
+            //print_columns(column_rgb, height);
+            //get_column_xpm(&data->images.scaled_xpm, column_rgb, j);
             // if (player->side[i] == 'N')
             //     colour = argb_to_hex(0, 255, 0, 0);
             // else if (player->side[i] == 'S')
@@ -91,10 +104,17 @@ void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse)
             //     colour = argb_to_hex(0, 127, 0, 0);
             // else
             //     colour = argb_to_hex(0, 0, 127, 0);
-            colour = argb_to_hex(0, player->which_wall[i] * 20, player->which_wall[i] * 10, player->which_wall[i] * 15);
-            draw_columns(&images->main, i, height, parse->win_height, colour);
+            colour = argb_to_hex(0, data->player.which_wall[i] * 20, data->player.which_wall[i] * 10, data->player.which_wall[i] * 15);
+            // draw_columns(&data->images.main, i, height, data->parse.win_height, colour);
+            draw_texture(&data->images.main, count, height, data->parse.win_height, column_rgb);
+            free(column_rgb);
             j++;
+            count++;
+            //return ;
         }
+        mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.scaled_xpm.img_ptr);
+        //break ;
+        printf("\n");
         j = 0;
         i++;
     }

@@ -73,10 +73,17 @@
 
 # define INF_SMALL 0.0000000000001
 
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	
+}				t_mlx;
+
 typedef struct s_img
 {
-    void            *mlx_ptr;
-    void            *win_ptr;
+    // void            *mlx_ptr;
+    // void            *win_ptr;
     void            *img_ptr;
     char            *img_addr;
 
@@ -91,11 +98,13 @@ typedef struct s_img
 
 typedef struct s_images
 {
-	t_img	main;
+	t_mlx	mlx;
+	t_img	main;		// which will be pushed to  the window
 	t_img	north_xpm;
 	t_img	south_xpm;
 	t_img	west_xpm;
 	t_img	east_xpm;
+	t_img	scaled_xpm;
 
 }			t_images;
 
@@ -237,8 +246,9 @@ void    check_directions(t_player *player, char **map);
 int		check_next_step(double new_x, double new_y, char **map);
 
 /* Draw elements */
-void    clear_screen(t_img *img, int win_width, int win_height);
+void    clear_screen(t_img *main, int win_width, int win_height);
 void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
+void    draw_texture(t_img *main, int column, int wall_height, int win_height, unsigned int *colour);
 void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Intersection */
@@ -249,8 +259,8 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i);
 int 	cast_all_rays(t_player *player, int width, char **map);
 
 /* Map to 3D */
-void    map_to_3d(t_img *main, t_player *player, int win_width, int win_height);
-void    v1_map_to_3d(t_images *images, t_player *player, t_parse *parse);
+void    map_to_3d(t_data *data);
+void    v1_map_to_3d(t_data *data);
 int 	*width_of_wall(int *which_wall, int width);
 int 	amount_visible_walls(int *which_wall, int width);
 void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column);
@@ -278,12 +288,14 @@ int		ft_arrlen(char **arr);
 void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);
+void    print_columns(unsigned int *arr, int len);
 
 /* --------------------------- Texture Handling ---------------------------- */
 
-void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
-
-void    load_all_xpm_images(t_images *images, t_parse *parse);
-void    load_xpm_image(t_img *xpm_img, char *path);
+//void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
+void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img);
+void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
+void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
+void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 
 #endif

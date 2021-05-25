@@ -20,7 +20,7 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
 	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
 	if (ver_dist <= hor_dist)
     {
-		if (unit_circle_left_right(angle) == 3)
+		if (unit_circle_left_right(angle) == 3) // Put these numbers in an ENUM instead of 1, 2, 3, 4
             player->side[i] = 'E';
         else
             player->side[i] = 'W';
