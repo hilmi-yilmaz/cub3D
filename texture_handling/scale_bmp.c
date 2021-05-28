@@ -67,6 +67,82 @@ void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_h
     }
 }
 
+void    scale_bmp_horizontal(t_img *xpm_img, t_img *scaled_xpm)
+{
+    int i;
+
+    i = 0;
+    while (i < xpm_img->height)
+    {
+        scale_bmp_x(xpm_img, scaled_xpm, i);
+        i++;
+    }
+}
+
+void    scale_bmp_x(t_img *xpm_img, t_img *scaled_xpm, int row)
+{
+    int i;  // loops over column source image
+    int x;  // loops over column destination image
+    t_scale scale_params;
+
+    xpm_img->img_addr = mlx_get_data_addr(xpm_img->img_ptr, &xpm_img->bits_per_pixel, &xpm_img->line_size, &xpm_img->endian);
+    scaled_xpm->img_addr = mlx_get_data_addr(scaled_xpm->img_ptr, &scaled_xpm->bits_per_pixel, &scaled_xpm->line_size, &scaled_xpm->endian);
+
+    i = 0;
+    x = 0;
+    scale_params.fx = (double)xpm_img->width / scaled_xpm->width;
+    scale_params.fx = 1 / scale_params.fx;
+    scale_params.fxstep = 0.9999 * scale_params.fx;
+    scale_params.fix = 1 / scale_params.fx;
+    while (x < scaled_xpm->width)
+    {
+        scale_params.sx1 = x * scale_params.fx;
+        scale_params.sx2 = scale_params.sx1 + scale_params.fxstep;
+        scale_params.istart = trunc(scale_params.sx1);
+        scale_params.iend = trunc(scale_params.sx2);
+        scale_params.devX1 = 1.0 - (scale_params.sx1 - scale_params.istart);
+        scale_params.devX2 = 1.0 - (scale_params.sx2 - scale_params.iend);
+
+        scale_params.destR = 0;
+        scale_params.destG = 0;
+        scale_params.destB = 0;
+
+        if (PRINT == 1)
+        {
+            printf(" >>>>>>>>> x = %d, y = %d <<<<<<<<<<< \n", row, x);
+            printf("sx1 = %f, sx2 = %f\n", scale_params.sx1, scale_params.sx2);
+            printf("istart = %d, iend = %d\n", scale_params.istart, scale_params.iend);
+            printf("devX1 = %f, devX2 = %f\n", scale_params.devX1, scale_params.devX2);
+        }
+
+        while (i <= scale_params.iend)
+        {
+            if (i == scale_params.istart)
+                scale_params.dx = scale_params.devX1;
+            if (i == scale_params.iend)
+                scale_params.dx = 1.0 - scale_params.devX2;
+
+            printf("row = %d, i = %d\n", row, i);
+            unsigned int    colour = my_pixel_get(xpm_img, row, i);
+            scale_params.sR = get_argb(colour, 'r');
+            scale_params.sG = get_argb(colour, 'g');
+            scale_params.sB = get_argb(colour, 'b');
+
+            scale_params.AP = scale_params.fix * scale_params.dx;
+
+            scale_params.destR += (scale_params.sR * scale_params.AP);
+            scale_params.destG += (scale_params.sG * scale_params.AP);
+            scale_params.destB += (scale_params.sB * scale_params.AP);
+
+            i++;
+        }
+        unsigned int    dst_colour = argb_to_hex(0, (int)scale_params.destR, (int)scale_params.destG, (int)scale_params.destB);
+        //printf("%p\n", scaled_xpm_img);
+        my_pixel_put(scaled_xpm, row, x, dst_colour);
+        x++;
+    }
+}
+
 void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img)
 {
     t_scale	scale_params;
@@ -191,7 +267,7 @@ void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img)
             }
 
             if (PRINT == 1)
-                printf("color = %d %d %d\n", (int)scale_params.destR, (int)scale_params.destG, (int)scale_params.destB);
+                printf("--------------------------------------------------------- >>>> color = %d %d %d\n", (int)scale_params.destR, (int)scale_params.destG, (int)scale_params.destB);
 
             unsigned int    dst_colour = argb_to_hex(0, (int)scale_params.destR, (int)scale_params.destG, (int)scale_params.destB);
             //printf("%p\n", scaled_xpm_img);

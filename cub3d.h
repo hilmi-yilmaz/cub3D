@@ -295,6 +295,8 @@ void    print_columns(unsigned int *arr, int len);
 //void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
 void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img);
 void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
+void    scale_bmp_horizontal(t_img *xpm_img, t_img *scaled_xpm);
+void    scale_bmp_x(t_img *xpm_img, t_img *scaled_xpm, int row);
 void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
 void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 

@@ -30,7 +30,7 @@ int raycaster_main(t_data *data)
 	// xpm_img.win_ptr = data->img.win_ptr;
 	// int	img_width;
 	// int	img_height;
-	xpm_img.img_ptr = mlx_xpm_file_to_image(data->images.mlx.mlx_ptr, "textures/stone.xpm", &xpm_img.width, &xpm_img.height);
+	xpm_img.img_ptr = mlx_xpm_file_to_image(data->images.mlx.mlx_ptr, "textures/brick.xpm", &xpm_img.width, &xpm_img.height);
 	//xpm_img.img_ptr = mlx_png_file_to_image(xpm_img.mlx_ptr, "textures/pics/eagle.png", &img_width, &img_height);
 	if (xpm_img.img_ptr == NULL)
 	{
@@ -40,7 +40,7 @@ int raycaster_main(t_data *data)
 
 	/* Create a scaled xpm image */
     t_img	scaled_xpm_img;
-	scaled_xpm_img.width = 80;
+	scaled_xpm_img.width = 100;
 	scaled_xpm_img.height = 32;
 	scaled_xpm_img.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, scaled_xpm_img.width, scaled_xpm_img.height);
 	if (scaled_xpm_img.img_ptr == NULL)
@@ -49,14 +49,14 @@ int raycaster_main(t_data *data)
 		return (-1);
 	}
 
-	scale_bmp(&xpm_img, &scaled_xpm_img);
+	scale_bmp_horizontal(&xpm_img, &scaled_xpm_img);
 
 	/* Create the window */
 	data->images.mlx.win_ptr = mlx_new_window(data->images.mlx.mlx_ptr, 1024, 1024, "cub3d");
 	if (data->images.mlx.win_ptr == NULL)
 		return (-1);
 
-	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, scaled_xpm_img.img_ptr, 0, 40);
+	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, scaled_xpm_img.img_ptr, 0, 50);
 
 	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, xpm_img.img_ptr, 0, 0);
 
