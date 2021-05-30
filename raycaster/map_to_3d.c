@@ -22,13 +22,13 @@ void    map_to_3d(t_data *data)
     width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
 
 //-------------------------------------- //
-    int p = 0;
-    while (width_walls[p] != -1)
-    {
-        printf("%d ", width_walls[p]);
-        p++;
-    }
-    printf("\n");
+    // int p = 0;
+    // while (width_walls[p] != -1)
+    // {
+    //     printf("%d ", width_walls[p]);
+    //     p++;
+    // }
+    // printf("\n");
 //-----------------------------------------//
 
     while (i < data->parse.win_width)
@@ -46,6 +46,7 @@ void    map_to_3d(t_data *data)
         draw_columns(&data->images.main, i, height, data->parse.win_height, colour);
         i++;
     }
+	free(width_walls);
 }
 
 void    v1_map_to_3d(t_data *data)
@@ -67,13 +68,13 @@ void    v1_map_to_3d(t_data *data)
     width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
 
 //-------------------------------------- //
-    int p = 0;
-    while (width_walls[p] != -1)
-    {
-        printf("%d ", width_walls[p]);
-        p++;
-    }
-    printf("\n");
+    // int p = 0;
+    // while (width_walls[p] != -1)
+    // {
+    //     printf("%d ", width_walls[p]);
+    //     p++;
+    // }
+    // printf("\n");
 //-----------------------------------------//
 
     while (width_walls[i] != -1)
@@ -83,7 +84,7 @@ void    v1_map_to_3d(t_data *data)
         data->images.scaled_xpm.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, data->images.scaled_xpm.width, data->images.scaled_xpm.height);
         data->images.scaled_xpm.img_addr = mlx_get_data_addr(data->images.scaled_xpm.img_ptr, &data->images.scaled_xpm.bits_per_pixel, &data->images.scaled_xpm.line_size, &data->images.scaled_xpm.endian);
         //printf("scaled_xpm_address = %p\n", data->images.scaled_xpm.img_addr);
-        scale_bmp(&data->images.north_xpm, &data->images.scaled_xpm); // Scale in x direction
+        scale_bmp_all_rows(&data->images.north_xpm, &data->images.scaled_xpm); // Scale in x direction
         //mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.scaled_xpm.img_ptr, 0, 0);
         
         while (j < width_walls[i])
@@ -114,10 +115,11 @@ void    v1_map_to_3d(t_data *data)
         }
         mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.scaled_xpm.img_ptr);
         //break ;
-        printf("\n");
+        //printf("\n");
         j = 0;
         i++;
     }
+	free(width_walls);
 }
 
 void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column)
@@ -168,7 +170,7 @@ int *width_of_wall(int *which_wall, int width)
         res += width_walls[p];
         p++;
     }
-    printf("res = %d\n", res);
+    //printf("res = %d\n", res);
     return (width_walls);
 }
 

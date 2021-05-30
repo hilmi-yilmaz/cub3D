@@ -127,28 +127,50 @@ typedef struct s_parse
 
 }	t_parse;
 
+// typedef struct s_scale
+// {
+// 	double	fx;
+// 	double	fy;
+// 	double	fxstep;
+// 	double	fystep;
+// 	double	fix;
+// 	double	fiy;
+// 	double	sy1;
+// 	double	sy2;
+// 	int		jstart;
+// 	int		jend;
+// 	double	devY1;
+// 	double	devY2;
+// 	double	sx1;
+// 	double	sx2;
+// 	int		istart;
+// 	int		iend;
+// 	double	devX1;
+// 	double	devX2;
+// 	double	dx;
+// 	double	dy;
+// 	double	AP;
+// 	double	destR;
+// 	double	destG;
+// 	double	destB;
+// 	int		sR;
+// 	int		sG;
+// 	int		sB;
+
+// }			t_scale;
+
 typedef struct s_scale
 {
-	double	fx;
-	double	fy;
-	double	fxstep;
-	double	fystep;
-	double	fix;
-	double	fiy;
-	double	sy1;
-	double	sy2;
-	int		jstart;
-	int		jend;
-	double	devY1;
-	double	devY2;
-	double	sx1;
-	double	sx2;
-	int		istart;
-	int		iend;
-	double	devX1;
-	double	devX2;
-	double	dx;
-	double	dy;
+	double	f;
+	double	fstep;
+	double	fi;
+	double	s1;
+	double	s2;
+	int		start;
+	int		end;
+	double	dev1;
+	double	dev2;
+	double	d;
 	double	AP;
 	double	destR;
 	double	destG;
@@ -158,6 +180,7 @@ typedef struct s_scale
 	int		sB;
 
 }			t_scale;
+
 
 typedef struct s_ray
 {
@@ -293,10 +316,9 @@ void    print_columns(unsigned int *arr, int len);
 /* --------------------------- Texture Handling ---------------------------- */
 
 //void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
-void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img);
 void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
-void    scale_bmp_horizontal(t_img *xpm_img, t_img *scaled_xpm);
-void    scale_bmp_x(t_img *xpm_img, t_img *scaled_xpm, int row);
+void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
+void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
 void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
 void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 
