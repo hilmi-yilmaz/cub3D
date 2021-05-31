@@ -1,5 +1,5 @@
 R 1024 512
-NO ./textures/wood.xpm
+NO ./textures/north.xpm
 SO ./textures/brick.xpm
 WE ./textures/brick.xpm
 EA ./textures/brick.xpm

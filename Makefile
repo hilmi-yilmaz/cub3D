@@ -58,7 +58,8 @@ SRC_RAYCASTER = raycaster_main.c \
 
 DIR_TEXTURES = 	texture_handling
 SRC_TEXTURES = 	scale_bmp.c \
-				load_xpm.c
+				load_xpm.c \
+				v1_scale_bmp.c
 
 SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER) $(SRC_TEXTURES)
 
