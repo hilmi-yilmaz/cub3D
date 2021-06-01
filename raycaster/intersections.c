@@ -26,7 +26,7 @@ int horizontal_intersection(t_player *player, double angle, char **map)
 	return (expand_ray(&player->hor_ray, map, angle, unit_circle_upper_lower));
 }
 
-int	vertical_intersection(t_player *player, double angle, char **map, int target)
+int	vertical_intersection(t_player *player, double angle, char **map)
 {
 	if (unit_circle_left_right(angle) == 3)
 	{
