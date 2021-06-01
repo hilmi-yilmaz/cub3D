@@ -127,37 +127,37 @@ typedef struct s_parse
 
 }	t_parse;
 
-// typedef struct s_scale
-// {
-// 	double	fx;
-// 	double	fy;
-// 	double	fxstep;
-// 	double	fystep;
-// 	double	fix;
-// 	double	fiy;
-// 	double	sy1;
-// 	double	sy2;
-// 	int		jstart;
-// 	int		jend;
-// 	double	devY1;
-// 	double	devY2;
-// 	double	sx1;
-// 	double	sx2;
-// 	int		istart;
-// 	int		iend;
-// 	double	devX1;
-// 	double	devX2;
-// 	double	dx;
-// 	double	dy;
-// 	double	AP;
-// 	double	destR;
-// 	double	destG;
-// 	double	destB;
-// 	int		sR;
-// 	int		sG;
-// 	int		sB;
+typedef struct s_tmpscale
+{
+	double	fx;
+	double	fy;
+	double	fxstep;
+	double	fystep;
+	double	fix;
+	double	fiy;
+	double	sy1;
+	double	sy2;
+	int		jstart;
+	int		jend;
+	double	devY1;
+	double	devY2;
+	double	sx1;
+	double	sx2;
+	int		istart;
+	int		iend;
+	double	devX1;
+	double	devX2;
+	double	dx;
+	double	dy;
+	double	AP;
+	double	destR;
+	double	destG;
+	double	destB;
+	int		sR;
+	int		sG;
+	int		sB;
 
-// }			t_scale;
+}			t_tmpscale;
 
 typedef struct s_scale
 {
@@ -204,6 +204,8 @@ typedef struct s_player
     double          *rays_array;
     char            *side;
 	int				*which_wall;
+	double			wall_x_start;
+	double			wall_x_end;
 	
 }	                t_player;
 
@@ -321,5 +323,10 @@ void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
 void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
 void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
 void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
+
+void			get_scale_params_x(t_tmpscale *scale_params, t_img *xpm, int width);
+void			get_scale_params_y(t_tmpscale *scale_params, t_img *xpm, int height);
+unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x, int dest_y);
+void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height);
 
 #endif

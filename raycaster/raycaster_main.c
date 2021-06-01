@@ -115,7 +115,7 @@ int raycaster_main(t_data *data)
 	/* React on the moving player */
 	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);
 
-	//mlx_loop_hook(data->images.mlx.mlx_ptr, hooks, data);	
+	//mlx_loop_hook(data->images.mlx.mlx_ptr, hooks, data);
 
 	/* React on closing the screen */
 	if (__linux__)
