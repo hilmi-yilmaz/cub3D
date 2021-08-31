@@ -26,7 +26,7 @@ void    init(t_data *data)
 	/* Load xpm images */
 	load_all_xpm_images(data->images.mlx.mlx_ptr, &data->images, &data->parse);
 
-    cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
+    cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
 	v1_map_to_3d(data);
 	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
     //print_side_array(data->player.which_wall, data->parse.win_width);

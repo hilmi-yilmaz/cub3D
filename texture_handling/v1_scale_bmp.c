@@ -97,7 +97,7 @@ unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x,
 ** y is height of the wall
 **
 */
-void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height)
+void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i)
 {
 	//int				j;
 	unsigned int	colour;
@@ -112,7 +112,7 @@ void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, 
 	end_xpm = xpm->height;
 	if (y_start < 0)
 	{
-		start_xpm = -(y_start);
+		start_xpm = y_start * -1;
 		y_start = 0;
 	}
 	//printf("start_xpm = %d\n", start_xpm);
@@ -120,6 +120,13 @@ void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, 
 	if (y_end > win_height - 1)
 		y_end = win_height - 1;
 	//j = 0;
+	// if (i == 0)
+	// {
+	// 	x += (1.0 - (((double)player->wall_x_start - (int)player->wall_x_start))) * width_walls[0];
+	// 	// printf("wall_x_start = %f\n", player->wall_x_start);
+	// 	// printf("width = %d\n", width_walls[0]);
+	// 	printf("x = %d\n", x);
+	// }
 	while (y_start < y_end)
 	{
 		//colour = get_texture_pixel(xpm, scale_params, x, j);

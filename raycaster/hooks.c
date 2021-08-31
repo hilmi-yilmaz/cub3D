@@ -23,7 +23,7 @@ int hooks(int keycode, t_data *data)
         data->player.angle += data->player.rot_speed;
 	reset_angle(&data->player.angle);
 	draw_floor_ceiling(&data->images.main, &data->parse);
-    cast_all_rays(&data->player, data->parse.win_width, data->parse.map);
+    cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
 	v1_map_to_3d(data);
 	//print_side_array(data->player.which_wall, data->parse.win_width);
     free(data->player.rays_array);
@@ -34,7 +34,7 @@ int hooks(int keycode, t_data *data)
 	//printf("player->y       = %f\n", data->player.y);
 	//printf("player->angle   = %f\n", data->player.angle / PI * 180);
 
-	//printf("\n");
+	printf("\n");
     return (0);
 }
 

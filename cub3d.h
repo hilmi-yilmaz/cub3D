@@ -280,8 +280,8 @@ void    draw_floor_ceiling(t_img *main, t_parse *parse);
 int 	horizontal_intersection(t_player *player, double angle, char **map);
 int		vertical_intersection(t_player *player, double angle, char **map);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
-double	cast_single_ray(t_player *player, double angle, char **map, int i);
-int 	cast_all_rays(t_player *player, int width, char **map);
+double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
+int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* Map to 3D */
 void    map_to_3d(t_data *data);
@@ -327,6 +327,6 @@ void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 void			get_scale_params_x(t_tmpscale *scale_params, t_img *xpm, int width);
 void			get_scale_params_y(t_tmpscale *scale_params, t_img *xpm, int height);
 unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x, int dest_y);
-void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height);
+void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i);
 
 #endif

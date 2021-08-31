@@ -6,7 +6,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-double	cast_single_ray(t_player *player, double angle, char **map, int i)
+double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse)
 {
 	double	hor_dist;
 	double	ver_dist;
@@ -26,6 +26,10 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
             player->side[i] = 'W';
 		player->which_wall[i] = wall_ver + player->side[i];
         distance = ver_dist;
+		if (i == 0)
+			player->wall_x_start = player->ver_ray.x;
+		else if (i == parse->win_width - 1)
+			player->wall_x_end = player->ver_ray.x;
     }
     else
     {
@@ -35,11 +39,15 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i)
             player->side[i] = 'S';
 		player->which_wall[i] = wall_hor + player->side[i];
 		distance = hor_dist;
+		if (i == 0)
+			player->wall_x_start = player->hor_ray.x;
+		else if (i == parse->win_width - 1)
+			player->wall_x_end = player->hor_ray.x;
     }
     return (distance * cos(player->angle - angle));
 }
 
-int cast_all_rays(t_player *player, int width, char **map)
+int cast_all_rays(t_player *player, int width, char **map, t_parse *parse)
 {
     int     i;
     double  angle;
@@ -53,7 +61,7 @@ int cast_all_rays(t_player *player, int width, char **map)
 	player->which_wall = malloc(sizeof(int) * width);
     while (i < width)
     {
-        player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map, width - 1 - i);
+        player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map, width - 1 - i, parse);
         angle += angle_increment;
         reset_angle(&angle);
         i++;
