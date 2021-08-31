@@ -4,7 +4,6 @@ EA ./path_to_the_east_texture
 
 C 225,30,0
 NO ./path_to_the_north_texture
-S ./path_to_the_sprite_texture
 
 F 220,100,0
 R 1920 1080

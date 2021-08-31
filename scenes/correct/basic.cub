@@ -4,7 +4,6 @@ SO ./textures/brick.xpm
 WE ./textures/brick.xpm
 EA ./textures/brick.xpm
 
-S ./path_to_the_sprite_texture
 F 50,50,0
 C 0,50,50
 

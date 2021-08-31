@@ -1,6 +1,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* Parser */
+# define UNINIT -1	/* Uninitialized value */
+
+
 # ifdef IS_LINUX
 #  include "mlx_linux/mlx.h"
 #  define UP_KEY 65362
@@ -50,7 +54,7 @@
 # define RESOLUTION_DATA_COUNT 2
 # define MAX_KOMMAS 2
 
-# define UNINITIALIZED -1 /* Rename to UNINIT */
+
 
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
@@ -110,22 +114,16 @@ typedef struct s_images
 
 typedef struct s_parse
 {
-    int     win_width;
-    int     win_height;
-
-    char    *north_text;
-    char    *south_text;
-    char    *west_text;
-    char    *east_text;
-
-    char    *sprite_text;
-
-    int     floor_colour[RGB_DATA_COUNT];
-    int     ceiling_colour[RGB_DATA_COUNT];
-
-	char	**map;
-
-}	t_parse;
+    int     		win_width;
+    int     		win_height;
+    char    		*north_text;
+    char    		*south_text;
+    char    		*west_text;
+    char    		*east_text;
+    unsigned char	floor_colour[RGB_DATA_COUNT];
+    unsigned char   ceiling_colour[RGB_DATA_COUNT];
+	char			**map;
+}			t_parse;
 
 typedef struct s_tmpscale
 {
@@ -222,19 +220,20 @@ typedef struct s_data
 int     parse_main(t_parse *parse, char **argv);
 void    	parse_init(t_parse *parse);
 int     	parse_data(int fd, t_parse *parse);
-int     		parse_resolution(int *win_width, int *win_height, char *line);
-int     		parse_textures(t_parse *parse, char *line);
-int     			fill_texture(char **texture, char *line, char *text_id);
-int     		parse_colour(int *colour_array, char *line);
-int     		parse_map(int fd, t_parse *parse, char *line);
-char     			**create_map(t_parse *parse, char *line, int rows);
-int     			*create_len(t_parse *parse, char *line, int rows);
-int     			old_to_new_map(t_parse *parse, char **new_map, int rows);
+int 			decision(int fd, t_parse *parse, char *line);
+int     			parse_resolution(int *win_width, int *win_height, char *line);
+int     			parse_textures(t_parse *parse, char *line);
+int     				fill_texture(char **texture, char *line, char *text_id);
+int     			parse_colour(unsigned char *colour_array, char *line);
+int						fill_colour(unsigned char *colour_array, char *line);
+int     			parse_map(int fd, t_parse *parse, char *line);
+char     				**create_map(t_parse *parse, char *line, int rows);
+int     				*create_len(t_parse *parse, char *line, int rows);
+int     				old_to_new_map(t_parse *parse, char **new_map, int rows);
 int			check_data_completeness(t_parse *parse);
 
 /* Checks while parsing */
 int     check_resolution(char *line);
-int		fill_colour(int *colour_array, char *line);
 int		error_colour(void);
 void    *error_malloc(void);
 

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/20 12:59:16 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/08/31 17:02:54 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,62 @@
 int	parse_data(int fd, t_parse *parse)
 {
 	int		res;
-	int		return_val;
+	int		ret;
 	int		count;
 	char	*line;
 
     res = 1;
-	return_val = 0;
-    line = NULL;
+	ret = 0;
 	count = 0;
+    line = NULL;
     while (res > 0)
     {
         res = get_next_line(fd, &line);
 		if (res == 0 && count == 0 && *line == '\0')
 		{
-			printf("Error\nThe scene file is empty.\n");
+			printf("Error: The scene file is empty.\n");
 			free(line);
 			return (-1);
 		}
-        if (*line == 'R')
-            return_val = parse_resolution(&parse->win_width, &parse->win_height, line + LEN_R); /* No allocation in parse_resolution */
-        else if (*line == 'N' || (*line == 'S' && *(line + 1) == 'O') || \
-                *line == 'W' || *line == 'E' || *line == 'S')
-            return_val = parse_textures(parse, line); /* Allocation happens */
-        else if (*line == 'F')
-            return_val = parse_colour(parse->floor_colour, line + LEN_F); /* No allocation */
-        else if (*line == 'C')
-            return_val = parse_colour(parse->ceiling_colour, line + LEN_C); /* No allocation */
-        else if (*line == '0' || *line == '1' || *line == '2' || *line == 'N' || \
-                *line == 'S' || *line == 'E' || *line == 'W' || *line == ' ') // ----------- Actually cant be NWSE because map would not be valid then ------------- //
-        {
-            return_val = parse_map(fd, parse, line); /* Allocation happens */
-            if (return_val == -1)
-                return (-1);
-			return (0);
-        }
-        else
-        {
-			if (*line != '\0')
-			{
-            	printf("Error\nWrong type identifier in scene file or wrong starting element in map.\n");
-            	return_val = -1;
-			}
-        }
-        free(line);
+        ret = decision(fd, parse, line);
+        if (ret == -1)
+            return (-1);
+        if (ret != 1)
+            free(line);
         line = NULL;
 		count++;
-        if (return_val == -1)
-            return (-1);
     }
+    return (0);
+}
+
+int decision(int fd, t_parse *parse, char *line)
+{
+    int ret;
+
+    if (*line == 'R')
+            ret = parse_resolution(&parse->win_width, &parse->win_height, line + LEN_R); /* No allocation in parse_resolution */
+    else if ((*line == 'N' && *(line + 1) == 'O') || (*line == 'S' && *(line + 1) == 'O') || (*line == 'W' && *(line + 1) == 'E') || (*line == 'E' && *(line + 1) == 'A'))
+        ret = parse_textures(parse, line); /* Allocation happens */
+    else if (*line == 'F')
+        ret = parse_colour(parse->floor_colour, line + LEN_F); /* No allocation */
+    else if (*line == 'C')
+        ret = parse_colour(parse->ceiling_colour, line + LEN_C); /* No allocation */
+    else if (*line == '1' || *line == ' ')
+    {
+        ret = parse_map(fd, parse, line); /* Allocation happens */
+        if (ret == -1)
+            return (-1);
+        return (1); // 1 acts as a flag that the reading of the cub file is done
+    }
+    else
+    {
+        if (*line != '\0')
+        {
+            printf("Error: Wrong type identifier in scene file or wrong starting element in map.\n");
+            ret = -1;
+        }
+    }
+    if (ret == -1)
+        return (-1);
     return (0);
 }

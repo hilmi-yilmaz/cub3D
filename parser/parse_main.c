@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/20 14:23:16 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/08/31 13:25:32 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int parse_main(t_parse *parse, char **argv)
 	int		check;
     int     close_return;
 
-    fd = open(*(argv + 1), O_RDONLY);
+    fd = open(argv[1], O_RDONLY);
     if (fd == -1)
     {
-        printf("Error\nSomething went wrong opening \"%s\": %s\n", *(argv + 1), strerror(errno));
-        exit(1);
+        printf("Error: %s (%s)\n", argv[1], strerror(errno));
+        return (-1);
     }
     parse_init(parse);
     parse_return = parse_data(fd, parse);
@@ -68,7 +68,7 @@ int	check_data_completeness(t_parse *parse)
 
 	i = 0;
 	error = 0;
-	if (parse->win_width == UNINITIALIZED || parse->win_height == UNINITIALIZED)
+	if (parse->win_width == UNINIT || parse->win_height == UNINIT)
 	{
 		if (error != -1)
 			printf("Error\n");
@@ -76,8 +76,7 @@ int	check_data_completeness(t_parse *parse)
 		error = -1;
 	}
 	if (parse->north_text == NULL || parse->south_text == NULL || \
-		parse->west_text == NULL || parse->east_text == NULL || \
-		parse->sprite_text == NULL)
+		parse->west_text == NULL || parse->east_text == NULL)
 	{
 		if (error != -1)
 			printf("Error\n");
@@ -86,8 +85,8 @@ int	check_data_completeness(t_parse *parse)
 	}
     while (i < RGB_DATA_COUNT)
     {
-        if (*(parse->floor_colour + i) == UNINITIALIZED || \
-			*(parse->ceiling_colour + i) == UNINITIALIZED)
+        if (*(parse->floor_colour + i) == UNINIT || \
+			*(parse->ceiling_colour + i) == UNINIT)
 		{
 			if (error != -1)
 				printf("Error\n");

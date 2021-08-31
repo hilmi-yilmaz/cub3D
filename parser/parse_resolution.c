@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/23 13:59:31 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/08/31 11:42:04 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@
 int parse_resolution(int *win_width, int *win_height, char *line)
 {
     int i;
-    int check;
+    int ret;
 
 	if (*line != ' ')
 	{
-		printf("Error\nNo space between identifier and data for resolution.\n");
+		printf("Error: No space between identifier and data for resolution.\n");
 		return (-1);
 	}
-	i = 1;
-	check = check_resolution(line);
-    if (check == -1)
+	ret = check_resolution(line);
+    if (ret == -1)
         return (-1);
     i = skip_chr(line, ' ');
     *win_width = ft_atoi(line + i);
@@ -44,20 +43,20 @@ int check_resolution(char *line)
 
     i = 0;
     data_count = 0;
-    while (*(line + i) != '\0')
+    while (line[i] != '\0')
     {
-        if (ft_isdigit(*(line + i)) == 0 && *(line + i) != ' ')
+        if (ft_isdigit(line[i]) == 0 && line[i] != ' ')
         {
-            printf("Error\nWrong characters found while parsing resolution data.\n");
+            printf("Error: Wrong characters found while parsing resolution data.\n");
             return (-1);
         }
-        if (ft_isdigit(*(line + i)) != 0 && ft_isdigit(*(line + i + 1)) == 0)
+        if (ft_isdigit(line[i]) != 0 && ft_isdigit(line[i + 1]) == 0)
             data_count++;
         i++;
     }
     if (data_count != RESOLUTION_DATA_COUNT)
-    {   
-        printf("Error\nFormat of resolution isn't correct. Give resolutions as 2 numbers for width and height.\n");
+    {
+        printf("Error: Format of resolution isn't correct. Give resolutions as 2 numbers for width and height.\n");
         return (-1);
     }
     return (0);

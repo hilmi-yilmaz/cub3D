@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 16:02:54 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/04/20 16:31:38 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/08/31 13:26:10 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	free_textures(t_parse *parse)
     free(parse->south_text);
     free(parse->west_text);
     free(parse->east_text);
-    free(parse->sprite_text);
 }
 
 void	free_map(char **map)

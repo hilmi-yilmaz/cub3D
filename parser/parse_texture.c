@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/05/24 16:41:33 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/08/31 13:25:55 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@
 
 int parse_textures(t_parse *parse, char *line)
 {
-    int res;
+    int ret;
 
 	if (*line == 'N')
-        res = fill_texture(&parse->north_text, line + LEN_NO, "North");
-    else if (*line == 'S' && *(line + 1) == 'O')
-        res = fill_texture(&parse->south_text, line + LEN_SO, "South");
-    else if (*line == 'W')
-        res = fill_texture(&parse->west_text, line + LEN_WE, "West");
-    else if (*line == 'E')
-        res = fill_texture(&parse->east_text, line + LEN_EA, "East");
+        ret = fill_texture(&parse->north_text, line + LEN_NO, "North");
     else if (*line == 'S')
-        res = fill_texture(&parse->sprite_text, line + LEN_S, "Sprite");
-    if (res == -1)
+        ret = fill_texture(&parse->south_text, line + LEN_SO, "South");
+    else if (*line == 'W')
+        ret = fill_texture(&parse->west_text, line + LEN_WE, "West");
+    else if (*line == 'E')
+        ret = fill_texture(&parse->east_text, line + LEN_EA, "East");
+    if (ret == -1)
         return (-1);
     return (0);
 }
@@ -44,14 +42,14 @@ int fill_texture(char **texture, char *line, char *text_id)
 
     if (*line != ' ')
 	{
-		printf("Error\nNo space between identifier and data for %s texture.\n", text_id);
+		printf("Error: No space between identifier and data for %s texture.\n", text_id);
 		return (-1);
 	}
 	i = skip_chr(line, ' ');
     *texture = ft_strdup(line + i); /* XXXXXXXXXX If a lot of spaces after texture, memory is allocated --> fix XXXXXXXXXX */
     if (*texture == NULL)
 	{
-		printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+		printf("Error: %s\n", strerror(errno));
         return (-1);
 	}
 	return (0);
