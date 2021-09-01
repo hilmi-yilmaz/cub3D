@@ -21,7 +21,6 @@ void    free_parse(t_parse *parse)
 {
 	free_textures(parse);
 	free_map(parse->map);
-	//free_map_len(parse->map_len); Can be deleted later
 }
 
 void	free_textures(t_parse *parse)
@@ -39,17 +38,11 @@ void	free_map(char **map)
 	i = 0;
     if (map != NULL)
     {
-        while (*(map + i) != NULL)
+        while (map[i] != NULL)
         {
-            free(*(map + i));
+            free(map[i]);
             i++;
         }
     }
     free(map);
 }
-
-// Can be deleted later
-// void	free_map_len(int *map_len)
-// {
-// 	free(map_len);
-// }

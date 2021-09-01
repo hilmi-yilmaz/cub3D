@@ -17,7 +17,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int parse_colour(unsigned char *colour_array, char *line)
+int parse_colour(int *colour_array, char *line)
 {
     int i;
 	int	j;
@@ -36,7 +36,7 @@ int parse_colour(unsigned char *colour_array, char *line)
 	return (0);
 }
 
-int	fill_colour(unsigned char *colour_array, char *line)
+int	fill_colour(int *colour_array, char *line)
 {
 	int	i;
 	int	j;
@@ -57,7 +57,7 @@ int	fill_colour(unsigned char *colour_array, char *line)
 		if (ft_isdigit(line[i]) == 0)
 			return (error_colour());
 		colour_array[j] = ft_atoi(line + i);
-		i += ft_nblen((int)colour_array[j], 10);
+		i += ft_nblen(colour_array[j], 10);
 		j++;
 	}
 	i += skip_chr(line + i, ' ');

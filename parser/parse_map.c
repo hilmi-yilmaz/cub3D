@@ -38,7 +38,11 @@ int parse_map(int fd, t_parse *parse, char *line)
         }
         printf("line = %s\n", line);
         if (*line == '\0')
+        {
+            free(line);
+            line = NULL;
             break ;
+        }
         parse->map = create_map(parse, line, rows);
         if (parse->map == NULL)
         {

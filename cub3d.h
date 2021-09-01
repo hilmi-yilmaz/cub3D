@@ -120,8 +120,8 @@ typedef struct s_parse
     char    		*south_text;
     char    		*west_text;
     char    		*east_text;
-    unsigned char	floor_colour[RGB_DATA_COUNT];
-    unsigned char   ceiling_colour[RGB_DATA_COUNT];
+    int             floor_colour[RGB_DATA_COUNT];
+    int             ceiling_colour[RGB_DATA_COUNT];
 	char			**map;
 }			t_parse;
 
@@ -224,8 +224,8 @@ int 			decision(int fd, t_parse *parse, char *line);
 int     			parse_resolution(int *win_width, int *win_height, char *line);
 int     			parse_textures(t_parse *parse, char *line);
 int     				fill_texture(char **texture, char *line, char *text_id);
-int     			parse_colour(unsigned char *colour_array, char *line);
-int						fill_colour(unsigned char *colour_array, char *line);
+int     			parse_colour(int *colour_array, char *line);
+int						fill_colour(int *colour_array, char *line);
 int     			parse_map(int fd, t_parse *parse, char *line);
 char     				**create_map(t_parse *parse, char *line, int rows);
 int     				*create_len(t_parse *parse, char *line, int rows);

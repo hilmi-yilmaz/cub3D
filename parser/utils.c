@@ -53,6 +53,21 @@ void    print_map(t_parse *parse)
     }
 }
 
+int check_map(char **map)
+{
+    // Using the flood_fill approach
+
+}
+
+int flood_fill(int x, int y, char **map)
+{
+    if (x < 0 || x > ft_strlen(map[y]) || y < 0 || y > ft_arrlen(map))
+        return (0);
+    else if (map[x][y] == '1')
+        return (1);
+    return (flood_fill(x + 1, y) + flood_fill(x - 1, y) + flood_fill(x, y + 1), flood_fill(x, y - 1));
+}
+
 int skip_chr(char *str, int c)
 {
     int i;

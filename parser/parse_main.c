@@ -39,7 +39,7 @@ int parse_main(t_parse *parse, char **argv)
     parse_return = parse_data(fd, parse);
     if (parse_return == -1)
     {
-        //free_parse(parse);
+        free_parse(parse);
         return (-1);
     }
 	check = check_data_completeness(parse);
@@ -80,7 +80,7 @@ int	check_data_completeness(t_parse *parse)
 	{
 		if (error != -1)
 			printf("Error\n");
-		printf("Missing texture data.\n");
+		printf("Missing texture data.\nMake sure to add NO, SO, WE and EA textures.\n");
 		error = -1;
 	}
     while (i < RGB_DATA_COUNT)

@@ -40,7 +40,11 @@ int	parse_data(int fd, t_parse *parse)
 		}
         ret = decision(fd, parse, line);
         if (ret == -1)
+        {
+            free(line);
+            line = NULL;
             return (-1);
+        }
         if (ret != 1)
             free(line);
         line = NULL;
@@ -72,7 +76,7 @@ int decision(int fd, t_parse *parse, char *line)
     {
         if (*line != '\0')
         {
-            printf("Error: Wrong type identifier in scene file or wrong starting element in map.\n");
+            printf("Error: Wrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
             ret = -1;
         }
     }
