@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 14:32:25 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:47:47 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int parse_colour(int *colour_array, char *line)
 	j = 0;
 	if (*line != ' ')
 	{
-		printf("Error: No space between identifier and data for colour.\n");
+		printf("Error\nNo space between identifier and data for colour.\n");
 		return (-1);
 	}
 	check = fill_colour(colour_array, line);

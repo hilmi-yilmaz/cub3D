@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 15:43:34 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:47:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	parse_data(int fd, t_parse *parse)
         res = get_next_line(fd, &line);
 		if (res == 0 && count == 0 && *line == '\0')
 		{
-			printf("Error: The scene file is empty.\n");
+			printf("Error\nThe scene file is empty.\n");
 			free(line);
 			return (-1);
 		}
@@ -78,7 +78,7 @@ int decision(int fd, t_parse *parse, char *line)
     {
         if (*line != '\0')
         {
-            printf("Error: Wrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
+            printf("Error\nWrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
             ret = -1;
         }
     }

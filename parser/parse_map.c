@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 17:51:04 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:47:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int parse_map(int fd, t_parse *parse, char *line)
             res = get_next_line(fd, &line);
         if (res == -1) // ------------- Also check for case that res = 0 first time in loop ---------------//
         {
-            printf("Error: Something went wrong reading the map.\n");
+            printf("Error\nSomething went wrong reading the map.\n");
             return (-1);
         }
         printf("line = %s\n", line);

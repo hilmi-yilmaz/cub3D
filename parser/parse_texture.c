@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 14:34:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:47:39 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int fill_texture(char **texture, char *line, char *text_id)
 
     if (*line != ' ')
 	{
-		printf("Error: No space between identifier and data for %s texture.\n", text_id);
+		printf("Error\nNo space between identifier and data for %s texture.\n", text_id);
 		return (-1);
 	}
 	i = skip_chr(line, ' ');
@@ -54,7 +54,7 @@ int fill_texture(char **texture, char *line, char *text_id)
     *texture = ft_strdup(line + i); /* XXXXXXXXXX If a lot of spaces after texture, memory is allocated --> fix XXXXXXXXXX */
     if (*texture == NULL)
 	{
-		printf("Error: %s\n", strerror(errno));
+		printf("Error\n%s\n", strerror(errno));
         return (-1);
 	}
 	return (0);

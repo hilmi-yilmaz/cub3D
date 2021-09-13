@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 13:25:32 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:48:21 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int parse_main(t_parse *parse, char **argv)
     fd = open(argv[1], O_RDONLY);
     if (fd == -1)
     {
-        printf("Error: %s (%s)\n", argv[1], strerror(errno));
+        printf("Error\n%s (%s)\n", argv[1], strerror(errno));
         return (-1);
     }
     parse_init(parse);
