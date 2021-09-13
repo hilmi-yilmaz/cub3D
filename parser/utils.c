@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 14:04:17 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 17:47:42 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,62 @@ void    print_map(t_parse *parse)
     }
 }
 
-// int check_map(char **map)
-// {
-//     // Using the flood_fill approach
+void    find_player_location(int *x, int *y, char **map)
+{
+	int i;
+	int j;
 
-// }
+	i = 0;
+	j = 0;
+	while (map[i] != NULL)
+	{
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] != '0' && map[i][j] != '1')
+			{
+				*x = j;
+                *y = i;
+				return ;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 
-// int flood_fill(int x, int y, char **map)
-// {
-//     if (x < 0 || x > ft_strlen(map[y]) || y < 0 || y > ft_arrlen(map))
-//         return (0);
-//     else if (map[x][y] == '1')
-//         return (1);
-//     return (flood_fill(x + 1, y) + flood_fill(x - 1, y) + flood_fill(x, y + 1), flood_fill(x, y - 1));
-// }
+int check_map(char **map)
+{
+    int ret;
+    int player_x;
+    int player_y;
+
+    find_player_location(&player_x, &player_y, map);
+    printf("player_x = %d\n", player_x);
+    printf("player_y = %d\n", player_y);
+
+    ret = flood_fill(player_x, player_y, map);
+    printf("ret = %d", ret);
+    return (ret);
+
+}
+
+int flood_fill(int x, int y, char **map)
+{
+    printf("map[%d][%d] = %c\n", y, x, map[y][x]);
+    if (x < 0 || x >= ft_strlen(map[y]) || y < 0 || y >= ft_arrlen(map) || map[y][x] == ' ')
+    {
+        printf("x or y out of bounds or space\n");
+        return (1);
+    }
+    else if (map[y][x] == '1')
+    {
+        printf("Found a wall\n");
+        return (0);
+    }
+    map[x][y] = '1';
+    return (flood_fill(x + 1, y, map) + flood_fill(x - 1, y, map) + flood_fill(x, y + 1, map) +  flood_fill(x, y - 1, map));
+}
 
 int skip_chr(char *str, int c)
 {

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 15:48:21 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 16:51:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int parse_main(t_parse *parse, char **argv)
 		return (-1);
 	}
     print_parse(parse);
+	check = check_map(parse->map);
     //free_parse(parse);
     close_return = close(fd);
     if (close_return == -1)

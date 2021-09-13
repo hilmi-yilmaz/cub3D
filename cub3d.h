@@ -239,6 +239,9 @@ void    *error_malloc(void);
 
 /* Utils */
 int     skip_chr(char *str, int c);
+void    find_player_location(int *x, int *y, char **map);
+int 	check_map(char **map);
+int 	flood_fill(int x, int y, char **map);
 
 /* Free data */
 void    free_parse(t_parse *parse);
