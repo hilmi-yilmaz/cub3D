@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 17:01:08 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 14:32:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int	fill_colour(int *colour_array, char *line)
 		i += skip_chr(line + i, ' ');
 		if (ft_isdigit(line[i]) == 0)
 			return (error_colour());
+		if (colour_array[j] != UNINIT)
+		{
+			printf("Error\nDouble colour data.\n");
+			return (-1);
+		}
 		colour_array[j] = ft_atoi(line + i);
 		i += ft_nblen(colour_array[j], 10);
 		j++;
@@ -68,7 +73,7 @@ int	fill_colour(int *colour_array, char *line)
 
 int	error_colour(void)
 {
-	printf("Error: Format of colour data isn't correct.\n");
+	printf("Error\nFormat of colour data isn't correct.\n");
 	printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
 	return (-1);
 }

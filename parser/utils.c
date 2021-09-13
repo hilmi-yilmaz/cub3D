@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 13:26:22 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 14:04:17 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ void    print_map(t_parse *parse)
     }
 }
 
-int check_map(char **map)
-{
-    // Using the flood_fill approach
+// int check_map(char **map)
+// {
+//     // Using the flood_fill approach
 
-}
+// }
 
-int flood_fill(int x, int y, char **map)
-{
-    if (x < 0 || x > ft_strlen(map[y]) || y < 0 || y > ft_arrlen(map))
-        return (0);
-    else if (map[x][y] == '1')
-        return (1);
-    return (flood_fill(x + 1, y) + flood_fill(x - 1, y) + flood_fill(x, y + 1), flood_fill(x, y - 1));
-}
+// int flood_fill(int x, int y, char **map)
+// {
+//     if (x < 0 || x > ft_strlen(map[y]) || y < 0 || y > ft_arrlen(map))
+//         return (0);
+//     else if (map[x][y] == '1')
+//         return (1);
+//     return (flood_fill(x + 1, y) + flood_fill(x - 1, y) + flood_fill(x, y + 1), flood_fill(x, y - 1));
+// }
 
 int skip_chr(char *str, int c)
 {

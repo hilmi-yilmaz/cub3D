@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 13:25:55 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 14:34:51 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int fill_texture(char **texture, char *line, char *text_id)
 		return (-1);
 	}
 	i = skip_chr(line, ' ');
+    if (*texture != NULL)
+    {
+        printf("Error\nDouble %s texture data.\n", text_id);
+        return (-1);
+    }
     *texture = ft_strdup(line + i); /* XXXXXXXXXX If a lot of spaces after texture, memory is allocated --> fix XXXXXXXXXX */
     if (*texture == NULL)
 	{
