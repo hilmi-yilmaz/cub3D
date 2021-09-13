@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 17:02:54 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/13 15:43:34 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	parse_data(int fd, t_parse *parse)
 			return (-1);
 		}
         ret = decision(fd, parse, line);
+        if (ret == 1)
+            return (0);
         if (ret == -1)
         {
             free(line);
