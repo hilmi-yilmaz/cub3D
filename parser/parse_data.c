@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 15:47:25 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/14 13:15:03 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int decision(int fd, t_parse *parse, char *line)
         ret = parse_colour(parse->floor_colour, line + LEN_F); /* No allocation */
     else if (*line == 'C')
         ret = parse_colour(parse->ceiling_colour, line + LEN_C); /* No allocation */
-    else if (*line == '1' || *line == ' ')
+    else if (*line == '0' || *line == '1' ||  *line == ' ')
     {
         ret = parse_map(fd, parse, line); /* Allocation happens */
         if (ret == -1)

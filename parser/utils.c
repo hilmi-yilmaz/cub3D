@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/14 13:10:30 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/14 13:24:55 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    find_player_location(int *x, int *y, char **map)
 	{
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] != '0' && map[i][j] != '1')
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != ' ')
 			{
 				*x = j;
                 *y = i;
@@ -83,7 +83,14 @@ int check_map(char **map)
     int player_x;
     int player_y;
 
+    player_x = -1;
+    player_y = -1;
     find_player_location(&player_x, &player_y, map);
+    if (player_x == -1 && player_y == -1)
+    {
+        printf("Error\nNo player in the map. Put a N, S, E, W character in the map.\n");
+        return (-1);
+    }
     ret = flood_fill(player_x, player_y, map);
     if (ret != 0)
     {
@@ -96,6 +103,9 @@ int check_map(char **map)
 
 int flood_fill(int x, int y, char **map)
 {
+    static int i = 0;
+    printf("%d\n", i);
+    i++;
     
     if (x < 0 || y < 0 || y >= ft_arrlen(map) || x >= ft_strlen(map[y]) || map[y][x] == ' ')
         return (1);
