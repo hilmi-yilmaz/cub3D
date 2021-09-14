@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 17:47:42 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/14 13:10:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,24 @@ int check_map(char **map)
     int player_y;
 
     find_player_location(&player_x, &player_y, map);
-    printf("player_x = %d\n", player_x);
-    printf("player_y = %d\n", player_y);
-
     ret = flood_fill(player_x, player_y, map);
-    printf("ret = %d", ret);
+    if (ret != 0)
+    {
+        printf("Error\nMap is invalid. Make sure the map is surrounded by walls.\n");
+        return (-1);
+    }
     return (ret);
 
 }
 
 int flood_fill(int x, int y, char **map)
 {
-    printf("map[%d][%d] = %c\n", y, x, map[y][x]);
-    if (x < 0 || x >= ft_strlen(map[y]) || y < 0 || y >= ft_arrlen(map) || map[y][x] == ' ')
-    {
-        printf("x or y out of bounds or space\n");
+    
+    if (x < 0 || y < 0 || y >= ft_arrlen(map) || x >= ft_strlen(map[y]) || map[y][x] == ' ')
         return (1);
-    }
     else if (map[y][x] == '1')
-    {
-        printf("Found a wall\n");
         return (0);
-    }
-    map[x][y] = '1';
+    map[y][x] = '1';
     return (flood_fill(x + 1, y, map) + flood_fill(x - 1, y, map) + flood_fill(x, y + 1, map) +  flood_fill(x, y - 1, map));
 }
 

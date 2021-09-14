@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 16:51:57 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/14 13:09:16 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int parse_main(t_parse *parse, char **argv)
 	}
     print_parse(parse);
 	check = check_map(parse->map);
+	if (check == -1)
+		return (-1);
     //free_parse(parse);
     close_return = close(fd);
     if (close_return == -1)
