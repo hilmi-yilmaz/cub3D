@@ -54,7 +54,7 @@
 # define RESOLUTION_DATA_COUNT 2
 # define MAX_KOMMAS 2
 
-
+# define STACK_MAX 10000 // Has to be bigger than 4 sides + 1 when checking during floodfill
 
 # define TRUE 1				/* Create a typedef for this */
 # define FALSE 0
@@ -99,6 +99,17 @@ typedef struct s_img
 	int				height;
 
 }                   t_img;
+
+typedef struct s_recursion_management
+{
+	unsigned int	i;
+	unsigned int	total_recursions;
+	char			max_stack_reached;
+	int				save_x;
+	int				save_y;
+	char			error;
+
+}	t_recursion_management;
 
 typedef struct s_images
 {
@@ -241,7 +252,8 @@ void    *error_malloc(void);
 int     skip_chr(char *str, int c);
 void    find_player_location(int *x, int *y, char **map);
 int 	check_map(char **map);
-int flood_fill(int x, int y, int *save_x, int *save_y, int *error, char **map);
+int flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
+void    recursion_management_init(t_recursion_management *rec_man);
 
 /* Free data */
 void    free_parse(t_parse *parse);

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/15 13:00:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/15 14:45:53 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int check_map(char **map)
     int ret;
     int player_x;
     int player_y;
+    t_recursion_management rec_man;
 
     player_x = -1;
     player_y = -1;
@@ -91,21 +92,17 @@ int check_map(char **map)
         printf("Error\nNo player in the map. Put a N, S, E, W character in the map.\n");
         return (-1);
     }
+    recursion_management_init(&rec_man);
     ret = -1;
-    int save_x = -1;
-    int save_y = -1;
-    int error = 0;
-    while (ret < 0)
+    while (ret != 0)
     {
-        ret = flood_fill(player_x, player_y, &save_x, &save_y, &error, map);
-        if (error == 1)
-        {
+        ret = flood_fill(player_x, player_y, map, &rec_man);
+        rec_man.max_stack_reached = 0;
+        if (rec_man.error == 1)
             break ;
-        }
-        printf("ret in loop = %d\n", ret);
     }
-    
-    if (ret != 0 || error == 1)
+    printf("total recursions = %d\n", rec_man.total_recursions);
+    if (rec_man.error == 1)
     {
         printf("Error\nMap is invalid. Make sure the map is surrounded by walls.\n");
         return (-1);
@@ -114,56 +111,46 @@ int check_map(char **map)
 
 }
 
-int flood_fill(int x, int y, int *save_x, int *save_y, int *error, char **map)
-{
-    static int i = 0;
-    static int flag = 0;
-    static int saved = 0;
+/*
+**
+** Returns 0 if all went oke, if map invalid, sets rec_man->error = 1.
+**
+ */
 
-    printf("i = %d, flag = %d\n", i, flag);
-    if (i < 0)
+int flood_fill(int x, int y, char **map, t_recursion_management *rec_man)
+{
+    if (rec_man->max_stack_reached == 1)
     {
-        flag = 0;
-        i = 0;
-    }
-    if (i == 4 || flag == 1)
-    {
-        // if (saved == 0)
-        // {
-        //     // *save_x = x;
-        //     // *save_y = y;
-        saved = 1;
-        // }
-        flag = 1;
-        i--;
         return (-1);
     }
-    if (*save_x != -1 && *save_y != -1 && saved == 1)
+    if (rec_man->i == STACK_MAX)
     {
-        x = *save_x;
-        y = *save_y;
-        *save_x = -1;
-        *save_y = -1;
-        saved = 0;
+        rec_man->max_stack_reached = 1;
+        rec_man->i = 0;
+        return (-1);
     }
-    if (map[y][x] == '0')
+    if (rec_man->i == 0 && rec_man->total_recursions != 0)
     {
-        *save_x = x;
-        *save_y = y;
+        x = rec_man->save_x;
+        y = rec_man->save_y;
+        map[y][x] = '0';
     }
-    if (i == 0 && map[y][x] == '1')
-        map[y][x] = 'X';
-
-    i++;
+    rec_man->total_recursions++;
+    rec_man->i++;
     if (x < 0 || y < 0 || y >= ft_arrlen(map) || x >= ft_strlen(map[y]) || map[y][x] == ' ')
     {
-        *error = 1;
+        rec_man->error = 1;
         return (1);
     }
     else if (map[y][x] == '1')
         return (0);
+    else if (map[y][x] == '0')
+    {
+        rec_man->save_x = x;
+        rec_man->save_y = y;
+    }
     map[y][x] = '1';
-    return (flood_fill(x + 1, y, save_x, save_y, error, map) + flood_fill(x - 1, y, save_x, save_y, error, map) + flood_fill(x, y + 1, save_x, save_y, error, map) +  flood_fill(x, y - 1, save_x, save_y, error, map));
+    return (flood_fill(x + 1, y, map, rec_man) + flood_fill(x - 1, y, map, rec_man) + flood_fill(x, y + 1, map, rec_man) +  flood_fill(x, y - 1, map, rec_man));
 }
 
 int skip_chr(char *str, int c)

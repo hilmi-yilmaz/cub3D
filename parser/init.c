@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:17:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/08/31 13:25:16 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/15 14:24:05 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,14 @@ void    parse_init(t_parse *parse)
         i++;
     }
     parse->map = NULL;
+}
+
+void    recursion_management_init(t_recursion_management *rec_man)
+{
+    rec_man->i = 0;
+    rec_man->total_recursions = 0;
+    rec_man->max_stack_reached = 0;
+    rec_man->save_x = -1;
+    rec_man->save_y = -1;
+    rec_man->error = 0;
 }
