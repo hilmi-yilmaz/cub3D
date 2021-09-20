@@ -7,16 +7,30 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse)
+int     load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse)
 {
-    load_xpm_image(mlx_ptr, &images->north_xpm, parse->north_text);
-    load_xpm_image(mlx_ptr, &images->south_xpm, parse->south_text);
-    load_xpm_image(mlx_ptr, &images->west_xpm, parse->west_text);
-    load_xpm_image(mlx_ptr, &images->east_xpm, parse->east_text);
+    int ret;
+
+    ret = load_xpm_image(mlx_ptr, &images->north_xpm, parse->north_text);
+    if (ret == -1)
+        return (-1);
+    ret = load_xpm_image(mlx_ptr, &images->south_xpm, parse->south_text);
+    if (ret == -1)
+        return (-1);
+    ret = load_xpm_image(mlx_ptr, &images->west_xpm, parse->west_text);
+    if (ret == -1)
+        return (-1);
+    ret = load_xpm_image(mlx_ptr, &images->east_xpm, parse->east_text);
+    if (ret == -1)
+        return (-1);
+    return (0);
 }
 
-void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
+int     load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
 {
     xpm_img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path, &xpm_img->width, &xpm_img->height);
+    if (xpm_img->img_ptr == NULL)
+        return (-1);
     xpm_img->img_addr = mlx_get_data_addr(xpm_img->img_ptr, &xpm_img->bits_per_pixel, &xpm_img->line_size, &xpm_img->endian);
+    return (0);
 }

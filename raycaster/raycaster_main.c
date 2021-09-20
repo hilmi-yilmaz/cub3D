@@ -110,7 +110,8 @@ int raycaster_main(t_data *data)
 	data->images.main.img_addr = mlx_get_data_addr(data->images.main.img_ptr, &data->images.main.bits_per_pixel, &data->images.main.line_size, &data->images.main.endian);
 
 	/* Initialize the screen with the player */
-	init(data);
+	int ret = init(data);
+	
 
 	/* React on the moving player */
 	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);

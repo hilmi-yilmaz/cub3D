@@ -284,7 +284,7 @@ void	free_map(char **map);
 int     raycaster_main(t_data *data);
 
 /* Initialize */
-void    init(t_data *data);
+int    init(t_data *data);
 void    set_start_location(t_player *player, char **map);
 
 /* Hooks */
@@ -348,8 +348,8 @@ void    print_columns(unsigned int *arr, int len);
 void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
 void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
 void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
-void    load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
-void    load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
+int    	load_all_xpm_images(void *mlx_ptr, t_images *images, t_parse *parse);
+int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 
 void			get_scale_params_x(t_tmpscale *scale_params, t_img *xpm, int width);
 void			get_scale_params_y(t_tmpscale *scale_params, t_img *xpm, int height);

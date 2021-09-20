@@ -6,11 +6,15 @@
 #include "../cub3d.h"
 
 
-void    init(t_data *data)
+int	init(t_data *data)
 {
-    ft_memset(&data->player, 0, sizeof(data->player));
+    int ret;
+	
+	ret = 0;
+	ft_memset(&data->player, 0, sizeof(data->player));
     set_start_location(&data->player, data->parse.map);
 	printf("player->x = %f, player->y = %f\n", data->player.x, data->player.y);
+	printf("angle = %f\n", data->player.angle);
     data->player.speed = 0.25;
     data->player.rot_speed = 0.025 * PI;
 
@@ -25,7 +29,9 @@ void    init(t_data *data)
 	//data->player.y = 8.8;
 
 	/* Load xpm images */
-	load_all_xpm_images(data->images.mlx.mlx_ptr, &data->images, &data->parse);
+	ret = load_all_xpm_images(data->images.mlx.mlx_ptr, &data->images, &data->parse);
+	if (ret == -1)
+		return (-1);
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
 	v1_map_to_3d(data);
@@ -34,20 +40,24 @@ void    init(t_data *data)
 	free(data->player.rays_array);
 	free(data->player.side);
 	free(data->player.which_wall);
+	return (0);
 }
 
 void    set_start_location(t_player *player, char **map)
 {
-    find_player_location(&player->x, &player->y, map);
-	printf("player->x = %f, player->y = %f\n", player->x, player->y);
-	if (map[(int)player->y][(int)player->x] == 'N')
+    int	x;
+	int	y;
+	
+	find_player_location(&x, &y, map);
+	//printf("player->x = %d, player->y = %d\n", x, y);
+	if (map[y][x] == 'N')
         player->angle = 0.5 * PI;
-    else if (map[(int)player->y][(int)player->x] == 'W')
+    else if (map[y][x] == 'W')
         player->angle = 1 * PI;
-    else if (map[(int)player->y][(int)player->x] == 'S')
+    else if (map[y][x] == 'S')
         player->angle = 1.5 * PI;
     else
         player->angle = 0 * PI;
-	player->x = (player->x + 0.5) * UNIT;
-    player->y = (player->y + 0.5) * UNIT;
+	player->x = (x + 0.5) * UNIT;
+    player->y = (y + 0.5) * UNIT;
 }

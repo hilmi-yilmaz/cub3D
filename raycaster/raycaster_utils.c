@@ -21,7 +21,7 @@ int close_window(t_data *data)
     mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.main.img_ptr);
     mlx_destroy_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr);
     if (__linux__)
-            mlx_destroy_display(data->images.mlx.mlx_ptr);
+        mlx_destroy_display(data->images.mlx.mlx_ptr);
 
     /* Free the pointers */
     free(data->images.mlx.mlx_ptr);

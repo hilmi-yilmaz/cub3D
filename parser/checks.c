@@ -1,3 +1,6 @@
+/* Standard library header files */
+#include <stdio.h>
+
 /* User defined header files */
 #include "../cub3d.h"
 
