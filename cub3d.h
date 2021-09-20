@@ -86,8 +86,6 @@ typedef struct s_mlx
 
 typedef struct s_img
 {
-    // void            *mlx_ptr;
-    // void            *win_ptr;
     void            *img_ptr;
     char            *img_addr;
 
@@ -227,46 +225,61 @@ typedef struct s_data
 }	t_data;
 
 /* ------------------------------------ PARSING ---------------------------------- */
-/* Parsing data */
+/* parse_main.c */
 int     parse_main(t_parse *parse, char **argv);
-void    	parse_init(t_parse *parse);
-int     	parse_data(int fd, t_parse *parse);
-int 			decision(int fd, t_parse *parse, char *line);
-int     			parse_resolution(int *win_width, int *win_height, char *line);
-int     			parse_textures(t_parse *parse, char *line);
-int     				fill_texture(char **texture, char *line, char *text_id);
-int     			parse_colour(int *colour_array, char *line);
-int						fill_colour(int *colour_array, char *line);
-int     			parse_map(int fd, t_parse *parse, char *line);
-char     				**create_map(t_parse *parse, char *line, int rows);
-int     				*create_len(t_parse *parse, char *line, int rows);
-int     				old_to_new_map(t_parse *parse, char **new_map, int rows);
-int			check_data_completeness(t_parse *parse);
 
-/* Checks while parsing */
+/* init.c */
+void	parse_init(t_parse *parse);
+void	recursion_management_init(t_recursion_management *rec_man);
+
+/* parse_data.c */
+int  	parse_data(int fd, t_parse *parse);
+int 	decision(int fd, t_parse *parse, char *line);
+
+/* parse_resolution.c */
+int   	parse_resolution(int *win_width, int *win_height, char *line);
+
+/* parse_textures.c */
+int 	parse_textures(t_parse *parse, char *line);
+int    	fill_texture(char **texture, char *line, char *text_id);
+
+/* parse_colour.c */
+int     parse_colour(int *colour_array, char *line);
+int		fill_colour(int *colour_array, char *line);
+
+/* parse_map.c */
+int    	parse_map(int fd, t_parse *parse, char *line);
+char  	**create_map(t_parse *parse, char *line, int rows);
+int    	old_to_new_map(t_parse *parse, char **new_map, int rows);
+
+/* checks.c */
 int     check_resolution(char *line);
-int		error_colour(void);
-void    *error_malloc(void);
-
-/* Utils */
-int     skip_chr(char *str, int c);
-void    find_player_location(int *x, int *y, char **map);
 int 	check_map(char **map);
-int flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
-void    recursion_management_init(t_recursion_management *rec_man);
+int		check_data_completeness(t_parse *parse);
 
-/* Free data */
-void    free_parse(t_parse *parse);
-void	free_textures(t_parse *parse);
-void	free_map(char **map);
-void	free_map_len(int *map_len);
-
-
-/* Temporary helper functions */
+/* print.c */
 void    print_parse(t_parse *parse);
 void    print_map(t_parse *parse);
 
+/* error.c */
+int		error_colour(void);
+void    *error_malloc(void);
+
+/* utils.c */
+int     skip_chr(char *str, int c);
+void    find_player_location(int *x, int *y, char **map);
+
+/* flood_fill.c */
+int flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
+
+/* free_data.c */
+void    free_parse(t_parse *parse);
+void	free_textures(t_parse *parse);
+void	free_map(char **map);
+
 /* --------------------------- V1 Raycasting ---------------------------- */
+
+/* raycaster_main.c */
 int     raycaster_main(t_data *data);
 
 /* Initialize */

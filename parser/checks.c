@@ -1,6 +1,32 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+int check_resolution(char *line)
+{
+    int i;
+    int data_count;
+
+    i = 0;
+    data_count = 0;
+    while (line[i] != '\0')
+    {
+        if (ft_isdigit(line[i]) == 0 && line[i] != ' ')
+        {
+            printf("Error: Wrong characters found while parsing resolution data.\n");
+            return (-1);
+        }
+        if (ft_isdigit(line[i]) != 0 && ft_isdigit(line[i + 1]) == 0)
+            data_count++;
+        i++;
+    }
+    if (data_count != RESOLUTION_DATA_COUNT)
+    {
+        printf("Error: Format of resolution isn't correct. Give resolutions as 2 numbers for width and height.\n");
+        return (-1);
+    }
+    return (0);
+}
+
 /* This function checks whether the data file was complete (no missing data) */
 int	check_data_completeness(t_parse *parse)
 {

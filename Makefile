@@ -40,6 +40,7 @@ SRC_PARSER =	parse_main.c \
 				parse_texture.c \
 				parse_colour.c \
 				parse_map.c \
+				flood_fill.c \
 				free_data.c \
 				utils.c \
 				checks.c \
@@ -63,8 +64,6 @@ DIR_TEXTURES = 	texture_handling
 SRC_TEXTURES = 	scale_bmp.c \
 				load_xpm.c \
 				v1_scale_bmp.c
-
-#SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER) $(SRC_TEXTURES)
 
 # Object files
 OBJ_DIR = obj
