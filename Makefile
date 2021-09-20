@@ -41,7 +41,10 @@ SRC_PARSER =	parse_main.c \
 				parse_colour.c \
 				parse_map.c \
 				free_data.c \
-				utils.c
+				utils.c \
+				checks.c \
+				error.c \
+				print.c
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = raycaster_main.c \
@@ -61,11 +64,15 @@ SRC_TEXTURES = 	scale_bmp.c \
 				load_xpm.c \
 				v1_scale_bmp.c
 
-SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER) $(SRC_TEXTURES)
+#SRC = $(SRC_MAIN) $(SRC_PARSER) $(SRC_RAYCASTER) $(SRC_TEXTURES)
 
 # Object files
 OBJ_DIR = obj
-OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ_MAIN = $(SRC_MAIN:%.c=$(OBJ_DIR)/%.o)
+OBJ_PARSER = $(SRC_PARSER:%.c=$(OBJ_DIR)/$(DIR_PARSER)/%.o)
+OBJ_RAYCASTER = $(SRC_RAYCASTER:%.c=$(OBJ_DIR)/$(DIR_RAYCASTER)/%.o)
+OBJ_TEXTURES = $(SRC_TEXTURES:%.c=$(OBJ_DIR)/$(DIR_TEXTURES)/%.o)
+OBJ = $(OBJ_MAIN) $(OBJ_PARSER) $(OBJ_RAYCASTER) $(OBJ_TEXTURES)
 
 VPATH = $(DIR_PARSER) $(DIR_RAYCASTER) $(DIR_TEXTURES)
 
@@ -80,10 +87,11 @@ $(MLX_LIB):
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ) #$(HEADER_FILE)
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LINKS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
+$(OBJ) : $(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(LINKS) -c $< -o $@
 
 clean:

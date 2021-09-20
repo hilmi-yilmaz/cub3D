@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/13 15:47:47 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/20 11:47:22 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,4 @@ int	fill_colour(int *colour_array, char *line)
 	if (line[i] != '\0')
         return (error_colour());
 	return (0);
-}
-
-int	error_colour(void)
-{
-	printf("Error\nFormat of colour data isn't correct.\n");
-	printf("Give 3 numbers for R, G and B separated by kommas and 1 or more spaces.\n");
-	return (-1);
 }

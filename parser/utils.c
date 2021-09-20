@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/15 14:45:53 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/20 11:53:59 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,6 @@
 
 /* User defined header files */
 #include "../cub3d.h"
-
-void    print_parse(t_parse *parse)
-{
-    printf("win_width = |%d|\n", parse->win_width);
-    printf("win_height = |%d|\n", parse->win_height);
-    printf("north_texture = |%s|\n", parse->north_text);
-    printf("south_texture = |%s|\n", parse->south_text);
-    printf("west_texture = |%s|\n", parse->west_text);
-    printf("east_texture = |%s|\n", parse->east_text);
-    printf("Floor colour = |%d,%d,%d|\n", parse->floor_colour[0], parse->floor_colour[1], parse->floor_colour[2]);
-    printf("Ceiling colour = |%d,%d,%d|\n", parse->ceiling_colour[0], parse->ceiling_colour[1], parse->ceiling_colour[2]);
-}
-
-void    print_map(t_parse *parse)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (*(parse->map + i) != NULL)
-    {
-        printf("|");
-        while (parse->map[i][j] != '\0')
-        {
-            printf("%c", *(*(parse->map + i) + j));
-            j++;
-        }
-        //printf("     %d", parse->map_len[i]);
-        printf("\n");
-        j = 0;
-        i++;
-    }
-}
 
 void    find_player_location(int *x, int *y, char **map)
 {
@@ -75,40 +41,6 @@ void    find_player_location(int *x, int *y, char **map)
 		j = 0;
 		i++;
 	}
-}
-
-int check_map(char **map)
-{
-    int ret;
-    int player_x;
-    int player_y;
-    t_recursion_management rec_man;
-
-    player_x = -1;
-    player_y = -1;
-    find_player_location(&player_x, &player_y, map);
-    if (player_x == -1 && player_y == -1)
-    {
-        printf("Error\nNo player in the map. Put a N, S, E, W character in the map.\n");
-        return (-1);
-    }
-    recursion_management_init(&rec_man);
-    ret = -1;
-    while (ret != 0)
-    {
-        ret = flood_fill(player_x, player_y, map, &rec_man);
-        rec_man.max_stack_reached = 0;
-        if (rec_man.error == 1)
-            break ;
-    }
-    printf("total recursions = %d\n", rec_man.total_recursions);
-    if (rec_man.error == 1)
-    {
-        printf("Error\nMap is invalid. Make sure the map is surrounded by walls.\n");
-        return (-1);
-    }
-    return (ret);
-
 }
 
 /*
@@ -161,10 +93,4 @@ int skip_chr(char *str, int c)
     while (*(str + i) == c)
         i++;
     return (i);
-}
-
-void    *error_malloc(void)
-{
-    printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
-    return (NULL);
 }
