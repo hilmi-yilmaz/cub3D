@@ -9,7 +9,8 @@
 void    init(t_data *data)
 {
     ft_memset(&data->player, 0, sizeof(data->player));
-    find_start_location(&data->player, data->parse.map);
+    set_start_location(&data->player, data->parse.map);
+	printf("player->x = %f, player->y = %f\n", data->player.x, data->player.y);
     data->player.speed = 0.25;
     data->player.rot_speed = 0.025 * PI;
 
@@ -35,39 +36,18 @@ void    init(t_data *data)
 	free(data->player.which_wall);
 }
 
-void    find_start_location(t_player *player, char **map)
+void    set_start_location(t_player *player, char **map)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (map[i] != NULL)
-	{
-		while (map[i][j] != '\0')
-		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '2')
-			{
-				set_start_location(player, map, i, j);
-				return ;
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
-
-void    set_start_location(t_player *player, char **map, int i, int j)
-{
-    player->x = (j + 0.5) * UNIT; /* check wether value j + 0.5 is not rounded to j */
-    player->y = (i + 0.5) * UNIT;
-    if (map[i][j] == 'N')
+    find_player_location(&player->x, &player->y, map);
+	printf("player->x = %f, player->y = %f\n", player->x, player->y);
+	if (map[(int)player->y][(int)player->x] == 'N')
         player->angle = 0.5 * PI;
-    else if (map[i][j] == 'W')
+    else if (map[(int)player->y][(int)player->x] == 'W')
         player->angle = 1 * PI;
-    else if (map[i][j] == 'S')
+    else if (map[(int)player->y][(int)player->x] == 'S')
         player->angle = 1.5 * PI;
     else
         player->angle = 0 * PI;
+	player->x = (player->x + 0.5) * UNIT;
+    player->y = (player->y + 0.5) * UNIT;
 }

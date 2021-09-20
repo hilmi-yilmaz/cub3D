@@ -104,5 +104,4 @@ int check_map(char **map)
         return (-1);
     }
     return (ret);
-
 }

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/20 13:16:22 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/20 15:01:22 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,21 @@ int skip_chr(char *str, int c)
     while (*(str + i) == c)
         i++;
     return (i);
+}
+
+char **copy_map(char **map)
+{
+	int		i;
+	char	**copy;
+
+	i = 0;
+	copy = malloc(sizeof(*copy) * (ft_arrlen(map) + 1));
+	while (map[i] != NULL)
+	{
+		copy[i] = malloc(sizeof(*copy[i] * (ft_strlen(map[i]) + 1)));
+		ft_strlcpy(copy[i], map[i], ft_strlen(map[i]) + 1);
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
 }

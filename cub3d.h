@@ -268,6 +268,7 @@ void    *error_malloc(void);
 /* utils.c */
 int     skip_chr(char *str, int c);
 void    find_player_location(int *x, int *y, char **map);
+char 	**copy_map(char **map);
 
 /* flood_fill.c */
 int flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
@@ -284,8 +285,7 @@ int     raycaster_main(t_data *data);
 
 /* Initialize */
 void    init(t_data *data);
-void    find_start_location(t_player *player, char **map);
-void    set_start_location(t_player *player, char **map, int i, int j);
+void    set_start_location(t_player *player, char **map);
 
 /* Hooks */
 int     hooks(int keycode, t_data *data);
