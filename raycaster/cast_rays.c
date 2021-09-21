@@ -61,17 +61,10 @@ int cast_all_rays(t_player *player, int width, char **map, t_parse *parse)
         return (-1);
     player->side = malloc(sizeof(*player->side) * width);
     if (player->side == NULL)
-    {
-        free(player->rays_array);
         return (-1);
-    }
     player->which_wall = malloc(sizeof(*player->which_wall) * width);
     if (player->which_wall == NULL)
-    {
-        free(player->rays_array);
-        free(player->side);
         return (-1);
-    }
     while (i < width)
     {
         player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map, width - 1 - i, parse);

@@ -4,6 +4,13 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void    free_all(t_data *data)
+{
+    free_images(&data->images);
+    free_player(&data->player);
+    free_images(&data->images);
+}
+
 void    free_images(t_images *images)
 {
     free(images->mlx.mlx_ptr);

@@ -14,16 +14,10 @@ int	gameplay(t_data *data)
     draw_floor_ceiling(&data->images.main, &data->parse);
     ret = cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
     if (ret == -1)
-    {
-        free_player(&data->player);
         return (-1);
-    }
     ret = map_to_3d_without_texture(data);
     if (ret == -1)
-    {
-        free_player(&data->player);
         return (-1);
-    }
 	free_player(&data->player);
     mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
 	return (0);

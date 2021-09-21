@@ -319,6 +319,7 @@ unsigned int 	argb_to_hex(int a, int r, int g, int b);
 int             get_argb(unsigned int argb, char c);
 
 /* free_data.c */
+void    free_all(t_data *data);
 void    free_images(t_images *images);
 void    free_player(t_player *player);
 
