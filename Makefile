@@ -49,7 +49,7 @@ SRC_PARSER =	parse_main.c \
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
-				init.c \
+				init_player.c \
 				init_data.c \
 				free_data.c \
 				hooks.c \
@@ -61,7 +61,8 @@ SRC_RAYCASTER = main.c \
 				cast_rays.c \
 				print_data.c \
 				map_to_3d.c \
-				map_to_3d_without_texture.c
+				map_to_3d_without_texture.c \
+				gameplay.c
 
 DIR_TEXTURES = 	texture_handling
 SRC_TEXTURES = 	scale_bmp.c \

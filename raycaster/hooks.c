@@ -8,34 +8,23 @@
 
 int hooks(int keycode, t_data *data)
 {	
-	clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
+	int ret;
+
 	if (keycode == W_KEY)
 		move(&data->player, 0.0, data->player.speed, data->parse.map);
 	if (keycode == S_KEY)
 		move(&data->player, 0.0, -data->player.speed, data->parse.map);
-	if (keycode == A_KEY)
-		move(&data->player, -data->player.speed, 0.0, data->parse.map);
 	if (keycode == D_KEY)
+		move(&data->player, -data->player.speed, 0.0, data->parse.map);
+	if (keycode == A_KEY)
 		move(&data->player, data->player.speed, 0.0, data->parse.map);
 	if (keycode == RIGHT_KEY)
         data->player.angle -= data->player.rot_speed;
     else if (keycode == LEFT_KEY)
         data->player.angle += data->player.rot_speed;
-	reset_angle(&data->player.angle);
-	draw_floor_ceiling(&data->images.main, &data->parse);
-    cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
-	//v1_map_to_3d(data);
-	map_to_3d_without_texture(data);
-	//print_side_array(data->player.which_wall, data->parse.win_width);
-    free(data->player.rays_array);
-	free(data->player.side);
-	free(data->player.which_wall);
-	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
-	//printf("player->x       = %f\n", data->player.x);
-	//printf("player->y       = %f\n", data->player.y);
-	//printf("player->angle   = %f\n", data->player.angle / PI * 180);
-
-	printf("\n");
+	ret = gameplay(data);
+	if (ret == -1)
+		return (-1);
     return (0);
 }
 

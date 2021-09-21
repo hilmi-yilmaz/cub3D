@@ -304,6 +304,9 @@ int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 /* map_to_3d_without_texture.c */
 int		map_to_3d_without_texture(t_data *data);
 
+/* gameplay.c */
+int		gameplay(t_data *data);
+
 /* utils.c */
 int 			*width_of_wall(int *which_wall, int width);
 int 			amount_visible_walls(int *which_wall, int width);

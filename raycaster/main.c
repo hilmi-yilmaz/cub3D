@@ -49,7 +49,10 @@ int raycaster_main(t_data *data)
 	if (data->images.main.img_ptr == NULL)
 		return (-1);
 	data->images.main.img_addr = mlx_get_data_addr(data->images.main.img_ptr, &data->images.main.bits_per_pixel, &data->images.main.line_size, &data->images.main.endian);
-	ret = init_window(data);
+	init_player(&data->player, data->parse.map);
+	ret = gameplay(data);
+	if (ret == -1)
+		return (-1);
 	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);
 	if (__linux__)
 		mlx_hook(data->images.mlx.win_ptr, ClientMessage, NoEventMask, close_window, data);
