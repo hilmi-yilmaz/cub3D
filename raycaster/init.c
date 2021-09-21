@@ -5,20 +5,13 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-
-int	init(t_data *data)
+int	init_window(t_data *data)
 {
     int ret;
 	
-	ret = 0;
-	ft_memset(&data->player, 0, sizeof(data->player));
     set_start_location(&data->player, data->parse.map);
-	printf("player->x = %f, player->y = %f\n", data->player.x, data->player.y);
-	printf("angle = %f\n", data->player.angle);
     data->player.speed = 0.25;
     data->player.rot_speed = 0.025 * PI;
-
-	/* Set the floor and ceiling colour */
 	draw_floor_ceiling(&data->images.main, &data->parse);
 
 	/* Load xpm images */
@@ -27,10 +20,8 @@ int	init(t_data *data)
 		return (-1);
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
-	//v1_map_to_3d(data);
 	map_to_3d_without_texture(data);
 	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
-    //print_side_array(data->player.which_wall, data->parse.win_width);
 	free(data->player.rays_array);
 	free(data->player.side);
 	free(data->player.which_wall);
@@ -43,7 +34,6 @@ void    set_start_location(t_player *player, char **map)
 	int	y;
 	
 	find_player_location(&x, &y, map);
-	//printf("player->x = %d, player->y = %d\n", x, y);
 	if (map[y][x] == 'N')
         player->angle = 0.5 * PI;
     else if (map[y][x] == 'W')

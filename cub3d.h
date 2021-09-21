@@ -54,9 +54,9 @@
 # define RESOLUTION_DATA_COUNT 2
 # define MAX_KOMMAS 2
 
-# define STACK_MAX 10000 // Has to be bigger than 4 sides + 1 when checking during floodfill
+# define STACK_MAX 10000
 
-# define TRUE 1				/* Create a typedef for this */
+# define TRUE 1
 # define FALSE 0
 
 # define UNIT 1
@@ -76,6 +76,30 @@
 # define INF 2147483647
 
 # define INF_SMALL 0.0000000000001
+
+typedef struct s_parse
+{
+    int     		win_width;
+    int     		win_height;
+    char    		*north_text;
+    char    		*south_text;
+    char    		*west_text;
+    char    		*east_text;
+    int             floor_colour[RGB_DATA_COUNT];
+    int             ceiling_colour[RGB_DATA_COUNT];
+	char			**map;
+}			t_parse;
+
+typedef struct s_recursion_management
+{
+	unsigned int	i;
+	unsigned int	total_recursions;
+	char			max_stack_reached;
+	int				save_x;
+	int				save_y;
+	char			error;
+
+}	t_recursion_management;
 
 typedef struct s_mlx
 {
@@ -98,17 +122,6 @@ typedef struct s_img
 
 }                   t_img;
 
-typedef struct s_recursion_management
-{
-	unsigned int	i;
-	unsigned int	total_recursions;
-	char			max_stack_reached;
-	int				save_x;
-	int				save_y;
-	char			error;
-
-}	t_recursion_management;
-
 typedef struct s_images
 {
 	t_mlx	mlx;
@@ -120,19 +133,6 @@ typedef struct s_images
 	t_img	scaled_xpm;
 
 }			t_images;
-
-typedef struct s_parse
-{
-    int     		win_width;
-    int     		win_height;
-    char    		*north_text;
-    char    		*south_text;
-    char    		*west_text;
-    char    		*east_text;
-    int             floor_colour[RGB_DATA_COUNT];
-    int             ceiling_colour[RGB_DATA_COUNT];
-	char			**map;
-}			t_parse;
 
 typedef struct s_tmpscale
 {
@@ -195,7 +195,7 @@ typedef struct s_ray
     double  y;
     double  xa;
     double  ya;
-    int     error;  
+    int     error;
 
 }               t_ray;
 
@@ -271,20 +271,26 @@ void    find_player_location(int *x, int *y, char **map);
 char 	**copy_map(char **map);
 
 /* flood_fill.c */
-int flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
+int 	flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
 
 /* free_data.c */
 void    free_parse(t_parse *parse);
 void	free_textures(t_parse *parse);
 void	free_map(char **map);
 
-/* --------------------------- V1 Raycasting ---------------------------- */
+/* --------------------------- Raycasting ---------------------------- */
 
 /* raycaster_main.c */
 int     raycaster_main(t_data *data);
 
-/* Initialize */
-int    init(t_data *data);
+/* init_data.c */
+void	raycaster_init(t_data *data);
+void	images_init(t_images *images);
+void	player_init(t_player *player);
+void	ray_init(t_ray *ray);
+
+/* init.c */
+int    	init_window(t_data *data);
 void    set_start_location(t_player *player, char **map);
 
 /* Hooks */

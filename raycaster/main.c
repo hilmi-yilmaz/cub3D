@@ -36,41 +36,25 @@ void	basic_horizontal_image(t_img *img)
 
 int raycaster_main(t_data *data)
 {
-    /* Establish the connection between the X Server and X client */
+	int ret;
+
+	raycaster_init(data);
 	data->images.mlx.mlx_ptr = mlx_init();
 	if (data->images.mlx.mlx_ptr == NULL)
 		return (-1);
-
-	/* Create the window */
 	data->images.mlx.win_ptr = mlx_new_window(data->images.mlx.mlx_ptr, data->parse.win_width, data->parse.win_height, "cub3d");
 	if (data->images.mlx.win_ptr == NULL)
 		return (-1);
-	
-	// /* Create an empty image */
 	data->images.main.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, data->parse.win_width, data->parse.win_height);
 	if (data->images.main.img_ptr == NULL)
 		return (-1);
-
-	/* Get the address of the image */
 	data->images.main.img_addr = mlx_get_data_addr(data->images.main.img_ptr, &data->images.main.bits_per_pixel, &data->images.main.line_size, &data->images.main.endian);
-
-	/* Initialize the screen with the player */
-	int ret = init(data);
-	
-
-	/* React on the moving player */
+	ret = init_window(data);
 	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);
-
-	//mlx_loop_hook(data->images.mlx.mlx_ptr, hooks, data);
-
-	/* React on closing the screen */
 	if (__linux__)
 		mlx_hook(data->images.mlx.win_ptr, ClientMessage, NoEventMask, close_window, data);
 	else
 		mlx_hook(data->images.mlx.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
-
-	/* mlx_loop is needed for listening to events. It is an infinite loop */
 	mlx_loop(data->images.mlx.mlx_ptr);
-
 	return (0);
 }

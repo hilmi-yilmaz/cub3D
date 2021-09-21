@@ -50,6 +50,7 @@ SRC_PARSER =	parse_main.c \
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
 				init.c \
+				init_data.c \
 				hooks.c \
 				checks.c \
 				math.c \
