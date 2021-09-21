@@ -29,7 +29,7 @@ int	init(t_data *data)
 	//data->player.y = 8.8;
 
 	/* Load xpm images */
-	ret = load_all_xpm_images(data->images.mlx.mlx_ptr, &data->images, &data->parse);
+	ret = load_all_xpm_images(&data->images, &data->parse);
 	if (ret == -1)
 		return (-1);
 
