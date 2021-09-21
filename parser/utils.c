@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/20 15:01:22 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/21 14:33:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    find_player_location(int *x, int *y, char **map)
 	{
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != ' ')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				*x = j;
                 *y = i;
