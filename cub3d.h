@@ -208,10 +208,10 @@ typedef struct s_player
     double         	rot_speed;
     t_ray           hor_ray;
     t_ray           ver_ray;
-    double          *rays_array;
-    char            *side;
-	int				*which_wall;
-	double			wall_x_start;
+    double          *rays_array;	// contains screen_width elements which are distances
+    char            *side;			// contains screen_width elements which are either N,S,E,W
+	int				*which_wall;	// contains screen_width elements of random numbers. Each succesive number sequence representents a wall.
+	double			wall_x_start;	
 	double			wall_x_end;
 	
 }	                t_player;
@@ -312,6 +312,7 @@ int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* Map to 3D */
 void    map_to_3d(t_data *data);
+void    map_to_3d_without_texture(t_data *data);
 void    v1_map_to_3d(t_data *data);
 int 	*width_of_wall(int *which_wall, int width);
 int 	amount_visible_walls(int *which_wall, int width);

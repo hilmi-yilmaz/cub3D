@@ -24,7 +24,8 @@ int hooks(int keycode, t_data *data)
 	reset_angle(&data->player.angle);
 	draw_floor_ceiling(&data->images.main, &data->parse);
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
-	v1_map_to_3d(data);
+	//v1_map_to_3d(data);
+	map_to_3d_without_texture(data);
 	//print_side_array(data->player.which_wall, data->parse.win_width);
     free(data->player.rays_array);
 	free(data->player.side);

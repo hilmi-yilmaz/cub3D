@@ -62,7 +62,7 @@ int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(doub
 			wall = check_wall(map, ray->x - 1.0, ray->y);
 		else
 			wall = check_wall(map, ray->x, ray->y);
-		if (wall > 0) // ------------------ //
+		if (wall > 0)
 			return (wall);
 		if (wall == -1)
 			return (-1);

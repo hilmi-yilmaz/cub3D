@@ -21,20 +21,14 @@ int	init(t_data *data)
 	/* Set the floor and ceiling colour */
 	draw_floor_ceiling(&data->images.main, &data->parse);
 
-	/* Set start angle */
-	//data->player.angle = deg2rad(360 - 45);
-
-	/* Set start location */
-	//data->player.x = 4.5;
-	//data->player.y = 8.8;
-
 	/* Load xpm images */
 	ret = load_all_xpm_images(&data->images, &data->parse);
 	if (ret == -1)
 		return (-1);
 
     cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
-	v1_map_to_3d(data);
+	//v1_map_to_3d(data);
+	map_to_3d_without_texture(data);
 	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
     //print_side_array(data->player.which_wall, data->parse.win_width);
 	free(data->player.rays_array);

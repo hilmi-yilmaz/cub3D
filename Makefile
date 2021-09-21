@@ -48,13 +48,13 @@ SRC_PARSER =	parse_main.c \
 				print.c
 
 DIR_RAYCASTER = raycaster
-SRC_RAYCASTER = raycaster_main.c \
-				raycaster_init.c \
+SRC_RAYCASTER = main.c \
+				init.c \
 				hooks.c \
 				checks.c \
 				math.c \
 				intersections.c \
-				raycaster_utils.c \
+				utils.c \
 				draw_elements.c \
 				cast_rays.c \
 				print_data.c \
