@@ -5,6 +5,24 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void    set_start_location(t_player *player, char **map)
+{
+    int	x;
+	int	y;
+	
+	find_player_location(&x, &y, map);
+	if (map[y][x] == 'N')
+        player->angle = 0.5 * PI;
+    else if (map[y][x] == 'W')
+        player->angle = 1 * PI;
+    else if (map[y][x] == 'S')
+        player->angle = 1.5 * PI;
+    else
+        player->angle = 0 * PI;
+	player->x = (x + 0.5) * UNIT;
+    player->y = (y + 0.5) * UNIT;
+}
+
 int		ft_arrlen(char **arr)
 {
 	int i;

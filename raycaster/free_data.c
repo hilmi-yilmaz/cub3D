@@ -13,3 +13,10 @@ void    free_images(t_images *images)
     free(images->west_xpm.img_ptr);
     free(images->east_xpm.img_ptr);
 }
+
+void    free_player(t_player *player)
+{
+    free(player->rays_array);
+    free(player->side);
+    free(player->which_wall);
+}

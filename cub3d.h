@@ -291,7 +291,18 @@ void	ray_init(t_ray *ray);
 
 /* init.c */
 int    	init_window(t_data *data);
+
+/* intersections.c */
+int 	horizontal_intersection(t_player *player, double angle, char **map);
+int		vertical_intersection(t_player *player, double angle, char **map);
+int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
+
+/* utils.c */
 void    set_start_location(t_player *player, char **map);
+
+/* free_data.c */
+void    free_images(t_images *images);
+void    free_player(t_player *player);
 
 /* Hooks */
 int     hooks(int keycode, t_data *data);
@@ -310,9 +321,6 @@ void    draw_texture(t_img *main, int column, int wall_height, int win_height, u
 void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Intersection */
-int 	horizontal_intersection(t_player *player, double angle, char **map);
-int		vertical_intersection(t_player *player, double angle, char **map);
-int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
 int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
@@ -332,6 +340,7 @@ int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
 double	deg2rad(double degree);
 void	rotate_vector(double *x, double *y, double angle);
+double	ft_floor(double x);
 
 /* MLX utils */
 int				close_window(t_data *data);

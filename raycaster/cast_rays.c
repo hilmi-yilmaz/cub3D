@@ -57,8 +57,21 @@ int cast_all_rays(t_player *player, int width, char **map, t_parse *parse)
     angle = player->angle - 0.5 * deg2rad(FOV);
     angle_increment = deg2rad(FOV) / width;
     player->rays_array = malloc(sizeof(*player->rays_array) * width);
+    if (player->rays_array == NULL)
+        return (-1);
     player->side = malloc(sizeof(*player->side) * width);
-	player->which_wall = malloc(sizeof(*player->which_wall) * width);
+    if (player->side == NULL)
+    {
+        free(player->rays_array);
+        return (-1);
+    }
+    player->which_wall = malloc(sizeof(*player->which_wall) * width);
+    if (player->which_wall == NULL)
+    {
+        free(player->rays_array);
+        free(player->side);
+        return (-1);
+    }
     while (i < width)
     {
         player->rays_array[width - 1 - i] = cast_single_ray(player, angle, map, width - 1 - i, parse);
@@ -66,6 +79,5 @@ int cast_all_rays(t_player *player, int width, char **map, t_parse *parse)
         reset_angle(&angle);
         i++;
     }
-    //print_side_array(player->side, width);
     return (0);
 }
