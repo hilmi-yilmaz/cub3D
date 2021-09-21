@@ -23,8 +23,13 @@ int	init_window(t_data *data)
         free_player(&data->player);
         return (-1);
     }
-    map_to_3d_without_texture(data);
-	mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
+    ret = map_to_3d_without_texture(data);
+    if (ret == -1)
+    {
+        free_player(&data->player);
+        return (-1);
+    }
+    mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
 	free_player(&data->player);
 	return (0);
 }

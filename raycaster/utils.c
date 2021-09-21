@@ -5,6 +5,58 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+/*
+ Returns the width of the walls visible on the screen. the width count up to the total width of the screen.
+ */
+int *width_of_wall(int *which_wall, int width)
+{
+    int i;
+    int i_temp;
+    int j;
+    int visible_walls;
+    int *width_walls;
+
+    i = 0;
+    j = 0;
+    i_temp = 0;
+    visible_walls = amount_visible_walls(which_wall, width);
+    width_walls = malloc(sizeof(*width_walls) * (visible_walls + 1));
+    if (width_walls == NULL)
+        return (NULL);
+    while (i < width - 1)
+    {
+        if (which_wall[i] != which_wall[i + 1] || i + 1 == width - 1)
+        {
+            width_walls[j] = i_temp + 1;
+            i_temp = 0;
+            j++;
+            i++;
+            continue ;
+        }
+        i++;
+        i_temp++;
+    }
+    width_walls[j - 1] += 1;
+    width_walls[j] = -1;
+    return (width_walls);
+}
+
+int amount_visible_walls(int *which_wall, int width)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 1;
+    while (i < width - 1)
+    {
+        if (which_wall[i] != which_wall[i + 1])
+            count++;
+        i++;
+    }
+    return (count);
+}
+
 void    set_start_location(t_player *player, char **map)
 {
     int	x;

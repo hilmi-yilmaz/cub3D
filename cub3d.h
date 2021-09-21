@@ -297,8 +297,23 @@ int 	horizontal_intersection(t_player *player, double angle, char **map);
 int		vertical_intersection(t_player *player, double angle, char **map);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
+/* cast_rays.c */
+double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
+int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
+
+/* map_to_3d_without_texture.c */
+int		map_to_3d_without_texture(t_data *data);
+
 /* utils.c */
-void    set_start_location(t_player *player, char **map);
+int 			*width_of_wall(int *which_wall, int width);
+int 			amount_visible_walls(int *which_wall, int width);
+void    		set_start_location(t_player *player, char **map);
+int				ft_arrlen(char **arr);
+int				close_window(t_data *data);
+void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
+unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
+unsigned int 	argb_to_hex(int a, int r, int g, int b);
+int             get_argb(unsigned int argb, char c);
 
 /* free_data.c */
 void    free_images(t_images *images);
@@ -326,10 +341,7 @@ int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* Map to 3D */
 void    map_to_3d(t_data *data);
-void    map_to_3d_without_texture(t_data *data);
 void    v1_map_to_3d(t_data *data);
-int 	*width_of_wall(int *which_wall, int width);
-int 	amount_visible_walls(int *which_wall, int width);
 void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column);
 
 /* Math utils */
@@ -341,16 +353,6 @@ int     unit_circle_left_right(double angle);
 double	deg2rad(double degree);
 void	rotate_vector(double *x, double *y, double angle);
 double	ft_floor(double x);
-
-/* MLX utils */
-int				close_window(t_data *data);
-void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
-unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
-unsigned int 	argb_to_hex(int a, int r, int g, int b);
-int             get_argb(unsigned int argb, char c);
-
-/* To libft */
-int		ft_arrlen(char **arr);
 
 /* Printing data */
 void    print_ray_data(t_ray ray);

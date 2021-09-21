@@ -60,7 +60,8 @@ SRC_RAYCASTER = main.c \
 				draw_elements.c \
 				cast_rays.c \
 				print_data.c \
-				map_to_3d.c
+				map_to_3d.c \
+				map_to_3d_without_texture.c
 
 DIR_TEXTURES = 	texture_handling
 SRC_TEXTURES = 	scale_bmp.c \
