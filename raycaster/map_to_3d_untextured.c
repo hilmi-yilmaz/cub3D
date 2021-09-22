@@ -6,7 +6,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int     map_to_3d_without_texture(t_data *data)
+int     map_to_3d_untextured(t_data *data)
 {
     int		        i;
     int             j;
@@ -22,6 +22,21 @@ int     map_to_3d_without_texture(t_data *data)
     width_walls = width_of_wall(data->player.which_wall, data->parse.win_width); // CONTINUE HERE
     if (width_walls == NULL)
         return (-1);
+
+    /* ----------------------------------- print width walls ---------------------------- */
+    int p = 0;
+    int total = 0;
+    while (width_walls[p] != -1)
+    {
+        printf("%d ", width_walls[p]);
+        total += width_walls[p];
+        p++;
+    }
+    printf("\ntotal = %d\n", total);
+    printf("player->wall_x_start = %f\n", data->player.wall_x_start);
+    printf("player->wall_x_end = %f\n", data->player.wall_x_end);
+    /* ---------------------------------------------------------------------------------- */
+
     while (i < data->parse.win_width)
     {
         height = 1.0 / data->player.rays_array[i] * dist_to_plane * WALL_RATIO;

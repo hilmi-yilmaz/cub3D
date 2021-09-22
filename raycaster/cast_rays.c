@@ -27,9 +27,9 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 		player->which_wall[i] = wall_ver + player->side[i];
         distance = ver_dist;
 		if (i == 0)
-			player->wall_x_start = player->ver_ray.x;
+			player->wall_x_start = player->ver_ray.y;
 		else if (i == parse->win_width - 1)
-			player->wall_x_end = player->ver_ray.x;
+			player->wall_x_end = player->ver_ray.y;
     }
     else
     {

@@ -6,7 +6,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void	v1_map_to_3d(t_data *data)
+int		map_to_3d_textured(t_data *data)
 {
 	int	i;
 	int	j;
@@ -21,16 +21,8 @@ void	v1_map_to_3d(t_data *data)
 	count = 0;
 	dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
 	width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
-
-// //-------------------------------------- //
-//     int p = 0;
-//     while (width_walls[p] != -1)
-//     {
-//         printf("%d ", width_walls[p]);
-//         p++;
-//     }
-//     printf("\n");
-// //-----------------------------------------//
+    if (width_walls == NULL)
+        return (-1);
 	printf("wall_x_start = %f\n", data->player.wall_x_start);
 	printf("wall_x_end = %f\n", data->player.wall_x_end);
 	while (width_walls[i] != -1)
@@ -57,6 +49,7 @@ void	v1_map_to_3d(t_data *data)
 		i++;
 	}
 	free(width_walls);
+	return (0);
 }
 
 // void    v1_map_to_3d(t_data *data)

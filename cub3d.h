@@ -301,8 +301,11 @@ int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(dou
 double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
 int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
-/* map_to_3d_without_texture.c */
-int		map_to_3d_without_texture(t_data *data);
+/* map_to_3d_untextured.c */
+int     map_to_3d_untextured(t_data *data);
+
+/* map_to_3d_textured.c */
+int		map_to_3d_textured(t_data *data);
 
 /* gameplay.c */
 int		gameplay(t_data *data);
