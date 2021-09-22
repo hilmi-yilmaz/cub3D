@@ -307,6 +307,9 @@ int		map_to_3d_without_texture(t_data *data);
 /* gameplay.c */
 int		gameplay(t_data *data);
 
+/* init_player.c */
+void    set_player_attributes(t_player *player, char **map);
+
 /* utils.c */
 int 			*width_of_wall(int *which_wall, int width);
 int 			amount_visible_walls(int *which_wall, int width);
