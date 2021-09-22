@@ -5,6 +5,15 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void    ft_swap_doubles(double *x, double *y)
+{
+    double  tmp;
+
+    tmp = *x;
+    *x = *y;
+    *y = tmp;
+}
+
 /*
  Returns the width of the walls visible on the screen. the width count up to the total width of the screen.
  */

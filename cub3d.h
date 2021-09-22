@@ -314,6 +314,7 @@ int		gameplay(t_data *data);
 void    set_player(t_player *player, char **map);
 
 /* utils.c */
+void    		ft_swap_doubles(double *x, double *y);
 int 			*width_of_wall(int *which_wall, int width);
 int 			amount_visible_walls(int *which_wall, int width);
 void    		set_start_location(t_player *player, char **map);

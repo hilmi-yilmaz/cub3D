@@ -17,7 +17,8 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 	wall_hor = horizontal_intersection(player, angle, map);
 	wall_ver = vertical_intersection(player, angle, map);
 	hor_dist = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
-	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y); 
+	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
+    //printf("i = %d\n", i);
 	if (ver_dist <= hor_dist)
     {
 		if (unit_circle_left_right(angle) == 3) // Put these numbers in an ENUM instead of 1, 2, 3, 4
@@ -27,9 +28,20 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 		player->which_wall[i] = wall_ver + player->side[i];
         distance = ver_dist;
 		if (i == 0)
-			player->wall_x_start = player->ver_ray.y;
-		else if (i == parse->win_width - 1)
-			player->wall_x_end = player->ver_ray.y;
+        {
+			if (player->side[i] == 'E')
+                player->wall_x_start = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
+            else if (player->side[i] == 'W')
+                player->wall_x_start = player->ver_ray.y - (int)player->ver_ray.y;
+        }
+        else if (i == parse->win_width - 1)
+        {
+			printf("ver = %f\n", player->ver_ray.y);
+            if (player->side[i] == 'E')
+                player->wall_x_end = player->ver_ray.y - (int)player->ver_ray.y;
+            else if (player->side[i] == 'W')
+                player->wall_x_end = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
+        }
     }
     else
     {
@@ -44,6 +56,8 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 		else if (i == parse->win_width - 1)
 			player->wall_x_end = player->hor_ray.x;
     }
+    //if (player->wall_x_start > player->wall_x_end)
+     //   ft_swap_doubles(&player->wall_x_start, &player->wall_x_end);
     return (distance * cos(player->angle - angle));
 }
 
