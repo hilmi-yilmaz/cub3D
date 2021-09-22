@@ -259,7 +259,7 @@ int		check_data_completeness(t_parse *parse);
 
 /* print.c */
 void    print_parse(t_parse *parse);
-void    print_map(t_parse *parse);
+void    print_map(char **map);
 
 /* error.c */
 int		error_colour(void);
@@ -308,7 +308,7 @@ int		map_to_3d_without_texture(t_data *data);
 int		gameplay(t_data *data);
 
 /* init_player.c */
-void    set_player_attributes(t_player *player, char **map);
+void    set_player(t_player *player, char **map);
 
 /* utils.c */
 int 			*width_of_wall(int *which_wall, int width);

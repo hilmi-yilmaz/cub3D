@@ -32,7 +32,7 @@ LIBFT_DIR = libft
 #DIR_MAIN = 
 SRC_MAIN = main.c
 
-DIR_PARSER = parser
+DIR_PARSER = 	parser
 SRC_PARSER =	parse_main.c \
 				parse_data.c \
 				init.c \
@@ -49,7 +49,7 @@ SRC_PARSER =	parse_main.c \
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
-				init_player.c \
+				set_player.c \
 				init_data.c \
 				free_data.c \
 				hooks.c \

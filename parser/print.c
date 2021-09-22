@@ -16,19 +16,19 @@ void    print_parse(t_parse *parse)
     printf("Ceiling colour = |%d,%d,%d|\n", parse->ceiling_colour[0], parse->ceiling_colour[1], parse->ceiling_colour[2]);
 }
 
-void    print_map(t_parse *parse)
+void    print_map(char **map)
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (*(parse->map + i) != NULL)
+    while (*(map + i) != NULL)
     {
         printf("|");
-        while (parse->map[i][j] != '\0')
+        while (map[i][j] != '\0')
         {
-            printf("%c", *(*(parse->map + i) + j));
+            printf("%c", *(*(map + i) + j));
             j++;
         }
         //printf("     %d", parse->map_len[i]);

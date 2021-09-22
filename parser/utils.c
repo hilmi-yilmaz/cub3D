@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/21 14:33:07 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/09/22 12:18:02 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char **copy_map(char **map)
 	copy = malloc(sizeof(*copy) * (ft_arrlen(map) + 1));
 	while (map[i] != NULL)
 	{
-		copy[i] = malloc(sizeof(*copy[i] * (ft_strlen(map[i]) + 1)));
+		copy[i] = malloc(sizeof(*copy[i]) * (ft_strlen(map[i]) + 1));
 		ft_strlcpy(copy[i], map[i], ft_strlen(map[i]) + 1);
 		i++;
 	}
