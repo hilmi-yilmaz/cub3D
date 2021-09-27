@@ -36,9 +36,9 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
         }
         else if (i == parse->win_width - 1)
         {
-            if (player->side[i] == 'E')
+            if (player->side[i] == 'W')
                 player->wall_x_end = player->ver_ray.y - (int)player->ver_ray.y;
-            else if (player->side[i] == 'W')
+            else if (player->side[i] == 'E')
                 player->wall_x_end = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
         }
     }
@@ -59,9 +59,9 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
         }
         else if (i == parse->win_width - 1)
         {
-			if (player->side[i] == 'N') 
+			if (player->side[i] == 'S') 
                 player->wall_x_end = player->hor_ray.x - (int)player->hor_ray.x;
-            else if (player->side[i] == 'S')
+            else if (player->side[i] == 'N')
                 player->wall_x_end = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
         }
     }

@@ -99,6 +99,16 @@ void    set_start_location(t_player *player, char **map)
     player->y = (y + 0.5) * UNIT;
 }
 
+int     ft_int_array_len(int *arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i] != -1)
+        i++;
+    return (i);
+}
+
 int		ft_arrlen(char **arr)
 {
 	int i;

@@ -124,11 +124,10 @@ void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, 
 	// printf("y_start = %d\n", y_start);
 	// printf("y_end = %d\n", y_end);
 
-	if (i == 0 || i == width)
+	if (i == 0)
 	{
 		x += (wall_x - width_walls[i]);
 	}
-	//printf("x = %d\n", x);
 	while (y_start < y_end)
 	{
 		//colour = get_texture_pixel(xpm, scale_params, x, j);

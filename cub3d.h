@@ -319,12 +319,14 @@ int 			*width_of_wall(int *which_wall, int width);
 int 			amount_visible_walls(int *which_wall, int width);
 void    		set_start_location(t_player *player, char **map);
 int				ft_arrlen(char **arr);
+int     		ft_int_array_len(int *arr);
 int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
 int             get_argb(unsigned int argb, char c);
 void    draw_line_on_wall_edges(t_img *main, int *width_walls, int win_height);
+
 
 /* free_data.c */
 void    free_all(t_data *data);

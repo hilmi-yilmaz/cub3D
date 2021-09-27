@@ -41,9 +41,15 @@ int		map_to_3d_textured(t_data *data)
 
 	while (width_walls[i] != -1)
 	{
-		if (i == 0 || i == data->parse.win_width)
+		if (i == 0)
 		{
 			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_start)); // what the length of the whole wall is (visible + invisible)
+			printf("wall_x = %d\n", wall_x);
+			get_scale_params_x(&params, &data->images.north_xpm, wall_x);
+		}
+		else if (i == ft_int_array_len(width_walls) - 1)
+		{
+			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_end)); // what the length of the whole wall is (visible + invisible)
 			printf("wall_x = %d\n", wall_x);
 			get_scale_params_x(&params, &data->images.north_xpm, wall_x);
 		}
@@ -53,7 +59,7 @@ int		map_to_3d_textured(t_data *data)
 		{
 			height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
 			get_scale_params_y(&params, &data->images.north_xpm, height);
-			pixel_from_xpm_to_window(&data->images.main, &data->images.north_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, data->parse.win_width);
+			pixel_from_xpm_to_window(&data->images.main, &data->images.north_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, ft_int_array_len(width_walls));
 			j++;
 			count++;
 		}
