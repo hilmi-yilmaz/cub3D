@@ -15,7 +15,7 @@ int	gameplay(t_data *data)
     ret = cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
     if (ret == -1)
         return (-1);
-    ret = map_to_3d_untextured(data);
+    ret = map_to_3d_textured(data);
     if (ret == -1)
         return (-1);
 	free_player(&data->player);

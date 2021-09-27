@@ -14,40 +14,53 @@ int		map_to_3d_textured(t_data *data)
 	int	count;
 	int	dist_to_plane;
 	int	*width_walls;
+	int wall_x;
 	t_tmpscale params;
 
 	i = 0;
 	j = 0;
-	count = 0;
+	count = 0; // stores which column (0 to width of screen)
 	dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
 	width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
     if (width_walls == NULL)
         return (-1);
-	printf("wall_x_start = %f\n", data->player.wall_x_start);
-	printf("wall_x_end = %f\n", data->player.wall_x_end);
+
+    /* ----------------------------------- print width walls ---------------------------- */
+    int p = 0;
+    int total = 0;
+		printf("--------------------\n");
+    while (width_walls[p] != -1)
+    {
+        printf("%d ", width_walls[p]);
+        total += width_walls[p];
+        p++;
+    }
+    printf("\nplayer->wall_x_start = %f\n", data->player.wall_x_start);
+    printf("player->wall_x_end = %f\n", data->player.wall_x_end);
+    /* ---------------------------------------------------------------------------------- */
+
 	while (width_walls[i] != -1)
 	{
-		
-		// if (i == 0)
-		// {
-		// 	// wall_x is the real length of the wall (visible + nonvisible part)
-		// 	int wall_x = (double)width_walls[i] / ((double)data->player.wall_x_start - (int)data->player.wall_x_start);
-		// 	printf("wall_width = %d (visible)\n", width_walls[i]);
-		// 	printf("wall_x = %d (visible + non-visible)\n", wall_x);
-		// 	get_scale_params_x(&params, &data->images.north_xpm, wall_x);
-		// }
-		get_scale_params_x(&params, &data->images.north_xpm, width_walls[i]);
+		if (i == 0 || i == data->parse.win_width)
+		{
+			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_start)); // what the length of the whole wall is (visible + invisible)
+			printf("wall_x = %d\n", wall_x);
+			get_scale_params_x(&params, &data->images.north_xpm, wall_x);
+		}
+		else
+			get_scale_params_x(&params, &data->images.north_xpm, width_walls[i]);
 		while (j < width_walls[i])
 		{
 			height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
 			get_scale_params_y(&params, &data->images.north_xpm, height);
-			pixel_from_xpm_to_window(&data->images.main, &data->images.north_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i);
+			pixel_from_xpm_to_window(&data->images.main, &data->images.north_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, data->parse.win_width);
 			j++;
 			count++;
 		}
 		j = 0;
 		i++;
 	}
+	draw_line_on_wall_edges(&data->images.main, width_walls, data->parse.win_height);
 	free(width_walls);
 	return (0);
 }

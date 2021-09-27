@@ -324,6 +324,7 @@ void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colo
 unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
 int             get_argb(unsigned int argb, char c);
+void    draw_line_on_wall_edges(t_img *main, int *width_walls, int win_height);
 
 /* free_data.c */
 void    free_all(t_data *data);
@@ -383,6 +384,6 @@ int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 void			get_scale_params_x(t_tmpscale *scale_params, t_img *xpm, int width);
 void			get_scale_params_y(t_tmpscale *scale_params, t_img *xpm, int height);
 unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x, int dest_y);
-void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i);
+void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i, int wall_x, int width);
 
 #endif

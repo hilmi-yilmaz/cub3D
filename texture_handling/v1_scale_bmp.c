@@ -36,7 +36,7 @@ unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x,
 	/* x scaling params */
 	scale_params->sx1 = dest_x * scale_params->fx;
 	scale_params->sx2 = scale_params->sx1 + scale_params->fxstep;
-	scale_params->istart = trunc(scale_params->sx1);
+	scale_params->istart = trunc(scale_params->sx1); // CANT USE TRUNC FUNCTION
 	scale_params->iend = trunc(scale_params->sx2);
 	scale_params->devX1 = 1.0 - (scale_params->sx1 - scale_params->istart);
 	scale_params->devX2 = 1.0 - (scale_params->sx2 - scale_params->iend);
@@ -97,7 +97,7 @@ unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x,
 ** y is height of the wall
 **
 */
-void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i)
+void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i, int wall_x, int width)
 {
 	//int				j;
 	unsigned int	colour;
@@ -107,7 +107,7 @@ void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, 
 	int				end_xpm;
 
 	//printf("height = %d\n", y);
-	y_start = (win_height - y) / 2;
+	y_start = (win_height - y) / 2; // y is height of column to draw
 	start_xpm = 0;
 	end_xpm = xpm->height;
 	if (y_start < 0)
@@ -119,14 +119,16 @@ void	pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, 
 	y_end = (win_height + y) / 2;
 	if (y_end > win_height - 1)
 		y_end = win_height - 1;
-	//j = 0;
-	// if (i == 0)
-	// {
-	// 	x += (1.0 - (((double)player->wall_x_start - (int)player->wall_x_start))) * width_walls[0];
-	// 	// printf("wall_x_start = %f\n", player->wall_x_start);
-	// 	// printf("width = %d\n", width_walls[0]);
-	// 	printf("x = %d\n", x);
-	// }
+	// printf("win_height = %d\n", win_height);
+	// printf("column_height = %d\n", y);
+	// printf("y_start = %d\n", y_start);
+	// printf("y_end = %d\n", y_end);
+
+	if (i == 0 || i == width)
+	{
+		x += (wall_x - width_walls[i]);
+	}
+	//printf("x = %d\n", x);
 	while (y_start < y_end)
 	{
 		//colour = get_texture_pixel(xpm, scale_params, x, j);

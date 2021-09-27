@@ -5,6 +5,21 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void    draw_line_on_wall_edges(t_img *main, int *width_walls, int win_height)
+{
+    int i;
+    int res;
+
+    i = 0;
+    res = 0;
+    while (width_walls[i] != -1)
+    {
+        res += width_walls[i];
+        draw_columns(main, res, win_height, win_height, argb_to_hex(0, 255, 255, 255));
+        i++;
+    }
+}
+
 void    ft_swap_doubles(double *x, double *y)
 {
     double  tmp;
