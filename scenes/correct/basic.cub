@@ -1,8 +1,8 @@
 R 512 256
-NO ./textures/north.xpm
-SO ./textures/brick.xpm
+NO ./textures/brick.xpm
+SO ./textures/grass.xpm
 WE ./textures/brick.xpm
-EA ./textures/brick.xpm
+EA ./textures/north.xpm
 
 F 50,50,0
 C 0,50,50
@@ -10,5 +10,7 @@ C 0,50,50
 1111111
 1000001
 100N001
+1000001
+1001001
 1000001
 1111111

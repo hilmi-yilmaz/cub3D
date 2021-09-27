@@ -15,6 +15,7 @@ int		map_to_3d_textured(t_data *data)
 	int	dist_to_plane;
 	int	*width_walls;
 	int wall_x;
+	t_img *selected_xpm;
 	t_tmpscale params;
 
 	i = 0;
@@ -41,25 +42,36 @@ int		map_to_3d_textured(t_data *data)
 
 	while (width_walls[i] != -1)
 	{
+		
+		if (data->player.side[count] == 'N')
+			selected_xpm = &data->images.north_xpm;
+		else if (data->player.side[count] == 'S')
+			selected_xpm = &data->images.south_xpm;
+		else if (data->player.side[count] == 'W')
+			selected_xpm = &data->images.west_xpm;
+		else if (data->player.side[count] == 'E')
+			selected_xpm = &data->images.east_xpm;
 		if (i == 0)
 		{
 			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_start)); // what the length of the whole wall is (visible + invisible)
-			printf("wall_x = %d\n", wall_x);
-			get_scale_params_x(&params, &data->images.north_xpm, wall_x);
+			printf("wall_x (start) = %d\n", wall_x);
+			get_scale_params_x(&params, selected_xpm, wall_x);
 		}
 		else if (i == ft_int_array_len(width_walls) - 1)
 		{
 			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_end)); // what the length of the whole wall is (visible + invisible)
-			printf("wall_x = %d\n", wall_x);
-			get_scale_params_x(&params, &data->images.north_xpm, wall_x);
+			printf("wall_x (end) = %d\n", wall_x);
+			get_scale_params_x(&params, selected_xpm, wall_x);
 		}
 		else
-			get_scale_params_x(&params, &data->images.north_xpm, width_walls[i]);
+			get_scale_params_x(&params, selected_xpm, width_walls[i]);
 		while (j < width_walls[i])
 		{
+
+			printf("player->side = %c\n", data->player.side[count]);
 			height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
-			get_scale_params_y(&params, &data->images.north_xpm, height);
-			pixel_from_xpm_to_window(&data->images.main, &data->images.north_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, ft_int_array_len(width_walls));
+			get_scale_params_y(&params, selected_xpm, height);
+			pixel_from_xpm_to_window(&data->images.main, selected_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, ft_int_array_len(width_walls));
 			j++;
 			count++;
 		}
