@@ -52,12 +52,20 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 		player->which_wall[i] = wall_hor + player->side[i];
 		distance = hor_dist;
 		if (i == 0)
-			player->wall_x_start = player->hor_ray.x;
-		else if (i == parse->win_width - 1)
-			player->wall_x_end = player->hor_ray.x;
+        {
+			if (player->side[i] == 'N')
+                player->wall_x_start = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
+            else if (player->side[i] == 'S')
+                player->wall_x_start = player->hor_ray.x - (int)player->hor_ray.x;
+        }
+        else if (i == parse->win_width - 1)
+        {
+			if (player->side[i] == 'N') 
+                player->wall_x_end = player->hor_ray.x - (int)player->hor_ray.x;
+            else if (player->side[i] == 'S')
+                player->wall_x_end = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
+        }
     }
-    //if (player->wall_x_start > player->wall_x_end)
-     //   ft_swap_doubles(&player->wall_x_start, &player->wall_x_end);
     return (distance * cos(player->angle - angle));
 }
 
