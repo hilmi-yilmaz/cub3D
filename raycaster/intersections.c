@@ -6,9 +6,7 @@
 #include "../cub3d.h"
 
 int horizontal_intersection(t_player *player, double angle, char **map)
-{
-	static int	i;
-	
+{	
 	if (unit_circle_upper_lower(angle) == 0)
 	{
 		player->hor_ray.y = floor(player->y);
@@ -30,12 +28,12 @@ int	vertical_intersection(t_player *player, double angle, char **map)
 {
 	if (unit_circle_left_right(angle) == 3)
 	{
-		player->ver_ray.x = ft_floor(player->x) + 1.0;
+		player->ver_ray.x = floor(player->x) + 1.0;
 		player->ver_ray.xa = 1.0;
 	}
 	else
 	{
-		player->ver_ray.x = ft_floor(player->x);
+		player->ver_ray.x = floor(player->x);
 		player->ver_ray.xa = -1.0;
 	}
 	player->ver_ray.y = player->y + (player->x - player->ver_ray.x) * tan(angle);

@@ -4,6 +4,18 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void	print_width_walls(int *width_walls)
+{
+    int p = 0;
+    int total = 0;
+    while (width_walls[p] != -1)
+    {
+        printf("%d ", width_walls[p]);
+        total += width_walls[p];
+        p++;
+    }
+}
+
 void    print_ray_data(t_ray ray)
 {
         printf("x = %f\n", ray.x);

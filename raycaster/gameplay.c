@@ -12,7 +12,7 @@ int	gameplay(t_data *data)
 	reset_angle(&data->player.angle);
     clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
     draw_floor_ceiling(&data->images.main, &data->parse);
-    ret = cast_all_rays(&data->player, data->parse.win_width, data->parse.map, &data->parse);
+    ret = cast_all_rays(&data->player, &data->parse);
     if (ret == -1)
         return (-1);
     ret = map_to_3d_textured(data);

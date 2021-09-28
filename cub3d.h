@@ -285,8 +285,8 @@ void	images_init(t_images *images);
 void	player_init(t_player *player);
 void	ray_init(t_ray *ray);
 
-/* init.c */
-int    	init_window(t_data *data);
+/* gameplay.c */
+int		gameplay(t_data *data);
 
 /* intersections.c */
 int 	horizontal_intersection(t_player *player, double angle, char **map);
@@ -294,17 +294,13 @@ int		vertical_intersection(t_player *player, double angle, char **map);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
 /* cast_rays.c */
-//double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
-int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
+int 	cast_all_rays(t_player *player, t_parse *parse);
 
 /* map_to_3d_untextured.c */
 int     map_to_3d_untextured(t_data *data);
 
 /* map_to_3d_textured.c */
 int		map_to_3d_textured(t_data *data);
-
-/* gameplay.c */
-int		gameplay(t_data *data);
 
 /* utils.c */
 void    		ft_swap_doubles(double *x, double *y);
@@ -344,7 +340,7 @@ void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Intersection */
 //double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
-int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
+//int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* Map to 3D */
 void    map_to_3d(t_data *data);
@@ -352,8 +348,7 @@ void    v1_map_to_3d(t_data *data);
 void    get_column_xpm(t_img *xpm_img, unsigned int *column_rgb, int column);
 
 /* Math utils */
-double	calculate_ray_len(t_player *player, double x, double angle);
-double	calculate_ray_len_v1(t_player *player, double x, double y);
+double	calculate_ray_len(t_player *player, double x, double y);
 void    reset_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
