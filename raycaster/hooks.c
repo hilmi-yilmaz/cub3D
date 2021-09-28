@@ -10,6 +10,8 @@ int hooks(int keycode, t_data *data)
 {	
 	int ret;
 
+	if (keycode == ESC_KEY)
+		close_window(data);
 	if (keycode == W_KEY)
 		move(&data->player, 0.0, data->player.speed, data->parse.map);
 	if (keycode == S_KEY)

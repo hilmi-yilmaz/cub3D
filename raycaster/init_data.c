@@ -13,7 +13,12 @@ void	raycaster_init(t_data *data)
 
 void	images_init(t_images *images)
 {
-	ft_bzero(images, sizeof(images));
+	ft_bzero(&images->main, sizeof(images->mlx));
+	ft_bzero(&images->main, sizeof(images->main));
+	ft_bzero(&images->north_xpm, sizeof(images->north_xpm));
+	ft_bzero(&images->south_xpm, sizeof(images->south_xpm));
+	ft_bzero(&images->west_xpm, sizeof(images->west_xpm));
+	ft_bzero(&images->east_xpm, sizeof(images->east_xpm));
 }
 
 void	player_init(t_player *player)

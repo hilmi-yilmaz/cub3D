@@ -15,6 +15,7 @@
 #  define D_KEY 100
 #  define W_KEY 119
 #  define S_KEY 115
+#  define ESC_KEY 65307
 # else
 #  define IS_LINUX 0
 #  include "mlx/mlx.h"
@@ -26,6 +27,7 @@
 #  define D_KEY 2
 #  define W_KEY 13
 #  define S_KEY 1
+#  define ESC_KEY 53
 // #  define KeyPress 2
 // #  define KeyPressMask 1L<<0
 // #  define NoEventMask 1L<<0

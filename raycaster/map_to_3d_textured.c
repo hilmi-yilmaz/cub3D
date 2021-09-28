@@ -67,8 +67,6 @@ int		map_to_3d_textured(t_data *data)
 			get_scale_params_x(&params, selected_xpm, width_walls[i]);
 		while (j < width_walls[i])
 		{
-
-			printf("player->side = %c\n", data->player.side[count]);
 			height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
 			get_scale_params_y(&params, selected_xpm, height);
 			pixel_from_xpm_to_window(&data->images.main, selected_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, ft_int_array_len(width_walls));
