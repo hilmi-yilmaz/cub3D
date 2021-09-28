@@ -26,8 +26,8 @@ void	player_init(t_player *player)
 	player->x = -1;;
 	player->y = -1;
     player->angle = -1;
-    player->speed = -1;
-    player->rot_speed = -1;
+    player->speed = 0.25;
+    player->rot_speed = 0.025 * PI;
     player->rays_array = NULL;
     player->side = NULL;
 	player->which_wall = NULL;

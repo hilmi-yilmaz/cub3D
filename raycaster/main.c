@@ -7,50 +7,40 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-#define SCALE_X 0.5
-#define SCALE_Y 0.5
-
-void	basic_horizontal_image(t_img *img)
+static int	set_mlx(t_data *data)
 {
-	int i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < img->height)
-	{
-		while (i < img->width)
-		{
-			if (i == 0)
-				my_pixel_put(img, i, j, argb_to_hex(0, 255, 0, 0));
-			else if (i == 1)
-				my_pixel_put(img, i, j, argb_to_hex(0, 0, 255, 0));
-			else if (i == 2)
-				my_pixel_put(img, i, j, argb_to_hex(0, 0, 0, 255));
-			i++;
-		}
-		i = 0;
-		j++;
-	}
-}
-
-int raycaster_main(t_data *data)
-{
-	int ret;
-
-	raycaster_init(data);
 	data->images.mlx.mlx_ptr = mlx_init();
 	if (data->images.mlx.mlx_ptr == NULL)
 		return (-1);
-	data->images.mlx.win_ptr = mlx_new_window(data->images.mlx.mlx_ptr, data->parse.win_width, data->parse.win_height, "cub3d");
+	data->images.mlx.win_ptr = mlx_new_window(data->images.mlx.mlx_ptr, \
+											  data->parse.win_width, \
+											  data->parse.win_height, \
+											  "cub3d");
 	if (data->images.mlx.win_ptr == NULL)
 		return (-1);
-	data->images.main.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, data->parse.win_width, data->parse.win_height);
+	data->images.main.img_ptr = mlx_new_image(data->images.mlx.mlx_ptr, \
+											  data->parse.win_width, \
+											  data->parse.win_height);
 	if (data->images.main.img_ptr == NULL)
 		return (-1);
-	data->images.main.img_addr = mlx_get_data_addr(data->images.main.img_ptr, &data->images.main.bits_per_pixel, &data->images.main.line_size, &data->images.main.endian);
-	load_all_xpm_images(&data->images, &data->parse);
-	set_player(&data->player, data->parse.map);
+	data->images.main.img_addr = mlx_get_data_addr(data->images.main.img_ptr, \
+												   &data->images.main.bits_per_pixel, \
+												   &data->images.main.line_size, \
+												   &data->images.main.endian);
+	if (data->images.main.img_addr == NULL)
+		return (-1);
+	if (!load_all_xpm_images(&data->images, &data->parse))
+		return (-1);
+	return (0);
+}
+
+int	raycaster_main(t_data *data)
+{
+	int	ret;
+
+	raycaster_init(data);
+	set_mlx(data);
+	set_start_location(&data->player, data->parse.map);
 	ret = gameplay(data);
 	if (ret == -1)
 		return (-1);

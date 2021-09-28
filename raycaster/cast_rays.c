@@ -6,7 +6,61 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse)
+static double	set_vertical_data(t_player *player, double angle, double ver_dist, int i, int win_width, int wall_ver)
+{
+	double distance;
+
+	if (unit_circle_left_right(angle) == 3) // Put these numbers in an ENUM instead of 1, 2, 3, 4
+		player->side[i] = 'E';
+	else
+		player->side[i] = 'W';
+	player->which_wall[i] = wall_ver + player->side[i];
+	distance = ver_dist;
+	if (i == 0)
+	{
+		if (player->side[i] == 'W')
+			player->wall_x_start = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
+		else if (player->side[i] == 'E')
+			player->wall_x_start = player->ver_ray.y - (int)player->ver_ray.y;
+	}
+	else if (i == win_width - 1)
+	{
+		if (player->side[i] == 'W')
+			player->wall_x_end = player->ver_ray.y - (int)player->ver_ray.y;
+		else if (player->side[i] == 'E')
+			player->wall_x_end = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
+	}
+	return (distance);
+}
+
+static double	set_horizontal_data(t_player *player, double angle, double hor_dist, int i, int win_width, int wall_hor)
+{
+	double distance;
+
+	if (unit_circle_upper_lower(angle) == 0)
+		player->side[i] = 'N';
+	else
+		player->side[i] = 'S';
+	player->which_wall[i] = wall_hor + player->side[i];
+	distance = hor_dist;
+	if (i == 0)
+	{
+		if (player->side[i] == 'S')
+			player->wall_x_start = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
+		else if (player->side[i] == 'N')
+			player->wall_x_start = player->hor_ray.x - (int)player->hor_ray.x;
+	}
+	else if (i == win_width - 1)
+	{
+		if (player->side[i] == 'S') 
+			player->wall_x_end = player->hor_ray.x - (int)player->hor_ray.x;
+		else if (player->side[i] == 'N')
+			player->wall_x_end = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
+	}
+	return (distance);
+}
+
+static double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse)
 {
 	double	hor_dist;
 	double	ver_dist;
@@ -18,53 +72,10 @@ double	cast_single_ray(t_player *player, double angle, char **map, int i, t_pars
 	wall_ver = vertical_intersection(player, angle, map);
 	hor_dist = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
 	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
-    //printf("i = %d\n", i);
 	if (ver_dist <= hor_dist)
-    {
-		if (unit_circle_left_right(angle) == 3) // Put these numbers in an ENUM instead of 1, 2, 3, 4
-            player->side[i] = 'E';
-        else
-            player->side[i] = 'W';
-		player->which_wall[i] = wall_ver + player->side[i];
-        distance = ver_dist;
-		if (i == 0)
-        {
-			if (player->side[i] == 'W')
-                player->wall_x_start = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
-            else if (player->side[i] == 'E')
-                player->wall_x_start = player->ver_ray.y - (int)player->ver_ray.y;
-        }
-        else if (i == parse->win_width - 1)
-        {
-            if (player->side[i] == 'W')
-                player->wall_x_end = player->ver_ray.y - (int)player->ver_ray.y;
-            else if (player->side[i] == 'E')
-                player->wall_x_end = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
-        }
-    }
+		distance = set_vertical_data(player, angle, ver_dist, i, parse->win_width, wall_ver);
     else
-    {
-		if (unit_circle_upper_lower(angle) == 0)
-            player->side[i] = 'N';
-        else
-            player->side[i] = 'S';
-		player->which_wall[i] = wall_hor + player->side[i];
-		distance = hor_dist;
-		if (i == 0)
-        {
-			if (player->side[i] == 'S')
-                player->wall_x_start = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
-            else if (player->side[i] == 'N')
-                player->wall_x_start = player->hor_ray.x - (int)player->hor_ray.x;
-        }
-        else if (i == parse->win_width - 1)
-        {
-			if (player->side[i] == 'S') 
-                player->wall_x_end = player->hor_ray.x - (int)player->hor_ray.x;
-            else if (player->side[i] == 'N')
-                player->wall_x_end = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
-        }
-    }
+		distance = set_horizontal_data(player, angle, hor_dist, i, parse->win_width, wall_hor);
     return (distance * cos(player->angle - angle));
 }
 

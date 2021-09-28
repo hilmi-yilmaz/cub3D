@@ -5,7 +5,7 @@
 # define UNINIT -1	/* Uninitialized value */
 
 
-# ifdef IS_LINUX
+# ifdef __linux__
 #  include "mlx_linux/mlx.h"
 #  define UP_KEY 65362
 #  define DOWN_KEY 65364
@@ -17,7 +17,6 @@
 #  define S_KEY 115
 #  define ESC_KEY 65307
 # else
-#  define IS_LINUX 0
 #  include "mlx/mlx.h"
 #  define UP_KEY 126
 #  define DOWN_KEY 125
@@ -28,11 +27,6 @@
 #  define W_KEY 13
 #  define S_KEY 1
 #  define ESC_KEY 53
-// #  define KeyPress 2
-// #  define KeyPressMask 1L<<0
-// #  define NoEventMask 1L<<0
-// #  define DestroyNotify 17
-// #  define StructureNotifyMask 1L<<17
 # endif
 
 /* If not defined, we are on OSX */
@@ -300,7 +294,7 @@ int		vertical_intersection(t_player *player, double angle, char **map);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
 /* cast_rays.c */
-double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
+//double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
 int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* map_to_3d_untextured.c */
@@ -311,9 +305,6 @@ int		map_to_3d_textured(t_data *data);
 
 /* gameplay.c */
 int		gameplay(t_data *data);
-
-/* init_player.c */
-void    set_player(t_player *player, char **map);
 
 /* utils.c */
 void    		ft_swap_doubles(double *x, double *y);
@@ -352,7 +343,7 @@ void    draw_texture(t_img *main, int column, int wall_height, int win_height, u
 void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Intersection */
-double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
+//double	cast_single_ray(t_player *player, double angle, char **map, int i, t_parse *parse);
 int 	cast_all_rays(t_player *player, int width, char **map, t_parse *parse);
 
 /* Map to 3D */

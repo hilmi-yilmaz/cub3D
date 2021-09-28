@@ -7,8 +7,8 @@ CFLAGS = -g3 -fsanitize=address
 endif
 
 # Setting variables depending on Operating System
-ifdef IS_LINUX
-LINKS = -D IS_LINUX=1 -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+ifdef __linux__
+LINKS = -D __linux__=1 -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 MLX_DIR = mlx_linux
 else
 LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
@@ -49,7 +49,6 @@ SRC_PARSER =	parse_main.c \
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
-				set_player.c \
 				init_data.c \
 				free_data.c \
 				hooks.c \

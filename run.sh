@@ -3,11 +3,11 @@
 # This script runs "make" or "make fclean" for linux
 
 if [[ "$1" == "fclean" ]]; then
-    make fclean IS_LINUX=1
+    make fclean __linux__=1
 elif [[ "$1" == "valgrind" ]]; then
-	make IS_LINUX=1 VALGRIND=1
+	make __linux__=1 VALGRIND=1
 elif [[ "$1" == "" ]]; then
-    make IS_LINUX=1 && ./exec scenes/correct/basic.cub
+    make __linux__=1 && ./exec scenes/correct/basic.cub
 	#make IS_LINUX=1 && ./exec scenes/correct/basic.cub
 else
     echo "Run script as: ./run.sh [fclean]."
