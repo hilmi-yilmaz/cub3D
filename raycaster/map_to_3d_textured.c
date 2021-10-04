@@ -6,66 +6,85 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-static void	select_xpm_nswe(t_data *data, t_img **selected_xpm, int count)
+static void	select_xpm_nswe(t_data *data, t_img **selected_xpm, int i)
 {
-	if (data->player.side[count] == 'N')
+	if (data->player.side[i] == 'N')
 		*selected_xpm = &data->images.north_xpm;
-	else if (data->player.side[count] == 'S')
+	else if (data->player.side[i] == 'S')
 		*selected_xpm = &data->images.south_xpm;
-	else if (data->player.side[count] == 'W')
+	else if (data->player.side[i] == 'W')
 		*selected_xpm = &data->images.west_xpm;
-	else if (data->player.side[count] == 'E')
+	else if (data->player.side[i] == 'E')
 		*selected_xpm = &data->images.east_xpm;
+}
+
+static void	column_from_texture_to_main_img(t_img *xpm_img, t_img *main, int p, int column, int height, int win_height)
+{
+	int	i;
+	int	start;
+	double	ratio_heights;
+	unsigned int	colour;
+
+	i = 0;
+	start = (double)(win_height - height) / 2;
+	// printf("start = %d\n", start);
+	ratio_heights = (double)xpm_img->height / height;
+	printf("xpm_height / column_height = ratio_height = %d / %d = %f\n", xpm_img->height, height, ratio_heights);
+	while (i < height)
+	{
+		//printf("column = %d, height = %f\n", column, (double)i * ratio_heights);
+		colour = my_pixel_get(xpm_img, column, (double)i * ratio_heights);
+		my_pixel_put(main, p, start + i, colour);
+		i++;
+	}
 }
 
 int		map_to_3d_textured(t_data *data)
 {
-	int	i; // loops over all walls [98, 255, 99]
-	int	j; // loops over each wall [0..97, 0..255, 0..99]
-	int	height; // height of the column
-	int	count;  // which columns we are at (0..width)
-	int	dist_to_plane; // const distance to plane
-	int	*width_walls;  // contains width of the walls [98, 255, 99]
-	int wall_x;
-	t_img *selected_xpm;
-	t_tmpscale params;
+	int		i;
+	int		height;
+	int		dist_to_plane;
+	double	textwidth;
+	t_img	*selected_xpm;
 
 	i = 0;
-	j = 0;
-	count = 0; // stores which column (0 to width of screen)
 	dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
-	width_walls = width_of_wall(data->player.which_wall, data->parse.win_width);
-    if (width_walls == NULL)
-        return (-1);
-
-	while (width_walls[i] != -1)
+	while (i < data->parse.win_width)
 	{
-		select_xpm_nswe(data, &selected_xpm, count);
-		if (i == 0)
+		if (data->player.side[i] == 'E')
 		{
-			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_start)); // what the length of the whole wall is (visible + invisible)
-			get_scale_params_x(&params, selected_xpm, wall_x);
+			select_xpm_nswe(data, &selected_xpm, i);
+			printf("vertical  : x = %f, y = %f\n", data->player.ver_ray[i].x, data->player.ver_ray[i].y);
+			textwidth = data->player.ver_ray[i].y - floor(data->player.ver_ray[i].y);
 		}
-		else if (i == ft_int_array_len(width_walls) - 1)
+		else if (data->player.side[i] == 'W')
 		{
-			wall_x = (int)((double)width_walls[i] / (1.0 - data->player.wall_x_end)); // what the length of the whole wall is (visible + invisible)
-			get_scale_params_x(&params, selected_xpm, wall_x);
+			select_xpm_nswe(data, &selected_xpm, i);
+			printf("vertical  : x = %f, y = %f\n", data->player.ver_ray[i].x, data->player.ver_ray[i].y);
+			textwidth = 1.0 - (data->player.ver_ray[i].y - floor(data->player.ver_ray[i].y));
 		}
-		else
-			get_scale_params_x(&params, selected_xpm, width_walls[i]);
-		while (j < width_walls[i])
+		else if (data->player.side[i] == 'N')
 		{
-			height = 1.0 / data->player.rays_array[count] * dist_to_plane * WALL_RATIO;
-			get_scale_params_y(&params, selected_xpm, height);
-			pixel_from_xpm_to_window(&data->images.main, selected_xpm, &params, count, j, height, data->parse.win_height, &data->player, width_walls, i, wall_x, ft_int_array_len(width_walls));
-			j++;
-			count++;
+			select_xpm_nswe(data, &selected_xpm, i);
+			printf("horizontal: x = %f, y = %f\n", data->player.hor_ray[i].x, data->player.hor_ray[i].y);
+			textwidth = data->player.hor_ray[i].x - floor(data->player.hor_ray[i].x);
 		}
-		j = 0;
+		else if (data->player.side[i] == 'S')
+		{
+			select_xpm_nswe(data, &selected_xpm, i);
+			printf("horizontal: x = %f, y = %f\n", data->player.hor_ray[i].x, data->player.hor_ray[i].y);
+			textwidth = 1.0 - (data->player.hor_ray[i].x - floor(data->player.hor_ray[i].x));
+		}
+
+		textwidth *= selected_xpm->width;
+		printf("textwidth = %f\n", textwidth);
+
+		height = 1.0 / data->player.rays_array[i] * dist_to_plane * WALL_RATIO;
+
+		column_from_texture_to_main_img(selected_xpm, &data->images.main, i, textwidth, height, data->parse.win_height);
 		i++;
 	}
-	draw_line_on_wall_edges(&data->images.main, width_walls, data->parse.win_height);
-	free(width_walls);
+	//draw_line_on_wall_edges(&data->images.main, width_walls, data->parse.win_height);
 	return (0);
 }
 

@@ -4,6 +4,19 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+void    print_intersections(t_player *player, int width)
+{
+    int i;
+
+    i = 0;
+    while(i < width)
+    {
+        printf("hor: x = %5f | y = %5f\n", player->hor_ray[i].x, player->hor_ray[i].y);
+        printf("ver: x = %5f | y = %5f\n\n", player->ver_ray[i].x, player->ver_ray[i].y);
+        i++;
+    }
+}
+
 void	print_width_walls(int *width_walls)
 {
     int p = 0;

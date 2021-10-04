@@ -202,13 +202,15 @@ typedef struct s_player
     double          angle;
     double        	speed;
     double         	rot_speed;
-    t_ray           hor_ray;
-    t_ray           ver_ray;
+    t_ray           *hor_ray;
+    t_ray           *ver_ray;
+	char			*hor_or_ver_intersect; // 'h' or 'v'
     double          *rays_array;	// contains screen_width elements which are distances
     char            *side;			// contains screen_width elements which are either N,S,E,W
-	int				*which_wall;	// contains screen_width elements of random numbers. Each succesive number sequence representents a wall.
-	double			wall_x_start;	
-	double			wall_x_end;
+	// int				*which_wall;	// contains screen_width elements of random numbers. Each succesive number sequence representents a wall.
+	// int				*width_walls;
+	// double			*wall_x_start;
+	// double			*wall_x_end;
 	
 }	                t_player;
 
@@ -282,15 +284,15 @@ int     raycaster_main(t_data *data);
 /* init_data.c */
 void	raycaster_init(t_data *data);
 void	images_init(t_images *images);
-void	player_init(t_player *player);
+void	player_init(t_player *player, int width);
 void	ray_init(t_ray *ray);
 
 /* gameplay.c */
 int		gameplay(t_data *data);
 
 /* intersections.c */
-int 	horizontal_intersection(t_player *player, double angle, char **map);
-int		vertical_intersection(t_player *player, double angle, char **map);
+int 	horizontal_intersection(t_player *player, double angle, char **map, int i);
+int		vertical_intersection(t_player *player, double angle, char **map, int i);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
 /* cast_rays.c */
@@ -304,6 +306,7 @@ int		map_to_3d_textured(t_data *data);
 
 /* utils.c */
 void    		ft_swap_doubles(double *x, double *y);
+int 			*width_of_accumulated_walls(t_player *player, t_parse *parse);
 int 			*width_of_wall(int *which_wall, int width);
 int 			amount_visible_walls(int *which_wall, int width);
 void    		set_start_location(t_player *player, char **map);
@@ -357,6 +360,8 @@ void	rotate_vector(double *x, double *y, double angle);
 double	ft_floor(double x);
 
 /* Printing data */
+void    print_wall_x_starts(t_player *player, t_parse *parse);
+void    print_intersections(t_player *player, int width);
 void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);

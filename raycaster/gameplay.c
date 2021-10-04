@@ -15,6 +15,7 @@ int	gameplay(t_data *data)
     ret = cast_all_rays(&data->player, &data->parse);
     if (ret == -1)
         return (-1);
+    //print_intersections(&data->player, data->parse.win_width);
     ret = map_to_3d_textured(data);
     if (ret == -1)
         return (-1);

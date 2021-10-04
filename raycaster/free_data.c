@@ -25,5 +25,4 @@ void    free_player(t_player *player)
 {
     free(player->rays_array);
     free(player->side);
-    free(player->which_wall);
 }

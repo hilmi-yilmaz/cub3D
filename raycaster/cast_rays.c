@@ -14,22 +14,23 @@ static double	set_vertical_data(t_player *player, double angle, double ver_dist,
 		player->side[i] = 'E';
 	else
 		player->side[i] = 'W';
-	player->which_wall[i] = wall_ver + player->side[i];
+	//player->which_wall[i] = wall_ver + player->side[i];
 	distance = ver_dist;
-	if (i == 0)
-	{
-		if (player->side[i] == 'W')
-			player->wall_x_start = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
-		else if (player->side[i] == 'E')
-			player->wall_x_start = player->ver_ray.y - (int)player->ver_ray.y;
-	}
-	else if (i == win_width - 1)
-	{
-		if (player->side[i] == 'W')
-			player->wall_x_end = player->ver_ray.y - (int)player->ver_ray.y;
-		else if (player->side[i] == 'E')
-			player->wall_x_end = 1.0 - (player->ver_ray.y - (int)player->ver_ray.y);
-	}
+	player->hor_or_ver_intersect[i] = 'v';
+	// //if (i == 0)
+	// //{
+	// 	if (player->side[i] == 'W')
+	// 		player->wall_x_start[i] = 1.0 - (player->ver_ray[i].y - (int)player->ver_ray[i].y);
+	// 	else if (player->side[i] == 'E')
+	// 		player->wall_x_start[i] = player->ver_ray[i].y - (int)player->ver_ray[i].y;
+	// //}
+	// //else if (i == win_width - 1)
+	// //{
+	// 	if (player->side[i] == 'W')
+	// 		player->wall_x_end[i] = player->ver_ray[i].y - (int)player->ver_ray[i].y;
+	// 	else if (player->side[i] == 'E')
+	// 		player->wall_x_end[i] = 1.0 - (player->ver_ray[i].y - (int)player->ver_ray[i].y);
+	// //}
 	return (distance);
 }
 
@@ -41,22 +42,23 @@ static double	set_horizontal_data(t_player *player, double angle, double hor_dis
 		player->side[i] = 'N';
 	else
 		player->side[i] = 'S';
-	player->which_wall[i] = wall_hor + player->side[i];
+	//player->which_wall[i] = wall_hor + player->side[i];
 	distance = hor_dist;
-	if (i == 0)
-	{
-		if (player->side[i] == 'S')
-			player->wall_x_start = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
-		else if (player->side[i] == 'N')
-			player->wall_x_start = player->hor_ray.x - (int)player->hor_ray.x;
-	}
-	else if (i == win_width - 1)
-	{
-		if (player->side[i] == 'S') 
-			player->wall_x_end = player->hor_ray.x - (int)player->hor_ray.x;
-		else if (player->side[i] == 'N')
-			player->wall_x_end = 1.0 - (player->hor_ray.x - (int)player->hor_ray.x);
-	}
+	player->hor_or_ver_intersect[i] = 'h';
+	// //if (i == 0)
+	// //{
+	// 	if (player->side[i] == 'S')
+	// 		player->wall_x_start[i] = 1.0 - (player->hor_ray[i].x - (int)player->hor_ray[i].x);
+	// 	else if (player->side[i] == 'N')
+	// 		player->wall_x_start[i] = player->hor_ray[i].x - (int)player->hor_ray[i].x;
+	// //}
+	// //else if (i == win_width - 1)
+	// //{
+	// 	if (player->side[i] == 'S') 
+	// 		player->wall_x_end[i] = player->hor_ray[i].x - (int)player->hor_ray[i].x;
+	// 	else if (player->side[i] == 'N')
+	// 		player->wall_x_end[i] = 1.0 - (player->hor_ray[i].x - (int)player->hor_ray[i].x);
+	// //}
 	return (distance);
 }
 
@@ -78,10 +80,10 @@ static double	cast_single_ray(t_player *player, t_parse *parse, double angle, in
 	int		wall_hor;
 	int		wall_ver;
 
-	wall_hor = horizontal_intersection(player, angle, parse->map);
-	wall_ver = vertical_intersection(player, angle, parse->map);
-	hor_dist = calculate_ray_len(player, player->hor_ray.x, player->hor_ray.y);
-	ver_dist = calculate_ray_len(player, player->ver_ray.x, player->ver_ray.y);
+	wall_hor = horizontal_intersection(player, angle, parse->map, i);
+	wall_ver = vertical_intersection(player, angle, parse->map, i);
+	hor_dist = calculate_ray_len(player, player->hor_ray[i].x, player->hor_ray[i].y);
+	ver_dist = calculate_ray_len(player, player->ver_ray[i].x, player->ver_ray[i].y);
 	if (ver_dist <= hor_dist)
 		distance = set_vertical_data(player, angle, ver_dist, i, parse->win_width, wall_ver);
     else
@@ -104,8 +106,8 @@ int cast_all_rays(t_player *player, t_parse *parse)
     player->side = malloc(sizeof(*player->side) * parse->win_width);
     if (player->side == NULL)
         return (-1);
-    player->which_wall = malloc(sizeof(*player->which_wall) * parse->win_width);
-    if (player->which_wall == NULL)
+    player->hor_or_ver_intersect = malloc(sizeof(*player->hor_or_ver_intersect) * parse->win_width);
+    if (player->hor_or_ver_intersect == NULL)
         return (-1);
     while (i < parse->win_width)
     {
