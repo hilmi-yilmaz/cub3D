@@ -207,18 +207,25 @@ typedef struct s_player
 	char			*hor_or_ver_intersect; // 'h' or 'v'
     double          *rays_array;	// contains screen_width elements which are distances
     char            *side;			// contains screen_width elements which are either N,S,E,W
-	// int				*which_wall;	// contains screen_width elements of random numbers. Each succesive number sequence representents a wall.
-	// int				*width_walls;
-	// double			*wall_x_start;
-	// double			*wall_x_end;
 	
 }	                t_player;
 
+typedef struct s_mlx_key_handler
+{
+	char	a_key;
+	char	w_key;
+	char	s_key;
+	char	d_key;
+	char	left_key;
+	char	right_key;
+}	t_mlx_key_handler;
+
 typedef struct s_data
 {
-	t_parse		parse;
-	t_images	images;
-	t_player	player;
+	t_parse				parse;
+	t_images			images;
+	t_player			player;
+	t_mlx_key_handler	key_handler;
 
 }	t_data;
 
@@ -326,7 +333,9 @@ void    free_images(t_images *images);
 void    free_player(t_player *player);
 
 /* Hooks */
-int     hooks(int keycode, t_data *data);
+//int     hooks(int keycode, t_data *data);
+int 	keypress_hook(int keycode, t_data *data);
+int 	keyrelease_hook(int keycode, t_data *data);
 int     move(t_player *player, double x_local, double y_local, char **map);
 
 /* Checks*/

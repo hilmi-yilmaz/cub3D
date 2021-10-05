@@ -5,13 +5,35 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+int new_screen(t_data *data)
+{	
+	int ret;
+
+	if (data->key_handler.w_key == 1)
+		move(&data->player, 0.0, data->player.speed, data->parse.map);
+	if (data->key_handler.s_key == 1)
+		move(&data->player, 0.0, -data->player.speed, data->parse.map);
+	if (data->key_handler.d_key == 1)
+		move(&data->player, -data->player.speed, 0.0, data->parse.map);
+	if (data->key_handler.a_key == 1)
+		move(&data->player, data->player.speed, 0.0, data->parse.map);
+	if (data->key_handler.right_key == 1)
+        data->player.angle -= data->player.rot_speed;
+	else if (data->key_handler.left_key == 1)
+        data->player.angle += data->player.rot_speed;
+	if (ret == -1)
+		return (-1);
+    return (0);
+}
+
 int	gameplay(t_data *data)
 {
     int ret;
 	
-	reset_angle(&data->player.angle);
+    reset_angle(&data->player.angle);
     clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
     draw_floor_ceiling(&data->images.main, &data->parse);
+    new_screen(data);
     ret = cast_all_rays(&data->player, &data->parse);
     if (ret == -1)
         return (-1);

@@ -41,15 +41,19 @@ int	raycaster_main(t_data *data)
 	raycaster_init(data);
 	set_mlx(data);
 	set_start_location(&data->player, data->parse.map);
-	ret = gameplay(data);
+	//ret = gameplay(data);
 	if (ret == -1)
 		return (-1);
-	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);
+	//mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, hooks, data);
+	mlx_hook(data->images.mlx.win_ptr, KeyPress, KeyPressMask, keypress_hook, data);
+	mlx_hook(data->images.mlx.win_ptr, KeyRelease, KeyReleaseMask, keyrelease_hook, data);
+	//mlx_key_hook(data->images.mlx.win_ptr, keypress_hook, data);
+	//mlx_key_hook(data->images.mlx.win_ptr, keyrelease_hook, data);
 	if (__linux__)
 		mlx_hook(data->images.mlx.win_ptr, ClientMessage, NoEventMask, close_window, data);
 	else
 		mlx_hook(data->images.mlx.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
-	mlx_loop_hook(data->images.mlx.mlx_ptr, gameplay, data);
+	mlx_loop_hook(data->images.mlx.mlx_ptr, gameplay, data); 
 	mlx_loop(data->images.mlx.mlx_ptr);
 	return (0);
 }

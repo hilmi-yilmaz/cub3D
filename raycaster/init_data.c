@@ -29,8 +29,8 @@ void	player_init(t_player *player, int width)
 	player->x = -1;;
 	player->y = -1;
     player->angle = -1;
-    player->speed = 0.25;
-    player->rot_speed = 0.025 * PI;
+    player->speed = 0.05;
+    player->rot_speed = 0.005 * PI;
     player->rays_array = NULL;
     player->side = NULL;
 	player->hor_ray = malloc(sizeof(*player->hor_ray) * width);
