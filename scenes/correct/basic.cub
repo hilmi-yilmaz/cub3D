@@ -1,4 +1,4 @@
-R 512 256
+R 1024 512
 NO ./textures/brick.xpm
 SO ./textures/grass.xpm
 WE ./textures/flat.xpm

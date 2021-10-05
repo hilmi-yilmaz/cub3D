@@ -49,6 +49,7 @@ int	raycaster_main(t_data *data)
 		mlx_hook(data->images.mlx.win_ptr, ClientMessage, NoEventMask, close_window, data);
 	else
 		mlx_hook(data->images.mlx.win_ptr, DestroyNotify, StructureNotifyMask, close_window, data);
+	mlx_loop_hook(data->images.mlx.mlx_ptr, gameplay, data);
 	mlx_loop(data->images.mlx.mlx_ptr);
 	return (0);
 }

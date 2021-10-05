@@ -24,7 +24,7 @@ int hooks(int keycode, t_data *data)
         data->player.angle -= data->player.rot_speed;
     else if (keycode == LEFT_KEY)
         data->player.angle += data->player.rot_speed;
-	ret = gameplay(data);
+	//ret = gameplay(data);
 	if (ret == -1)
 		return (-1);
     return (0);
