@@ -1,8 +1,8 @@
 R 1080 720
-NO ./textures/residential1.png
-SO ./textures/residential2.png
-EA ./textures/residential3.png
-WE ./textures/residential4.png
+NO ./textures/north.xpm
+SO ./textures/north.xpm
+EA ./textures/north.xpm
+WE ./textures/north.xpm
 
 C 235, 245, 247
 F 44, 56, 56
