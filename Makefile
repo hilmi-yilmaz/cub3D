@@ -64,9 +64,7 @@ SRC_RAYCASTER = main.c \
 				gameplay.c
 
 DIR_TEXTURES = 	texture_handling
-SRC_TEXTURES = 	scale_bmp.c \
-				load_xpm.c \
-				v1_scale_bmp.c
+SRC_TEXTURES = 	load_xpm.c
 
 # Object files
 OBJ_DIR = obj

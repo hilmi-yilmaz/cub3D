@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "parser/parse.h"
+
 /* Parser */
 # define UNINIT -1	/* Uninitialized value */
 
@@ -37,25 +39,25 @@
 # include "incl/X.h"
 # include "libft/libft.h"
 
-# define LEN_R 1	/* Rename to OFFSET_R */
-# define LEN_NO 2
-# define LEN_SO 2
-# define LEN_WE 2
-# define LEN_EA 2
-# define LEN_S 1
-# define LEN_F 1
-# define LEN_C 1
+// # define LEN_R 1	/* Rename to OFFSET_R */
+// # define LEN_NO 2
+// # define LEN_SO 2
+// # define LEN_WE 2
+// # define LEN_EA 2
+// # define LEN_S 1
+// # define LEN_F 1
+// # define LEN_C 1
 
-# define RGB_DATA_COUNT 3
-# define RESOLUTION_DATA_COUNT 2
-# define MAX_KOMMAS 2
+// # define RGB_DATA_COUNT 3
+// # define RESOLUTION_DATA_COUNT 2
+// # define MAX_KOMMAS 2
 
-# define STACK_MAX 10000
+// # define STACK_MAX 10000
 
 # define TRUE 1
 # define FALSE 0
 
-# define UNIT 1
+// # define UNIT 1
 # define EDGE 1
 # define INF 2147483647 
 
@@ -73,29 +75,29 @@
 
 # define INF_SMALL 0.0000000000001
 
-typedef struct s_parse
-{
-    int     		win_width;
-    int     		win_height;
-    char    		*north_text;
-    char    		*south_text;
-    char    		*west_text;
-    char    		*east_text;
-    int             floor_colour[RGB_DATA_COUNT];
-    int             ceiling_colour[RGB_DATA_COUNT];
-	char			**map;
-}			t_parse;
+// typedef struct s_parse
+// {
+//     int     		win_width;
+//     int     		win_height;
+//     char    		*north_text;
+//     char    		*south_text;
+//     char    		*west_text;
+//     char    		*east_text;
+//     int             floor_colour[RGB_DATA_COUNT];
+//     int             ceiling_colour[RGB_DATA_COUNT];
+// 	char			**map;
+// }			t_parse;
 
-typedef struct s_recursion_management
-{
-	unsigned int	i;
-	unsigned int	total_recursions;
-	char			max_stack_reached;
-	int				save_x;
-	int				save_y;
-	char			error;
+// typedef struct s_recursion_management
+// {
+// 	unsigned int	i;
+// 	unsigned int	total_recursions;
+// 	char			max_stack_reached;
+// 	int				save_x;
+// 	int				save_y;
+// 	char			error;
 
-}	t_recursion_management;
+// }	t_recursion_management;
 
 typedef struct s_mlx
 {
@@ -108,11 +110,9 @@ typedef struct s_img
 {
     void            *img_ptr;
     char            *img_addr;
-
     int             bits_per_pixel;
     int             line_size;
     int             endian;
-
 	int				width;
 	int				height;
 
@@ -126,64 +126,8 @@ typedef struct s_images
 	t_img	south_xpm;
 	t_img	west_xpm;
 	t_img	east_xpm;
-	t_img	scaled_xpm;
 
 }			t_images;
-
-typedef struct s_tmpscale
-{
-	double	fx;
-	double	fy;
-	double	fxstep;
-	double	fystep;
-	double	fix;
-	double	fiy;
-	double	sy1;
-	double	sy2;
-	int		jstart;
-	int		jend;
-	double	devY1;
-	double	devY2;
-	double	sx1;
-	double	sx2;
-	int		istart;
-	int		iend;
-	double	devX1;
-	double	devX2;
-	double	dx;
-	double	dy;
-	double	AP;
-	double	destR;
-	double	destG;
-	double	destB;
-	int		sR;
-	int		sG;
-	int		sB;
-
-}			t_tmpscale;
-
-typedef struct s_scale
-{
-	double	f;
-	double	fstep;
-	double	fi;
-	double	s1;
-	double	s2;
-	int		start;
-	int		end;
-	double	dev1;
-	double	dev2;
-	double	d;
-	double	AP;
-	double	destR;
-	double	destG;
-	double	destB;
-	int		sR;
-	int		sG;
-	int		sB;
-
-}			t_scale;
-
 
 typedef struct s_ray
 {
@@ -210,7 +154,7 @@ typedef struct s_player
 	
 }	                t_player;
 
-typedef struct s_mlx_key_handler
+typedef struct 	s_mlx_key_handler
 {
 	char	a_key;
 	char	w_key;
@@ -218,7 +162,7 @@ typedef struct s_mlx_key_handler
 	char	d_key;
 	char	left_key;
 	char	right_key;
-}	t_mlx_key_handler;
+}				t_mlx_key_handler;
 
 typedef struct s_data
 {
@@ -230,58 +174,58 @@ typedef struct s_data
 }	t_data;
 
 /* ------------------------------------ PARSING ---------------------------------- */
-/* parse_main.c */
-int     parse_main(t_parse *parse, char **argv);
+// /* parse_main.c */
+// int     parse_main(t_parse *parse, char **argv);
 
-/* init.c */
-void	parse_init(t_parse *parse);
-void	recursion_management_init(t_recursion_management *rec_man);
+// /* init.c */
+// void	parse_init(t_parse *parse);
+// void	recursion_management_init(t_recursion_management *rec_man);
 
-/* parse_data.c */
-int  	parse_data(int fd, t_parse *parse);
-int 	decision(int fd, t_parse *parse, char *line);
+// /* parse_data.c */
+// int  	parse_data(int fd, t_parse *parse);
+// int 	decision(int fd, t_parse *parse, char *line);
 
-/* parse_resolution.c */
-int   	parse_resolution(int *win_width, int *win_height, char *line);
+// /* parse_resolution.c */
+// int   	parse_resolution(int *win_width, int *win_height, char *line);
 
-/* parse_textures.c */
-int 	parse_textures(t_parse *parse, char *line);
-int    	fill_texture(char **texture, char *line, char *text_id);
+// /* parse_textures.c */
+// int 	parse_textures(t_parse *parse, char *line);
+// int    	fill_texture(char **texture, char *line, char *text_id);
 
-/* parse_colour.c */
-int     parse_colour(int *colour_array, char *line);
-int		fill_colour(int *colour_array, char *line);
+// /* parse_colour.c */
+// int     parse_colour(int *colour_array, char *line);
+// int		fill_colour(int *colour_array, char *line);
 
-/* parse_map.c */
-int    	parse_map(int fd, t_parse *parse, char *line);
-char  	**create_map(t_parse *parse, char *line, int rows);
-int    	old_to_new_map(t_parse *parse, char **new_map, int rows);
+// /* parse_map.c */
+// int    	parse_map(int fd, t_parse *parse, char *line);
+// char  	**create_map(t_parse *parse, char *line, int rows);
+// int    	old_to_new_map(t_parse *parse, char **new_map, int rows);
 
-/* checks.c */
-int     check_resolution(char *line);
-int 	check_map(char **map);
-int		check_data_completeness(t_parse *parse);
+// /* checks.c */
+// int     check_resolution(char *line);
+// int 	check_map(char **map);
+// int		check_data_completeness(t_parse *parse);
 
-/* print.c */
-void    print_parse(t_parse *parse);
-void    print_map(char **map);
+// /* print.c */
+// void    print_parse(t_parse *parse);
+// void    print_map(char **map);
 
-/* error.c */
-int		error_colour(void);
-void    *error_malloc(void);
+// /* error.c */
+// int		error_colour(void);
+// void    *error_malloc(void);
 
-/* utils.c */
-int     skip_chr(char *str, int c);
-void    find_player_location(int *x, int *y, char **map);
-char 	**copy_map(char **map);
+// /* utils.c */
+// int     skip_chr(char *str, int c);
+// void    find_player_location(int *x, int *y, char **map);
+// char 	**copy_map(char **map);
 
-/* flood_fill.c */
-int 	flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
+// /* flood_fill.c */
+// int 	flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
 
-/* free_data.c */
-void    free_parse(t_parse *parse);
-void	free_textures(t_parse *parse);
-void	free_map(char **map);
+// /* free_data.c */
+// void    free_parse(t_parse *parse);
+// void	free_textures(t_parse *parse);
+// void	free_map(char **map);
 
 /* --------------------------- Raycasting ---------------------------- */
 
@@ -379,15 +323,10 @@ void    print_columns(unsigned int *arr, int len);
 /* --------------------------- Texture Handling ---------------------------- */
 
 //void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
-void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
-void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
-void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
+// void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
+// void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
+// void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
 int    	load_all_xpm_images(t_images *images, t_parse *parse);
 int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
-
-void			get_scale_params_x(t_tmpscale *scale_params, t_img *xpm, int width);
-void			get_scale_params_y(t_tmpscale *scale_params, t_img *xpm, int height);
-unsigned int	get_texture_pixel(t_img *xpm, t_tmpscale *scale_params, int dest_x, int dest_y);
-void			pixel_from_xpm_to_window(t_img *img, t_img *xpm, t_tmpscale *scale_params, int x_screen, int x, int y, int win_height, t_player *player, int *width_walls, int i, int wall_x, int width);
 
 #endif
