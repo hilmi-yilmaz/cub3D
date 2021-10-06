@@ -5,10 +5,8 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int new_screen(t_data *data)
+static void move_player(t_data *data)
 {	
-	int ret;
-
 	if (data->key_handler.w_key == 1)
 		move(&data->player, 0.0, data->player.speed, data->parse.map);
 	if (data->key_handler.s_key == 1)
@@ -21,9 +19,6 @@ int new_screen(t_data *data)
         data->player.angle -= data->player.rot_speed;
 	else if (data->key_handler.left_key == 1)
         data->player.angle += data->player.rot_speed;
-	if (ret == -1)
-		return (-1);
-    return (0);
 }
 
 int	gameplay(t_data *data)
@@ -33,14 +28,11 @@ int	gameplay(t_data *data)
     reset_angle(&data->player.angle);
     clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
     draw_floor_ceiling(&data->images.main, &data->parse);
-    new_screen(data);
+    move_player(data);
     ret = cast_all_rays(&data->player, &data->parse);
     if (ret == -1)
         return (-1);
-    //print_intersections(&data->player, data->parse.win_width);
-    ret = map_to_3d_textured(data);
-    if (ret == -1)
-        return (-1);
+    map_to_3d_textured(data);
 	free_player(&data->player);
     mlx_put_image_to_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr, data->images.main.img_ptr, 0, 0);
 	return (0);

@@ -237,35 +237,27 @@ int		raycaster_init(t_data *data);
 /* gameplay.c */
 int		gameplay(t_data *data);
 
+/* cast_rays.c */
+int 	cast_all_rays(t_player *player, t_parse *parse);
+
 /* intersections.c */
 int 	horizontal_intersection(t_player *player, double angle, char **map, int i);
 int		vertical_intersection(t_player *player, double angle, char **map, int i);
 int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
-/* cast_rays.c */
-int 	cast_all_rays(t_player *player, t_parse *parse);
-
 /* map_to_3d_untextured.c */
 int     map_to_3d_untextured(t_data *data);
 
 /* map_to_3d_textured.c */
-int		map_to_3d_textured(t_data *data);
+void	map_to_3d_textured(t_data *data);
 
 /* utils.c */
 void    		*error_malloc(unsigned int bytes);
-void    		ft_swap_doubles(double *x, double *y);
-int 			*width_of_accumulated_walls(t_player *player, t_parse *parse);
-int 			*width_of_wall(int *which_wall, int width);
-int 			amount_visible_walls(int *which_wall, int width);
-void    		set_start_location(t_player *player, char **map);
 int				ft_arrlen(char **arr);
-int     		ft_int_array_len(int *arr);
 int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
 unsigned int 	argb_to_hex(int a, int r, int g, int b);
-int             get_argb(unsigned int argb, char c);
-void    draw_line_on_wall_edges(t_img *main, int *width_walls, int win_height);
 
 
 /* free_data.c */
@@ -307,7 +299,6 @@ int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
 double	deg2rad(double degree);
 void	rotate_vector(double *x, double *y, double angle);
-double	ft_floor(double x);
 
 /* Printing data */
 void    print_wall_x_starts(t_player *player, t_parse *parse);
@@ -319,10 +310,6 @@ void    print_columns(unsigned int *arr, int len);
 
 /* --------------------------- Texture Handling ---------------------------- */
 
-//void    scale_bmp(t_img *xpm_img, t_img *scaled_xpm_img, int xpm_width, int xpm_height, int scaled_xpm_width, int scaled_xpm_height);
-// void    scale_column(t_img *scaled_xpm, int column, unsigned int *dst, int dst_height);
-// void    scale_bmp_all_rows(t_img *xpm_img, t_img *scaled_xpm);
-// void    scale_bmp_single_row(t_img *xpm_img, t_img *scaled_xpm, t_scale *scale_params, int row);
 int    	load_all_xpm_images(t_images *images, t_parse *parse);
 int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 

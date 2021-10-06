@@ -7,11 +7,6 @@
 #define ROWS 2
 #define COLUMNS 2
 
-double	ft_floor(double x)
-{
-	return ((int)x);
-}
-
 double	calculate_ray_len(t_player *player, double x, double y)
 {
 	return (sqrt(pow(fabs(player->x - x), 2) + pow(fabs(player->y - y), 2)));

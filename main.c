@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/06 13:11:06 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/06 14:06:39 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	free_all(&data);
+	printf("Ending program");
     return (0);
 }

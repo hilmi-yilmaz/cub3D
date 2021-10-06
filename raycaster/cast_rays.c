@@ -6,28 +6,20 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-static double	set_vertical_data(t_player *player, double angle, double ver_dist, int i, int win_width, int wall_ver)
+static void	set_vertical_data(t_player *player, double angle, int i)
 {
-	double distance;
-
 	if (unit_circle_left_right(angle) == 3) // Put these numbers in an ENUM instead of 1, 2, 3, 4
 		player->side[i] = 'E';
 	else
 		player->side[i] = 'W';
-	distance = ver_dist;
-	return (distance);
 }
 
-static double	set_horizontal_data(t_player *player, double angle, double hor_dist, int i, int win_width, int wall_hor)
+static void	set_horizontal_data(t_player *player, double angle, int i)
 {
-	double distance;
-
 	if (unit_circle_upper_lower(angle) == 0)
 		player->side[i] = 'N';
 	else
 		player->side[i] = 'S';
-	distance = hor_dist;
-	return (distance);
 }
 
 /*
@@ -53,10 +45,15 @@ static double	cast_single_ray(t_player *player, t_parse *parse, double angle, in
 	hor_dist = calculate_ray_len(player, player->hor_ray[i].x, player->hor_ray[i].y);
 	ver_dist = calculate_ray_len(player, player->ver_ray[i].x, player->ver_ray[i].y);
 	if (ver_dist <= hor_dist)
-		distance = set_vertical_data(player, angle, ver_dist, i, parse->win_width, wall_ver);
-    else
-		distance = set_horizontal_data(player, angle, hor_dist, i, parse->win_width, wall_hor);
-    return (distance * cos(player->angle - angle));
+	{
+		set_vertical_data(player, angle, i);
+		return (ver_dist * cos(player->angle - angle));
+	}
+	else
+	{
+		set_horizontal_data(player, angle, i);
+		return (hor_dist * cos(player->angle - angle));
+	}
 }
 
 int cast_all_rays(t_player *player, t_parse *parse)
@@ -68,10 +65,10 @@ int cast_all_rays(t_player *player, t_parse *parse)
     i = 0;
     angle = player->angle - 0.5 * deg2rad(FOV);
     angle_increment = deg2rad(FOV) / parse->win_width;
-    player->rays_array = malloc(sizeof(*player->rays_array) * parse->win_width);
+    player->rays_array = error_malloc(sizeof(*player->rays_array) * parse->win_width);
     if (player->rays_array == NULL)
         return (-1);
-    player->side = malloc(sizeof(*player->side) * parse->win_width);
+    player->side = error_malloc(sizeof(*player->side) * parse->win_width);
     if (player->side == NULL)
         return (-1);
     while (i < parse->win_width)
