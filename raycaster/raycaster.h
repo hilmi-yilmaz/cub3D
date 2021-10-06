@@ -30,6 +30,7 @@ typedef struct s_images
 	t_img	south_xpm;
 	t_img	west_xpm;
 	t_img	east_xpm;
+	//t_img	*selected_xpm;
 
 }			t_images;
 
@@ -100,8 +101,8 @@ int     map_to_3d_untextured(t_data *data);
 void	map_to_3d_textured(t_data *data);
 
 /* utils.c */
-void    		*error_malloc(unsigned int bytes);
-int				ft_arrlen(char **arr);
+// void    		*error_malloc(unsigned int bytes);
+// int				ft_arrlen(char **arr);
 int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
@@ -123,7 +124,6 @@ int     check_coordinates(double x, double y, char **map);
 int		check_next_step(double new_x, double new_y, char **map);
 
 /* Draw elements */
-void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
 void    draw_floor_ceiling(t_img *main, t_parse *parse);
 
 /* Math utils */
@@ -132,14 +132,12 @@ void    reset_angle(double *angle);
 int     unit_circle_upper_lower(double angle);
 int     unit_circle_left_right(double angle);
 double	deg2rad(double degree);
-void	rotate_vector(double *x, double *y, double angle);
 
 /* Printing data */
 void    print_intersections(t_player *player, int width);
 void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);
-void    print_columns(unsigned int *arr, int len);
 
 /* --------------------------- Texture Handling ---------------------------- */
 

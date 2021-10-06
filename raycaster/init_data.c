@@ -35,16 +35,16 @@ static void	ray_init(t_ray *ray)
 */
 static int	player_init(t_player *player, int width)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	player->x = -1;;
+	player->x = -1;
 	player->y = -1;
-    player->angle = -1;
-    player->speed = 0.05;
-    player->rot_speed = 0.008 * PI;
-    player->rays_array = NULL;
-    player->side = NULL;
+	player->angle = -1;
+	player->speed = 0.05;
+	player->rot_speed = 0.008 * PI;
+	player->rays_array = NULL;
+	player->side = NULL;
 	player->hor_ray = error_malloc(sizeof(*player->hor_ray) * width);
 	if (player->hor_ray == NULL)
 		return (-1);
@@ -65,7 +65,7 @@ static int	player_init(t_player *player, int width)
 */
 int	raycaster_init(t_data *data)
 {
-	int ret;
+	int	ret;
 
 	images_init(&data->images);
 	ret = player_init(&data->player, data->parse.win_width);

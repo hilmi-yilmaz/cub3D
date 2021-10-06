@@ -4,79 +4,56 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    print_intersections(t_player *player, int width)
+void	print_intersections(t_player *player, int width)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(i < width)
-    {
-        printf("hor: x = %5f | y = %5f\n", player->hor_ray[i].x, player->hor_ray[i].y);
-        printf("ver: x = %5f | y = %5f\n\n", player->ver_ray[i].x, player->ver_ray[i].y);
-        i++;
-    }
+	i = 0;
+	while (i < width)
+	{
+		printf("hor: x = %5f | y = %5f\n", \
+				player->hor_ray[i].x, player->hor_ray[i].y);
+		printf("ver: x = %5f | y = %5f\n\n", \
+				player->ver_ray[i].x, player->ver_ray[i].y);
+		i++;
+	}
 }
 
-void	print_width_walls(int *width_walls)
+void	print_ray_data(t_ray ray)
 {
-    int p = 0;
-    int total = 0;
-    while (width_walls[p] != -1)
-    {
-        printf("%d ", width_walls[p]);
-        total += width_walls[p];
-        p++;
-    }
+	printf("x = %f\n", ray.x);
+	printf("y = %f\n", ray.y);
+	printf("xa = %.15f\n", ray.xa);
+	printf("ya = %.15f\n", ray.ya);
+	printf("error = %d\n", ray.error);
 }
 
-void    print_ray_data(t_ray ray)
+void	print_rays_array(double *rays_array, int width)
 {
-        printf("x = %f\n", ray.x);
-        printf("y = %f\n", ray.y);
-        printf("xa = %.15f\n", ray.xa);
-        printf("ya = %.15f\n", ray.ya);
-        printf("error = %d\n", ray.error);
-}
+	int	i;
 
-void    print_rays_array(double *rays_array, int width)
-{
-    int i;
-
-    i = 0;
-    while (i < width)
-    {
-        printf("%.15f ", rays_array[i]);
+	i = 0;
+	while (i < width)
+	{
+		printf("%.15f ", rays_array[i]);
 		if (i % 4 == 0)
 			printf("\n");
-        i++;
-    }
-    printf("\n\n");
+		i++;
+	}
+	printf("\n\n");
 }
 
-void    print_side_array(int *side_array, int width)
+void	print_side_array(int *side_array, int width)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < width)
-    {
-        printf("%d = %d\n", i, side_array[i]);
+	i = 0;
+	while (i < width)
+	{
+		printf("%d = %d\n", i, side_array[i]);
 		if (i % 10 == 0 && i != 0)
 			printf("\n");
-        i++;
-    }
-    printf("\n\n");
-}
-
-void    print_columns(unsigned int *arr, int len)
-{
-    int i;
-
-    i = 0;
-    while (i < len)
-    {
-        printf("%u ", arr[i]);
-        i++;
-    }
-    printf("\n\n");
+		i++;
+	}
+	printf("\n\n");
 }

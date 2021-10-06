@@ -5,7 +5,7 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int horizontal_intersection(t_player *player, double angle, char **map, int i)
+int	horizontal_intersection(t_player *player, double angle, char **map, int i)
 {	
 	if (unit_circle_upper_lower(angle) == 0)
 	{
@@ -17,11 +17,13 @@ int horizontal_intersection(t_player *player, double angle, char **map, int i)
 		player->hor_ray[i].y = floor(player->y) + 1.0;
 		player->hor_ray[i].ya = 1.0;
 	}
-	player->hor_ray[i].x = player->x + (player->y - player->hor_ray[i].y) / tan(angle);
+	player->hor_ray[i].x = player->x + \
+							(player->y - player->hor_ray[i].y) / tan(angle);
 	player->hor_ray[i].xa = 1.0 / tan(angle);
 	if (unit_circle_upper_lower(angle) == 1)
 		player->hor_ray[i].xa *= -1;
-	return (expand_ray(&player->hor_ray[i], map, angle, unit_circle_upper_lower));
+	return (expand_ray(&player->hor_ray[i], map, angle, \
+						unit_circle_upper_lower));
 }
 
 int	vertical_intersection(t_player *player, double angle, char **map, int i)
@@ -36,16 +38,19 @@ int	vertical_intersection(t_player *player, double angle, char **map, int i)
 		player->ver_ray[i].x = floor(player->x);
 		player->ver_ray[i].xa = -1.0;
 	}
-	player->ver_ray[i].y = player->y + (player->x - player->ver_ray[i].x) * tan(angle);
+	player->ver_ray[i].y = player->y + \
+							(player->x - player->ver_ray[i].x) * tan(angle);
 	player->ver_ray[i].ya = 1.0 * tan(angle);
 	if (unit_circle_left_right(angle) == 3)
 		player->ver_ray[i].ya *= -1;
-	return (expand_ray(&player->ver_ray[i], map, angle, unit_circle_left_right));
+	return (expand_ray(&player->ver_ray[i], map, angle, \
+						unit_circle_left_right));
 }
 
-int	expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double))
+int	expand_ray(t_ray *ray, char **map, double angle, \
+				int (*angle_direction)(double))
 {
-	int wall;
+	int	wall;
 	int	dir;
 
 	dir = angle_direction(angle);

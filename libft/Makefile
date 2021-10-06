@@ -91,7 +91,9 @@ OBJ_LLIST = $(SRC_LLIST:.c=.o)
 DIR_OTHER = other/
 
 SRC_OTHER = get_next_line_bonus.c \
-			get_next_line_utils_bonus.c
+			get_next_line_utils_bonus.c \
+			error_malloc.c \
+			string_array_len.c
 
 OBJ_OTHER = $(SRC_OTHER:.c=.o)
 
