@@ -80,7 +80,7 @@ void    print_map(char **map);
 
 /* error.c */
 int		error_colour(void);
-void    *error_malloc(void);
+//void    *error_malloc(void);
 
 /* utils.c */
 int     skip_chr(char *str, int c);

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/15 10:25:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/06 13:01:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,21 @@ char **create_map(t_parse *parse, char *line, int rows)
 
     i = 0;
     j = 0;
-    new_map = malloc(sizeof(*new_map) * (rows + 1));
+    new_map = error_malloc(sizeof(*new_map) * (rows + 1));
     if (new_map == NULL)
 	{
 		free_parse(parse);
-		return (error_malloc());
+		return (NULL);
 	}
 	new_map[rows] = NULL;
     i = old_to_new_map(parse, new_map, rows);
     if (i == -1)
 		return (NULL);
-	new_map[i] = malloc(sizeof(*(*(new_map + i))) * (ft_strlen(line) + 1));
-    if (*(new_map + i) == NULL)
+	new_map[i] = error_malloc(sizeof(*(*(new_map + i))) * (ft_strlen(line) + 1));
+    if (new_map[i] == NULL)
 	{
 		free_map(new_map);
-        return (error_malloc());
+        return (NULL);
 	}
     ft_strlcpy(new_map[i], line, ft_strlen(line) + 1);
     return (new_map);
@@ -95,12 +95,11 @@ int old_to_new_map(t_parse *parse, char **new_map, int rows)
     i = 0;
     while (i < rows - 1)
     {
-		new_map[i] = malloc(sizeof(*(*(new_map + i))) * (ft_strlen(parse->map[i]) + 1));
+		new_map[i] = error_malloc(sizeof(*(*(new_map + i))) * (ft_strlen(parse->map[i]) + 1));
         if (new_map[i] == NULL)
         {
             free_map(new_map);
 			free_parse(parse);
-			error_malloc();
             return (-1);
         }
         ft_strlcpy(new_map[i], parse->map[i], ft_strlen(parse->map[i]) + 1);

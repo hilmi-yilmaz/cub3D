@@ -146,12 +146,11 @@ typedef struct s_player
     double          angle;
     double        	speed;
     double         	rot_speed;
+    double          *rays_array;
+    char            *side;
     t_ray           *hor_ray;
     t_ray           *ver_ray;
-	char			*hor_or_ver_intersect; // 'h' or 'v'
-    double          *rays_array;	// contains screen_width elements which are distances
-    char            *side;			// contains screen_width elements which are either N,S,E,W
-	
+
 }	                t_player;
 
 typedef struct 	s_mlx_key_handler
@@ -233,10 +232,7 @@ typedef struct s_data
 int     raycaster_main(t_data *data);
 
 /* init_data.c */
-void	raycaster_init(t_data *data);
-void	images_init(t_images *images);
-void	player_init(t_player *player, int width);
-void	ray_init(t_ray *ray);
+int		raycaster_init(t_data *data);
 
 /* gameplay.c */
 int		gameplay(t_data *data);
@@ -256,6 +252,7 @@ int     map_to_3d_untextured(t_data *data);
 int		map_to_3d_textured(t_data *data);
 
 /* utils.c */
+void    		*error_malloc(unsigned int bytes);
 void    		ft_swap_doubles(double *x, double *y);
 int 			*width_of_accumulated_walls(t_player *player, t_parse *parse);
 int 			*width_of_wall(int *which_wall, int width);

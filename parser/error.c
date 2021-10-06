@@ -13,8 +13,8 @@ int	error_colour(void)
 	return (-1);
 }
 
-void    *error_malloc(void)
-{
-    printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
-    return (NULL);
-}
+// void    *error_malloc(void)
+// {
+//     printf("Error\nMalloc failed: %s\nFreeing all dynamically allocated memory...", strerror(errno));
+//     return (NULL);
+// }

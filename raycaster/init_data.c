@@ -5,13 +5,10 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void	raycaster_init(t_data *data)
-{
-	images_init(&data->images);
-	player_init(&data->player, data->parse.win_width);
-}
-
-void	images_init(t_images *images)
+/*
+** Initialize all images.
+*/
+static void	images_init(t_images *images)
 {
 	ft_bzero(&images->mlx, sizeof(images->mlx));
 	ft_bzero(&images->main, sizeof(images->main));
@@ -21,7 +18,22 @@ void	images_init(t_images *images)
 	ft_bzero(&images->east_xpm, sizeof(images->east_xpm));
 }
 
-void	player_init(t_player *player, int width)
+/*
+** Initialize the ray struct.
+*/
+static void	ray_init(t_ray *ray)
+{
+	ray->x = -1;
+	ray->y = -1;
+	ray->xa = -1;
+	ray->ya = -1;
+	ray->error = -1;
+}
+
+/*
+** Initialize the player struct.
+*/
+static int	player_init(t_player *player, int width)
 {
 	int i;
 
@@ -33,21 +45,31 @@ void	player_init(t_player *player, int width)
     player->rot_speed = 0.008 * PI;
     player->rays_array = NULL;
     player->side = NULL;
-	player->hor_ray = malloc(sizeof(*player->hor_ray) * width);
-	player->ver_ray = malloc(sizeof(*player->ver_ray) * width);
+	player->hor_ray = error_malloc(sizeof(*player->hor_ray) * width);
+	if (player->hor_ray == NULL)
+		return (-1);
+	player->ver_ray = error_malloc(sizeof(*player->ver_ray) * width);
+	if (player->ver_ray == NULL)
+		return (-1);
 	while (i < width)
 	{
 		ray_init(&player->hor_ray[i]);
 		ray_init(&player->ver_ray[i]);
 		i++;
 	}
+	return (0);
 }
 
-void	ray_init(t_ray *ray)
+/* 
+** Initialize the images and player structs.
+*/
+int	raycaster_init(t_data *data)
 {
-	ray->x = -1;
-	ray->y = -1;
-	ray->xa = -1;
-	ray->ya = -1;
-	ray->error = -1;
+	int ret;
+
+	images_init(&data->images);
+	ret = player_init(&data->player, data->parse.win_width);
+	if (ret == -1)
+		return (-1);
+	return (0);
 }
