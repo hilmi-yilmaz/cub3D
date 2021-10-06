@@ -6,10 +6,10 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int keypress_hook(int keycode, t_data *data)
+int	keypress_hook(int keycode, t_data *data)
 {	
-	int ret;
-
+	if (keycode == ESC_KEY)
+		close_window(data);
 	if (keycode == W_KEY)
 		data->key_handler.w_key = 1;
 	if (keycode == S_KEY)
@@ -22,15 +22,11 @@ int keypress_hook(int keycode, t_data *data)
 		data->key_handler.right_key = 1;
 	else if (keycode == LEFT_KEY)
 		data->key_handler.left_key = 1;
-	if (ret == -1)
-		return (-1);
-    return (0);
+	return (0);
 }
 
-int keyrelease_hook(int keycode, t_data *data)
+int	keyrelease_hook(int keycode, t_data *data)
 {	
-	int ret;
-
 	if (keycode == W_KEY)
 		data->key_handler.w_key = 0;
 	if (keycode == S_KEY)
@@ -43,7 +39,5 @@ int keyrelease_hook(int keycode, t_data *data)
 		data->key_handler.right_key = 0;
 	else if (keycode == LEFT_KEY)
 		data->key_handler.left_key = 0;
-	if (ret == -1)
-		return (-1);
-    return (0);
+	return (0);
 }

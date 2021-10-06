@@ -40,8 +40,7 @@ int close_window(t_data *data)
     mlx_destroy_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr);
     if (__linux__)
         mlx_destroy_display(data->images.mlx.mlx_ptr);
-    free(data->images.mlx.mlx_ptr);
-    free_all(data);
+    //free_all(data);
     exit(0);
     return (1);
 }
