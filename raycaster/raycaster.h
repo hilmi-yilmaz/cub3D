@@ -123,7 +123,6 @@ int     check_coordinates(double x, double y, char **map);
 int		check_next_step(double new_x, double new_y, char **map);
 
 /* Draw elements */
-void    clear_screen(t_img *main, int win_width, int win_height);
 void    draw_columns(t_img *img, int column, int wall_height, int win_height, unsigned int colour);
 void    draw_floor_ceiling(t_img *main, t_parse *parse);
 

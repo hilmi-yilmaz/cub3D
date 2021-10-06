@@ -36,7 +36,7 @@ int	gameplay(t_data *data)
     int ret;
 	
     reset_angle(&data->player.angle);
-    clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
+    //clear_screen(&data->images.main, data->parse.win_width, data->parse.win_height);
     draw_floor_ceiling(&data->images.main, &data->parse);
     move_player(data);
     ret = cast_all_rays(&data->player, &data->parse);

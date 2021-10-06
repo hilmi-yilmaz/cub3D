@@ -46,22 +46,3 @@ void    draw_floor_ceiling(t_img *main, t_parse *parse)
         i++;
     }
 }
-
-void    clear_screen(t_img *main, int win_width, int win_height)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    while (i < win_height)
-    {
-        while(j < win_width)
-        {
-            my_pixel_put(main, j, i, argb_to_hex(0, 0, 0, 0));
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-}
