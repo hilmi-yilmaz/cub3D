@@ -21,29 +21,6 @@ void    draw_columns(t_img *img, int column, int wall_height, int win_height, un
     }
 }
 
-void    draw_texture(t_img *main, int column, int wall_height, int win_height, unsigned int *colour)
-{
-    int i;
-    int start;
-    int end;
-
-    i = 0;
-    start = (win_height - wall_height) / 2;
-    if (start < 0)
-        start = 0;
-    end = (win_height + wall_height) / 2;
-    if (end >= win_height)
-        end = win_height - 1;
-    while (start < end)
-    {
-        my_pixel_put(main, column, start, colour[i]);
-        //printf("%u ", colour[i]);
-        start++;
-        i++;
-    }
-    //printf("\n--------------------- \n");
-}
-
 void    draw_floor_ceiling(t_img *main, t_parse *parse)
 {
     int             i;

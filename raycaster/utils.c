@@ -32,16 +32,16 @@ int		ft_arrlen(char **arr)
 
 int close_window(t_data *data)
 {
-    /* Destroy the image and window */
     mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.main.img_ptr);
+    mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.north_xpm.img_ptr);
+    mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.south_xpm.img_ptr);
+    mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.east_xpm.img_ptr);
+    mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.west_xpm.img_ptr);
     mlx_destroy_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr);
     if (__linux__)
         mlx_destroy_display(data->images.mlx.mlx_ptr);
-
-    /* Free the pointers */
     free(data->images.mlx.mlx_ptr);
-    
-    /* Exit the programn */
+    free_all(data);
     exit(0);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/06 14:06:39 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/06 14:16:03 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	parse_return = parse_main(&data.parse, argv);
     if (parse_return == -1)
 	{
-		free_all(&data);
+		free_parse(&data);
 		return (-1);
 	}
 	raycaster_return = raycaster_main(&data);

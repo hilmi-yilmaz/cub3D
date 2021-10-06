@@ -5,6 +5,16 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+static int	move(t_player *player, double x_local, double y_local, char **map)
+{
+	rotate_vector(&x_local, &y_local, player->angle + 0.5 * PI);
+	if (check_next_step(player->x + x_local, player->y + y_local, map) == 1)
+		return (-1);
+	player->x += x_local;
+	player->y += y_local;
+	return (0);
+}
+
 static void move_player(t_data *data)
 {	
 	if (data->key_handler.w_key == 1)
