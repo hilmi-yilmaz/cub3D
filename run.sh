@@ -8,7 +8,6 @@ elif [[ "$1" == "valgrind" ]]; then
 	make __linux__=1 VALGRIND=1
 elif [[ "$1" == "" ]]; then
     make __linux__=1 && ./exec scenes/correct/basic.cub
-	#make IS_LINUX=1 && ./exec scenes/correct/basic.cub
 else
     echo "Run script as: ./run.sh [fclean]."
     exit 1

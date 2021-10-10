@@ -29,7 +29,6 @@ LIBFT = libft.a
 LIBFT_DIR = libft
 
 # Source files
-#DIR_MAIN = 
 SRC_MAIN = main.c
 
 DIR_PARSER = 	parser

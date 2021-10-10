@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/15 12:46:46 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/10 13:28:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ int decision(int fd, t_parse *parse, char *line)
     else
     {
         if (*line != '\0')
-        {
             printf("Error\nWrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
-            ret = -1;
-        }
+		ret = -1;
     }
     if (ret == -1)
         return (-1);
