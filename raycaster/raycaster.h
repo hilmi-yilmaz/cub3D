@@ -30,7 +30,6 @@ typedef struct s_images
 	t_img	south_xpm;
 	t_img	west_xpm;
 	t_img	east_xpm;
-	//t_img	*selected_xpm;
 
 }			t_images;
 
@@ -66,6 +65,7 @@ typedef struct 	s_mlx_key_handler
 	char	d_key;
 	char	left_key;
 	char	right_key;
+
 }				t_mlx_key_handler;
 
 typedef struct s_data
@@ -101,8 +101,6 @@ int     map_to_3d_untextured(t_data *data);
 void	map_to_3d_textured(t_data *data);
 
 /* utils.c */
-// void    		*error_malloc(unsigned int bytes);
-// int				ft_arrlen(char **arr);
 int				close_window(t_data *data);
 void            my_pixel_put(t_img *img, int pos_x, int pos_y, unsigned int colour);
 unsigned int    my_pixel_get(t_img *img, int pos_x, int pos_y);
@@ -139,8 +137,7 @@ void    print_ray_data(t_ray ray);
 void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);
 
-/* --------------------------- Texture Handling ---------------------------- */
-
+/* load_xpm.c */
 int    	load_all_xpm_images(t_images *images, t_parse *parse);
 int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 

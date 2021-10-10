@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/10 13:28:13 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/10 13:41:01 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int decision(int fd, t_parse *parse, char *line)
 {
     int ret;
 
+	ret = 0;
     if (*line == 'R')
             ret = parse_resolution(&parse->win_width, &parse->win_height, line + LEN_R); /* No allocation in parse_resolution */
     else if ((*line == 'N' && *(line + 1) == 'O') || (*line == 'S' && *(line + 1) == 'O') || (*line == 'W' && *(line + 1) == 'E') || (*line == 'E' && *(line + 1) == 'A'))
@@ -77,8 +78,10 @@ int decision(int fd, t_parse *parse, char *line)
     else
     {
         if (*line != '\0')
+		{
             printf("Error\nWrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
-		ret = -1;
+			ret = -1;
+		}
     }
     if (ret == -1)
         return (-1);
