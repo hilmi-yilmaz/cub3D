@@ -1,7 +1,7 @@
 #ifndef RAYCASTER_H
 # define RAYCASTER_H
 
-# include "parser/parse.h"
+# include "../parser/parse.h"
 
 typedef struct s_mlx
 {

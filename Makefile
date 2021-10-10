@@ -60,25 +60,23 @@ SRC_RAYCASTER = main.c \
 				cast_rays.c \
 				print_data.c \
 				map_to_3d_textured.c \
-				gameplay.c
-
-DIR_TEXTURES = 	texture_handling
-SRC_TEXTURES = 	load_xpm.c
+				gameplay.c \
+				load_xpm.c
 
 # Object files
 OBJ_DIR = obj
 OBJ_MAIN = $(SRC_MAIN:%.c=$(OBJ_DIR)/%.o)
 OBJ_PARSER = $(SRC_PARSER:%.c=$(OBJ_DIR)/$(DIR_PARSER)/%.o)
 OBJ_RAYCASTER = $(SRC_RAYCASTER:%.c=$(OBJ_DIR)/$(DIR_RAYCASTER)/%.o)
-OBJ_TEXTURES = $(SRC_TEXTURES:%.c=$(OBJ_DIR)/$(DIR_TEXTURES)/%.o)
-OBJ = $(OBJ_MAIN) $(OBJ_PARSER) $(OBJ_RAYCASTER) $(OBJ_TEXTURES)
+OBJ = $(OBJ_MAIN) $(OBJ_PARSER) $(OBJ_RAYCASTER)
 
-VPATH = $(DIR_PARSER) $(DIR_RAYCASTER) $(DIR_TEXTURES)
+VPATH = $(DIR_PARSER) $(DIR_RAYCASTER)
 
 all: $(OBJ_DIR) $(MLX_LIB) $(LIBFT) $(NAME)
 
 $(OBJ_DIR):
-	mkdir $@
+	mkdir -p $@/$(DIR_PARSER)
+	mkdir -p $@/$(DIR_RAYCASTER)
 
 $(MLX_LIB):
 	make -C $(MLX_DIR)
@@ -90,8 +88,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LINKS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
 $(OBJ) : $(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
-	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(LINKS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rdf $(OBJ_DIR)
