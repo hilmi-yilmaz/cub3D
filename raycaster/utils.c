@@ -9,15 +9,7 @@
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.main.img_ptr);
-	mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.north_xpm.img_ptr);
-	mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.south_xpm.img_ptr);
-	mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.east_xpm.img_ptr);
-	mlx_destroy_image(data->images.mlx.mlx_ptr, data->images.west_xpm.img_ptr);
-	mlx_destroy_window(data->images.mlx.mlx_ptr, data->images.mlx.win_ptr);
-	if (__linux__)
-		mlx_destroy_display(data->images.mlx.mlx_ptr);
-	free(data->images.mlx.mlx_ptr);
+	free_images(&data->images);
 	free_parse(&data->parse);
 	free(data->player.hor_ray);
 	free(data->player.ver_ray);
