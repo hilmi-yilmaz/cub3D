@@ -11,8 +11,7 @@ int	close_window(t_data *data)
 {
 	free_images(&data->images);
 	free_parse(&data->parse);
-	free(data->player.hor_ray);
-	free(data->player.ver_ray);
+	free_player(&data->player);
 	exit(0);
 	return (1);
 }

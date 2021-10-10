@@ -60,7 +60,7 @@ static double	cast_single_ray(t_player *player, t_parse *parse, \
 	}
 }
 
-int	cast_all_rays(t_player *player, t_parse *parse)
+void	cast_all_rays(t_player *player, t_parse *parse)
 {
 	int		i;
 	double	angle;
@@ -69,13 +69,6 @@ int	cast_all_rays(t_player *player, t_parse *parse)
 	i = 0;
 	angle = player->angle - 0.5 * deg2rad(FOV);
 	angle_increment = deg2rad(FOV) / parse->win_width;
-	player->rays_array = error_malloc(sizeof(*player->rays_array) * \
-									parse->win_width);
-	if (player->rays_array == NULL)
-		return (-1);
-	player->side = error_malloc(sizeof(*player->side) * parse->win_width);
-	if (player->side == NULL)
-		return (-1);
 	while (i < parse->win_width)
 	{
 		player->rays_array[parse->win_width - 1 - i] = cast_single_ray(\
@@ -84,5 +77,4 @@ int	cast_all_rays(t_player *player, t_parse *parse)
 		reset_angle(&angle);
 		i++;
 	}
-	return (0);
 }

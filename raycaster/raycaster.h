@@ -87,7 +87,7 @@ int		raycaster_init(t_data *data);
 int		gameplay(t_data *data);
 
 /* cast_rays.c */
-int 	cast_all_rays(t_player *player, t_parse *parse);
+void 	cast_all_rays(t_player *player, t_parse *parse);
 
 /* intersections.c */
 int 	horizontal_intersection(t_player *player, double angle, char **map, int i);

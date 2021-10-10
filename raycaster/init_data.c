@@ -43,8 +43,12 @@ static int	player_init(t_player *player, int width)
 	player->angle = -1;
 	player->speed = 0.05;
 	player->rot_speed = 0.008 * PI;
-	player->rays_array = NULL;
-	player->side = NULL;
+	player->rays_array = error_malloc(sizeof(*player->rays_array) * width);
+	if (player->rays_array == NULL)
+		return (-1);
+	player->side = error_malloc(sizeof(*player->side) * width);
+	if (player->side == NULL)
+		return (-1);
 	player->hor_ray = error_malloc(sizeof(*player->hor_ray) * width);
 	if (player->hor_ray == NULL)
 		return (-1);

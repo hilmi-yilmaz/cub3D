@@ -59,11 +59,8 @@ int	gameplay(t_data *data)
 	reset_angle(&data->player.angle);
 	draw_floor_ceiling(&data->images.main, &data->parse);
 	move_player(data);
-	ret = cast_all_rays(&data->player, &data->parse);
-	if (ret == -1)
-		return (-1);
+	cast_all_rays(&data->player, &data->parse);
 	map_to_3d_textured(data);
-	free_player(&data->player);
 	mlx_put_image_to_window(data->images.mlx.mlx_ptr, \
 							data->images.mlx.win_ptr, \
 							data->images.main.img_ptr, 0, 0);
