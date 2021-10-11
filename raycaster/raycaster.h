@@ -7,8 +7,8 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		mlx_ptr_flag;
-	int		win_ptr_flag;
+	char	mlx_ptr_flag;
+	char	win_ptr_flag;
 	
 }				t_mlx;
 
@@ -21,8 +21,8 @@ typedef struct s_img
     int             endian;
 	int				width;
 	int				height;
-	int				img_ptr_flag;
-	int				img_addr_flag;
+	char			img_ptr_flag;
+	char			img_addr_flag;
 
 }                   t_img;
 
@@ -76,27 +76,27 @@ typedef struct s_data
 }	t_data;
 
 /* raycaster_main.c */
-int     raycaster_main(t_data *data);
+int     		raycaster_main(t_data *data);
 
 /* init_data.c */
-int		raycaster_init(t_data *data);
+int				raycaster_init(t_data *data);
 
 /* gameplay.c */
-int		gameplay(t_data *data);
+int				gameplay(t_data *data);
 
 /* cast_rays.c */
-void 	cast_all_rays(t_player *player, t_parse *parse);
+void 			cast_all_rays(t_player *player, t_parse *parse);
 
 /* intersections.c */
-int 	horizontal_intersection(t_player *player, double angle, char **map, int i);
-int		vertical_intersection(t_player *player, double angle, char **map, int i);
-int		expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
+int 			horizontal_intersection(t_player *player, double angle, char **map, int i);
+int				vertical_intersection(t_player *player, double angle, char **map, int i);
+int				expand_ray(t_ray *ray, char **map, double angle, int (*angle_direction)(double));
 
 /* map_to_3d_untextured.c */
-int     map_to_3d_untextured(t_data *data);
+int     		map_to_3d_untextured(t_data *data);
 
 /* map_to_3d_textured.c */
-void	map_to_3d_textured(t_data *data);
+void			map_to_3d_textured(t_data *data);
 
 /* utils.c */
 int				close_window(t_data *data);
@@ -106,37 +106,34 @@ unsigned int 	argb_to_hex(int a, int r, int g, int b);
 
 
 /* free_data.c */
-void    free_all(t_data *data);
-void    free_images(t_data *data);
-void    free_player(t_player *player);
+void    			free_all(t_data *data);
+void    			free_images(t_data *data);
+void    			free_player(t_player *player);
 
-/* Hooks */
-int 	keypress_hook(int keycode, t_data *data);
-int 	keyrelease_hook(int keycode, t_data *data);
+/* hooks.c */
+int 				keypress_hook(int keycode, t_data *data);
+int 				keyrelease_hook(int keycode, t_data *data);
 
-/* Checks*/
-int     check_wall(char **map, double x, double y);
-int     check_coordinates(double x, double y, char **map);
-int		check_next_step(double new_x, double new_y, char **map);
+/* check.c */
+int     			check_wall(char **map, double x, double y);
+int     			check_coordinates(double x, double y, char **map);
+int					check_next_step(double new_x, double new_y, char **map);
 
-/* Draw elements */
-void    draw_floor_ceiling(t_img *main, t_parse *parse);
-
-/* Math utils */
-double	calculate_ray_len(t_player *player, double x, double y);
-void    reset_angle(double *angle);
-int     unit_circle_upper_lower(double angle);
-int     unit_circle_left_right(double angle);
-double	deg2rad(double degree);
-
-/* Printing data */
-void    print_intersections(t_player *player, int width);
-void    print_ray_data(t_ray ray);
-void    print_rays_array(double *rays_array, int width);
-void    print_side_array(int *side_array, int width);
+/* math.c */
+double				calculate_ray_len(t_player *player, double x, double y);
+void   				reset_angle(double *angle);
+int    				unit_circle_upper_lower(double angle);
+int     			unit_circle_left_right(double angle);
+double				deg2rad(double degree);
 
 /* load_xpm.c */
-int     load_all_xpm_images(t_data *data);
-int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
+int     			load_all_xpm_images(t_data *data);
+int    				load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
+
+/* print_data.c */
+void    			print_intersections(t_player *player, int width);
+void   			 	print_ray_data(t_ray ray);
+void    			print_rays_array(double *rays_array, int width);
+void    			print_side_array(int *side_array, int width);
 
 #endif

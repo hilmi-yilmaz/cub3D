@@ -55,7 +55,6 @@ SRC_RAYCASTER = main.c \
 				math.c \
 				intersections.c \
 				utils.c \
-				draw_elements.c \
 				cast_rays.c \
 				print_data.c \
 				map_to_3d_textured.c \

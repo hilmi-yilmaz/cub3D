@@ -77,20 +77,6 @@ static int	player_init(t_player *player, int width)
 	return (0);
 }
 
-/*
-** Initialize moving flags.
-*/
-
-static void	keyflags_init(t_mlx_key_handler *keys)
-{
-	keys->w_key = 0;
-	keys->s_key = 0;
-	keys->d_key = 0;
-	keys->a_key = 0;
-	keys->right_key = 0;
-	keys->left_key = 0;
-}
-
 /* 
 ** Initialize the images and player structs.
 */
@@ -102,6 +88,6 @@ int	raycaster_init(t_data *data)
 	ret = player_init(&data->player, data->parse.win_width);
 	if (ret == -1)
 		return (-1);
-	keyflags_init(&data->key_handler);
+	ft_bzero(&data->key_handler, sizeof(data->key_handler));
 	return (0);
 }

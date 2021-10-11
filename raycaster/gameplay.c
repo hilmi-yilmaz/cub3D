@@ -6,15 +6,41 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-/* Define for 2D rotation matrix */
-#define ROWS 2
-#define COLUMNS 2
+static void	draw_floor_ceiling(t_img *main, t_parse *parse)
+{
+	int				i;
+	int				j;
+	unsigned int	ceiling_colour;
+	unsigned int	floor_colour;
+
+	i = 0;
+	j = 0;
+	ceiling_colour = argb_to_hex(0, parse->ceiling_colour[0], \
+									parse->ceiling_colour[1], \
+									parse->ceiling_colour[2]);
+	floor_colour = argb_to_hex(0, parse->floor_colour[0], \
+									parse->floor_colour[1], \
+									parse->floor_colour[2]);
+	while (i < parse->win_height)
+	{
+		while (j < parse->win_width)
+		{
+			if (i < parse->win_height / 2)
+				my_pixel_put(main, j, i, ceiling_colour);
+			else
+				my_pixel_put(main, j, i, floor_colour);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 
 static void	rotate_vector(double *x, double *y, double angle)
 {	
 	double	x_temp;
 	double	y_temp;
-	double	rot_matrix[ROWS][COLUMNS];
+	double	rot_matrix[2][2];
 
 	x_temp = *x;
 	y_temp = *y;
