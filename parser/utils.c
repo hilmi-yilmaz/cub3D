@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:09:47 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/11 14:36:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-void    find_player_location(int *x, int *y, char **map)
+void	find_player_location(int *x, int *y, char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -30,10 +30,11 @@ void    find_player_location(int *x, int *y, char **map)
 	{
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || \
+				map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				*x = j;
-                *y = i;
+				*y = i;
 				return ;
 			}
 			j++;
@@ -43,17 +44,7 @@ void    find_player_location(int *x, int *y, char **map)
 	}
 }
 
-int skip_chr(char *str, int c)
-{
-    int i;
-
-    i = 0;
-    while (*(str + i) == c)
-        i++;
-    return (i);
-}
-
-char **copy_map(char **map)
+char	**copy_map(char **map)
 {
 	int		i;
 	char	**copy;

@@ -34,7 +34,8 @@ SRC_STR =   ft_strlen.c \
 			ft_split.c \
             ft_strmapi.c \
             ft_toupper_str_bonus.c \
-            ft_cmpstr_bonus.c
+            ft_cmpstr_bonus.c \
+			skip_chr.c
 
 OBJ_STR = $(SRC_STR:.c=.o)
 

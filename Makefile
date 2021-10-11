@@ -43,7 +43,6 @@ SRC_PARSER =	parse_main.c \
 				free_data.c \
 				utils.c \
 				checks.c \
-				error.c \
 				print.c
 
 DIR_RAYCASTER = raycaster

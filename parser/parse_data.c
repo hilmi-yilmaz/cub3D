@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/10 13:41:01 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/11 17:09:55 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,59 @@
 /* User defined header files */
 #include "../cub3d.h"
 
+/*
+**  return 1 acts as a flag that the reading of the cub file is done
+ */
+static int	decision(int fd, t_parse *parse, char *line)
+{
+	int	r;
+
+	r = 0;
+	if (*line == 'R')
+		r = parse_resolution(&parse->win_width, &parse->win_height, line + 1);
+	else if ((*line == 'N') || (*line == 'S') || (*line == 'W') \
+			|| (*line == 'E'))
+		r = parse_textures(parse, line);
+	else if (*line == 'F' || *line == 'C')
+		r = parse_colour(parse, line);
+	else if (*line == '0' || *line == '1' || *line == ' ')
+	{
+		if (parse_map(fd, parse, line))
+			return (-1);
+		return (1);
+	}
+	else
+	{
+		if (*line != '\0')
+		{
+			printf("Error\nWrong type identifier in scene file: %s\n", line);
+			r = -1;
+		}
+	}
+	return (r);
+}
+
+/*
+** ret = 1 when done reading
+ */
+static int	decision_wrapper(int fd, t_parse *parse, char *line)
+{
+	int	ret;
+
+	ret = decision(fd, parse, line);
+	if (ret == 1)
+		return (0);
+	if (ret == -1)
+	{
+		free(line);
+		line = NULL;
+		return (-1);
+	}
+	if (ret == 0)
+		free(line);
+	return (ret);
+}
+
 int	parse_data(int fd, t_parse *parse)
 {
 	int		res;
@@ -25,65 +78,22 @@ int	parse_data(int fd, t_parse *parse)
 	int		count;
 	char	*line;
 
-    res = 1;
+	res = 1;
 	ret = 0;
 	count = 0;
-    line = NULL;
-    while (res > 0)
-    {
-        res = get_next_line(fd, &line);
+	line = NULL;
+	while (res > 0)
+	{
+		res = get_next_line(fd, &line);
 		if (res == 0 && count == 0 && *line == '\0')
 		{
 			printf("Error\nThe scene file is empty.\n");
 			free(line);
 			return (-1);
 		}
-        ret = decision(fd, parse, line);
-        if (ret == 1)
-            return (0);
-        if (ret == -1)
-        {
-            free(line);
-            line = NULL;
-            return (-1);
-        }
-        if (ret != 1)
-            free(line);
-        line = NULL;
+		ret = decision_wrapper(fd, parse, line);
+		line = NULL;
 		count++;
-    }
-    return (0);
-}
-
-int decision(int fd, t_parse *parse, char *line)
-{
-    int ret;
-
-	ret = 0;
-    if (*line == 'R')
-            ret = parse_resolution(&parse->win_width, &parse->win_height, line + LEN_R); /* No allocation in parse_resolution */
-    else if ((*line == 'N' && *(line + 1) == 'O') || (*line == 'S' && *(line + 1) == 'O') || (*line == 'W' && *(line + 1) == 'E') || (*line == 'E' && *(line + 1) == 'A'))
-        ret = parse_textures(parse, line); /* Allocation happens */
-    else if (*line == 'F')
-        ret = parse_colour(parse->floor_colour, line + LEN_F); /* No allocation */
-    else if (*line == 'C')
-        ret = parse_colour(parse->ceiling_colour, line + LEN_C); /* No allocation */
-    else if (*line == '0' || *line == '1' ||  *line == ' ')
-    {
-        ret = parse_map(fd, parse, line); /* Allocation happens */
-        if (ret == -1)
-            return (-1);
-        return (1); // 1 acts as a flag that the reading of the cub file is done
-    }
-    else
-    {
-        if (*line != '\0')
-		{
-            printf("Error\nWrong type identifier in scene file or wrong starting element in map:\n%s\n", line);
-			ret = -1;
-		}
-    }
-    if (ret == -1)
-        return (-1);
-    return (0);
+	}
+	return (0);
 }

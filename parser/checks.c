@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:53:57 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 12:34:37 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/11 15:19:02 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	texture_completeness(t_parse *parse, int *error)
 		if (*error != -1)
 			printf("Error\n");
 		printf("Missing texture data. \
-				Make sure to add NO, SO, WE and EA textures.\n");
+Make sure to add NO, SO, WE and EA textures.\n");
 		*error = -1;
 	}
 }
@@ -92,7 +92,7 @@ int	check_map(char **map)
 	if (player_x == -1 && player_y == -1)
 	{
 		printf("Error\nNo player in the map. \
-				Put a N, S, E, W character in the map.\n");
+Put a N, S, E, W character in the map.\n");
 		return (-1);
 	}
 	recursion_management_init(&rec_man);
@@ -101,7 +101,7 @@ int	check_map(char **map)
 	if (rec_man.error == 1)
 	{
 		printf("Error\nMap is invalid. \
-				Make sure the map is surrounded by walls.\n");
+Make sure the map is surrounded by walls.\n");
 		return (-1);
 	}
 	return (ret);

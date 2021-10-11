@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:46:53 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 12:32:24 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/11 15:26:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int	recursion_management(t_recursion_management *rec_man, \
 	return (0);
 }
 
-static int	flood_fill(int x, int y, char **map, t_recursion_management *rec_man)
+static int	flood_fill(int x, int y, char **map, \
+						t_recursion_management *rec_man)
 {
 	if (recursion_management(rec_man, &x, &y, map))
 		return (-1);
@@ -71,7 +72,8 @@ static int	flood_fill(int x, int y, char **map, t_recursion_management *rec_man)
 			flood_fill(x + 1, y - 1, map, rec_man));
 }
 
-int	managed_flood_fill(int player_x, int player_y, char **map, t_recursion_management *rec_man)
+int	managed_flood_fill(int player_x, int player_y, char **map, \
+						t_recursion_management *rec_man)
 {
 	int	ret;
 	
