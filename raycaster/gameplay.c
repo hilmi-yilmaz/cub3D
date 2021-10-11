@@ -55,12 +55,12 @@ static void	move_player(t_data *data)
 int	gameplay(t_data *data)
 {
 	reset_angle(&data->player.angle);
-	draw_floor_ceiling(&data->images.main, &data->parse);
+	draw_floor_ceiling(&data->main, &data->parse);
 	move_player(data);
 	cast_all_rays(&data->player, &data->parse);
 	map_to_3d_textured(data);
-	mlx_put_image_to_window(data->images.mlx.mlx_ptr, \
-							data->images.mlx.win_ptr, \
-							data->images.main.img_ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, \
+							data->mlx.win_ptr, \
+							data->main.img_ptr, 0, 0);
 	return (0);
 }

@@ -7,14 +7,14 @@
 /* User defined header files */
 #include "../cub3d.h"
 
-int     load_all_xpm_images(t_images *images, t_parse *parse)
+int     load_all_xpm_images(t_data *data)
 {
     int ret;
 
-    if (load_xpm_image(images->mlx.mlx_ptr, &images->north_xpm, parse->north_text)
-        || load_xpm_image(images->mlx.mlx_ptr, &images->south_xpm, parse->south_text)
-        || load_xpm_image(images->mlx.mlx_ptr, &images->west_xpm, parse->west_text)
-        || load_xpm_image(images->mlx.mlx_ptr, &images->east_xpm, parse->east_text))
+    if (load_xpm_image(data->mlx.mlx_ptr, &data->north_xpm, data->parse.north_text)
+        || load_xpm_image(data->mlx.mlx_ptr, &data->south_xpm, data->parse.south_text)
+        || load_xpm_image(data->mlx.mlx_ptr, &data->west_xpm, data->parse.west_text)
+        || load_xpm_image(data->mlx.mlx_ptr, &data->east_xpm, data->parse.east_text))
         return (-1);
     return (0);
 }

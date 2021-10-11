@@ -9,13 +9,13 @@
 static void	select_xpm_nswe(t_data *data, t_img **selected_xpm, int i)
 {
 	if (data->player.side[i] == 'N')
-		*selected_xpm = &data->images.north_xpm;
+		*selected_xpm = &data->north_xpm;
 	else if (data->player.side[i] == 'S')
-		*selected_xpm = &data->images.south_xpm;
+		*selected_xpm = &data->south_xpm;
 	else if (data->player.side[i] == 'W')
-		*selected_xpm = &data->images.west_xpm;
+		*selected_xpm = &data->west_xpm;
 	else if (data->player.side[i] == 'E')
-		*selected_xpm = &data->images.east_xpm;
+		*selected_xpm = &data->east_xpm;
 }
 
 static void	column_from_texture_to_main_img(t_data *data, t_img *xpm_img, \
@@ -42,7 +42,7 @@ static void	column_from_texture_to_main_img(t_data *data, t_img *xpm_img, \
 			break ;
 		colour = my_pixel_get(xpm_img, xpm_column, \
 							(double)(text_begin_y + i) * ratio_heights);
-		my_pixel_put(&data->images.main, column, start + i, colour);
+		my_pixel_put(&data->main, column, start + i, colour);
 		i++;
 	}
 }

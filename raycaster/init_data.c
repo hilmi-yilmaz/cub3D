@@ -8,14 +8,14 @@
 /*
 ** Initialize all images.
 */
-static void	images_init(t_images *images)
+static void	images_init(t_data *data)
 {
-	ft_bzero(&images->mlx, sizeof(images->mlx));
-	ft_bzero(&images->main, sizeof(images->main));
-	ft_bzero(&images->north_xpm, sizeof(images->north_xpm));
-	ft_bzero(&images->south_xpm, sizeof(images->south_xpm));
-	ft_bzero(&images->west_xpm, sizeof(images->west_xpm));
-	ft_bzero(&images->east_xpm, sizeof(images->east_xpm));
+	ft_bzero(&data->mlx, sizeof(data->mlx));
+	ft_bzero(&data->main, sizeof(data->main));
+	ft_bzero(&data->north_xpm, sizeof(data->north_xpm));
+	ft_bzero(&data->south_xpm, sizeof(data->south_xpm));
+	ft_bzero(&data->west_xpm, sizeof(data->west_xpm));
+	ft_bzero(&data->east_xpm, sizeof(data->east_xpm));
 }
 
 /*
@@ -98,7 +98,7 @@ int	raycaster_init(t_data *data)
 {
 	int	ret;
 
-	images_init(&data->images);
+	images_init(data);
 	ret = player_init(&data->player, data->parse.win_width);
 	if (ret == -1)
 		return (-1);

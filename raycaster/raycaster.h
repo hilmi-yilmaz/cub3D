@@ -26,17 +26,6 @@ typedef struct s_img
 
 }                   t_img;
 
-typedef struct s_images
-{
-	t_mlx	mlx;
-	t_img	main;
-	t_img	north_xpm;
-	t_img	south_xpm;
-	t_img	west_xpm;
-	t_img	east_xpm;
-
-}			t_images;
-
 typedef struct s_ray
 {
     double  x;
@@ -75,9 +64,14 @@ typedef struct 	s_mlx_key_handler
 typedef struct s_data
 {
 	t_parse				parse;
-	t_images			images;
 	t_player			player;
 	t_mlx_key_handler	key_handler;
+	t_mlx				mlx;
+	t_img				main;
+	t_img				north_xpm;
+	t_img				south_xpm;
+	t_img				west_xpm;
+	t_img				east_xpm;
 
 }	t_data;
 
@@ -113,7 +107,7 @@ unsigned int 	argb_to_hex(int a, int r, int g, int b);
 
 /* free_data.c */
 void    free_all(t_data *data);
-void    free_images(t_images *images);
+void    free_images(t_data *data);
 void    free_player(t_player *player);
 
 /* Hooks */
@@ -142,7 +136,7 @@ void    print_rays_array(double *rays_array, int width);
 void    print_side_array(int *side_array, int width);
 
 /* load_xpm.c */
-int    	load_all_xpm_images(t_images *images, t_parse *parse);
+int     load_all_xpm_images(t_data *data);
 int    	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path);
 
 #endif

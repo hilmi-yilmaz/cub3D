@@ -9,7 +9,7 @@
 
 int	close_window(t_data *data)
 {
-	free_images(&data->images);
+	free_images(data);
 	free_parse(&data->parse);
 	free_player(&data->player);
 	exit(0);
