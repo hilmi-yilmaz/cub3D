@@ -70,7 +70,6 @@ char  	**create_map(t_parse *parse, char *line, int rows);
 int    	old_to_new_map(t_parse *parse, char **new_map, int rows);
 
 /* checks.c */
-int     check_resolution(char *line);
 int 	check_map(char **map);
 int		check_data_completeness(t_parse *parse);
 
@@ -88,7 +87,7 @@ void    find_player_location(int *x, int *y, char **map);
 char 	**copy_map(char **map);
 
 /* flood_fill.c */
-int 	flood_fill(int x, int y, char **map, t_recursion_management *rec_man);
+int	managed_flood_fill(int player_x, int player_y, char **map, t_recursion_management *rec_man);
 
 /* free_data.c */
 void    free_parse(t_parse *parse);

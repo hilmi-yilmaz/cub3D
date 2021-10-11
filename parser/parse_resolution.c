@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/09/20 12:43:55 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/11 12:06:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,33 @@
 
 /* User defined header files */
 #include "../cub3d.h"
+
+static int  check_resolution(char *line)
+{
+	int	i;
+	int	data_count;
+
+	i = 0;
+	data_count = 0;
+	while (line[i] != '\0')
+	{
+		if (ft_isdigit(line[i]) == 0 && line[i] != ' ')
+		{
+			printf("Error\nWrong characters in resolution data.\n");
+			return (-1);
+		}
+		if (ft_isdigit(line[i]) != 0 && ft_isdigit(line[i + 1]) == 0)
+			data_count++;
+		i++;
+	}
+	if (data_count != RESOLUTION_DATA_COUNT)
+	{
+		printf("Error\nFormat of resolution isn't correct. \
+				Give resolutions as 2 numbers for width and height.\n");
+		return (-1);
+	}
+	return (0);
+}
 
 int parse_resolution(int *win_width, int *win_height, char *line)
 {
