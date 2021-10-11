@@ -54,8 +54,6 @@ static void	move_player(t_data *data)
 
 int	gameplay(t_data *data)
 {
-	int	ret;
-
 	reset_angle(&data->player.angle);
 	draw_floor_ceiling(&data->images.main, &data->parse);
 	move_player(data);

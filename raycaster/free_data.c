@@ -6,6 +6,7 @@
 
 void	free_all(t_data *data)
 {
+	free_parse(&data->parse);
 	free_images(&data->images);
 	free_player(&data->player);
 }

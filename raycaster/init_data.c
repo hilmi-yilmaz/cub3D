@@ -30,19 +30,8 @@ static void	ray_init(t_ray *ray)
 	ray->error = -1;
 }
 
-/*
-** Initialize the player struct.
-*/
-static int	player_init(t_player *player, int width)
+static	int	allocate(t_player *player, int width)
 {
-	int	i;
-
-	i = 0;
-	player->x = -1;
-	player->y = -1;
-	player->angle = -1;
-	player->speed = 0.05;
-	player->rot_speed = 0.008 * PI;
 	player->rays_array = error_malloc(sizeof(*player->rays_array) * width);
 	if (player->rays_array == NULL)
 		return (-1);
@@ -54,6 +43,30 @@ static int	player_init(t_player *player, int width)
 		return (-1);
 	player->ver_ray = error_malloc(sizeof(*player->ver_ray) * width);
 	if (player->ver_ray == NULL)
+		return (-1);
+	return (0);
+}
+
+/*
+** Initialize the player struct.
+*/
+static int	player_init(t_player *player, int width)
+{
+	int	i;
+	int	ret;
+
+	i = 0;
+	player->x = -1;
+	player->y = -1;
+	player->angle = -1;
+	player->speed = 0.05;
+	player->rot_speed = 0.008 * PI;
+	player->rays_array = NULL;
+	player->side = NULL;
+	player->hor_ray = NULL;
+	player->ver_ray = NULL;
+	ret = allocate(player, width);
+	if (ret == -1)
 		return (-1);
 	while (i < width)
 	{
