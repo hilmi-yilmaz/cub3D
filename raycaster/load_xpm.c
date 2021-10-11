@@ -24,8 +24,10 @@ int     load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
     xpm_img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path, &xpm_img->width, &xpm_img->height);
     if (xpm_img->img_ptr == NULL)
         return (-1);
+    xpm_img->img_ptr_flag = 1;
     xpm_img->img_addr = mlx_get_data_addr(xpm_img->img_ptr, &xpm_img->bits_per_pixel, &xpm_img->line_size, &xpm_img->endian);
 	if (xpm_img->img_addr == NULL)
 		return (-1);
+    xpm_img->img_addr_flag = 1;
     return (0);
 }

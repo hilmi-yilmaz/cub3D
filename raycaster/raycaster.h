@@ -7,6 +7,8 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		mlx_ptr_flag;
+	int		win_ptr_flag;
 	
 }				t_mlx;
 
@@ -19,6 +21,8 @@ typedef struct s_img
     int             endian;
 	int				width;
 	int				height;
+	int				img_ptr_flag;
+	int				img_addr_flag;
 
 }                   t_img;
 

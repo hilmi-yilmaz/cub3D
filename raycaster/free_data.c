@@ -13,13 +13,19 @@ void	free_all(t_data *data)
 
 void	free_images(t_images *images)
 {
-	mlx_destroy_image(images->mlx.mlx_ptr, images->main.img_ptr);
-	mlx_destroy_image(images->mlx.mlx_ptr, images->north_xpm.img_ptr);
-	mlx_destroy_image(images->mlx.mlx_ptr, images->south_xpm.img_ptr);
-	mlx_destroy_image(images->mlx.mlx_ptr, images->east_xpm.img_ptr);
-	mlx_destroy_image(images->mlx.mlx_ptr, images->west_xpm.img_ptr);
-	mlx_destroy_window(images->mlx.mlx_ptr, images->mlx.win_ptr);
-	if (__linux__)
+	if (images->main.img_ptr_flag == 1)
+		mlx_destroy_image(images->mlx.mlx_ptr, images->main.img_ptr);
+	if (images->north_xpm.img_ptr_flag == 1)
+		mlx_destroy_image(images->mlx.mlx_ptr, images->north_xpm.img_ptr);
+	if (images->south_xpm.img_ptr_flag == 1)
+		mlx_destroy_image(images->mlx.mlx_ptr, images->south_xpm.img_ptr);
+	if (images->east_xpm.img_ptr_flag == 1)
+		mlx_destroy_image(images->mlx.mlx_ptr, images->east_xpm.img_ptr);
+	if (images->west_xpm.img_ptr_flag == 1)
+		mlx_destroy_image(images->mlx.mlx_ptr, images->west_xpm.img_ptr);
+	if (images->mlx.win_ptr_flag == 1)
+		mlx_destroy_window(images->mlx.mlx_ptr, images->mlx.win_ptr);
+	if (__linux__ && images->mlx.mlx_ptr_flag == 1)
 		mlx_destroy_display(images->mlx.mlx_ptr);
 	free(images->mlx.mlx_ptr);
 }
