@@ -40,5 +40,12 @@ int flood_fill(int x, int y, char **map, t_recursion_management *rec_man)
         rec_man->save_y = y;
     }
     map[y][x] = '1';
-    return (flood_fill(x + 1, y, map, rec_man) + flood_fill(x - 1, y, map, rec_man) + flood_fill(x, y + 1, map, rec_man) +  flood_fill(x, y - 1, map, rec_man));
+    return (flood_fill(x + 1, y, map, rec_man) + \
+            flood_fill(x - 1, y, map, rec_man) + \
+            flood_fill(x, y + 1, map, rec_man) + \
+            flood_fill(x, y - 1, map, rec_man) + \
+            flood_fill(x - 1, y + 1, map, rec_man) + \
+            flood_fill(x + 1, y + 1, map, rec_man) + \
+            flood_fill(x - 1, y - 1, map, rec_man) + \
+            flood_fill(x + 1, y - 1, map, rec_man));
 }

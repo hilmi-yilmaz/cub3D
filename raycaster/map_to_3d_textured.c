@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   map_to_3d_textured.c                               :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/10/11 11:14:36 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/11 11:14:37 by hyilmaz       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* Standard library header files */
 #include <stdio.h>
 #include <stdlib.h>
