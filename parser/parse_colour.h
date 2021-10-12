@@ -3,7 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "parse_structs.h"
+# include "parser.h"
 
 # include "../libft/libft.h"
 

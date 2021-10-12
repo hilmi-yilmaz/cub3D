@@ -5,7 +5,7 @@
 # include <stdlib.h>
 # include "../../libft/libft.h"
 
-# include "../raycaster_structs.h"
+# include "../raycaster.h"
 
 int	raycaster_init(t_data *data);
 

@@ -1,7 +1,7 @@
 #ifndef RAYCASTER_UTILS_H
 # define RAYCASTER_UTILS_H
 
-# include "../raycaster_structs.h"
+# include "../raycaster.h"
 
 # include "raycaster_free.h"
 

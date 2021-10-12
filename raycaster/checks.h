@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 # include "../libft/libft.h"
 

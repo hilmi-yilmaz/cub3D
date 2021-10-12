@@ -6,7 +6,7 @@
 
 # include "utils/maths.h"
 # include "checks.h"
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 int				horizontal_intersection(t_player *player, double angle, \
 										char **map, int i);

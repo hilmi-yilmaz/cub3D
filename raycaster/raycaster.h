@@ -1,7 +1,7 @@
-#ifndef RAYCASTER_STRUCTS_H
-# define RAYCASTER_STRUCTS_H
+#ifndef RAYCASTER_H
+# define RAYCASTER_H
 
-# include "../parser/parse_structs.h"
+# include "../parser/parser.h"
 
 # define PI 3.141592653589793
 # define FOV 60

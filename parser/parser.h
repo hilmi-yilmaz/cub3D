@@ -1,5 +1,5 @@
-#ifndef PARSE_STRUCTS_H
-# define PARSE_STRUCTS_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # define RGB_DATA_COUNT 3
 # define UNINIT -1

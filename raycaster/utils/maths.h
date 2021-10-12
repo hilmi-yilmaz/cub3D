@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-# include "../raycaster_structs.h"
+# include "../raycaster.h"
 
 double			calculate_ray_len(t_player *player, double x, double y);
 void			reset_angle(double *angle);

@@ -45,7 +45,7 @@ SRC_PARSER =	parse_main.c \
 				utils/parser_utils.c \
 				utils/print.c
 
-INC_PARSER = 	parse_structs.h \
+INC_PARSER = 	parser.h \
 				parse_main.h \
 				parse_data.h \
 				parse_resolution.h \
@@ -74,7 +74,7 @@ SRC_RAYCASTER = raycaster_main.c \
 				utils/raycaster_free.c \
 				utils/raycaster_utils.c
 
-INC_RAYCASTER = raycaster_structs.h \
+INC_RAYCASTER = raycaster.h \
 				raycaster_main.h \
 				utils/raycaster_init.h \
 				hooks.h \

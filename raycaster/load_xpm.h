@@ -3,7 +3,7 @@
 
 # include "stddef.h"
 
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 #if __linux__ == 1
 # include "../mlx_linux/mlx.h"

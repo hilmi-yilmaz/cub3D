@@ -1,7 +1,7 @@
 #ifndef MAP_TO_3D_TEXTURED_H
 # define MAP_TO_3D_TEXTURED_H
 
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 # include <stdlib.h>
 

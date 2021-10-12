@@ -2,7 +2,7 @@
 # define PARSE_RESOLUTION_H
 
 # include <stdio.h>
-# include "parse_structs.h"
+# include "parser.h"
 
 # include "../libft/libft.h"
 

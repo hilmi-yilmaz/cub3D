@@ -3,7 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "parse_structs.h"
+# include "parser.h"
 
 # include "parse_resolution.h"
 # include "parse_texture.h"

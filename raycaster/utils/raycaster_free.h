@@ -1,7 +1,7 @@
 #ifndef RAYCASTER_FREE_H
 # define RAYCASTER_FREE_H
 
-# include "../raycaster_structs.h"
+# include "../raycaster.h"
 # include "../../parser/utils/parser_free.h"
 
 # ifndef __linux__

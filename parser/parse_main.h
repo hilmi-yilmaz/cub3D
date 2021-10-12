@@ -8,7 +8,7 @@
 # include <string.h>
 # include <errno.h>
 
-# include "parse_structs.h"
+# include "parser.h"
 # include "parse_data.h"
 # include "checks/check_data_completeness.h"
 # include "checks/check_map.h"

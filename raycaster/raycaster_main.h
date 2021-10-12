@@ -7,7 +7,7 @@
 #include <math.h>
 
 # include "../incl/X.h"
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 # include "gameplay.h"
 # include "hooks.h"

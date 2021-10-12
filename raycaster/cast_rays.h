@@ -7,7 +7,7 @@
 
 # include "utils/maths.h"
 # include "intersections.h"
-# include "raycaster_structs.h"
+# include "raycaster.h"
 
 void	cast_all_rays(t_player *player, t_parse *parse);
 

@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-# include "../parse_structs.h"
+# include "../parser.h"
 
 void	free_parse(t_parse *parse);
 void	free_textures(t_parse *parse);

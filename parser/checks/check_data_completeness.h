@@ -3,7 +3,7 @@
 
 # include <stddef.h>
 # include <stdio.h>
-# include "../parse_structs.h"
+# include "../parser.h"
 
 int	check_data_completeness(t_parse *parse);
 
