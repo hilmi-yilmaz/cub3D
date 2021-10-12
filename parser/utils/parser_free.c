@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free_data.c                                        :+:    :+:            */
+/*   parser_free.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 16:02:54 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 15:24:19 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 17:06:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdlib.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parser_free.h"
 
 /* This function frees the textures and map */
 void	free_parse(t_parse *parse)

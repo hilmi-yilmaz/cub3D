@@ -6,21 +6,12 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 13:14:48 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:02:49 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Standard library header files */
-#include <stddef.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parse_main.h"
 
 static int	close_file(int fd, char *filename)
 {

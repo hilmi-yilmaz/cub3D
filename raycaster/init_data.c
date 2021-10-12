@@ -6,16 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:16:06 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:37:44 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard Library header files */
-#include <stdio.h>
-#include <stdlib.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "init_data.h"
 
 /*
 ** Initialize all images.

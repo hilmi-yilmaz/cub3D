@@ -6,18 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:08 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:14:10 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 17:44:40 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "main.h"
 
 static int	set_mlx(t_data *data)
 {
@@ -81,7 +74,7 @@ int	raycaster_main(t_data *data)
 			keypress_hook, data);
 	mlx_hook(data->mlx.win_ptr, KeyRelease, KeyReleaseMask, \
 			keyrelease_hook, data);
-	if (__linux__)
+	if (__linux__ == 1)
 		mlx_hook(data->mlx.win_ptr, ClientMessage, NoEventMask, \
 				close_window, data);
 	else

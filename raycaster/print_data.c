@@ -6,15 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:18:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:18:07 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:56:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+# include "print_data.h"
 
 void	print_intersections(t_player *player, int width)
 {

@@ -6,16 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:41 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:14:42 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:24:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "checks.h"
 
 /*
 ** The check_wall function checks whether there is a wall at location (x,y).

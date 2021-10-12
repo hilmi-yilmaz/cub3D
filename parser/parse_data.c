@@ -6,17 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 17:09:55 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 12:57:42 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parse_data.h"
 
 /*
 **  return 1 acts as a flag that the reading of the cub file is done

@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   flood_fill.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/10/11 11:46:53 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 15:26:30 by hyilmaz       ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "check_map.h"
 
 /*
 **
@@ -72,7 +59,7 @@ static int	flood_fill(int x, int y, char **map, \
 			flood_fill(x + 1, y - 1, map, rec_man));
 }
 
-int	managed_flood_fill(int player_x, int player_y, char **map, \
+static int	managed_flood_fill(int player_x, int player_y, char **map, \
 						t_recursion_management *rec_man)
 {
 	int	ret;
@@ -84,6 +71,34 @@ int	managed_flood_fill(int player_x, int player_y, char **map, \
 		rec_man->max_stack_reached = 0;
 		if (rec_man->error == 1)
 			break ;
+	}
+	return (ret);
+}
+
+int	check_map(char **map)
+{
+	int						ret;
+	int						player_x;
+	int						player_y;
+	t_recursion_management	rec_man;
+
+	player_x = -1;
+	player_y = -1;
+	find_player_location(&player_x, &player_y, map);
+	if (player_x == -1 && player_y == -1)
+	{
+		printf("Error\nNo player in the map. \
+Put a N, S, E, W character in the map.\n");
+		return (-1);
+	}
+	recursion_management_init(&rec_man);
+	ret = managed_flood_fill(player_x, player_y, map, &rec_man);
+	printf("total recursions = %d\n", rec_man.total_recursions);
+	if (rec_man.error == 1)
+	{
+		printf("Error\nMap is invalid. \
+Make sure the map is surrounded by walls.\n");
+		return (-1);
 	}
 	return (ret);
 }

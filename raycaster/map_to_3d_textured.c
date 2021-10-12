@@ -6,17 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:14:37 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:51:37 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "map_to_3d_textured.h"
 
 static void	select_xpm_nswe(t_data *data, t_img **selected_xpm, int i)
 {

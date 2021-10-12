@@ -6,18 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 17:01:38 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:10:37 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <stddef.h>
-#include <string.h>
-#include <errno.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parse_texture.h"
 
 static int	fill_texture(char **texture, char *line, char *text_id)
 {

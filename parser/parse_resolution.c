@@ -6,15 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 15:38:52 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:06:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parse_resolution.h"
 
 static int	check_resolution(char *line)
 {

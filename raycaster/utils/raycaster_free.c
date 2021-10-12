@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free_data.c                                        :+:    :+:            */
+/*   raycaster_free.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:26 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:16:27 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 17:47:48 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdlib.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "raycaster_free.h"
 
 void	free_all(t_data *data)
 {

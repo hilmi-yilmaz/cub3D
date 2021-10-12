@@ -6,15 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 17:08:22 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 17:08:23 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:14:28 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "print.h"
 
 void	print_parse(t_parse *parse)
 {

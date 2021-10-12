@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   raycaster_utils.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/10/11 11:16:45 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:16:46 by hyilmaz       ########   odam.nl         */
+/*   Created: 2021/10/12 16:26:40 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/12 16:26:58 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "raycaster_utils.h"
 
 int	close_window(t_data *data)
 {

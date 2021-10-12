@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   checks.c                                           :+:    :+:            */
+/*   check_data_completeness.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/10/11 11:53:57 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 15:19:02 by hyilmaz       ########   odam.nl         */
+/*   Created: 2021/10/12 11:54:19 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/12 11:54:20 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "check_data_completeness.h"
 
 static void	resolution_completeness(t_parse *parse, int *error)
 {
@@ -77,32 +73,4 @@ int	check_data_completeness(t_parse *parse)
 		error = -1;
 	}
 	return (error);
-}
-
-int	check_map(char **map)
-{
-	int						ret;
-	int						player_x;
-	int						player_y;
-	t_recursion_management	rec_man;
-
-	player_x = -1;
-	player_y = -1;
-	find_player_location(&player_x, &player_y, map);
-	if (player_x == -1 && player_y == -1)
-	{
-		printf("Error\nNo player in the map. \
-Put a N, S, E, W character in the map.\n");
-		return (-1);
-	}
-	recursion_management_init(&rec_man);
-	ret = managed_flood_fill(player_x, player_y, map, &rec_man);
-	printf("total recursions = %d\n", rec_man.total_recursions);
-	if (rec_man.error == 1)
-	{
-		printf("Error\nMap is invalid. \
-Make sure the map is surrounded by walls.\n");
-		return (-1);
-	}
-	return (ret);
 }

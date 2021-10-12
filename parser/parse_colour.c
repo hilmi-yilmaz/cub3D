@@ -6,16 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 15:00:49 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 11:59:49 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <stdlib.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "parse_colour.h"
 
 static int	error_colour(void)
 {

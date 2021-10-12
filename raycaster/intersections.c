@@ -6,16 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:16:36 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:39:29 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "intersections.h"
 
 int	horizontal_intersection(t_player *player, double angle, char **map, int i)
 {	

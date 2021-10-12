@@ -6,17 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:48 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:14:49 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:33:18 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard Library header files */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "gameplay.h"
 
 static void	draw_floor_ceiling(t_img *main, t_parse *parse)
 {

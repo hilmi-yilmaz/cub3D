@@ -6,17 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:22 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 11:16:23 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:20:47 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-/* User defined header files */
-#include "../cub3d.h"
+#include "cast_rays.h"
 
 static void	set_vertical_data(t_player *player, double angle, int i)
 {
