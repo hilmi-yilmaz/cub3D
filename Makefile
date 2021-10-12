@@ -40,7 +40,7 @@ SRC_PARSER =	parse_main.c \
 				parse_map.c \
 				checks/check_data_completeness.c \
 				checks/check_map.c \
-				utils/init.c \
+				utils/parse_init.c \
 				utils/parser_free.c \
 				utils/parser_utils.c \
 				utils/print.c
@@ -54,7 +54,7 @@ INC_PARSER = 	parser.h \
 				parse_map.h \
 				checks/check_data_completeness.h \
 				checks/check_map.h \
-				utils/init.h \
+				utils/parse_init.h \
 				utils/parser_utils.h \
 				utils/parser_free.h \
 				utils/print.h

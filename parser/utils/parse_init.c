@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
+/*   parse_init.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:17:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 11:42:45 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 19:54:53 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // #include <stddef.h>
 
 /* User defined header files */
-#include "init.h"
+#include "parse_init.h"
 
 void	parse_init(t_parse *parse)
 {
