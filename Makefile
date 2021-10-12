@@ -60,7 +60,7 @@ INC_PARSER = 	parse_structs.h \
 				utils/print.h
 
 DIR_RAYCASTER = raycaster
-SRC_RAYCASTER = main.c \
+SRC_RAYCASTER = raycaster_main.c \
 				utils/raycaster_init.c \
 				hooks.c \
 				checks.c \
@@ -75,7 +75,7 @@ SRC_RAYCASTER = main.c \
 				utils/raycaster_utils.c
 
 INC_RAYCASTER = raycaster_structs.h \
-				main.h \
+				raycaster_main.h \
 				utils/raycaster_init.h \
 				hooks.h \
 				checks.h \

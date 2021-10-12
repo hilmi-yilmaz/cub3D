@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef RAYCASTER_MAIN_H
+# define RAYCASTER_MAIN_H
 
 #include <stddef.h>
 #include <stdio.h>

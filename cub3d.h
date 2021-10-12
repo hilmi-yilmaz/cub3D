@@ -5,7 +5,7 @@
 # include "parser/parse_structs.h"
 
 # include "parser/parse_main.h"
-# include "raycaster/main.h"
+# include "raycaster/raycaster_main.h"
 
 # include "raycaster/utils/raycaster_free.h"
 # include "parser/utils/parser_free.h"
