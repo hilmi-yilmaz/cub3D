@@ -43,7 +43,21 @@ SRC_PARSER =	parse_main.c \
 				utils/init.c \
 				utils/parser_free.c \
 				utils/parser_utils.c \
-				print.c
+				utils/print.c
+
+INC_PARSER = 	parse_structs.h \
+				parse_main.h \
+				parse_data.h \
+				parse_resolution.h \
+				parse_texture.h \
+				parse_colour.h \
+				parse_map.h \
+				checks/check_data_completeness.h \
+				checks/check_map.h \
+				utils/init.h \
+				utils/parser_utils.h \
+				utils/parser_free.h \
+				utils/print.h
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
@@ -59,6 +73,24 @@ SRC_RAYCASTER = main.c \
 				load_xpm.c \
 				utils/raycaster_free.c \
 				utils/raycaster_utils.c
+
+INC_RAYCASTER = raycaster_structs.h \
+				main.h \
+				init_data.h \
+				hooks.h \
+				checks.h \
+				math.h \
+				intersections.h \
+				cast_rays.h \
+				print_data.h \
+				map_to_3d_textured.h \
+				gameplay.h \
+				load_xpm.h \
+				utils/raycaster_free.h \
+				utils/raycaster_utils.h
+
+# Headerfiles
+HEADER_FILES = cub3d.h $(INC_PARSER) $(INC_RAYCASTER)
 
 # Object files
 OBJ_DIR = obj
@@ -87,7 +119,7 @@ $(LIBFT):
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LINKS) $(LIBFT_DIR)/$(LIBFT) -o $(NAME)
 
-$(OBJ) : $(OBJ_DIR)/%.o: %.c $(HEADER_FILE)
+$(OBJ) : $(OBJ_DIR)/%.o: %.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
