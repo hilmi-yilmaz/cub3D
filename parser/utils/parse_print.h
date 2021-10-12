@@ -1,5 +1,5 @@
-#ifndef PRINT_H
-# define PRINT_H
+#ifndef PARSE_PRINT_H
+# define PARSE_PRINT_H
 
 # include <stdio.h>
 #include "../parser.h"

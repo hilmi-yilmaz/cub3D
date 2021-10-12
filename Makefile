@@ -43,7 +43,7 @@ SRC_PARSER =	parse_main.c \
 				utils/parse_init.c \
 				utils/parser_free.c \
 				utils/parser_utils.c \
-				utils/print.c
+				utils/parse_print.c
 
 INC_PARSER = 	parser.h \
 				parse_main.h \
@@ -57,7 +57,7 @@ INC_PARSER = 	parser.h \
 				utils/parse_init.h \
 				utils/parser_utils.h \
 				utils/parser_free.h \
-				utils/print.h
+				utils/parse_print.h
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = raycaster_main.c \

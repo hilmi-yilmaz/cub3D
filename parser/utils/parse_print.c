@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print.c                                            :+:    :+:            */
+/*   parse_print.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 17:08:22 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:14:28 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 19:59:21 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
+#include "parse_print.h"
 
 void	print_parse(t_parse *parse)
 {
