@@ -5,7 +5,7 @@
 
 # include <stdlib.h>
 
-# include "math.h"
+# include "utils/maths.h"
 
 # include "utils/raycaster_utils.h"
 

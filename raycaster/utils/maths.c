@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   math.c                                             :+:    :+:            */
+/*   maths.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:15:46 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:40:52 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 19:29:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include "maths.h"
 
 double	calculate_ray_len(t_player *player, double x, double y)
 {

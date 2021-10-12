@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-# include "math.h"
+# include "utils/maths.h"
 # include "checks.h"
 # include "raycaster_structs.h"
 

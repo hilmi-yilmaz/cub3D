@@ -9,7 +9,7 @@
 
 # include "utils/raycaster_utils.h"
 # include "checks.h"
-# include "math.h"
+# include "utils/maths.h"
 # include "cast_rays.h"
 # include "map_to_3d_textured.h"
 

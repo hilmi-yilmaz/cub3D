@@ -64,7 +64,7 @@ SRC_RAYCASTER = main.c \
 				init_data.c \
 				hooks.c \
 				checks.c \
-				math.c \
+				utils/maths.c \
 				intersections.c \
 				cast_rays.c \
 				print_data.c \
@@ -79,7 +79,7 @@ INC_RAYCASTER = raycaster_structs.h \
 				init_data.h \
 				hooks.h \
 				checks.h \
-				math.h \
+				utils/maths.h \
 				intersections.h \
 				cast_rays.h \
 				print_data.h \
