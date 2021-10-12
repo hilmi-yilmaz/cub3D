@@ -13,7 +13,7 @@
 # include "hooks.h"
 # include "load_xpm.h"
 # include "../parser/utils/parser_utils.h"
-# include "init_data.h"
+# include "utils/raycaster_init.h"
 # include "utils/raycaster_utils.h"
 
 # ifndef __linux__

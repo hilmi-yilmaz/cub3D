@@ -61,13 +61,13 @@ INC_PARSER = 	parse_structs.h \
 
 DIR_RAYCASTER = raycaster
 SRC_RAYCASTER = main.c \
-				init_data.c \
+				utils/raycaster_init.c \
 				hooks.c \
 				checks.c \
 				utils/maths.c \
 				intersections.c \
 				cast_rays.c \
-				print_data.c \
+				utils/raycaster_print.c \
 				map_to_3d_textured.c \
 				gameplay.c \
 				load_xpm.c \
@@ -76,13 +76,13 @@ SRC_RAYCASTER = main.c \
 
 INC_RAYCASTER = raycaster_structs.h \
 				main.h \
-				init_data.h \
+				utils/raycaster_init.h \
 				hooks.h \
 				checks.h \
 				utils/maths.h \
 				intersections.h \
 				cast_rays.h \
-				print_data.h \
+				utils/raycaster_print.h \
 				map_to_3d_textured.h \
 				gameplay.h \
 				load_xpm.h \

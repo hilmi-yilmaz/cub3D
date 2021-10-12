@@ -1,9 +1,9 @@
-#ifndef PRINT_DATA_H
-# define PRINT_DATA_H
+#ifndef RAYCASTER_PRINT_H
+# define RAYCASTER_PRINT_H
 
 # include <stdio.h>
 
-# include "raycaster_structs.h"
+# include "../raycaster_structs.h"
 
 void	print_intersections(t_player *player, int width);
 void	print_ray_data(t_ray ray);

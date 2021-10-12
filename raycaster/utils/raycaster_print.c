@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_data.c                                       :+:    :+:            */
+/*   raycaster_print.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:18:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:56:43 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 19:33:43 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "print_data.h"
+# include "raycaster_print.h"
 
 void	print_intersections(t_player *player, int width)
 {

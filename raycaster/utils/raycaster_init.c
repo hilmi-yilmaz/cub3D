@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_data.c                                        :+:    :+:            */
+/*   raycaster_init.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:37:44 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/12 19:39:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init_data.h"
+#include "raycaster_init.h"
 
 /*
 ** Initialize all images.
