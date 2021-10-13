@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 10:07:15 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 10:58:51 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 11:00:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 /* User defined headers */
 # include "../raycaster/raycaster.h"
 # include "../parser/parser.h"
-
 # include "../parser/parse_main.h"
 # include "../raycaster/raycaster_main.h"
-
 # include "../raycaster/utils/raycaster_free.h"
 # include "../parser/utils/parser_free.h"
 

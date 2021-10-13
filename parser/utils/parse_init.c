@@ -6,14 +6,10 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:17:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 19:54:53 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 11:07:00 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
-// #include <stddef.h>
-
-/* User defined header files */
 #include "parse_init.h"
 
 void	parse_init(t_parse *parse)

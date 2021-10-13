@@ -1,9 +1,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+/* Macros */
 # define RGB_DATA_COUNT 3
 # define UNINIT -1
 
+/* Data structures */
 typedef struct s_parse
 {
 	int		win_width;

@@ -93,7 +93,6 @@ Put a N, S, E, W character in the map.\n");
 	}
 	recursion_management_init(&rec_man);
 	ret = managed_flood_fill(player_x, player_y, map, &rec_man);
-	printf("total recursions = %d\n", rec_man.total_recursions);
 	if (rec_man.error == 1)
 	{
 		printf("Error\nMap is invalid. \
