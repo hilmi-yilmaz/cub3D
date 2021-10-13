@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:01 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:43:58 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:49:34 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	static load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
 
 int	load_all_xpm_images(t_data *data)
 {
-	int	ret;
-
 	if (load_xpm_image(data->mlx.mlx_ptr, &data->north_xpm, \
 						data->parse.north_text)
 		|| load_xpm_image(data->mlx.mlx_ptr, &data->south_xpm, \

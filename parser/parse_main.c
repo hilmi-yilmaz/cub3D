@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 10:24:29 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:51:11 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	close_file(int fd, char *filename)
 int	parse_main(t_parse *parse, char **argv)
 {
 	int		fd;
-	int		parse_return;
-	int		check;
 	char	**cpy_map;
+
+	printf("Ewa\n");
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)

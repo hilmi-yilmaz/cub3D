@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:22 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:20:47 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:49:21 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static double	cast_single_ray(t_player *player, t_parse *parse, \
 {
 	double	hor_dist;
 	double	ver_dist;
-	double	distance;
 	int		wall_hor;
 	int		wall_ver;
 

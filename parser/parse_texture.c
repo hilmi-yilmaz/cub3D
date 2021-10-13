@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:09 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:10:37 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:47:44 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	parse_textures(t_parse *parse, char *line)
 {
 	int	ret;
 
+	ret = 0;
 	if (*line == 'N' && line[1] == 'O')
 		ret = fill_texture(&parse->north_text, line + 2, "North");
 	else if (*line == 'S' && line[1] == 'O')

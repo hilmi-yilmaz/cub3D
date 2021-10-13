@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:26 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 17:47:48 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:50:02 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->west_xpm.img_ptr);
 	if (data->mlx.win_ptr_flag == 1)
 		mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
-	if (__linux__ && data->mlx.mlx_ptr_flag == 1)
-		mlx_destroy_display(data->mlx.mlx_ptr);
 	free(data->mlx.mlx_ptr);
 }
 

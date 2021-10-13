@@ -36,7 +36,7 @@ static int	flood_fill(int x, int y, char **map, \
 	if (recursion_management(rec_man, &x, &y, map))
 		return (-1);
 	if (x < 0 || y < 0 || y >= ft_str_arr_len(map) || \
-		x >= ft_strlen(map[y]) || map[y][x] == ' ')
+		x >= (int)ft_strlen(map[y]) || map[y][x] == ' ')
 	{
 		rec_man->error = 1;
 		return (1);

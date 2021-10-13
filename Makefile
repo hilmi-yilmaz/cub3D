@@ -3,7 +3,7 @@ CC = clang
 ifdef VALGRIND
 CFLAGS = -g3 
 else
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
 endif
 
 # Setting variables depending on Operating System
