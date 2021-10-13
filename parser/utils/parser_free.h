@@ -11,5 +11,6 @@
 void	free_parse(t_parse *parse);
 void	free_textures(t_parse *parse);
 void	free_map(char **map);
+void	*free_2d_str_array_if_fails(char **copy, int i);
 
 #endif

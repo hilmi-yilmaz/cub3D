@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/24 16:02:54 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 17:06:25 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 13:13:34 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ void	free_map(char **map)
 		}
 	}
 	free(map);
+}
+
+void	*free_2d_str_array_if_fails(char **copy, int i)
+{
+	int j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(copy[j]);
+		j++;
+	}
+	free(copy);
+	return (NULL);
 }

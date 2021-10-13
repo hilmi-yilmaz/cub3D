@@ -9,6 +9,7 @@
 
 /* User defined headers */
 # include "../../libft/libft.h"
+# include "parser_free.h"
 
 /* Function prototypes */
 void	find_player_location(int *x, int *y, char **map);

@@ -6,25 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 10:22:39 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 13:13:25 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_utils.h"
-
-static void	*free_if_cpy_fails(char **copy, int i)
-{
-	int j;
-
-	j = 0;
-	while (j < i)
-	{
-		free(copy[j]);
-		j++;
-	}
-	free(copy);
-	return (NULL);
-}
 
 char	**copy_map(char **map)
 {
@@ -39,7 +25,7 @@ char	**copy_map(char **map)
 	{
 		copy[i] = error_malloc(sizeof(*copy[i]) * (ft_strlen(map[i]) + 1));
 		if (copy[i] == NULL)
-			return (free_if_cpy_fails(copy, i));
+			return (free_2d_str_array_if_fails(copy, i));
 		ft_strlcpy(copy[i], map[i], ft_strlen(map[i]) + 1);
 		i++;
 	}
