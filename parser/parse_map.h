@@ -13,6 +13,6 @@
 # include "utils/parser_free.h"
 
 /* Function prototypes */
-int	parse_map(int fd, t_parse *parse, char *line);
+int	parse_map(int fd, t_parse *parse, char **line);
 
 #endif

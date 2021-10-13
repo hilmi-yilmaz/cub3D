@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 11:56:18 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 17:30:45 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 /*
 **  return 1 acts as a flag that the reading of the cub file is done
  */
-static int	decision(int fd, t_parse *parse, char *line)
+static int	decision(int fd, t_parse *parse, char **line)
 {
 	int	r;
 
 	r = 0;
-	if ((*line == 'N') || (*line == 'S') || (*line == 'W') \
-			|| (*line == 'E'))
-		r = parse_textures(parse, line);
-	else if (*line == 'F' || *line == 'C')
-		r = parse_colour(parse, line);
-	else if (*line == '0' || *line == '1' || *line == ' ')
+	if ((*(*line) == 'N') || (*(*line) == 'S') || (*(*line) == 'W') \
+			|| (*(*line) == 'E'))
+		r = parse_textures(parse, *line);
+	else if (*(*line) == 'F' || *(*line) == 'C')
+		r = parse_colour(parse, *line);
+	else if (*(*line) == '0' || *(*line) == '1' || *(*line) == ' ')
 	{
 		if (parse_map(fd, parse, line))
 			return (-1);
@@ -33,9 +33,9 @@ static int	decision(int fd, t_parse *parse, char *line)
 	}
 	else
 	{
-		if (*line != '\0')
+		if (*(*line) != '\0')
 		{
-			printf("Error\nWrong type identifier in scene file: %s\n", line);
+			printf("Error\nWrong type identifier in scene file: %s\n", *line);
 			r = -1;
 		}
 	}
@@ -45,7 +45,7 @@ static int	decision(int fd, t_parse *parse, char *line)
 /*
 ** ret = 1 when done reading
  */
-static int	decision_wrapper(int fd, t_parse *parse, char *line)
+static int	decision_wrapper(int fd, t_parse *parse, char **line)
 {
 	int	ret;
 
@@ -54,12 +54,12 @@ static int	decision_wrapper(int fd, t_parse *parse, char *line)
 		return (0);
 	if (ret == -1)
 	{
-		free(line);
-		line = NULL;
+		free(*line);
+		*line = NULL;
 		return (-1);
 	}
 	if (ret == 0)
-		free(line);
+		free(*line);
 	return (ret);
 }
 
@@ -83,7 +83,7 @@ int	parse_data(int fd, t_parse *parse)
 			free(line);
 			return (-1);
 		}
-		ret = decision_wrapper(fd, parse, line);
+		ret = decision_wrapper(fd, parse, &line);
 		if (ret == -1)
 		{
 			return (-1);

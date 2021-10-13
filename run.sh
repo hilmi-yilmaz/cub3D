@@ -5,7 +5,7 @@
 if [[ "$1" == "fclean" ]]; then
     make fclean __linux__=1
 elif [[ "$1" == "valgrind" ]]; then
-	make __linux__=1 VALGRIND=1
+	make fclean && make __linux__=1 VALGRIND=1
 elif [[ "$1" == "" ]]; then
     make __linux__=1 && ./exec scenes/correct/basic.cub
 else
