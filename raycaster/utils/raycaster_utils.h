@@ -1,10 +1,11 @@
 #ifndef RAYCASTER_UTILS_H
 # define RAYCASTER_UTILS_H
 
+/* User defined headers */
 # include "../raycaster.h"
-
 # include "raycaster_free.h"
 
+/* Function prototypes */
 int				close_window(t_data *data);
 void			my_pixel_put(t_img *img, int pos_x, int pos_y, \
 								unsigned int colour);

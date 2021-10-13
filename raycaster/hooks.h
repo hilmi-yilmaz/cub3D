@@ -1,15 +1,11 @@
 #ifndef HOOKS_H
 # define HOOKS_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-
+/* User defined headers */
 # include "raycaster.h"
-
 # include "utils/raycaster_utils.h"
 
-/* Define keybindings for linux and macosx */
+/* Macros */
 # if __linux__ == 1
 #  include "mlx_linux/mlx.h"
 #  define UP_KEY 65362
@@ -34,6 +30,7 @@
 #  define ESC_KEY 53
 # endif
 
+/* Function prototypes */
 int	keypress_hook(int keycode, t_data *data);
 int	keyrelease_hook(int keycode, t_data *data);
 

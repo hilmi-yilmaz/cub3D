@@ -1,24 +1,24 @@
 #ifndef GAMEPLAY_H
 # define GAMEPLAY_H
 
-# include <stdio.h>
-# include <stdlib.h>
+/* System headers */
 # include <math.h>
 
+/* User defined headers */
 # include "raycaster.h"
-
-# include "utils/raycaster_utils.h"
-# include "checks.h"
-# include "utils/maths.h"
 # include "cast_rays.h"
 # include "map_to_3d_textured.h"
+# include "checks.h"
+# include "utils/raycaster_utils.h"
+# include "utils/maths.h"
 
-#if __linux__ == 1
-# include "../mlx_linux/mlx.h"
-#else
-# include "../mlx/mlx.h"
-#endif
+# if __linux__ == 1
+#  include "../mlx_linux/mlx.h"
+# else
+#  include "../mlx/mlx.h"
+# endif
 
+/* Function prototypes */
 int	gameplay(t_data *data);
 
 #endif
