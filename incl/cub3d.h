@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   cub3d.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 10:08:51 by hyilmaz       ########   odam.nl         */
+/*   Created: 2021/10/13 10:07:15 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/13 10:08:16 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "incl/cub3d.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int	main(int argc, char **argv)
-{
-	t_data	data;
-	int		ret;
+# include "../raycaster/raycaster.h"
+# include "../parser/parser.h"
 
-	ret = parse_main(&data.parse, argv);
-	if (ret == -1)
-	{
-		free_parse(&data.parse);
-		return (-1);
-	}
-	ret = raycaster_main(&data);
-	if (ret == -1)
-	{
-		free_all(&data);
-		return (-1);
-	}
-	free_all(&data);
-	return (0);
-}
+# include "../parser/parse_main.h"
+# include "../raycaster/raycaster_main.h"
+
+# include "../raycaster/utils/raycaster_free.h"
+# include "../parser/utils/parser_free.h"
+
+#endif

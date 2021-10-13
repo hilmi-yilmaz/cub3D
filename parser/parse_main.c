@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:02:49 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 10:24:29 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	parse_main(t_parse *parse, char **argv)
 	if (parse_data(fd, parse) || check_data_completeness(parse))
 		return (-1);
 	cpy_map = copy_map(parse->map);
+	if (cpy_map == NULL)
+		return (-1);
 	if (check_map(cpy_map))
 	{
 		free_map(cpy_map);

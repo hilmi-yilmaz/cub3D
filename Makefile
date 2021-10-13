@@ -90,7 +90,7 @@ INC_RAYCASTER = raycaster.h \
 				utils/raycaster_utils.h
 
 # Headerfiles
-HEADER_FILES = cub3d.h $(INC_PARSER) $(INC_RAYCASTER)
+HEADER_FILES = incl/cub3d.h $(INC_PARSER) $(INC_RAYCASTER)
 
 # Object files
 OBJ_DIR = obj
