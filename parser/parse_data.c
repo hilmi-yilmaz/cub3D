@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 12:57:42 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 11:56:18 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static int	decision(int fd, t_parse *parse, char *line)
 	int	r;
 
 	r = 0;
-	if (*line == 'R')
-		r = parse_resolution(&parse->win_width, &parse->win_height, line + 1);
-	else if ((*line == 'N') || (*line == 'S') || (*line == 'W') \
+	if ((*line == 'N') || (*line == 'S') || (*line == 'W') \
 			|| (*line == 'E'))
 		r = parse_textures(parse, line);
 	else if (*line == 'F' || *line == 'C')
@@ -86,6 +84,10 @@ int	parse_data(int fd, t_parse *parse)
 			return (-1);
 		}
 		ret = decision_wrapper(fd, parse, line);
+		if (ret == -1)
+		{
+			return (-1);
+		}
 		line = NULL;
 		count++;
 	}

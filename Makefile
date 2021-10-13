@@ -34,7 +34,6 @@ SRC_MAIN = main.c
 DIR_PARSER = 	parser
 SRC_PARSER =	parse_main.c \
 				parse_data.c \
-				parse_resolution.c \
 				parse_texture.c \
 				parse_colour.c \
 				parse_map.c \
@@ -48,7 +47,6 @@ SRC_PARSER =	parse_main.c \
 INC_PARSER = 	parser.h \
 				parse_main.h \
 				parse_data.h \
-				parse_resolution.h \
 				parse_texture.h \
 				parse_colour.h \
 				parse_map.h \

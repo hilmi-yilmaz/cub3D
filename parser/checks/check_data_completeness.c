@@ -6,22 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 11:54:19 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 11:54:20 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 11:51:45 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check_data_completeness.h"
-
-static void	resolution_completeness(t_parse *parse, int *error)
-{
-	if (parse->win_width == UNINIT || parse->win_height == UNINIT)
-	{
-		if (*error != -1)
-			printf("Error\n");
-		printf("Missing resolution data.\n");
-		*error = -1;
-	}
-}
 
 static void	texture_completeness(t_parse *parse, int *error)
 {
@@ -62,7 +51,6 @@ int	check_data_completeness(t_parse *parse)
 	int	error;
 
 	error = 0;
-	resolution_completeness(parse, &error);
 	texture_completeness(parse, &error);
 	colour_completeness(parse, &error);
 	if (parse->map == NULL)

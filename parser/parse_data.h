@@ -8,7 +8,6 @@
 /* User defined headers */
 # include "../libft/libft.h"
 # include "parser.h"
-# include "parse_resolution.h"
 # include "parse_texture.h"
 # include "parse_colour.h"
 # include "parse_map.h"

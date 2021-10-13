@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:17:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 11:07:00 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 11:53:22 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	parse_init(t_parse *parse)
 	int	i;
 
 	i = 0;
-	parse->win_width = UNINIT;
-	parse->win_height = UNINIT;
+	parse->win_width = WINDOW_WIDTH;
+	parse->win_height = WINDOW_HEIGHT;
 	parse->north_text = NULL;
 	parse->south_text = NULL;
 	parse->west_text = NULL;
