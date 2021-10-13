@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 13:16:13 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 13:22:23 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int	parse_map(int fd, t_parse *parse, char *line)
 		res = loop_wrapper(fd, parse, line, rows);
 		if (res == -1)
 			return (-1);
-		else if (res == 0)
-			break ;
+		// else if (res == 0) IS ALREADY IN THE LOOP
+		// 	break ;
 		rows++;
 	}
 	return (0);
