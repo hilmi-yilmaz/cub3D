@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 13:11:50 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/13 13:16:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ static char	**create_map(t_parse *parse, char *line, int rows)
 	new_map[rows] = NULL;
 	i = old_to_new_map(parse, new_map, rows);
 	if (i == -1)
-	{
-		free(new_map);
 		return (NULL);
-	}
 	new_map[i] = error_malloc(sizeof(*new_map[i]) * (ft_strlen(line) + 1));
 	if (new_map[i] == NULL)
 	{
