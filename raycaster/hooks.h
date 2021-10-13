@@ -7,7 +7,7 @@
 
 /* Macros */
 # if __linux__ == 1
-#  include "mlx_linux/mlx.h"
+#  include "../mlx_linux/mlx.h"
 #  define UP_KEY 65362
 #  define DOWN_KEY 65364
 #  define RIGHT_KEY 65363
