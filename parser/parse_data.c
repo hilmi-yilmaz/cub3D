@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 12:46:36 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 16:21:00 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ int	parse_data(int fd, t_parse *parse)
 		}
 		ret = decision_wrapper(fd, parse, &line);
 		if (ret == -1)
-		{
 			return (-1);
-		}
 		line = NULL;
 		count++;
 	}

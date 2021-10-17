@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 14:56:35 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 17:03:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	old_to_new_map(t_parse *parse, char **new_map, int rows)
 	i = 0;
 	while (i < rows - 1)
 	{
-		new_map[i] = malloc(sizeof(*new_map[i]) * (ft_strlen(parse->map[i]) + 1));
+		new_map[i] = malloc(sizeof(*new_map[i]) * \
+							(ft_strlen(parse->map[i]) + 1));
 		if (new_map[i] == NULL)
 		{
 			free_2d_str_array_if_fails(new_map, i);
@@ -66,7 +67,7 @@ static void	free_and_null(char *line)
 
 static int	loop_wrapper(int fd, t_parse *parse, char **line, int rows)
 {
-	int res;
+	int	res;
 
 	res = 1;
 	if (rows != 1)
@@ -83,10 +84,7 @@ static int	loop_wrapper(int fd, t_parse *parse, char **line, int rows)
 	}
 	parse->map = create_map(parse, *line, rows);
 	if (parse->map == NULL)
-	{
-		//free_and_null(line);
 		return (-1);
-	}
 	free_and_null(*line);
 	return (res);
 }

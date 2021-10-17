@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   check_map.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/10/17 17:06:42 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/17 17:06:43 by hyilmaz       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "check_map.h"
 
 /*
@@ -63,7 +75,7 @@ static int	managed_flood_fill(int player_x, int player_y, char **map, \
 						t_recursion_management *rec_man)
 {
 	int	ret;
-	
+
 	ret = -1;
 	while (ret != 0)
 	{

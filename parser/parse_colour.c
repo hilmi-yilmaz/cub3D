@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 11:59:49 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 16:59:30 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,53 @@ separated by kommas and 1 or more spaces.\n");
 	return (-1);
 }
 
+static int	loop_wrapper(int *colour_array, char *line, int *i, int *j)
+{
+	if (*j != 0)
+	{
+		*i += skip_chr(line + *i, ' ');
+		if (line[*i] != ',')
+			return (error_colour());
+		*i += 1;
+	}
+	*i += skip_chr(line + *i, ' ');
+	if (ft_isdigit(line[*i]) == 0)
+		return (error_colour());
+	if (colour_array[*j] != UNINIT)
+	{
+		printf("Error\nDouble colour data.\n");
+		return (-1);
+	}
+	colour_array[*j] = ft_atoi(line + *i);
+	*i += ft_nblen(colour_array[*j], 10);
+	return (0);
+}
+
 static int	fill_colour(int *colour_array, char *line)
 {
 	int	i;
 	int	j;
+	int	ret;
 
 	i = 0;
 	j = 0;
+	ret = 0;
 	while (j < RGB_DATA_COUNT)
 	{
-		if (j != 0)
-		{
-			i += skip_chr(line + i, ' ');
-			if (line[i] != ',')
-				return (error_colour());
-			i++;
-		}
-		i += skip_chr(line + i, ' ');
-		if (ft_isdigit(line[i]) == 0)
-			return (error_colour());
-		if (colour_array[j] != UNINIT)
-		{
-			printf("Error\nDouble colour data.\n");
+		ret = loop_wrapper(colour_array, line, &i, &j);
+		if (ret == -1)
 			return (-1);
-		}
-		colour_array[j] = ft_atoi(line + i);
-		i += ft_nblen(colour_array[j], 10);
 		j++;
 	}
 	i += skip_chr(line + i, ' ');
 	if (line[i] != '\0')
-        return (error_colour());
+		return (error_colour());
 	return (0);
 }
 
-int parse_colour(t_parse *parse, char *line)
+int	parse_colour(t_parse *parse, char *line)
 {
-    int i;
+	int	i;
 	int	j;
 	int	check;
 	int	*selected_arr;
@@ -78,4 +88,3 @@ int parse_colour(t_parse *parse, char *line)
 		return (-1);
 	return (0);
 }
-
