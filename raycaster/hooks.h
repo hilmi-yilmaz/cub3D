@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   hooks.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/10/17 17:09:30 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/17 20:48:19 by hyilmaz       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HOOKS_H
 # define HOOKS_H
 
 /* User defined headers */
+# include "../incl/is_linux.h"
 # include "raycaster.h"
 # include "utils/raycaster_utils.h"
 
 /* Macros */
-# if __linux__ == 1
+# if __LINUX__ == 1
 #  include "../mlx_linux/mlx.h"
 #  define UP_KEY 65362
 #  define DOWN_KEY 65364
@@ -18,7 +31,7 @@
 #  define S_KEY 115
 #  define ESC_KEY 65307
 # else
-#  include "mlx/mlx.h"
+#  include "../mlx/mlx.h"
 #  define UP_KEY 126
 #  define DOWN_KEY 125
 #  define RIGHT_KEY 124

@@ -5,6 +5,7 @@
 # include <math.h>
 
 /* User defined headers */
+# include "../incl/is_linux.h"
 # include "raycaster.h"
 # include "cast_rays.h"
 # include "map_to_3d_textured.h"
@@ -12,7 +13,7 @@
 # include "utils/raycaster_utils.h"
 # include "utils/maths.h"
 
-# if __linux__ == 1
+# if __LINUX__ == 1
 #  include "../mlx_linux/mlx.h"
 # else
 #  include "../mlx/mlx.h"

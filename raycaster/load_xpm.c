@@ -6,13 +6,13 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:01 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 15:02:52 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 17:09:20 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "load_xpm.h"
 
-int	static load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
+int	static	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
 {
 	xpm_img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path, &xpm_img->width, \
 											&xpm_img->height);
@@ -44,5 +44,3 @@ int	load_all_xpm_images(t_data *data)
 	}
 	return (0);
 }
-
-

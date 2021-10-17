@@ -6,6 +6,7 @@
 
 /* User defined headers */
 # include "../incl/X.h"
+# include "../incl/is_linux.h"
 # include "raycaster.h"
 # include "gameplay.h"
 # include "hooks.h"
@@ -15,10 +16,6 @@
 # include "../parser/utils/parser_utils.h"
 
 /* Macros */
-# ifndef __linux__
-#  define __linux__ 0
-# endif
-
 # define UNIT 1
 
 /* Function prototypes */

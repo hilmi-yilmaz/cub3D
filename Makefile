@@ -1,18 +1,21 @@
 CC = clang
+CFLAGS = -g -Wall -Wextra -Werror
 
 ifdef VALGRIND
-CFLAGS = -g3 
-else
+CFLAGS = -g3
+endif
+
+ifdef ASAN
 CFLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
 endif
 
 # Setting variables depending on Operating System
-ifdef __linux__
-LINKS = -D __linux__=1 -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
-MLX_DIR = mlx_linux
+ifdef __LINUX__
+	LINKS = -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+	MLX_DIR = mlx_linux
 else
-LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-MLX_DIR = mlx
+	LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLX_DIR = mlx
 endif
 
 # Output file which is the executable
@@ -129,3 +132,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY = all clean fclean re
