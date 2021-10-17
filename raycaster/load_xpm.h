@@ -2,7 +2,7 @@
 # define LOAD_XPM_H
 
 /* System headers */
-# include "stddef.h"
+# include <stdio.h>
 
 /* User defined headers */
 # include "raycaster.h"

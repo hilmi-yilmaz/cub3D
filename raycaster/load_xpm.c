@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:16:01 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 10:49:34 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 15:02:52 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	load_all_xpm_images(t_data *data)
 						data->parse.west_text)
 		|| load_xpm_image(data->mlx.mlx_ptr, &data->east_xpm, \
 						data->parse.east_text))
+	{
+		printf("Error\nProblem while loading texture.\n");
 		return (-1);
+	}
 	return (0);
 }
 

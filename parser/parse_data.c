@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 17:30:45 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 12:46:36 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	decision(int fd, t_parse *parse, char **line)
 	int	r;
 
 	r = 0;
-	if ((*(*line) == 'N') || (*(*line) == 'S') || (*(*line) == 'W') \
-			|| (*(*line) == 'E'))
+	if ((**line == 'N') || (**line == 'S') || (**line == 'W') \
+			|| (**line == 'E'))
 		r = parse_textures(parse, *line);
-	else if (*(*line) == 'F' || *(*line) == 'C')
+	else if (**line == 'F' || **line == 'C')
 		r = parse_colour(parse, *line);
-	else if (*(*line) == '0' || *(*line) == '1' || *(*line) == ' ')
+	else if (**line == '0' || **line == '1' || **line == ' ')
 	{
 		if (parse_map(fd, parse, line))
 			return (-1);
@@ -33,7 +33,7 @@ static int	decision(int fd, t_parse *parse, char **line)
 	}
 	else
 	{
-		if (*(*line) != '\0')
+		if (**line != '\0')
 		{
 			printf("Error\nWrong type identifier in scene file: %s\n", *line);
 			r = -1;

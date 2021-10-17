@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 17:33:21 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/17 14:56:35 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	loop_wrapper(int fd, t_parse *parse, char **line, int rows)
 		printf("Error\nSomething went wrong reading the map.\n");
 		return (-1);
 	}
-	if (*(*line) == '\0')
+	if (**line == '\0')
 	{
 		free_and_null(*line);
 		return (0);
@@ -103,8 +103,6 @@ int	parse_map(int fd, t_parse *parse, char **line)
 		res = loop_wrapper(fd, parse, line, rows);
 		if (res == -1)
 			return (-1);
-		// else if (res == 0) IS ALREADY IN THE LOOP
-		// 	break ;
 		rows++;
 	}
 	return (0);
