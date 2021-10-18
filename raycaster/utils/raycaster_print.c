@@ -6,11 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:18:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 19:33:43 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:12:47 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "raycaster_print.h"
+#include "raycaster_print.h"
 
 void	print_intersections(t_player *player, int width)
 {

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:48 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 11:19:05 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:11:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ static void	draw_floor_ceiling(t_img *main, t_parse *parse)
 	i = 0;
 	j = 0;
 	ceiling_colour = argb_to_hex(0, parse->ceiling_colour[0], \
-									parse->ceiling_colour[1], \
-									parse->ceiling_colour[2]);
+						parse->ceiling_colour[1], parse->ceiling_colour[2]);
 	floor_colour = argb_to_hex(0, parse->floor_colour[0], \
-									parse->floor_colour[1], \
-									parse->floor_colour[2]);
+						parse->floor_colour[1], parse->floor_colour[2]);
 	while (i < parse->win_height)
 	{
 		while (j < parse->win_width)

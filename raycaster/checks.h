@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:10:12 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 17:10:13 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:11:23 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CHECKS_H
 
 /* System headers */
-#include <math.h>
+# include <math.h>
 
 /* User defined headers */
 # include "../libft/libft.h"
