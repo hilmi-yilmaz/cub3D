@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/12 13:51:37 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:23:18 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	select_xpm_nswe(t_data *data, t_img **selected_xpm, int i)
 }
 
 static void	column_from_texture_to_main_img(t_data *data, t_img *xpm_img, \
-								int column, int xpm_column, int height)
+											t_map3d *map3d)
 {
 	int				i;
 	int				start;
@@ -34,21 +34,21 @@ static void	column_from_texture_to_main_img(t_data *data, t_img *xpm_img, \
 	unsigned int	colour;
 
 	i = 0;
-	start = (double)(data->parse.win_height - height) / 2;
+	start = (double)(data->parse.win_height - map3d->height) / 2;
 	text_begin_y = 0.0;
 	if (start < 0)
 	{
 		text_begin_y = (double)abs(start);
 		start = 0;
 	}
-	ratio_heights = (double)xpm_img->height / height;
-	while (i < height)
+	ratio_heights = (double)xpm_img->height / map3d->height;
+	while (i < map3d->height)
 	{
 		if (start + i >= data->parse.win_height)
 			break ;
-		colour = my_pixel_get(xpm_img, xpm_column, \
+		colour = my_pixel_get(xpm_img, map3d->textwidth, \
 							(double)(text_begin_y + i) * ratio_heights);
-		my_pixel_put(&data->main, column, start + i, colour);
+		my_pixel_put(&data->main, map3d->column, start + i, colour);
 		i++;
 	}
 }
@@ -83,21 +83,17 @@ static double	get_textwidth(t_data *data, t_img **selected_xpm, int i)
 
 void	map_to_3d_textured(t_data *data)
 {
-	int		column;
-	int		height;
-	int		dist_to_plane;
-	double	textwidth;
+	t_map3d	map3d;
 	t_img	*selected_xpm;
 
-	column = 0;
-	dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
-	while (column < data->parse.win_width)
+	map3d.column = 0;
+	map3d.dist_to_plane = data->parse.win_width / 2 * tan(deg2rad(FOV) / 2);
+	while (map3d.column < data->parse.win_width)
 	{
-		textwidth = get_textwidth(data, &selected_xpm, column);
-		height = 1.0 / data->player.rays_array[column] * \
-				dist_to_plane * WALL_RATIO;
-		column_from_texture_to_main_img(data, selected_xpm, \
-										column, textwidth, height);
-		column++;
+		map3d.textwidth = get_textwidth(data, &selected_xpm, map3d.column);
+		map3d.height = 1.0 / data->player.rays_array[map3d.column] * \
+				map3d.dist_to_plane * WALL_RATIO;
+		column_from_texture_to_main_img(data, selected_xpm, &map3d);
+		map3d.column++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/18 15:11:48 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 15:15:58 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:17:10 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_map3d
 {
 	int		column;
 	int		height;
+	int		dist_to_plane;
 	double	textwidth;
 }				t_map3d;
 
