@@ -6,7 +6,7 @@
 /*   By: hyilmaz <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 19:05:02 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/10 12:50:38 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:29:40 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			i++;
 		}
 	}
-	return ((void*)dst);
+	return ((void *)dst);
 }

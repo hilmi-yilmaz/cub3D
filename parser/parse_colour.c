@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 16:59:30 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:40:46 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int	loop_wrapper(int *colour_array, char *line, int *i, int *j)
 {
 	if (*j != 0)
 	{
-		*i += skip_chr(line + *i, ' ');
+		*i += skip_chr(line + *i, ft_isspace);
 		if (line[*i] != ',')
 			return (error_colour());
 		*i += 1;
 	}
-	*i += skip_chr(line + *i, ' ');
+	*i += skip_chr(line + *i, ft_isspace);
 	if (ft_isdigit(line[*i]) == 0)
 		return (error_colour());
 	if (colour_array[*j] != UNINIT)
@@ -58,7 +58,7 @@ static int	fill_colour(int *colour_array, char *line)
 			return (-1);
 		j++;
 	}
-	i += skip_chr(line + i, ' ');
+	i += skip_chr(line + i, ft_isspace);
 	if (line[i] != '\0')
 		return (error_colour());
 	return (0);
@@ -78,7 +78,7 @@ int	parse_colour(t_parse *parse, char *line)
 	else
 		selected_arr = parse->ceiling_colour;
 	line++;
-	if (*line != ' ')
+	if (ft_isspace(*line) == 0)
 	{
 		printf("Error\nNo space between identifier and data for colour.\n");
 		return (-1);

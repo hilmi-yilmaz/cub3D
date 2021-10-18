@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/02 17:08:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/20 13:59:45 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:31:02 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*create(char *line, char *buff, t_remains *re)
 	char	*array;
 
 	size = ft_strlen_mod(line, '\0') + ft_strlen_mod(buff, '\n') \
-			 + ft_strlen_mod(re->rest + re->i, '\n');
+			+ ft_strlen_mod(re->rest + re->i, '\n');
 	array = (char *)malloc(sizeof(char) * size + 1);
 	if (array == NULL)
 		return (NULL);

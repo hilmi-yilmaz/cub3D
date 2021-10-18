@@ -6,7 +6,7 @@
 /*   By: hyilmaz <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 18:27:30 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/09 11:45:14 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:30:07 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 		*(ptr_dest + i) = *(ptr_src + i);
 		if (*(ptr_src + i) == (unsigned char)c)
 		{
-			return ((void*)ptr_dest + i + 1);
+			return ((void *)ptr_dest + i + 1);
 		}
 		i++;
 	}

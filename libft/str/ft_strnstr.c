@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/30 12:51:30 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/10 13:06:33 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:31:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 
 	len_little = ft_strlen(little);
 	if (len_little == 0)
-		return ((char*)big);
+		return ((char *)big);
 	result = find_little(big, little, len, len_little);
 	return (result);
 }

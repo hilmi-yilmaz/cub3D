@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error_malloc.c                                     :+:    :+:            */
+/*   skip_chr.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/10/18 09:30:40 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 09:30:41 by hyilmaz       ########   odam.nl         */
+/*   Created: 2021/10/18 09:27:49 by hyilmaz       #+#    #+#                 */
+/*   Updated: 2021/10/18 09:28:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-
-void	*error_malloc(unsigned int bytes)
+int	skip_chr(char *str, int (func)(int))
 {
-	void	*ptr;
+	int	i;
 
-	ptr = malloc(bytes);
-	if (ptr == NULL)
-	{
-		printf("Error: %s\n", strerror(errno));
-		return (NULL);
-	}
-	return (ptr);
+	i = 0;
+	while (func(str[i]) != 0)
+		i++;
+	return (i);
 }

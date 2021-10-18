@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:03 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/10 12:48:15 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:29:13 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*head;
 
-	head = (t_list*)malloc(sizeof(t_list));
+	head = (t_list *)malloc(sizeof(t_list));
 	if (head == NULL)
 		return (NULL);
 	head->content = content;

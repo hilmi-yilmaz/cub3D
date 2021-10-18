@@ -6,7 +6,7 @@
 /*   By: hyilmaz <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/01 17:07:34 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/11 14:28:42 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:32:40 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
-void				ft_lstclear(t_list **lst, void(*del)(void*));
+void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void*));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
@@ -73,5 +73,7 @@ int					ft_nblen(long nb, int base);
 int					ft_cmpstr(char *s1, char *s2);
 void				*error_malloc(unsigned int bytes);
 int					ft_str_arr_len(char **arr);
-int					skip_chr(char *str, int c);
+int					skip_chr(char *str, int (func)(int));
+int					ft_isspace(int c);
+
 #endif

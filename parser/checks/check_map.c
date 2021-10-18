@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:06:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 17:06:43 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:38:38 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	flood_fill(int x, int y, char **map, \
 	if (recursion_management(rec_man, &x, &y, map))
 		return (-1);
 	if (x < 0 || y < 0 || y >= ft_str_arr_len(map) || \
-		x >= (int)ft_strlen(map[y]) || map[y][x] == ' ')
+		x >= (int)ft_strlen(map[y]) || ft_isspace(map[y][x]) != 0)
 	{
 		rec_man->error = 1;
 		return (1);

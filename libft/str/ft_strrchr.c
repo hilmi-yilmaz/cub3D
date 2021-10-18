@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/30 12:29:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/03/10 13:06:45 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:31:32 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*ft_strrchr(const char *s, int c)
 		i++;
 	}
 	if (set_i >= 0)
-		return ((char*)s + set_i);
+		return ((char *)s + set_i);
 	if (c == '\0')
-		return ((char*)s + i);
+		return ((char *)s + i);
 	return (NULL);
 }

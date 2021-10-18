@@ -6,11 +6,14 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 16:21:00 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 09:33:57 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
+
+// include ctype
+# include <ctype.h>
 
 /*
 **  return 1 acts as a flag that the reading of the cub file is done
@@ -25,7 +28,7 @@ static int	decision(int fd, t_parse *parse, char **line)
 		r = parse_textures(parse, *line);
 	else if (**line == 'F' || **line == 'C')
 		r = parse_colour(parse, *line);
-	else if (**line == '0' || **line == '1' || **line == ' ')
+	else if (**line == '0' || **line == '1' || ft_isspace(**line) != 0)
 	{
 		if (parse_map(fd, parse, line))
 			return (-1);

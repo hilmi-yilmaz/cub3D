@@ -2,7 +2,7 @@ CC = clang
 CFLAGS = -g -Wall -Wextra -Werror
 
 ifdef VALGRIND
-CFLAGS = -g3
+CFLAGS = -g3 -Wall -Wextra -Werror
 endif
 
 ifdef ASAN
