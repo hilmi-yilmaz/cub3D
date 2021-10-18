@@ -6,14 +6,11 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:20:32 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 09:33:57 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:49:24 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
-
-// include ctype
-# include <ctype.h>
 
 /*
 **  return 1 acts as a flag that the reading of the cub file is done

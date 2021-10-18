@@ -6,11 +6,10 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 17:03:07 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:49:44 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* User defined header files */
 #include "parse_map.h"
 
 static int	old_to_new_map(t_parse *parse, char **new_map, int rows)

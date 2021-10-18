@@ -6,11 +6,10 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 11:10:32 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/18 15:49:39 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Standard library header files */
 #include "parse_main.h"
 
 static int	close_file(int fd, char *filename)
