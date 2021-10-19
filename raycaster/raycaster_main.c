@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/11 11:14:08 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 17:11:05 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/19 10:01:52 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ int	raycaster_main(t_data *data)
 	if (ret == -1)
 		return (-1);
 	set_start_location(&data->player, data->parse.map);
-	mlx_hook(data->mlx.win_ptr, KeyPress, KeyPressMask, \
+	mlx_hook(data->mlx.win_ptr, 2, 1L << 0, \
 			keypress_hook, data);
-	mlx_hook(data->mlx.win_ptr, KeyRelease, KeyReleaseMask, \
+	mlx_hook(data->mlx.win_ptr, 3, 1L << 1, \
 			keyrelease_hook, data);
 	if (__LINUX__ == 1)
-		mlx_hook(data->mlx.win_ptr, ClientMessage, NoEventMask, \
+		mlx_hook(data->mlx.win_ptr, 33, 0L, \
 				close_window, data);
 	else
-		mlx_hook(data->mlx.win_ptr, DestroyNotify, StructureNotifyMask, \
+		mlx_hook(data->mlx.win_ptr, 17, 1L << 17, \
 				close_window, data);
 	mlx_loop_hook(data->mlx.mlx_ptr, gameplay, data);
 	mlx_loop(data->mlx.mlx_ptr);
