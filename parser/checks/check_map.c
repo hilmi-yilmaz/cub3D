@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:06:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 09:38:38 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/19 11:43:03 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,9 @@ int	check_map(char **map)
 
 	player_x = -1;
 	player_y = -1;
-	find_player_location(&player_x, &player_y, map);
-	if (player_x == -1 && player_y == -1)
+	if (find_player_location(&player_x, &player_y, map))
 	{
-		printf("Error\nNo player in the map. \
-Put a N, S, E, W character in the map.\n");
+		printf("Error\nUse 1 player in the game.\n");
 		return (-1);
 	}
 	recursion_management_init(&rec_man);

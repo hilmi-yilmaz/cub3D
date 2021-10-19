@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:23:25 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 13:13:25 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/19 11:43:00 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ char	**copy_map(char **map)
 	return (copy);
 }
 
-void	find_player_location(int *x, int *y, char **map)
+int	find_player_location(int *x, int *y, char **map)
 {
 	int	i;
 	int	j;
+	int	flag;
 
 	i = 0;
 	j = 0;
+	flag = -1;
 	while (map[i] != NULL)
 	{
 		while (map[i][j] != '\0')
@@ -49,11 +51,12 @@ void	find_player_location(int *x, int *y, char **map)
 			{
 				*x = j;
 				*y = i;
-				return ;
+				flag++;
 			}
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	return (flag);
 }

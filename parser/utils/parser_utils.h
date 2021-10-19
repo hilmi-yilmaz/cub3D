@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:04:47 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 17:04:48 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/19 10:58:21 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "parser_free.h"
 
 /* Function prototypes */
-void	find_player_location(int *x, int *y, char **map);
+int		find_player_location(int *x, int *y, char **map);
 char	**copy_map(char **map);
 
 #endif
