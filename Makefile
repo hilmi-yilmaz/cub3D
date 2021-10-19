@@ -1,13 +1,5 @@
-CC = clang
+CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror
-
-ifdef VALGRIND
-CFLAGS = -g3 -Wall -Wextra -Werror
-endif
-
-ifdef ASAN
-CFLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
-endif
 
 # Setting variables depending on Operating System
 ifdef __LINUX__

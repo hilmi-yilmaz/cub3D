@@ -6,13 +6,13 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 20:36:06 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/17 20:46:20 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/19 10:20:22 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IS_LINUX_H
 # define IS_LINUX_H
 
-# define __LINUX__ 1
+# define __LINUX__ 0
 
 #endif
