@@ -3,15 +3,15 @@ CFLAGS = -g -Wall -Wextra -Werror
 
 # Setting variables depending on Operating System
 ifdef __LINUX__
-	LINKS = -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
-	MLX_DIR = mlx_linux
+LINKS = -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+MLX_DIR = mlx_linux
 else
-	LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-	MLX_DIR = mlx
+LINKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX_DIR = mlx
 endif
 
 # Output file which is the executable
-NAME = exec
+NAME = cub3D
 
 # The name of the library that is created by mlx
 MLX_LIB = libmlx.a
