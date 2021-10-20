@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/20 10:50:44 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/20 10:53:33 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	open_file(char *file)
 {
 	int	fd;
-	
+
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || read(fd, NULL, 0) == -1)
 	{

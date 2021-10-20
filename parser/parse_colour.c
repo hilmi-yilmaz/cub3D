@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:22:36 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 09:40:46 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/20 10:57:24 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static int	loop_wrapper(int *colour_array, char *line, int *i, int *j)
 		return (-1);
 	}
 	colour_array[*j] = ft_atoi(line + *i);
+	if (colour_array[*j] < 0 || colour_array[*j] > 255)
+	{
+		printf("Error\nR, G, B values should be between 0 and 255.\n");
+		return (-1);
+	}
 	*i += ft_nblen(colour_array[*j], 10);
 	return (0);
 }
