@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/13 11:49:36 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/20 10:38:35 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 		free_parse(&data.parse);
 		return (-1);
 	}
+	else if (ret == -2)
+		return (-1);
 	ret = raycaster_main(&data);
 	if (ret == -1)
 	{
