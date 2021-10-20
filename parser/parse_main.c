@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 15:49:39 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/10/20 10:33:54 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	parse_main(t_parse *parse, char **argv)
 	char	**cpy_map;
 
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || read(fd, NULL, 0) == -1)
 	{
 		printf("Error\nSomething went wrong opening \
 \"%s\": %s\n", *(argv + 1), strerror(errno));
