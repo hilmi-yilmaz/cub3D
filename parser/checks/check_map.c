@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:06:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/19 11:43:03 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/01 10:34:47 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,33 @@ static int	managed_flood_fill(int player_x, int player_y, char **map, \
 	return (ret);
 }
 
+static int	check_wrong_chars(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map[i] != NULL)
+	{
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] != 'N' && map[i][j] != 'S' && \
+				map[i][j] != 'W' && map[i][j] != 'E' && \
+				map[i][j] != '1' && map[i][j] != '0' && \
+				ft_isspace(map[i][j]) == 0)
+			{
+				printf("i = %d, j = %d, %c\n", i, j, map[i][j]);
+				return (-1);
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
+}
+
 int	check_map(char **map)
 {
 	int						ret;
@@ -99,6 +126,11 @@ int	check_map(char **map)
 	if (find_player_location(&player_x, &player_y, map))
 	{
 		printf("Error\nUse 1 player in the game.\n");
+		return (-1);
+	}
+	if (check_wrong_chars(map))
+	{
+		printf("Error\nWrong elements found in the map.\n");
 		return (-1);
 	}
 	recursion_management_init(&rec_man);
