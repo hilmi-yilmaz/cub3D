@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/17 17:06:42 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/11/01 10:34:47 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/09 11:53:04 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ static int	check_wrong_chars(char **map)
 				map[i][j] != 'W' && map[i][j] != 'E' && \
 				map[i][j] != '1' && map[i][j] != '0' && \
 				ft_isspace(map[i][j]) == 0)
-			{
-				printf("i = %d, j = %d, %c\n", i, j, map[i][j]);
 				return (-1);
-			}
 			j++;
 		}
 		j = 0;
