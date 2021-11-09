@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/11/09 10:26:27 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/09 10:33:40 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	parse_map(int fd, t_parse *parse, char **line)
 	rows = 1;
 	if (parse->map != NULL)
 	{
-		printf("Error\nDouble map data or you forgot a space on an empty line.\n");
+		printf("Error\nDouble map data or \
+you forgot a space on an empty line.\n");
 		return (-1);
 	}
 	while (res > 0)
