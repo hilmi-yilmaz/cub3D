@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/22 12:05:51 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/18 15:49:44 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/09 10:16:42 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ int	parse_map(int fd, t_parse *parse, char **line)
 
 	res = 1;
 	rows = 1;
+	if (parse->map != NULL)
+	{
+		printf("Error\nDouble map data.\n");
+		return (-1);
+	}
 	while (res > 0)
 	{
 		res = loop_wrapper(fd, parse, line, rows);
