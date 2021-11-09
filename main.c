@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 16:23:31 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/20 10:38:35 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/09 11:54:32 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		printf("Error\nRun as: ./cub3D scene_file.cub\n");
-		return (-1);
+		return (1);
 	}
 	ret = parse_main(&data.parse, argv);
 	if (ret == -1)
 	{
 		free_parse(&data.parse);
-		return (-1);
+		return (1);
 	}
 	else if (ret == -2)
-		return (-1);
+		return (1);
 	ret = raycaster_main(&data);
 	if (ret == -1)
 	{
 		free_all(&data);
-		return (-1);
+		return (1);
 	}
 	free_all(&data);
 	return (0);
