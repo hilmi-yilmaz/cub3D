@@ -6,7 +6,7 @@
 /*   By: hyilmaz <hyilmaz@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/21 15:21:28 by hyilmaz       #+#    #+#                 */
-/*   Updated: 2021/10/20 10:53:33 by hyilmaz       ########   odam.nl         */
+/*   Updated: 2021/11/09 10:19:58 by hyilmaz       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	parse_main(t_parse *parse, char **argv)
 	int		fd;
 	char	**cpy_map;
 
-	if (check_cub_extension(argv[1]))
-		return (-1);
 	fd = open_file(argv[1]);
 	if (fd == -1)
 		return (-2);
+	if (check_cub_extension(argv[1]))
+		return (-1);
 	parse_init(parse);
 	if (parse_data(fd, parse) || check_data_completeness(parse))
 		return (-1);
