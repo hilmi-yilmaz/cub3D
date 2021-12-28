@@ -44,11 +44,9 @@ static double	cast_single_ray(t_player *player, t_parse *parse, \
 {
 	double	hor_dist;
 	double	ver_dist;
-	int		wall_hor;
-	int		wall_ver;
 
-	wall_hor = horizontal_intersection(player, angle, parse->map, i);
-	wall_ver = vertical_intersection(player, angle, parse->map, i);
+	horizontal_intersection(player, angle, parse->map, i);
+	vertical_intersection(player, angle, parse->map, i);
 	hor_dist = calculate_ray_len(player, player->hor_ray[i].x, \
 								player->hor_ray[i].y);
 	ver_dist = calculate_ray_len(player, player->ver_ray[i].x, \

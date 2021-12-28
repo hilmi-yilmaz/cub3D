@@ -12,7 +12,7 @@
 
 #include "load_xpm.h"
 
-int	static	load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
+static int  load_xpm_image(void *mlx_ptr, t_img *xpm_img, char *path)
 {
 	xpm_img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path, &xpm_img->width, \
 											&xpm_img->height);

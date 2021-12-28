@@ -71,13 +71,9 @@ static int	fill_colour(int *colour_array, char *line)
 
 int	parse_colour(t_parse *parse, char *line)
 {
-	int	i;
-	int	j;
 	int	check;
 	int	*selected_arr;
 
-	i = 0;
-	j = 0;
 	if (*line == 'F')
 		selected_arr = parse->floor_colour;
 	else

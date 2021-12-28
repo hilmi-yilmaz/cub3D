@@ -36,11 +36,9 @@ static int	old_to_new_map(t_parse *parse, char **new_map, int rows)
 static char	**create_map(t_parse *parse, char *line, int rows)
 {
 	int		i;
-	int		j;
 	char	**new_map;
 
 	i = 0;
-	j = 0;
 	new_map = error_malloc(sizeof(*new_map) * (rows + 1));
 	if (new_map == NULL)
 		return (NULL);

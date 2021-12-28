@@ -13,6 +13,6 @@
 #ifndef IS_LINUX_H
 # define IS_LINUX_H
 
-# define __LINUX__ 0
+# define __LINUX__ 1
 
 #endif
